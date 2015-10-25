@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_exit_remind">再按一次返回键退出程序</string>
+    <string name="common_exit_isExit">是否确定要退出应用？</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_sure">确定</string>
+</resources>
