@@ -1,9 +1,11 @@
-package com.alkaid.trip51;
+package com.alkaid.trip51.main.nav;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity{
+import com.alkaid.trip51.R;
+import com.alkaid.trip51.base.widget.BaseFragmentActivity;
+
+public class MainActivity extends BaseFragmentActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

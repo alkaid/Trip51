@@ -1,11 +1,11 @@
-package com.alkaid.trip51.view.base;
+package com.alkaid.trip51.base.widget;
 
 import android.os.Bundle;
 
+import com.alkaid.base.view.base.BActivity;
 import com.alkaid.base.view.base.BContextWrap;
-import com.alkaid.base.view.base.BFragmentActivity;
 
-public class BaseFragmentActivity extends BFragmentActivity {
+public class BaseActivity extends BActivity {
 	private BaseContextWrap baseContextWrap;
 	protected BaseApp baseApp;
 	@Override

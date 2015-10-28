@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/F:/Projects/coodroid/51App/src/android/Trip51/base/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/C:/Alkaid/Projects/my/Trip51/src/android/Trip51/base/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string name="common_cancel">取消</string>
     <string name="common_exit_isExit">是否确定要退出应用？</string>
