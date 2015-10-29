@@ -2,6 +2,8 @@ package com.alkaid.trip51.base.widget;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,14 +28,11 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         if (label == null) {
             throw new IllegalArgumentException("title cann't be null!");
         }
-        View localView = new LabelIndicatorStrategy(this, label, tabLayId).createIndicatorView(this.mTabHost);
-        this.mTabManager.addTab(this.mTabHost.newTabSpec(label).setIndicator(localView), paramClass, bundle);
-        localView.setOnTouchListener(new View.OnTouchListener()
-        {
-            public boolean onTouch(View paramAnonymousView, MotionEvent paramAnonymousMotionEvent)
-            {
-                if ((paramAnonymousMotionEvent.getAction() == 1) && (!label.equals(BaseTabFragmentActivity.this.mTabHost.getCurrentTabTag())))
-                {
+        View tabView = new LabelIndicatorStrategy(this, label, tabLayId).createIndicatorView(this.mTabHost);
+        this.mTabManager.addTab(this.mTabHost.newTabSpec(label).setIndicator(tabView), paramClass, bundle);
+        tabView.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if ((event.getAction() == MotionEvent.ACTION_UP) && (!label.equals(BaseTabFragmentActivity.this.mTabHost.getCurrentTabTag()))) {
                     FragmentTabActivity.this.setGaPageNameByTitle(label);
                     GAHelper.instance().contextStatisticsEvent(FragmentTabActivity.this, "tab", label, 2147483647, "tap");
                     GAHelper.instance().setGAPageName(FragmentTabActivity.this.getGAPageName());
@@ -44,11 +43,11 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         });
     }
 
-    public void onCreate(Bundle paramBundle)
+    public void onCreate(Bundle bundle)
     {
-        super.onCreate(paramBundle);
+        super.onCreate(bundle);
         setOnContentView();
-        this.mTabHost = ((TabHost)findViewById(16908306));
+        this.mTabHost = ((TabHost)findViewById(android.R.id.tabhost));
         this.mTabHost.setup();
         this.mTabManager = new TabManager(this, this.mTabHost, R.id.realtabcontent);
         setTabWidgetBackground(0);
@@ -85,69 +84,70 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
     public static class TabManager
             implements TabHost.OnTabChangeListener
     {
-        private final FragmentTabActivity mActivity;
+        private final BaseTabFragmentActivity mActivity;
         private final int mContainerId;
         TabInfo mLastTab;
         private final TabHost mTabHost;
         private final HashMap<String, TabInfo> mTabs = new HashMap();
 
-        public TabManager(FragmentTabActivity paramFragmentTabActivity, TabHost paramTabHost, int paramInt)
+        public TabManager(BaseTabFragmentActivity act, TabHost tabHost, int containerId)
         {
-            this.mActivity = paramFragmentTabActivity;
-            this.mTabHost = paramTabHost;
-            this.mContainerId = paramInt;
+            this.mActivity = act;
+            this.mTabHost = tabHost;
+            this.mContainerId = containerId;
             this.mTabHost.setOnTabChangedListener(this);
         }
 
-        public void addTab(TabHost.TabSpec paramTabSpec, Class<?> paramClass, Bundle paramBundle)
+        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle bundle)
         {
-            paramTabSpec.setContent(new DummyTabFactory(this.mActivity));
-            String str = paramTabSpec.getTag();
-            TabInfo localTabInfo = new TabInfo(str, paramClass, paramBundle);
-            localTabInfo.fragment = this.mActivity.getSupportFragmentManager().findFragmentByTag(str);
-            if ((localTabInfo.fragment != null) && (!localTabInfo.fragment.isHidden()))
+            tabSpec.setContent(new DummyTabFactory(this.mActivity));
+            String tag = tabSpec.getTag();
+            TabInfo info = new TabInfo(tag, clss, bundle);
+            info.fragment = this.mActivity.getSupportFragmentManager().findFragmentByTag(tag);
+            if ((info.fragment != null) && (!info.fragment.isHidden()) /*&& !info.fragment.isDetached()*/)
             {
-                FragmentTransaction localFragmentTransaction = this.mActivity.getSupportFragmentManager().beginTransaction();
-                localFragmentTransaction.hide(localTabInfo.fragment);
-                localFragmentTransaction.commitAllowingStateLoss();
+                FragmentTransaction transaction = this.mActivity.getSupportFragmentManager().beginTransaction();
+//                transaction.detach(info.fragment);
+                transaction.hide(info.fragment);
+                transaction.commitAllowingStateLoss();
             }
-            this.mTabs.put(str, localTabInfo);
-            this.mTabHost.addTab(paramTabSpec);
+            this.mTabs.put(tag, info);
+            this.mTabHost.addTab(tabSpec);
         }
 
-        public void onTabChanged(String paramString)
+        public void onTabChanged(String tag)
         {
-            TabInfo localTabInfo = (TabInfo)this.mTabs.get(paramString);
-            FragmentTransaction localFragmentTransaction;
-            if (this.mLastTab != localTabInfo)
+            TabInfo newTab = (TabInfo)this.mTabs.get(tag);
+            FragmentTransaction transaction;
+            if (this.mLastTab != newTab)
             {
-                localFragmentTransaction = this.mActivity.getSupportFragmentManager().beginTransaction();
+                transaction = this.mActivity.getSupportFragmentManager().beginTransaction();
                 if ((this.mLastTab != null) && (this.mLastTab.fragment != null)) {
-                    localFragmentTransaction.hide(this.mLastTab.fragment);
+                    transaction.hide(this.mLastTab.fragment);
                 }
-                if (localTabInfo == null) {
+                if (newTab == null) {
                     break label219;
                 }
-                if (localTabInfo.fragment != null) {
+                if (newTab.fragment != null) {
                     break label177;
                 }
-                localTabInfo.fragment = Fragment.instantiate(this.mActivity, localTabInfo.clss.getName(), localTabInfo.args);
-                localFragmentTransaction.add(this.mContainerId, localTabInfo.fragment, localTabInfo.tag);
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + paramString + ", newTab.fragment is null, newTab.tag is " + localTabInfo.tag);
+                newTab.fragment = Fragment.instantiate(this.mActivity, newTab.clss.getName(), newTab.args);
+                transaction.add(this.mContainerId, newTab.fragment, newTab.tag);
+                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", newTab.fragment is null, newTab.tag is " + newTab.tag);
             }
             for (;;)
             {
-                this.mLastTab = localTabInfo;
-                localFragmentTransaction.commitAllowingStateLoss();
+                this.mLastTab = newTab;
+                transaction.commitAllowingStateLoss();
                 this.mActivity.getSupportFragmentManager().executePendingTransactions();
-                this.mActivity.onTabChanged(paramString);
+                this.mActivity.onTabChanged(tag);
                 return;
                 label177:
-                localFragmentTransaction.show(localTabInfo.fragment);
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + paramString + ", show fragment success");
+                transaction.show(newTab.fragment);
+                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", show fragment success");
                 continue;
                 label219:
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + paramString + ", newTab is null");
+                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", newTab is null");
             }
         }
 
@@ -161,7 +161,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
                 this.mContext = paramContext;
             }
 
-            public View createTabContent(String paramString)
+            public View createTabContent(String tag)
             {
                 View localView = new View(this.mContext);
                 localView.setMinimumWidth(0);
@@ -177,11 +177,11 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
             Fragment fragment;
             final String tag;
 
-            TabInfo(String paramString, Class<?> paramClass, Bundle paramBundle)
+            TabInfo(String tag, Class<?> clss, Bundle bundle)
             {
-                this.tag = paramString;
-                this.clss = paramClass;
-                this.args = paramBundle;
+                this.tag = tag;
+                this.clss = clss;
+                this.args = bundle;
             }
         }
     }

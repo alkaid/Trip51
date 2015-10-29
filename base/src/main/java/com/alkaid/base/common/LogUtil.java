@@ -9,75 +9,78 @@ import android.util.Log;
  *
  */
 public class LogUtil {
-	public static final String TAG="alkaid";
+	public static final String TAG="Mingyoupay";
 	/** 是否允许输出debug日志 包括Log.d() Log.v() Log.i() Log.w()*/
 	private static final boolean D=true;
 	/** 是否允许输出error日志 包括Log.e()*/
 	private static final boolean E=true;
 	public static int v(String msg) {
-        return D? Log.v(TAG, msg) : -1;
+        return D? Log.v(TAG, msg==null?"null":msg) : -1;
     }
 	public int v(String msg,Throwable e){
-		return D? Log.v(TAG,msg,e) : -1;
+		return D? Log.v(TAG,msg==null?"null":msg,e) : -1;
 	}
 	public static int v(String TAG,String msg) {
-        return D? Log.v(TAG, msg) : -1;
+        return D? Log.v(TAG, msg==null?"null":msg) : -1;
     }
 	public int v(String TAG,String msg,Throwable e){
-		return D? Log.v(TAG,msg,e) : -1;
+		return D? Log.v(TAG,msg==null?"null":msg,e) : -1;
 	}
 	
 	public static int d(String msg) {
-		return D? Log.d(TAG, msg) : -1;
+		return D? Log.d(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int d(String msg,Throwable e){
-		return D? Log.d(TAG, msg,e) : -1;
+		return D? Log.d(TAG, msg==null?"null":msg,e) : -1;
 	}
 	public static int d(String TAG,String msg) {
-		return D? Log.d(TAG, msg) : -1;
+		return D? Log.d(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int d(String TAG,String msg,Throwable e){
-		return D? Log.d(TAG, msg,e) : -1;
+		return D? Log.d(TAG, msg==null?"null":msg,e) : -1;
 	}
 	
 	public static int i(String msg){
-		return D? Log.i(TAG, msg) : -1;
+		return D? Log.i(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int i(String msg,Throwable e){
-		return D? Log.i(TAG, msg,e) : -1;
+		return D? Log.i(TAG, msg==null?"null":msg,e) : -1;
 	}
 	public static int i(String TAG,String msg){
-		return D? Log.i(TAG, msg) : -1;
+		return D? Log.i(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int i(String TAG,String msg,Throwable e){
-		return D? Log.i(TAG, msg,e) : -1;
+		return D? Log.i(TAG, msg==null?"null":msg,e) : -1;
 	}
 	
 	public static int w(String msg){
-		return D? Log.w(TAG, msg) : -1;
+		return D? Log.w(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int w(String msg,Throwable e){
-		return D? Log.w(TAG, msg,e) : -1;
+		return D? Log.w(TAG, msg==null?"null":msg,e) : -1;
 	}
 	public static int w(String TAG,String msg){
-		return D? Log.w(TAG, msg) : -1;
+		return D? Log.w(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int w(String TAG,String msg,Throwable e){
-		return D? Log.w(TAG, msg,e) : -1;
+		return D? Log.w(TAG, msg==null?"null":msg,e) : -1;
+	}
+	public static int w(Throwable e){
+		return E? Log.w(TAG, e) : -1;
 	}
 	
 	
 	public static int e(String msg){
-		return E? Log.e(TAG, msg) : -1;
+		return E? Log.e(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int e(String msg,Throwable e){
-		return E? Log.e(TAG, msg,e) : -1;
+		return E? Log.e(TAG, msg==null?"null":msg,e) : -1;
 	}
 	public static int e(String TAG,String msg){
-		return E? Log.e(TAG, msg) : -1;
+		return E? Log.e(TAG, msg==null?"null":msg) : -1;
 	}
 	public static int e(String TAG,String msg,Throwable e){
-		return E? Log.e(TAG, msg,e) : -1;
+		return E? Log.e(TAG, msg==null?"null":msg,e) : -1;
 	}
 	public static int e(Throwable e){
 		return E? Log.e(TAG, e.getMessage(),e) : -1;
@@ -90,6 +93,6 @@ public class LogUtil {
 		return Log.getStackTraceString(e);
 	}
 	public static int println(int priority, String tag, String msg){
-		return Log.println(priority, tag, msg);
+		return Log.println(priority, tag, msg==null?"null":msg);
 	}
 }
