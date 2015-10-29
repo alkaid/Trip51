@@ -1,11 +1,11 @@
-package com.alkaid.trip51.view.base;
+package com.alkaid.trip51.base.widget;
 
 import android.os.Bundle;
 
 import com.alkaid.base.view.base.BContextWrap;
-import com.alkaid.base.view.base.BFragment;
+import com.alkaid.base.view.base.BFragmentActivity;
 
-public class BaseFragment extends BFragment {
+public class BaseFragmentActivity extends BFragmentActivity {
 	private BaseContextWrap baseContextWrap;
 	protected BaseApp baseApp;
 	@Override
@@ -15,7 +15,7 @@ public class BaseFragment extends BFragment {
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		baseApp=baseContextWrap.baseApp;
 	}
