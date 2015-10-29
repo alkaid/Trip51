@@ -73,15 +73,6 @@ public class HttpRequest {
 	public static final String HEADER_CACHE_CONTROL = "Cache-Control";
 	public static final String HEADER_ORIGIN = "Origin";
 	public static final String HEADER_USER_AGENT = "User-Agent";
-	/** 连接超时时间 */
-	private static final int TIMEOUT_CONN = 5000;
-	/** 请求超时时间 */
-	private static final int TIMEOUT_SOCKET = 5000;
-	/** 重试次数 */
-	private static final int RETRY_COUNT=3;
-	/** 异常处理类 */
-	private static final RetryHandler DEFAULT_RETRY_HANDLER=new RetryHandler(RETRY_COUNT);
-	
 	//入参
 	private String url;
 	private String method=METHOD_GET;
@@ -95,15 +86,16 @@ public class HttpRequest {
 	private DefaultHttpClient client;
 	private HttpResponse response;
 	private HttpEntity responseEntity;
+	
 	/**
-	 * HttpClient默认使用单例模式<br/>
+	 * HttpClient默认不使用单例模式<br/>
 	 * 每次实例化都重置配置项为默认配置<br/>
 	 * 默认配置为:<br/>
 	 * 连接超时：3000ms  请求超时:5000ms 重试次数：3次
 	 */
 	public HttpRequest(){
-		client= HttpClientHolder.getHttpClient();
-		setDefaultConfig();
+		client= new DefaultHttpClient();
+		init();
 	}
 	/**
 	 * 每次实例化都重置配置项为默认配置<br/>
@@ -111,11 +103,11 @@ public class HttpRequest {
 	 * 连接超时：3000ms  请求超时:5000ms 重试次数：3次
 	 * @param useSingleClient 是否使用单例
 	 */
-	public HttpRequest(boolean useSingleClient){
+	/*private HttpRequest(boolean useSingleClient){
 //		this.useSingleClient=useSingleClient;
 		client= useSingleClient?HttpClientHolder.getHttpClient():new DefaultHttpClient();
 		setDefaultConfig();
-	}
+	}*/
 	/**
 	 * 重置<br/>  包括清除response、重新获得HttpClient 和 重置配置项
 	 * @param resetConfig 是否重置配置项
@@ -124,7 +116,8 @@ public class HttpRequest {
 		destroy();
 //		client= useSingleClient?HttpClientHolder.getHttpClient():new DefaultHttpClient();
 		if(resetConfig){
-			setDefaultConfig();
+			HttpConfig.getInstance().resetConfig();
+			init();
 		}
 		return this;
 	}
@@ -147,36 +140,16 @@ public class HttpRequest {
 		responseEntity=null;
 		response=null;
 	}
-	/** 恢复默认配置 <br/>
-	 * 连接超时：3000ms  请求超时:5000ms 重试次数：3次*/
-	public HttpRequest setDefaultConfig(){
+	public void init(){
 		client.getParams().setParameter(
-				CoreConnectionPNames.CONNECTION_TIMEOUT, TIMEOUT_CONN);
+				CoreConnectionPNames.CONNECTION_TIMEOUT, HttpConfig.getInstance().getTimeoutConn());
 		client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,
-				TIMEOUT_SOCKET);
+				HttpConfig.getInstance().getTimeoutConn());
 		//默认异常处理
-		client.setHttpRequestRetryHandler(DEFAULT_RETRY_HANDLER);
+		client.setHttpRequestRetryHandler(HttpConfig.getInstance().getRetryHandler());
 		//默认不管cookie HttpClient里保存的cookie是什么就是什么
 //		cookieStore=client.getCookieStore();
 //		client.setCookieStore(cookieStore);
-		return this;
-	}
-	/** 设置连接超时时间 */
-	public HttpRequest setConnectionTimeout(int time){
-		client.getParams().setParameter(
-				CoreConnectionPNames.CONNECTION_TIMEOUT, time);
-		return this;
-	}
-	/** 设置请求超时时间 */
-	public HttpRequest setSocketTimeout(int time){
-		client.getParams().setParameter(
-				CoreConnectionPNames.SO_TIMEOUT, time);
-		return this;
-	}
-	/** 设置重试次数 */
-	public HttpRequest setRetryCount(int count){
-		client.setHttpRequestRetryHandler(new RetryHandler(count));
-		return this;
 	}
 	/** 设置请求重试异常处理 */
 	public HttpRequest setRequestRetryHandler(HttpRequestRetryHandler handler){
@@ -323,55 +296,6 @@ public class HttpRequest {
 		return this;
 	}
 
-	static class RetryHandler implements HttpRequestRetryHandler{
-		private int retryCount;
-		public RetryHandler(int retryCount){
-			this.retryCount=retryCount;
-		}
-		@Override
-		public boolean retryRequest(IOException exception, int executionCount,
-				HttpContext context) {
-			if(executionCount > retryCount){
-				return false;
-			}
-			if(exception instanceof ConnectTimeoutException){
-				LogUtil.e(TAG, "http连接超时,共执行了"+executionCount+"次", exception);
-				return true;
-			}
-			if(exception instanceof SocketTimeoutException){
-				LogUtil.e(TAG, "http请求超时,共执行了"+executionCount+"次", exception);
-				return true;
-			}
-			if (exception instanceof NoHttpResponseException) { 
-                // 服务停掉则重新尝试连接 
-                return true; 
-            } 
-            if (exception instanceof SSLHandshakeException) { 
-                // SSL异常不需要重试 
-                return false; 
-            } 
-            if (exception instanceof UnknownHostException){
-            	LogUtil.e(TAG, "http找不到主机,共执行了"+executionCount+"次", exception);
-            	return true;
-            }
-            if (exception instanceof NoHttpResponseException) {
-                // Retry if the server dropped connection on us
-                return true;
-            }
-//            if (exception instanceof InterruptedIOException) {
-//                // Timeout
-//                return false;
-//            }
-            HttpRequest request = (HttpRequest) context.getAttribute( 
-                    ExecutionContext.HTTP_REQUEST); 
-            boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);  
-            if (idempotent) { 
-                // 请求内容相同则重试  
-                return true; 
-            } 
-            return false; 
-		}
-	}
 	/**
 	 * 将指定的参数转换成Url参数的方式 形如 id=001&user=0002
 	 * @param url
@@ -399,5 +323,29 @@ public class HttpRequest {
 		}
 		return strb.toString();
 	}
-
+	
+	/**
+	 * 将指定的参数转换成Url参数的方式 形如 id=001&user=0002
+	 * @param params
+	 *            url参数 或 entity参数
+	 * @param charset 
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public static String getAppendParams(Map<String, String> params,String charset) throws UnsupportedEncodingException {
+		if(TextUtils.isEmpty(charset))
+			charset="utf-8";
+		StringBuilder strb = new StringBuilder();
+		if (null != params && params.size() > 0) {
+			boolean isFirstParam = true;
+			for (String key : params.keySet()) {
+				if (isFirstParam)
+					isFirstParam = false;
+				else
+					strb.append("&");
+				strb.append(key).append("=").append(URLEncoder.encode(params.get(key),charset));
+			}
+		}
+		return strb.toString();
+	}
 }

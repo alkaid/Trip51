@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.alkaid.base.common;
 
 import java.io.BufferedInputStream;
@@ -175,12 +172,10 @@ public class IOUtil {
 	
 	/**
 	 * 得到配置列表
-	 * @param filePath  文件路径
 	 * @param enc	编码方式 若为null则用默认编码
 	 * @return
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
-	 * @throws AlkaidException 
 	 */
 	public Map<String, String> getConfig(String fileName,String enc) throws FileNotFoundException, IOException {
 		Map<String,String> map=new HashMap<String, String>();
@@ -216,6 +211,26 @@ public class IOUtil {
 				throw ex;
 			}
 		}
+	}
+	
+	public static void save2File(byte[] b, String file)  {
+        BufferedOutputStream stream = null;  
+        try {  
+        	File ret = createFile(file);
+            FileOutputStream fstream = new FileOutputStream(ret);  
+            stream = new BufferedOutputStream(fstream);  
+            stream.write(b);  
+        } catch (Exception e) {  
+            LogUtil.e(e);
+        } finally {  
+            if (stream != null) {  
+                try {  
+                    stream.close();  
+                } catch (IOException e) {  
+                    LogUtil.e(e);
+                }  
+            }  
+        }  
 	}
 	
 	/**
