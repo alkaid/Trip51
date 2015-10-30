@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
 
 import java.util.HashMap;
@@ -33,10 +34,10 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         tabView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if ((event.getAction() == MotionEvent.ACTION_UP) && (!label.equals(BaseTabFragmentActivity.this.mTabHost.getCurrentTabTag()))) {
-                    FragmentTabActivity.this.setGaPageNameByTitle(label);
-                    GAHelper.instance().contextStatisticsEvent(FragmentTabActivity.this, "tab", label, 2147483647, "tap");
-                    GAHelper.instance().setGAPageName(FragmentTabActivity.this.getGAPageName());
-                    GAHelper.instance().setRequestId(FragmentTabActivity.this, UUID.randomUUID().toString(), null, false);
+                    BaseTabFragmentActivity.this.setGaPageNameByTitle(label);
+//                    GAHelper.instance().contextStatisticsEvent(BaseTabFragmentActivity.this, "tab", label, 2147483647, "tap");
+//                    GAHelper.instance().setGAPageName(BaseTabFragmentActivity.this.getGAPageName());
+//                    GAHelper.instance().setRequestId(BaseTabFragmentActivity.this, UUID.randomUUID().toString(), null, false);
                 }
                 return false;
             }
@@ -126,28 +127,21 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
                     transaction.hide(this.mLastTab.fragment);
                 }
                 if (newTab == null) {
-                    break label219;
+                    LogUtil.i("onTabChanged with tabId:" + tag + ", newTab is null");
+                    return;
                 }
                 if (newTab.fragment != null) {
-                    break label177;
+                    transaction.show(newTab.fragment);
+                    LogUtil.i("onTabChanged with tabId:" + tag + ", show fragment success");
+                    return;
                 }
                 newTab.fragment = Fragment.instantiate(this.mActivity, newTab.clss.getName(), newTab.args);
                 transaction.add(this.mContainerId, newTab.fragment, newTab.tag);
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", newTab.fragment is null, newTab.tag is " + newTab.tag);
-            }
-            for (;;)
-            {
+                LogUtil.i( "onTabChanged with tabId:" + tag + ", newTab.fragment is null, newTab.tag is " + newTab.tag);
                 this.mLastTab = newTab;
                 transaction.commitAllowingStateLoss();
                 this.mActivity.getSupportFragmentManager().executePendingTransactions();
                 this.mActivity.onTabChanged(tag);
-                return;
-                label177:
-                transaction.show(newTab.fragment);
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", show fragment success");
-                continue;
-                label219:
-                Log.i(FragmentTabActivity.LOG_TAG, "onTabChanged with tabId:" + tag + ", newTab is null");
             }
         }
 
