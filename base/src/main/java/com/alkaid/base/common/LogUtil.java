@@ -9,7 +9,7 @@ import android.util.Log;
  *
  */
 public class LogUtil {
-	public static final String TAG="Mingyoupay";
+	public static final String TAG="trip51";
 	/** 是否允许输出debug日志 包括Log.d() Log.v() Log.i() Log.w()*/
 	private static final boolean D=true;
 	/** 是否允许输出error日志 包括Log.e()*/

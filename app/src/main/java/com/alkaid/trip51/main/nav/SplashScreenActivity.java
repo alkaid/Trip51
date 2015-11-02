@@ -15,5 +15,6 @@ public class SplashScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

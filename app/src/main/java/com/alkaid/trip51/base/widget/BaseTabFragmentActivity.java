@@ -204,7 +204,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
 //                this.mIndicatorView = R.layout.tab_indicator_holo;
 //            }
             View localView = ((LayoutInflater)this.mContext.getSystemService("layout_inflater")).inflate(this.mIndicatorView, tabHost.getTabWidget(), false);
-            ((TextView)localView.findViewById(android.R.id.text1)).setText(this.mLabel);
+            ((TextView)localView.findViewById(android.R.id.title)).setText(this.mLabel);
             return localView;
         }
     }
