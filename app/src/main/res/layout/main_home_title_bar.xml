@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageButton android:id="@id/btn_back_wx" android:background="@drawable/title_btn_right_transparent" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/ic_home_back"
         android:visibility="gone"/>
-    <TextView android:textSize="@dimen/text_size_16" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/city" android:paddingLeft="@dimen/title_bar_button_margin" android:paddingRight="0.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" android:drawableRight="@drawable/title_home_arrow_down" android:drawablePadding="5.0dip"
+    <com.alkaid.trip51.base.widget.view.NovaTextView android:textSize="@dimen/text_size_16" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/city" android:paddingLeft="@dimen/title_bar_button_margin" android:paddingRight="0.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" android:drawableRight="@drawable/title_home_arrow_down" android:drawablePadding="5.0dip"
         android:text="深圳"/>
     <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="3.0dip" android:layout_marginRight="3.0dip" android:layout_weight="1.0">
         <FrameLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
@@ -11,7 +11,7 @@
             <ImageView android:layout_gravity="center_vertical" android:id="@id/searchIcon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="7.0dip" android:src="@drawable/new_mail_icon" />
         </FrameLayout>
         <FrameLayout android:layout_width="50.0dip" android:layout_height="fill_parent">
-            <ImageButton android:id="@id/notify" android:background="@drawable/title_btn_right_transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/home_navibar_icon_add" />
+            <com.alkaid.trip51.base.widget.view.NovaImageButton android:id="@id/notify" android:background="@drawable/title_btn_right_transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/home_navibar_icon_bell" />
             <!--<ImageView android:layout_gravity="bottom|center" android:id="@id/tips_arrow" android:background="@drawable/title_btn_right_transparent" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/home_title_tips_arrow" android:adjustViewBounds="true" />
             <com.dianping.base.widget.MeasuredTextView android:textSize="@dimen/text_size_12" android:textColor="@color/text_color_white" android:gravity="center" android:layout_gravity="center" android:id="@id/findmain_mail_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginBottom="8.0dip" />-->
         </FrameLayout>
