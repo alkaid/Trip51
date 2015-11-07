@@ -208,4 +208,11 @@
     <attr name="itemTag" format="string" />
     <attr name="barColor1" format="color" />
     <attr name="barColor2" format="color" />
+
+    <declare-styleable name="coodOper">
+        <attr name="opMinusBtnBackground" format="reference" />
+        <attr name="opAddBtnBackground" format="reference|color" />
+        <attr name="opMaxCount" format="integer" />
+        <attr name="opMinCount" format="integer" />
+    </declare-styleable>
 </resources>

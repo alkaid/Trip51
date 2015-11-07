@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:coodOper="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content">
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingBottom="6dp" android:layout_marginTop="6dp"
-        android:padding="20dp">
+        android:paddingBottom="3dp" android:layout_marginTop="3dp" android:padding="5dp">
         <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_seat" android:layout_width="26dp" android:layout_height="wrap_content"  android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
         <ImageView android:id="@+id/ivArrow" android:src="@drawable/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_alignParentRight="true" android:layout_centerVertical="true"
             android:visibility="invisible"/>
@@ -26,9 +25,8 @@
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
                 <TextView android:id="@+id/tvItemValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="餐桌数" android:textColor="@color/text_gray"
                     android:textSize="15sp" android:layout_centerVertical="true"/>
-                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-                </LinearLayout>
+                <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" coodOper:opMaxCount="100" coodOper:opMinCount="1"/>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>

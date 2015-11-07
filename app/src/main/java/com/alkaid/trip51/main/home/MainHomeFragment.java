@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
-import com.alkaid.trip51.shop.ShopListActivity;
+import com.alkaid.trip51.booking.BookingFilterActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class MainHomeFragment extends BaseFragment {
         layOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, ShopListActivity.class));
+                startActivity(new Intent(context, BookingFilterActivity.class));
             }
         });
 
