@@ -373,4 +373,7 @@
     <color name="yy_translucent_deep_gray">#ffacacac</color>
     <color name="yy_translucent_light_gray">#ffd0d0d0</color>
     <color name="yy_translucent_light_red">#ffffbcad</color>
+    
+    <color name="divide_gray_default">#ffe9e9e9</color>
+    <color name="frame_gray_default">#ffcfcfcf</color>
 </resources>

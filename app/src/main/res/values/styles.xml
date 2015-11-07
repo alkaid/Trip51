@@ -496,4 +496,8 @@
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowIsTranslucent">false</item>
     </style>
+
+    <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/btn_radio_default</item>
+    </style>
 </resources>

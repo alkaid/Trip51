@@ -163,37 +163,7 @@
     <attr name="weight" format="integer" />
     <attr name="size" format="integer" />
     <attr name="selectable" format="boolean" />
-    <attr name="ptrRefreshableViewBackground" format="reference|color" />
-    <attr name="ptrHeaderBackground" format="reference|color" />
-    <attr name="ptrHeaderTextColor" format="reference|color" />
-    <attr name="ptrHeaderSubTextColor" format="reference|color" />
-    <attr name="ptrMode">
-        <flag name="both" value="0x00000003" />
-        <flag name="disabled" value="0x00000000" />
-        <flag name="manualOnly" value="0x00000004" />
-        <flag name="pullDownFromTop" value="0x00000001" />
-        <flag name="pullFromEnd" value="0x00000002" />
-        <flag name="pullFromStart" value="0x00000001" />
-        <flag name="pullUpFromBottom" value="0x00000002" />
-    </attr>
-    <attr name="ptrShowIndicator" format="reference|boolean" />
-    <attr name="ptrDrawable" format="reference" />
-    <attr name="ptrDrawableStart" format="reference" />
-    <attr name="ptrDrawableEnd" format="reference" />
-    <attr name="ptrOverScroll" format="reference|boolean" />
-    <attr name="ptrHeaderTextAppearance" format="reference" />
-    <attr name="ptrSubHeaderTextAppearance" format="reference" />
-    <attr name="ptrAnimationStyle">
-        <flag name="flip" value="0x00000001" />
-        <flag name="load" value="0x00000003" />
-        <flag name="rotate" value="0x00000000" />
-    </attr>
-    <attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean" />
-    <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
-    <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean" />
-    <attr name="ptrAdapterViewBackground" format="reference|color" />
-    <attr name="ptrDrawableTop" format="reference" />
-    <attr name="ptrDrawableBottom" format="reference" />
+
     <attr name="headerMode">
         <flag name="rotate" value="0x00000001" />
         <flag name="dper" value="0x00000000" />
@@ -216,10 +186,6 @@
     <attr name="minus_margin_bottom" format="dimension" />
     <attr name="empty_normal" format="reference" />
     <attr name="selected_normal" format="reference" />
-    <attr name="layoutManager" format="string" />
-    <attr name="spanCount" format="integer" />
-    <attr name="reverseLayout" format="boolean" />
-    <attr name="stackFromEnd" format="boolean" />
     <attr name="column_count" format="integer" />
     <attr name="column_count_portrait" format="integer" />
     <attr name="column_count_landscape" format="integer" />

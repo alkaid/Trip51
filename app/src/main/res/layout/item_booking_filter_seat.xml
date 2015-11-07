@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingBottom="6dp" android:layout_marginTop="6dp"
+        android:padding="20dp">
+        <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_seat" android:layout_width="26dp" android:layout_height="wrap_content"  android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
+        <ImageView android:id="@+id/ivArrow" android:src="@drawable/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_alignParentRight="true" android:layout_centerVertical="true"
+            android:visibility="invisible"/>
+        <TextView android:id="@+id/tvItemName" android:layout_width="100dp" android:layout_height="wrap_content" android:text="餐桌"
+            android:layout_toRightOf="@+id/ivItemIcon" android:textSize="19sp" android:layout_marginLeft="10dp" android:layout_centerVertical="true"/>
+        <LinearLayout android:id="@+id/layItemContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/tvItemName" android:orientation="vertical">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="horizontal" >
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="大厅" android:textColor="@color/text_color_gray"/>
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="雅座" android:textColor="@color/text_color_gray"/>/>
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="包房" android:textColor="@color/text_color_gray"/> android:checked="true"/>
+            </RadioGroup>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
+                <TextView android:id="@+id/tvItemValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="餐桌数" android:textColor="@color/text_gray"
+                    android:textSize="15sp" android:layout_centerVertical="true"/>
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <ImageView android:src="@color/divide_gray_default" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentBottom="true"/>
+</RelativeLayout>

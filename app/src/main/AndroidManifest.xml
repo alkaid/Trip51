@@ -61,28 +61,29 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="home" android:scheme="dianping"/>
+                <data android:host="home" android:scheme="trip51"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="find" android:scheme="dianping"/>
+                <data android:host="find" android:scheme="trip51"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="me" android:scheme="dianping"/>
+                <data android:host="me" android:scheme="trip51"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="tuanmain" android:scheme="dianping"/>
+                <data android:host="tuanmain" android:scheme="trip51"/>
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable" android:value="com.dianping.shoplist.activity.ShopListActivity"/>
+            <meta-data android:name="android.app.default_searchable" android:value="com.alkaid.trip51.shop.ShopListActivity"/>
         </activity>
+        <activity android:name=".shop.ShopListActivity"/>
     </application>
 
 </manifest>
