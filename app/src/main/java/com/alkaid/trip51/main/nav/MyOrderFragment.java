@@ -31,7 +31,7 @@ public class MyOrderFragment extends BaseTabPageViewFragment {
         mTabsAdapter.addTab(mTabHost.newTabSpec("退款单").setIndicator("退款单"),
                 OrderListFragment.class, null);
     }
-    private void intitTitleBar(View v){
+    private void initTitleBar(View v){
         View layTitleBar=v.findViewById(R.id.title_bar);
         TextView tvTitle= (TextView) v.findViewById(R.id.tvTitle);
         View btnLeft=v.findViewById(R.id.btn_back_wx);

@@ -25,7 +25,7 @@ public class BookingFilterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_booking);
-        intitTitleBar();
+        initTitleBar();
         btnSearch=findViewById(R.id.btnSearch);
         layContent= (ViewGroup) findViewById(R.id.content);
         inflater= LayoutInflater.from(context);
@@ -64,7 +64,7 @@ public class BookingFilterActivity extends BaseActivity {
         });
     }
 
-    private void intitTitleBar(){
+    private void initTitleBar(){
         View layTitleBar=findViewById(R.id.title_bar);
         TextView tvTitle= (TextView) findViewById(R.id.tvTitle);
         View btnLeft=findViewById(R.id.btn_back_wx);

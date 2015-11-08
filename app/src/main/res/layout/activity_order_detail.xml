@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/background_gray">
+    <include layout="@layout/default_title_bar" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+            <LinearLayout android:background="@color/white" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="12dp" android:paddingLeft="12dp">
+                <RelativeLayout android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="和太郎寿司" android:layout_centerVertical="true" android:textSize="20sp"/>
+                    <ImageView android:id="@+id/ivArrow" android:src="@drawable/arrow" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <TextView android:text="点击此处查看店铺详情" android:textSize="13sp" android:textColor="@color/text_color_light_gray" android:layout_toLeftOf="@+id/ivArrow" android:layout_marginRight="10dp" android:layout_centerVertical="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+                <TextView android:paddingTop="10dp" android:paddingBottom="10dp" android:lineSpacingExtra="5dp" android:textSize="15sp" android:textColor="@color/text_color_light_gray"
+                    android:text="预订时间：2015-08-11（周二）18：00\n预订信息：包房/4人\n用户信息：高先生  18976765423\n支付方式：货到付款"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+                <RelativeLayout android:paddingTop="10dp" android:paddingBottom="10dp"  android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="订单编号：CN20150811001" android:layout_centerVertical="true" android:textSize="15sp"/>
+                    <ImageView  android:src="@drawable/arrow" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="12dp" android:paddingLeft="12dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="订单详情：" android:layout_centerVertical="true" android:textSize="15sp"
+                    android:paddingTop="12dp" android:paddingBottom="12dp"/>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+            </LinearLayout>
+            <LinearLayout android:background="@color/white" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="12dp" android:paddingLeft="12dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="菜名"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="价格"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="份数"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="金额"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                </LinearLayout>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="鱼香茄子"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="1"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                </LinearLayout>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="鱼香茄子"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="1"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                        android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+                </LinearLayout>
+                <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="10dp" android:paddingBottom="10dp" >
+                    <TextView android:id="@+id/tvTotal" android:textSize="20sp" android:textColor="@color/red" android:gravity="center" android:layout_alignParentRight="true"
+                        android:text="￥168"  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center" android:layout_toLeftOf="@+id/tvTotal"
+                        android:text="订单总计："  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingRight="12dp" android:paddingLeft="12dp" android:paddingTop="5dp" android:paddingBottom="5dp">
+                <ImageView android:src="@drawable/trip51_info" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:textSize="13sp" android:textColor="@color/orange" android:gravity="center" android:layout_marginLeft="3dp"
+                    android:text="优惠规则详解"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button android:id="@+id/btnShareWx"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="60dp" android:layout_marginRight="60dp" android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_default_green" android:text="发送给微信好友" android:textSize="20sp" android:textColor="@android:color/white"/>
+    <Button android:id="@+id/btnPay"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_default_red" android:text="立即支付" android:textSize="20sp" android:textColor="@android:color/white"/>
+</LinearLayout>

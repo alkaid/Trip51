@@ -37,6 +37,6 @@ public class MainActivity extends BaseTabFragmentActivity{
 //            SkinManager.getInstance().refresh(ConfigHelper.appSkinConfig);
             super.addTab(TAB_TAG_HOME, R.layout.tab_indicator_home, MainHomeFragment.class, null);
             super.addTab(TAB_TAG_ORDER, R.layout.tab_indicator_order, MyOrderFragment.class, null);
-            super.addTab(TAB_TAG_MINE, R.layout.tab_indicator_my, MainHomeFragment.class, null);
+            super.addTab(TAB_TAG_MINE, R.layout.tab_indicator_my, UserCenterFragment.class, null);
     }
 }
