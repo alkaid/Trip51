@@ -25,6 +25,7 @@ public class BookingFilterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_booking);
+        intitTitleBar();
         btnSearch=findViewById(R.id.btnSearch);
         layContent= (ViewGroup) findViewById(R.id.content);
         inflater= LayoutInflater.from(context);
@@ -58,6 +59,21 @@ public class BookingFilterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context,ShopListActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void intitTitleBar(){
+        View layTitleBar=findViewById(R.id.title_bar);
+        TextView tvTitle= (TextView) findViewById(R.id.tvTitle);
+        View btnLeft=findViewById(R.id.btn_back_wx);
+        View btnRight=findViewById(R.id.notify);
+        tvTitle.setText("餐厅预订");
+        btnRight.setVisibility(View.GONE);
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

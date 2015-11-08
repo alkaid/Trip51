@@ -5,6 +5,8 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+   <style name="AppThemeOrangeTab" parent="AppTheme" />
+
     <style name="Theme.Dianping" parent="@style/Theme.Base" />
     <style name="NotificationText">
         <item name="android:textColor">?android:textColorPrimary</item>

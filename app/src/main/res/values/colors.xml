@@ -376,4 +376,5 @@
     
     <color name="divide_gray_default">#ffe9e9e9</color>
     <color name="frame_gray_default">#ffcfcfcf</color>
+    <color name="tab_bottom_background_default">#FFF58A42</color>
 </resources>

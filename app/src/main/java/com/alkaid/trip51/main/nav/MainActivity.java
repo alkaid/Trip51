@@ -2,7 +2,6 @@ package com.alkaid.trip51.main.nav;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseTabFragmentActivity;
@@ -26,7 +25,6 @@ public class MainActivity extends BaseTabFragmentActivity{
 
     public void onCreate(Bundle savedInstanceState)
     {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         if (this.activityFinished) {return;}
             this.mPreferences = getSharedPreferences(getPackageName(), 0);
@@ -38,7 +36,7 @@ public class MainActivity extends BaseTabFragmentActivity{
             super.setTabWidgetBackground(R.drawable.tab_bar_bg);
 //            SkinManager.getInstance().refresh(ConfigHelper.appSkinConfig);
             super.addTab(TAB_TAG_HOME, R.layout.tab_indicator_home, MainHomeFragment.class, null);
-            super.addTab(TAB_TAG_ORDER, R.layout.tab_indicator_order, MainHomeFragment.class, null);
+            super.addTab(TAB_TAG_ORDER, R.layout.tab_indicator_order, MyOrderFragment.class, null);
             super.addTab(TAB_TAG_MINE, R.layout.tab_indicator_my, MainHomeFragment.class, null);
     }
 }

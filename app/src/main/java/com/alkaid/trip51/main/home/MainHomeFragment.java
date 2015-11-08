@@ -121,4 +121,9 @@ public class MainHomeFragment extends BaseFragment {
         return v;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

@@ -123,24 +123,28 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
             if (this.mLastTab != newTab)
             {
                 transaction = this.mActivity.getSupportFragmentManager().beginTransaction();
-                if ((this.mLastTab != null) && (this.mLastTab.fragment != null)) {
-                    transaction.hide(this.mLastTab.fragment);
-                }
-                if (newTab == null) {
-                    LogUtil.i("onTabChanged with tabId:" + tag + ", newTab is null");
-                    return;
-                }
-                if (newTab.fragment != null) {
-                    transaction.show(newTab.fragment);
-                    LogUtil.i("onTabChanged with tabId:" + tag + ", show fragment success");
-                    return;
-                }
-                newTab.fragment = Fragment.instantiate(this.mActivity, newTab.clss.getName(), newTab.args);
-                transaction.add(this.mContainerId, newTab.fragment, newTab.tag);
-                LogUtil.i( "onTabChanged with tabId:" + tag + ", newTab.fragment is null, newTab.tag is " + newTab.tag);
-                this.mLastTab = newTab;
-                transaction.commitAllowingStateLoss();
-                this.mActivity.getSupportFragmentManager().executePendingTransactions();
+                if(null==newTab.fragment) newTab.fragment = Fragment.instantiate(this.mActivity, newTab.clss.getName(), newTab.args);
+                transaction.replace(this.mContainerId,newTab.fragment,newTab.tag).commit();
+                this.mLastTab=newTab;
+                //以下方法在Fragment嵌套时会出现多次切换后原一级Fragment无法显示的问题
+//                if ((this.mLastTab != null) && (this.mLastTab.fragment != null)) {
+//                    transaction.hide(this.mLastTab.fragment);
+//                }
+//                if (newTab == null) {
+//                    LogUtil.i("onTabChanged with tabId:" + tag + ", newTab is null");
+//                    return;
+//                }
+//                if (newTab.fragment != null) {
+//                    transaction.show(newTab.fragment);
+//                    LogUtil.i("onTabChanged with tabId:" + tag + ", show fragment success");
+//                    return;
+//                }
+//                newTab.fragment = Fragment.instantiate(this.mActivity, newTab.clss.getName(), newTab.args);
+//                transaction.add(this.mContainerId, newTab.fragment, newTab.tag);
+//                LogUtil.i( "onTabChanged with tabId:" + tag + ", newTab.fragment is null, newTab.tag is " + newTab.tag);
+//                this.mLastTab = newTab;
+//                transaction.commitAllowingStateLoss();
+//                this.mActivity.getSupportFragmentManager().executePendingTransactions();
                 this.mActivity.onTabChanged(tag);
             }
         }
