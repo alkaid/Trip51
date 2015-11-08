@@ -7,31 +7,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-        <Button
+        <TextView
             android:id="@+id/btn_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="菜单"
-            android:textSize="10sp" />
+            android:textColor="@color/menu_navigator_text_color"
+            android:textSize="15sp" />
 
-        <Button
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/menu_navigator_background_color" />
+
+        <TextView
             android:id="@+id/btn_suggest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="评价"
-            android:textSize="10sp" />
+            android:textColor="@color/menu_navigator_text_color"
+            android:textSize="15sp" />
 
-        <Button
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/menu_navigator_background_color" />
+
+        <TextView
             android:id="@+id/btn3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="店铺详情"
-            android:textSize="10sp" />
+            android:textColor="@color/menu_navigator_text_color"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,9 +60,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.alkaid.trip51.widget.RelationListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"></com.alkaid.trip51.widget.RelationListView>
     </LinearLayout>
+
 
 </LinearLayout>

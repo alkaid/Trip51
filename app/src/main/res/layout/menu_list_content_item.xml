@@ -5,47 +5,59 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:orientation="horizontal"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:textColor="@color/menu_navigator_text_color">
 
-<!--    <ImageView
+    <ImageView
         android:id="@+id/iv_menu_food"
-        android:layout_width="0"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
         android:src="@drawable/temp_shop_thumb" />
 
     <LinearLayout
         android:id="@+id/ll_menu_food_detail"
-        android:layout_width="0"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_menu_food_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_menu_food_count"
             android:layout_width="wrap_content"
+            android:textSize="10sp"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_menu_food_price"
             android:layout_width="wrap_content"
+            android:textSize="10sp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.alkaid.trip51.widget.Operator
-        android:id="@+id/opNums"
-        android:layout_width="0"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        coodOper:opMaxCount="100"
-        coodOper:opMinCount="1" />-->
+        android:layout_weight="2"
+        android:layout_gravity="bottom">
+        <com.alkaid.trip51.widget.Operator
+            android:id="@+id/opNums"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            coodOper:opMaxCount="100"
+            coodOper:opMinCount="1" />
+    </LinearLayout>
 
 
 </LinearLayout>
