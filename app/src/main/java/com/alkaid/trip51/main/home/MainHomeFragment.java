@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingFilterActivity;
+import com.alkaid.trip51.shop.MenuListActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 
 import java.util.ArrayList;
@@ -44,6 +45,13 @@ public class MainHomeFragment extends BaseFragment {
 
         ListView shopListView= (ListView) v.findViewById(android.R.id.list);
         shopListView.setAdapter(new ShopListAdapter(getActivity()));
+        shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(),MenuListActivity.class);
+                startActivity(intent);
+            }
+        });
         shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             private int mListViewFirstItem = 0;
             //listView中第一项的在屏幕中的位置

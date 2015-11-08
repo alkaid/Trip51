@@ -84,7 +84,7 @@
             <meta-data android:name="android.app.default_searchable" android:value="com.alkaid.trip51.shop.ShopListActivity"/>
         </activity>
         <activity android:name=".shop.ShopListActivity"/>
-        <activity android:name=".booking.BookingFilterActivity" />
+        <activity android:name=".shop.MenuListActivity"/>
     </application>
 
 </manifest>
