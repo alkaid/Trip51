@@ -87,8 +87,8 @@ public class Operator extends LinearLayout {
         mSubBtn = (ImageButton) findViewById(R.id.sub_btn);
         mAddBtn = (ImageButton) findViewById(R.id.add_btn);
         mEditNum = (EditText) findViewById(R.id.edit_num);
-        mSubBtn.setBackgroundResource(resMinusIconId);
-        mAddBtn.setBackgroundResource(resAddIconId);
+        mSubBtn.setImageResource(resMinusIconId);
+        mAddBtn.setImageResource(resAddIconId);
         mEditNum.addTextChangedListener(new TextWatcher() {
                                             public void afterTextChanged(Editable editable) {
                                                 isFromInput = true;
