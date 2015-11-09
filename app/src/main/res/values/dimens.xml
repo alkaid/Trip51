@@ -82,4 +82,5 @@
     <dimen name="user_section_height">15.0dip</dimen>
     <dimen name="wm_shopinfo_left_margin">17.0dip</dimen>
     <dimen name="wm_shopinfo_right_margin">19.0dip</dimen>
+    <dimen name="user_blance_background_height">200.0dip</dimen>
 </resources>

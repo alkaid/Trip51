@@ -378,6 +378,10 @@
     <color name="frame_gray_default">#ffcfcfcf</color>
     <color name="tab_bottom_background_default">#FFF58A42</color>
     <!--菜单导航相关颜色-->
-    <color name="menu_navigator_text_color">#999999</color>
-    <color name="menu_navigator_background_color">#EDEDEB</color>
+    <color name="menu_navigator_text_color">#272727</color>
+    <color name="menu_navigator_background_color">#E0E0E0</color>
+    <color name="menu_content_title_color">#5B5B5B</color>
+    <color name="menu_content_title_backgournd_color">#E0E0E0</color>
+    <color name="menu_divider">#8E8E8E</color>
+
 </resources>

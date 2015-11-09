@@ -17,8 +17,8 @@
         <ImageView android:src="@drawable/arrow_white_right_large" android:layout_alignParentRight="true" android:layout_centerVertical="true"
             android:layout_width="wrap_content" android:layout_height="wrap_content" />
     </RelativeLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/white">
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
+    <LinearLayout  android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/white">
+        <LinearLayout android:id="@+id/ll_my_balance" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
                 <TextView android:text="0.00" android:textSize="23sp" android:textColor="@color/orange"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" />
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content" android:layout_height="wrap_content" />
         </LinearLayout>
         <ImageView android:layout_width="1dp" android:layout_height="match_parent" android:src="@color/divide_gray_default" />
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
+        <LinearLayout android:id="@+id/ll_my_points"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
                 <TextView android:text="0" android:textSize="23sp" android:textColor="@color/orange"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" />

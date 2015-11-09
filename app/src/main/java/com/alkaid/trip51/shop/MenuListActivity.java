@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragmentActivity;
-import com.alkaid.trip51.base.widget.view.NovaImageButton;
 
 /**
  * Created by alkaid on 2015/11/7.
@@ -16,7 +16,7 @@ import com.alkaid.trip51.base.widget.view.NovaImageButton;
 public class MenuListActivity extends BaseFragmentActivity {
     View ivBack;
     TextView tvTitle;
-    NovaImageButton btnFavorite;
+    ImageButton btnFavorite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class MenuListActivity extends BaseFragmentActivity {
         ivBack=findViewById(R.id.btn_back_wx);
         tvTitle =  ((TextView)findViewById(R.id.tvTitle));
                                                     setShopNameForTitle("餐厅名称");
-        btnFavorite = (NovaImageButton)findViewById(R.id.notify);
+        btnFavorite = (ImageButton)findViewById(R.id.notify);
         btnFavorite.setImageResource(R.drawable.btn_favorite);
         //增加收藏的餐厅
         btnFavorite.setOnClickListener(new View.OnClickListener() {
