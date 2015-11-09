@@ -83,4 +83,27 @@
     <dimen name="wm_shopinfo_left_margin">17.0dip</dimen>
     <dimen name="wm_shopinfo_right_margin">19.0dip</dimen>
     <dimen name="user_blance_background_height">200.0dip</dimen>
+
+<!--所有字号-->
+    <!--一级标题/导航标题 对应标注里的34px-->
+    <dimen name="text_title_1">18sp</dimen>
+    <!--二级标题/文章标题 30px-->
+    <dimen name="text_title_2">16sp</dimen>
+    <!--三级标题 24px-->
+    <dimen name="text_title_3">16sp</dimen>
+    <!--正文 20px-->
+    <dimen name="text_article_normal">11sp</dimen>
+    <!--注脚或小字 (如主导航栏小字)字体大小 18px-->
+    <dimen name="text_subscript">10sp</dimen>
+    <!--TitleBar上的正文字体 23px-->
+    <dimen name="text_titlebar_normal">12sp</dimen>
+    <!--一般按钮里的字体大小 24px-->
+    <dimen name="text_button_normal">13sp</dimen>
+
+    <!--未命名字号1 70px-->
+    <dimen name="text_other_1">36sp</dimen>
+    <!--未命名字号1 32px-->
+    <dimen name="text_other_2">17sp</dimen>
+    <!--未命名字号1 26px-->
+    <dimen name="text_other_3">14sp</dimen>
 </resources>
