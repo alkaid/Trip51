@@ -5,14 +5,13 @@
     <include layout="@layout/default_title_bar" />
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"><LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
         <LinearLayout android:id="@+id/content" android:orientation="vertical"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:focusable="true" android:focusableInTouchMode="true" />
         <EditText android:id="@+id/etKeywords"
-            android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="20sp" android:background="@drawable/shape_default_edittext" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="20dp"
-            android:paddingBottom="20dp"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/text_article_normal" android:background="@drawable/shape_default_edittext" android:layout_marginLeft="@dimen/margin_page_medium" android:layout_marginRight="@dimen/margin_page_medium" android:layout_marginTop="20dp"
+            android:paddingBottom="10dp"
             android:hint="输入餐厅关键字"/>
         </LinearLayout>
     </ScrollView>
-    <Button android:id="@+id/btnSearch"
-        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
-        android:background="@drawable/btn_default_red" android:text="搜索" android:textSize="20sp" android:textColor="@android:color/white"/>
+    <Button android:id="@+id/btnSearch" android:text="搜索" style="@style/ButtonLarger.Red"/>
 </LinearLayout>

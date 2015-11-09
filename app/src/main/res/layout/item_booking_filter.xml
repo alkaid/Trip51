@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content">
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingBottom="3dp" android:layout_marginTop="3dp" android:padding="5dp">
-        <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_cuisine" android:layout_width="25dp" android:layout_height="wrap_content"  android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
+        android:paddingBottom="3dp" android:layout_marginTop="3dp" android:paddingTop="5dp" android:paddingLeft="@dimen/margin_page_medium" android:paddingRight="@dimen/margin_page_medium">
+        <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_cuisine" android:layout_width="20dp" android:layout_height="wrap_content"  android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
         <ImageView android:id="@+id/ivArrow" android:src="@drawable/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_alignParentRight="true" android:layout_centerVertical="true"
             android:visibility="visible"/>
         <TextView android:id="@+id/tvItemName" android:layout_width="100dp" android:layout_height="wrap_content" android:text="菜系"
-            android:layout_toRightOf="@+id/ivItemIcon" android:textSize="19sp" android:layout_marginLeft="10dp" android:layout_centerVertical="true"/>
+            android:layout_toRightOf="@+id/ivItemIcon" android:textSize="@dimen/text_title_2" android:layout_marginLeft="10dp" android:layout_centerVertical="true"/>
         <LinearLayout android:id="@+id/layItemContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/tvItemName" >
             <TextView android:id="@+id/tvItemValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="08月26日 今天 18:00" android:textColor="@color/text_gray"
-                android:textSize="15sp" android:layout_centerVertical="true"/>
+                android:textSize="@dimen/text_article_normal" android:layout_centerVertical="true"/>
         </LinearLayout>
     </RelativeLayout>
     <ImageView android:src="@color/divide_gray_default" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentBottom="true"/>
