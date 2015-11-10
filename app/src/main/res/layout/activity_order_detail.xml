@@ -18,68 +18,68 @@
                 </LinearLayout>
                 <View style="@style/DividerViewHorizon" />
                 <RelativeLayout style="@style/SingleItem">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="订单编号：CN20150811001" android:layout_centerVertical="true" android:textSize="15sp"/>
-                    <ImageView  android:src="@drawable/arrow" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <TextView android:text="订单编号：CN20150811001" style="@style/TextViewArticle.centerVertical"/>
+                    <ImageView  style="@style/ImageViewRightArrow"/>
                 </RelativeLayout>
                 <View style="@style/DividerViewHorizon" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="订单详情：" android:layout_centerVertical="true" android:textSize="15sp"
-                    android:paddingTop="12dp" android:paddingBottom="12dp"/>
-                <View style="@style/DividerViewHorizon" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <TextView android:text="订单详情：" style="@style/TextViewArticle.centerVertical"/>
+                <!--<View style="@style/DividerViewHorizon" />-->
             </LinearLayout>
             <LinearLayout android:background="@color/white" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
-                        android:text="菜名"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                <LinearLayout style="@style/SingleItem" >
+                    <TextView style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
+                        android:text="菜名"  android:layout_width="0dp" android:layout_weight="1.5" />
+                    <TextView style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="价格"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="份数"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="金额"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
                 </LinearLayout>
                 <View style="@style/DividerViewHorizon" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                <LinearLayout style="@style/SingleItem" >
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="鱼香茄子"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="1"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
                 </LinearLayout>
                 <View style="@style/DividerViewHorizon" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingTop="10dp" android:paddingBottom="10dp" >
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                <LinearLayout style="@style/SingleItem" >
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="鱼香茄子"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="1"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center"
+                    <TextView  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
                         android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
                 </LinearLayout>
                 <View style="@style/DividerViewHorizon" />
-                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="10dp" android:paddingBottom="10dp" >
-                    <TextView android:id="@+id/tvTotal" android:textSize="20sp" android:textColor="@color/red" android:gravity="center" android:layout_alignParentRight="true"
-                        android:text="￥168"  android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                    <TextView android:textSize="15sp" android:textColor="@color/text_color_light_gray" android:gravity="center" android:layout_toLeftOf="@+id/tvTotal"
-                        android:text="订单总计："  android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <RelativeLayout style="@style/SingleItem" >
+                    <TextView android:id="@+id/tvTotal" style="@style/TextViewTitle2.centerVertical" android:textColor="@color/red" android:gravity="center" android:layout_alignParentRight="true"
+                        android:text="￥168" />
+                    <TextView android:layout_toLeftOf="@+id/tvTotal" style="@style/TextViewArticle.centerVertical"
+                        android:text="订单总计："  />
                 </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small" android:paddingTop="5dp" android:paddingBottom="5dp">
+            </LinearLayout>.
+            <LinearLayout style="@style/SingleItem" >
                 <ImageView android:src="@drawable/trip51_info" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView android:textSize="13sp" android:textColor="@color/orange" android:gravity="center" android:layout_marginLeft="3dp"
-                    android:text="优惠规则详解"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView style="@style/TextViewArticle.centerVertical" android:textColor="@color/orange" android:layout_marginLeft="3dp"
+                    android:text="优惠规则详解"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <Button android:id="@+id/btnShareWx"
-        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="60dp" android:layout_marginRight="60dp" android:layout_marginBottom="10dp"
-        android:background="@drawable/btn_default_green" android:text="发送给微信好友" android:textSize="20sp" android:textColor="@android:color/white"/>
-    <Button android:id="@+id/btnPay"
-        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
-        android:background="@drawable/btn_default_red" android:text="立即支付" android:textSize="20sp" android:textColor="@android:color/white"/>
+    <LinearLayout style="@style/SingleItem" android:layout_marginLeft="60dp" android:layout_marginRight="60dp">
+    <Button android:id="@+id/btnShareWx" style="@style/ButtonLarger.Green" android:text="发送给微信好友"/>
+    </LinearLayout>
+    <LinearLayout style="@style/SingleItem">
+    <Button android:id="@+id/btnPay" style="@style/ButtonLarger.Red" android:text="立即支付"/>
+    </LinearLayout>
 </LinearLayout>
