@@ -502,7 +502,137 @@
         <item name="android:windowIsTranslucent">false</item>
     </style>
 
+
+    <!-- 自定义RadioButton-->
     <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/btn_radio_default</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_article_normal</item>
+    </style>
+    <style name="CustomRadioButtonDefault.textGray">
+        <item name="android:textColor">@color/text_color_light_gray</item>
+    </style>
+
+    <!--自定义大按钮-->
+    <style name="ButtonLarger">
+        <item name="android:textSize">@dimen/text_button_normal</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginLeft">@dimen/margin_page_medium</item>
+        <item name="android:layout_marginRight">@dimen/margin_page_medium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <!-- 大按钮红色-->
+    <style name="ButtonLarger.Red" parent="ButtonLarger">
+        <item name="android:background">@drawable/btn_default_red</item>
+    </style>
+    <!--大按钮绿色-->
+    <style name="ButtonLarger.Green" parent="ButtonLarger">
+        <item name="android:background">@drawable/btn_default_green</item>
+    </style>
+    <!--TextView正文样式-->
+    <style name="TextViewArticle">
+        <item name="android:textSize">@dimen/text_article_normal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextViewArticle.centerVertical">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="TextViewArticle.Gray">
+        <item name="android:textColor">@color/text_color_light_gray</item>
+    </style>
+    <style name="TextViewArticle.Gray.centerVertical">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="TextViewTitle1">
+        <item name="android:textSize">@dimen/text_title_1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextViewTitle1.TitleBar">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!--TextView一般标题样式 如商店列表单项里的商店名称-->
+    <style name="TextViewTitle2">
+        <item name="android:textSize">@dimen/text_title_2</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextViewTitle2.centerVertical">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <!--ListView单个Item外层容器样式-->
+    <style name="ListViewItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+    <!--单个Item样式 暂时和ListViewItem一样-->
+    <style name="SingleItem" parent="ListViewItem"></style>
+    <!--单个Item样式,包括左右padding-->
+    <style name="SingleItem.mediumPaddingHorizon">
+        <item name="android:paddingLeft">@dimen/margin_page_medium</item>
+        <item name="android:paddingRight">@dimen/margin_page_medium</item>
+    </style>
+    <!--单个item中左边icon的样式-->
+    <style name="IconInSingleItem">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_gravity">center_vertical|left</item>
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+    <!--ListViewItem中商店图片样式 包括大小-->
+    <style name="ListViewShopImage">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:layout_width">76dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--ListViewItem中正文外层容器样式 包括左间距-->
+    <style name="ListViewArticleLay">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <!--一般右箭头-->
+    <style name="ImageViewRightArrow">
+        <item name="android:src">@drawable/arrow</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <!--横向分割线-->
+    <style name="DividerViewHorizon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/divide_gray_default</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+    <!--纵向分割线-->
+    <style name="DividerViewVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/divide_gray_default</item>
+    </style>
+    <style name="DividerViewVertical.right">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_gravity">right</item>
+    </style>
+    <style name="DividerViewVertical.left">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_gravity">left</item>
     </style>
 </resources>

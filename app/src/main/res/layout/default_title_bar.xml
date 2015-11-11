@@ -5,7 +5,7 @@
         android:visibility="visible"/>
     <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="3.0dip" android:layout_marginRight="3.0dip" android:layout_weight="1.0">
         <LinearLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:gravity="center">
-            <TextView android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="当前位置" android:textColor="@android:color/white" android:textSize="19sp"/>
+            <TextView android:id="@+id/tvTitle" android:text="当前位置" style="@style/TextViewTitle1.TitleBar"/>
         </LinearLayout>
         <FrameLayout android:layout_width="@dimen/titlebar_height" android:layout_height="fill_parent">
             <com.alkaid.trip51.base.widget.view.NovaImageButton android:id="@id/notify" android:background="@drawable/title_btn_right_transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_home_search" />
