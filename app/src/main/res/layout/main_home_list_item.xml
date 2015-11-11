@@ -3,15 +3,9 @@
     android:orientation="horizontal" style="@style/ListViewItem">
     <ImageView android:id="@+id/imgShopThumb" android:src="@drawable/temp_shop_thumb" style="@style/ListViewShopImage"/>
     <LinearLayout android:orientation="vertical" style="@style/ListViewArticleLay">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
             <TextView android:text="和太郎寿司" style="@style/TextViewTitle2.centerVertical"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" android:src="@drawable/temp_flag_hui"
-                />
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:src="@drawable/temp_flag_hui"/>
         </RelativeLayout>
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">

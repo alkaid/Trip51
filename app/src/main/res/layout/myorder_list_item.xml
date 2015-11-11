@@ -1,51 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingTop="10dp" android:paddingBottom="10dp">
-    <ImageView android:id="@+id/imgShopThumb"
-        android:layout_width="80dp" android:layout_height="wrap_content" android:src="@drawable/temp_shop_thumb"
-        android:layout_marginTop="6dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="vertical"
-        android:layout_marginLeft="10dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="和太郎寿司" android:textSize="16sp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" android:src="@drawable/flag_payed"
-                />
+    android:orientation="horizontal" style="@style/ListViewItem">
+    <ImageView android:id="@+id/imgShopThumb" android:src="@drawable/temp_shop_thumb" style="@style/ListViewShopImage"/>
+    <LinearLayout android:orientation="vertical" style="@style/ListViewArticleLay">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView android:text="和太郎寿司" style="@style/TextViewTitle2"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:src="@drawable/flag_payed"/>
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="4dp">
-            <TextView android:id="@+id/tvPersonNum" android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="4人"
-                android:layout_width="110dp" android:layout_height="wrap_content" />
-            <TextView android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="包间"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp">
+            <TextView android:id="@+id/tvPersonNum" android:text="4人" android:layout_width="110dp" style="@style/TextViewArticle.Gray" />
+            <TextView android:text="包间" style="@style/TextViewArticle.Gray"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="4dp">
-            <TextView android:id="@+id/tvTime" android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="08-11（周二）"
-                android:layout_width="110dp" android:layout_height="wrap_content" />
-            <TextView android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="18:00"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp">
+            <TextView android:id="@+id/tvTime" android:text="08-11（周二）" android:layout_width="110dp" style="@style/TextViewArticle.Gray" />
+            <TextView android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="18:00" style="@style/TextViewArticle.Gray"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="4dp">
-            <TextView android:id="@+id/tvOrderNo" android:textSize="12sp" android:textColor="@color/text_color_light_gray" android:text="CN20151111223"
-                android:layout_width="110dp" android:layout_height="wrap_content" />
-            <TextView android:textSize="12sp" android:textColor="@color/red" android:text="￥256"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp">
+            <TextView android:id="@+id/tvOrderNo" android:text="CN20151111223" android:layout_width="110dp" style="@style/TextViewArticle.Gray" />
+            <TextView android:textColor="@color/red" android:text="￥256" style="@style/TextViewArticle" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

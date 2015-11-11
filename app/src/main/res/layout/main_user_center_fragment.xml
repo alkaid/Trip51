@@ -4,55 +4,42 @@
     android:layout_height="match_parent">
     <include layout="@layout/default_title_bar"/>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="10dp" android:background="@color/light_line_red">
-        <ImageView android:id="@+id/ivUserFace" android:src="@drawable/default_user_face"
-            android:layout_width="64dp" android:layout_height="64dp"
-            android:layout_alignParentEnd="false" />
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ivUserFace" android:orientation="vertical" android:layout_centerVertical="true">
+        <ImageView android:id="@+id/ivUserFace" android:src="@drawable/default_user_face" android:layout_width="64dp" android:layout_height="64dp" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_toRightOf="@+id/ivUserFace" android:orientation="vertical" android:layout_centerVertical="true">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="小泡泡785" android:textColor="@color/white" android:textSize="22sp" android:layout_marginBottom="2dp"/>
+                android:text="小泡泡785" android:textColor="@color/white" android:textSize="@dimen/text_other_2" android:layout_marginBottom="2dp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="账号：huangzz88" android:textColor="@color/white" android:textSize="14sp" android:layout_marginTop="2dp"/>
+                android:text="账号：huangzz88" android:textColor="@color/white" android:textSize="@dimen/text_titlebar_normal" android:layout_marginTop="2dp"/>
         </LinearLayout>
-        <ImageView android:src="@drawable/arrow_white_right_large" android:layout_alignParentRight="true" android:layout_centerVertical="true"
-            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <ImageView android:src="@drawable/arrow_white_right_large" style="@style/ImageViewRightArrow" />
     </RelativeLayout>
     <LinearLayout  android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/white">
         <LinearLayout android:id="@+id/ll_my_balance" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
-                <TextView android:text="0.00" android:textSize="23sp" android:textColor="@color/orange"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                <TextView android:text="元" android:textSize="13sp" android:textColor="@color/orange"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:text="0.00" style="@style/TextViewTitle1" android:textColor="@color/orange"/>
+                <TextView android:text="元" style="@style/TextViewArticle" android:textColor="@color/orange" />
             </LinearLayout>
-            <TextView android:text="我的余额" android:textSize="15sp"
-                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:text="我的余额" android:textSize="@dimen/text_titlebar_normal" android:layout_width="wrap_content" android:layout_height="wrap_content" />
         </LinearLayout>
-        <ImageView android:layout_width="1dp" android:layout_height="match_parent" android:src="@color/divide_gray_default" />
+        <View style="@style/DividerViewVertical"/>
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
-                <TextView android:text="0" android:textSize="23sp" android:textColor="@color/text_color_green"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                <TextView android:text="个" android:textSize="13sp" android:textColor="@color/text_color_green"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:text="0" style="@style/TextViewTitle1" android:textColor="@color/text_color_green" />
+                <TextView android:text="个" style="@style/TextViewArticle" android:textColor="@color/text_color_green"/>
             </LinearLayout>
-            <TextView android:text="优惠券" android:textSize="15sp"
-                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:text="优惠券" android:textSize="@dimen/text_titlebar_normal" android:layout_width="wrap_content" android:layout_height="wrap_content" />
         </LinearLayout>
-        <ImageView android:layout_width="1dp" android:layout_height="match_parent" android:src="@color/divide_gray_default" />
+        <View style="@style/DividerViewVertical"/>
         <LinearLayout android:id="@+id/ll_my_points"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
-                <TextView android:text="0" android:textSize="23sp" android:textColor="@color/orange"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                <TextView android:text="分" android:textSize="13sp" android:textColor="@color/orange"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:text="0" style="@style/TextViewTitle1" android:textColor="@color/orange" />
+                <TextView android:text="分" style="@style/TextViewArticle" android:textColor="@color/orange" />
             </LinearLayout>
-            <TextView android:text="我的积分" android:textSize="15sp"
-                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:text="我的积分" android:textSize="@dimen/text_titlebar_normal" android:layout_width="wrap_content" android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
-    <ImageView android:layout_width="match_parent" android:layout_height="1dp" android:src="@color/divide_gray_default" />
+    <View style="@style/DividerViewHorizon"/>
 
-    <LinearLayout android:id="@+id/content" android:layout_marginTop="10dp" android:background="@color/white" android:orientation="vertical" android:paddingLeft="12dp" android:paddingRight="12dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content"></LinearLayout>
+    <LinearLayout android:id="@+id/content" android:layout_marginTop="10dp" android:background="@color/white" android:orientation="vertical" android:paddingLeft="@dimen/margin_page_small" android:paddingRight="@dimen/margin_page_small"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>
