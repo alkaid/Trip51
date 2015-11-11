@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:coodOper="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content">
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingBottom="3dp" android:layout_marginTop="3dp" android:paddingTop="5dp" android:paddingLeft="@dimen/margin_page_medium" android:paddingRight="@dimen/margin_page_medium">
-        <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_seat" android:layout_width="20dp" android:layout_height="wrap_content"  android:layout_alignParentLeft="true" android:layout_centerVertical="true"/>
-        <ImageView android:id="@+id/ivArrow" android:src="@drawable/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_alignParentRight="true" android:layout_centerVertical="true"
-            android:visibility="invisible"/>
-        <TextView android:id="@+id/tvItemName" android:layout_width="100dp" android:layout_height="wrap_content" android:text="餐桌"
-            android:layout_toRightOf="@+id/ivItemIcon" android:textSize="@dimen/text_title_1" android:layout_marginLeft="10dp" android:layout_centerVertical="true"/>
+    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+        <ImageView android:id="@+id/ivItemIcon" android:src="@drawable/booking_ic_seat" style="@style/IconInSingleItem"/>
+        <ImageView android:id="@+id/ivArrow" style="@style/ImageViewRightArrow" android:visibility="gone"/>
+        <TextView android:id="@+id/tvItemName" android:layout_width="100dp" android:text="餐桌" style="@style/TextViewTitle2.centerVertical"
+            android:layout_toRightOf="@+id/ivItemIcon" android:layout_marginLeft="10dp"/>
         <LinearLayout android:id="@+id/layItemContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/tvItemName" android:orientation="vertical">
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="horizontal" >
-                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:textSize="@dimen/text_article_normal"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="大厅" android:textColor="@color/text_color_gray"/>
-                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:textSize="@dimen/text_article_normal"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="雅座" android:textColor="@color/text_color_gray"/>/>
-                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:textSize="@dimen/text_article_normal"
-                    android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="包房" android:textColor="@color/text_color_gray" android:checked="true"/>
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:text="大厅"/>
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:text="雅座"/>
+                <RadioButton style="@style/CustomRadioButtonDefault" android:layout_weight="1" android:text="包房" android:checked="true"/>
             </RadioGroup>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
-                <TextView android:id="@+id/tvItemValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="餐桌数" android:textColor="@color/text_gray"
-                    android:textSize="@dimen/text_article_normal" android:layout_centerVertical="true"/>
+                <TextView android:id="@+id/tvItemValue" android:text="餐桌数" style="@style/TextViewArticle.Gray.centerVertical"/>
                 <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true"
                     android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"/>
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-    <ImageView android:src="@color/divide_gray_default" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentBottom="true"/>
+    <View style="@style/DividerViewHorizon"/>
 </RelativeLayout>
