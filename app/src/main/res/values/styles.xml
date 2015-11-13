@@ -526,11 +526,11 @@
         <item name="android:padding">8dp</item>
     </style>
     <!-- 大按钮红色-->
-    <style name="ButtonLarger.Red" parent="ButtonLarger">
+    <style name="ButtonLarger.Red">
         <item name="android:background">@drawable/btn_default_red</item>
     </style>
     <!--大按钮绿色-->
-    <style name="ButtonLarger.Green" parent="ButtonLarger">
+    <style name="ButtonLarger.Green">
         <item name="android:background">@drawable/btn_default_green</item>
     </style>
     <!--TextView正文样式-->
@@ -576,7 +576,7 @@
         <item name="android:paddingBottom">10dp</item>
     </style>
     <!--单个Item样式 暂时和ListViewItem一样-->
-    <style name="SingleItem" parent="ListViewItem"></style>
+    <style name="SingleItem" parent="ListViewItem"/>
     <!--单个Item样式,包括左右padding-->
     <style name="SingleItem.mediumPaddingHorizon">
         <item name="android:paddingLeft">@dimen/margin_page_medium</item>

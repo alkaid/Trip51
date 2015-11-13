@@ -6,7 +6,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -58,13 +59,56 @@
     <LinearLayout
         android:id="@+id/llcontent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
         android:orientation="vertical">
 
         <com.alkaid.trip51.widget.RelationListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.alkaid.trip51.widget.RelationListView>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+        <LinearLayout
+            android:id="@+id/ll_shoppinp_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购物车"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(满50定金免单)"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/red"
+            android:text="立即预定"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
 
 </LinearLayout>
