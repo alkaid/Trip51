@@ -14,6 +14,7 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
+import com.alkaid.trip51.usercenter.UserInfoActivity;
 
 /**
  * Created by alkaid on 2015/11/9.
@@ -57,6 +58,7 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
     private void initView(View v) {
         v.findViewById(R.id.ll_my_balance).setOnClickListener(this);
         v.findViewById(R.id.ll_my_points).setOnClickListener(this);
+        v.findViewById(R.id.ll_user_info).setOnClickListener(this);
     }
 
     private void initItem(int resIconId, String name) {
@@ -77,6 +79,9 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.ll_my_points:
                 startActivity(new Intent(getActivity(), MyPointsActivity.class));
+                break;
+            case R.id.ll_user_info:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             default:
                 break;

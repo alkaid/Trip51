@@ -89,6 +89,8 @@
         <activity android:name=".shop.OrderDetailActivity"/>
         <activity android:name=".usercenter.MyBalanceActivity"/>
         <activity android:name=".usercenter.MyPointsActivity"/>
+        <activity android:name=".usercenter.UserInfoActivity"/>
+
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/default_title_bar"/>
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="10dp" android:background="@color/light_line_red">
+    <RelativeLayout android:id="@+id/ll_user_info" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="10dp" android:background="@color/light_line_red">
         <ImageView android:id="@+id/ivUserFace" android:src="@drawable/default_user_face"
             android:layout_width="64dp" android:layout_height="64dp"
             android:layout_alignParentEnd="false" />
