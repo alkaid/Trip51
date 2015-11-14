@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/default_title_bar" />
+    
+    <RelativeLayout style="@style/SingleItem">
+        <TextView
+            style="@style/TextViewArticle.centerVertical"
+            android:text="当前区域专家"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            style="@style/TextViewArticle.centerVertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="5家" />
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/lv_my_fav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"></ListView>
+</LinearLayout>
