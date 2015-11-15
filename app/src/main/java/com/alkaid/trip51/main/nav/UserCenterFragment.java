@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
+import com.alkaid.trip51.usercenter.MyCouponActivity;
 import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
@@ -61,6 +62,7 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         v.findViewById(R.id.ll_my_balance).setOnClickListener(this);
         v.findViewById(R.id.ll_my_points).setOnClickListener(this);
         v.findViewById(R.id.ll_user_info).setOnClickListener(this);
+        v.findViewById(R.id.ll_user_coupon).setOnClickListener(this);
     }
 
     private void initItem(int resIconId, final String name) {
@@ -103,6 +105,9 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.ll_user_info:
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                break;
+            case R.id.ll_user_coupon:
+                startActivity(new Intent(getActivity(), MyCouponActivity.class));
                 break;
             default:
                 break;

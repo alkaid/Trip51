@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content" android:layout_height="wrap_content" />
         </LinearLayout>
         <ImageView android:layout_width="1dp" android:layout_height="match_parent" android:src="@color/divide_gray_default" />
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
+        <LinearLayout android:id="@+id/ll_user_coupon" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:paddingTop="16dp" android:paddingBottom="16dp" android:orientation="vertical" android:gravity="center">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="3dp">
                 <TextView android:text="0" android:textSize="23sp" android:textColor="@color/text_color_green"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" />
