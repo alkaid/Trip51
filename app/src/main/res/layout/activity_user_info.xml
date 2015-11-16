@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/default_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/temp_user_info_ipc" />
+
+            <ImageView
+                android:id="@+id/ivArrow0"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow0"
+                android:text="头像设置" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="昵称" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/tv_user_name"
+                android:text="小泡泡785" />
+
+            <ImageView
+                android:id="@+id/ivArrow1"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow1"
+                android:text="修改" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="性别" />
+
+            <ImageView
+                android:id="@+id/ivArrow2"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow2"
+                android:text="男" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="姓名" />
+
+            <ImageView
+                android:id="@+id/ivArrow3"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow3"
+                android:text="高欢腾" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="密码" />
+
+            <ImageView
+                android:id="@+id/ivArrow4"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow4"
+                android:text="修改" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="12dp"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small"
+        android:paddingTop="12dp">
+
+        <TextView
+            style="@style/TextViewArticle.centerVertical"
+            android:text="客户设置：" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/temp_phone_pic" />
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:layout_toRightOf="@id/iv_phone"
+                android:layout_marginLeft="10dp"
+                android:text="手机" />
+
+
+            <ImageView
+                android:id="@+id/ivArrow5"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow5"
+                android:text="138****2345" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_weixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/temp_weixin_pic" />
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:layout_toRightOf="@id/iv_weixin"
+                android:layout_marginLeft="10dp"
+                android:text="微信" />
+
+
+            <ImageView
+                android:id="@+id/ivArrow6"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow6"
+                android:text="已绑定" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/temp_qq_pic" />
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:layout_toRightOf="@id/iv_qq"
+                android:layout_marginLeft="10dp"
+                android:text="QQ" />
+
+
+            <ImageView
+                android:id="@+id/ivArrow7"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow7"
+                android:text="已绑定" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_weibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/temp_phone_pic" />
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:layout_toRightOf="@id/iv_weibo"
+                android:layout_marginLeft="10dp"
+                android:text="微博" />
+
+
+            <ImageView
+                android:id="@+id/ivArrow8"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow8"
+                android:text="未绑定" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

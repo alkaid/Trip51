@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
+import com.alkaid.trip51.usercenter.MyDiscussActivity;
+import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
+import com.alkaid.trip51.usercenter.UserInfoActivity;
 
 /**
  * Created by alkaid on 2015/11/9.
@@ -57,15 +60,35 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
     private void initView(View v) {
         v.findViewById(R.id.ll_my_balance).setOnClickListener(this);
         v.findViewById(R.id.ll_my_points).setOnClickListener(this);
+        v.findViewById(R.id.ll_user_info).setOnClickListener(this);
     }
 
-    private void initItem(int resIconId, String name) {
+    private void initItem(int resIconId, final String name) {
         ViewHolder holder = new ViewHolder();
         holder.lay = (ViewGroup) inflater.inflate(R.layout.item_user_center, layContent, false);
         holder.icon = (ImageView) holder.lay.findViewById(R.id.ivItemIcon);
         holder.itemName = (TextView) holder.lay.findViewById(R.id.tvItemName);
         holder.icon.setImageResource(resIconId);
         holder.itemName.setText(name);
+        holder.lay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if("我的收藏".equals(name)){
+                   startActivity(new Intent(getActivity(), MyFavoriteActivity.class));
+               }else if("我的评论".equals(name)){
+                   startActivity(new Intent(getActivity(), MyDiscussActivity.class));
+               }else if("分享好友".equals(name)){
+
+               }else if("积分商城".equals(name)){
+
+               }else if("服务中心".equals(name)){
+
+               }else if("去鼓励我".equals(name)){
+
+               }
+
+            }
+        });
         layContent.addView(holder.lay);
     }
 
@@ -77,6 +100,9 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.ll_my_points:
                 startActivity(new Intent(getActivity(), MyPointsActivity.class));
+                break;
+            case R.id.ll_user_info:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             default:
                 break;

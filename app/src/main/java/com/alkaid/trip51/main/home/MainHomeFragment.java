@@ -24,7 +24,7 @@ import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
 /**
  * Created by alkaid on 2015/10/31.
  */
-public class MainHomeFragment extends BaseFragment {
+public class    MainHomeFragment extends BaseFragment {
     private View slideshowView,layMainMenu,layOrder;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
