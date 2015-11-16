@@ -19,20 +19,20 @@ public class FormInputStream extends WrapInputStream {
     public static final String ISO_8859_1 = "ISO-8859-1";
     public static final String DEFAULT_CHARSET = ISO_8859_1;
     private String charsetName = DEFAULT_CHARSET;
-    private List form;
+    private List<BasicNameValuePair> form;
 
-    public FormInputStream(List list) {
+    public FormInputStream(List<BasicNameValuePair> list) {
         this(list, DEFAULT_CHARSET);
     }
 
-    public FormInputStream(List form, String charsetName) {
+    public FormInputStream(List<BasicNameValuePair> form, String charsetName) {
         this.form = form;
         this.charsetName = charsetName;
     }
 
     public FormInputStream(String as[], String charsetName) {
         int i = as.length / 2;
-        ArrayList arraylist = new ArrayList(i);
+        ArrayList<BasicNameValuePair> arraylist = new ArrayList<BasicNameValuePair>(i);
         for (int j = 0; j < i; j++)
             arraylist.add(new BasicNameValuePair(as[j * 2], as[1 + j * 2]));
         form = arraylist;
@@ -61,7 +61,7 @@ public class FormInputStream extends WrapInputStream {
         return charsetName;
     }
 
-    public List form() {
+    public List<BasicNameValuePair> form() {
         return form;
     }
 

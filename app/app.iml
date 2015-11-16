@@ -96,5 +96,6 @@
     <orderEntry type="module" module-name="pullToRefreshLib" exported="" />
     <orderEntry type="module" module-name="base" exported="" />
     <orderEntry type="module" module-name="popupbuttonlibrary" exported="" />
+    <orderEntry type="library" exported="" name="org.apache.http.legacy-android-23" level="project" />
   </component>
 </module>

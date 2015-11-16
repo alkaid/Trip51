@@ -35,7 +35,7 @@ public class NetworkInfoHelper {
     public static boolean isNetworkConnected(Context context1) {
         if (context1 == null)
             return false;
-        NetworkInfo networkinfo = ((ConnectivityManager) context1.getSystemService("connectivity")).getActiveNetworkInfo();
+        NetworkInfo networkinfo = ((ConnectivityManager) context1.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (networkinfo == null)
             return false;
         return networkinfo.isAvailable();
@@ -44,7 +44,7 @@ public class NetworkInfoHelper {
     protected ConnectivityManager connectivityManager() {
         if (connectivityManager == null)
             try {
-                connectivityManager = (ConnectivityManager) context.getSystemService("connectivity");
+                connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             } catch (Exception exception) {
                 Log.w("network", "cannot get connectivity manager, maybe the permission is missing in AndroidManifest.xml?", exception);
             }
@@ -218,7 +218,7 @@ public class NetworkInfoHelper {
     protected TelephonyManager telephonyManager() {
         if (teleManager == null)
             try {
-                teleManager = (TelephonyManager) context.getSystemService("phone");
+                teleManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             } catch (Exception exception) {
                 Log.w("network", "cannot get telephony manager, maybe the permission is missing in AndroidManifest.xml?", exception);
             }

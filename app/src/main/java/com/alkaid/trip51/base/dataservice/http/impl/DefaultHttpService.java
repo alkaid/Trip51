@@ -49,7 +49,7 @@ import java.util.concurrent.Executor;
 
 public class DefaultHttpService
         implements HttpService {
-    protected class Task extends MyTask implements WatchedInputStream.Listener {
+    protected class Task extends MyTask<Void,Void,HttpResponse> implements WatchedInputStream.Listener {
 
         protected int availableBytes;
         protected int contentLength;
@@ -63,7 +63,8 @@ public class DefaultHttpService
         protected long startTime;
         protected int statusCode;
 
-        public HttpResponse doInBackground() {
+        @Override
+        public HttpResponse doInBackground(Void... params) {
             InputStream inputstream;
             inputstream = null;
             InputStream inputstream1 = req.input();
@@ -171,11 +172,6 @@ public class DefaultHttpService
             return basichttpresponse;
         }
 
-        @Override
-        public Object doInBackground(Object parrams[]) {
-            return doInBackground();
-        }
-
         protected HttpUriRequest getUriRequest()
                 throws Exception {
             Object obj;
@@ -266,6 +262,7 @@ public class DefaultHttpService
                 request.abort();
         }
 
+        @Override
         protected void onPostExecute(HttpResponse httpresponse) {
             if (runningTasks.remove(req, this)) {
                 if (httpresponse.result() != null)
@@ -295,11 +292,6 @@ public class DefaultHttpService
         }
 
         @Override
-        protected void onPostExecute(Object obj) {
-            onPostExecute((HttpResponse) obj);
-        }
-
-        @Override
         protected void onPreExecute() {
             if (handler instanceof FullRequestHandle)
                 ((FullRequestHandle) handler).onRequestStart(req);
@@ -307,11 +299,7 @@ public class DefaultHttpService
         }
 
         @Override
-        protected void onProgressUpdate(Object aobj[]) {
-            onProgressUpdate((Void[]) aobj);
-        }
-
-        protected void onProgressUpdate(Void avoid[]) {
+        protected void onProgressUpdate(Void... params) {
             if (isUploadProgress) {
                 if (handler instanceof FullRequestHandle)
                     ((FullRequestHandle) handler).onRequestProgress(req, sentBytes, availableBytes);

@@ -6,14 +6,22 @@ package com.alkaid.trip51.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.dianping.archive.*;
 
 public class SimpleMsg
-    implements Parcelable, Decoding
+    implements Parcelable/*, Decoding*/
 {
 
-    public static final android.os.Parcelable.Creator CREATOR = new _cls2();
-    public static final DecodingFactory DECODER = new _cls1();
+    public static final android.os.Parcelable.Creator<SimpleMsg> CREATOR = new Creator<SimpleMsg>() {
+        @Override
+        public SimpleMsg createFromParcel(Parcel source) {
+            return new SimpleMsg(source);
+        }
+        @Override
+        public SimpleMsg[] newArray(int size) {
+            return new SimpleMsg[size];
+        }
+    };
+//    public static final DecodingFactory DECODER = new _cls1();
     protected String content;
     protected String data;
     protected int flag;
@@ -25,14 +33,14 @@ public class SimpleMsg
     {
     }
 
-    public SimpleMsg(int i, String s, String s1, int j, int k, String s2)
+    public SimpleMsg(int statusCode, String title, String s1, int icon, int flag, String data)
     {
-        statusCode = i;
-        title = s;
+        this.statusCode = statusCode;
+        this.title = title;
         content = s1;
-        icon = j;
-        flag = k;
-        data = s2;
+        this.icon = icon;
+        this.flag = flag;
+        this.data = data;
     }
 
     protected SimpleMsg(Parcel parcel)
@@ -45,22 +53,22 @@ public class SimpleMsg
         data = parcel.readString();
     }
 
-    public SimpleMsg(DPObject dpobject)
-    {
-        statusCode = dpobject.getInt(141);
-        title = dpobject.getString(14057);
-        content = dpobject.getString(22454);
-        icon = dpobject.getInt(45243);
-        flag = dpobject.getInt(29613);
-        data = dpobject.getString(25578);
-    }
+//    public SimpleMsg(DPObject dpobject)
+//    {
+//        statusCode = dpobject.getInt(141);
+//        title = dpobject.getString(14057);
+//        content = dpobject.getString(22454);
+//        icon = dpobject.getInt(45243);
+//        flag = dpobject.getInt(29613);
+//        data = dpobject.getString(25578);
+//    }
 
-    public SimpleMsg(String s, String s1, int i, int j)
+    public SimpleMsg(String title, String content, int icon, int flag)
     {
-        title = s;
-        content = s1;
-        icon = i;
-        flag = j;
+        this.title = title;
+        this.content = content;
+        this.icon = icon;
+        this.flag = flag;
     }
 
     public String content()
@@ -73,47 +81,48 @@ public class SimpleMsg
         return data;
     }
 
-    public void decode(Unarchiver unarchiver)
-        throws ArchiveException
-    {
-        do
-        {
-            int i = unarchiver.readMemberHash16();
-            if(i <= 0)
-                break;
-            switch(i)
-            {
-            default:
-                unarchiver.skipAnyObject();
-                break;
+//    public void decode(Unarchiver unarchiver)
+//        throws ArchiveException
+//    {
+//        do
+//        {
+//            int i = unarchiver.readMemberHash16();
+//            if(i <= 0)
+//                break;
+//            switch(i)
+//            {
+//            default:
+//                unarchiver.skipAnyObject();
+//                break;
+//
+//            case 141:
+//                statusCode = unarchiver.readInt();
+//                break;
+//
+//            case 14057:
+//                title = unarchiver.readString();
+//                break;
+//
+//            case 22454:
+//                content = unarchiver.readString();
+//                break;
+//
+//            case 45243:
+//                icon = unarchiver.readInt();
+//                break;
+//
+//            case 29613:
+//                flag = unarchiver.readInt();
+//                break;
+//
+//            case 25578:
+//                data = unarchiver.readString();
+//                break;
+//            }
+//        } while(true);
+//    }
 
-            case 141:
-                statusCode = unarchiver.readInt();
-                break;
-
-            case 14057:
-                title = unarchiver.readString();
-                break;
-
-            case 22454:
-                content = unarchiver.readString();
-                break;
-
-            case 45243:
-                icon = unarchiver.readInt();
-                break;
-
-            case 29613:
-                flag = unarchiver.readInt();
-                break;
-
-            case 25578:
-                data = unarchiver.readString();
-                break;
-            }
-        } while(true);
-    }
-
+    @Override
     public int describeContents()
     {
         return 0;
@@ -139,12 +148,14 @@ public class SimpleMsg
         return title;
     }
 
+    @Override
     public String toString()
     {
         return (new StringBuilder()).append(title).append(" : ").append(content).toString();
     }
 
-    public void writeToParcel(Parcel parcel, int i)
+    @Override
+    public void writeToParcel(Parcel parcel, int flags)
     {
         parcel.writeInt(statusCode);
         parcel.writeString(title);
@@ -155,68 +166,37 @@ public class SimpleMsg
     }
 
 
-    private class _cls1
-        implements DecodingFactory
-    {
-
-        public SimpleMsg[] createArray(int i)
-        {
-            return new SimpleMsg[i];
-        }
-
-        public volatile Object[] createArray(int i)
-        {
-            return createArray(i);
-        }
-
-        public SimpleMsg createInstance(int i)
-        {
-            SimpleMsg simplemsg;
-            if(i == 37021)
-                simplemsg = new SimpleMsg();
-            else
-                simplemsg = null;
-            return simplemsg;
-        }
-
-        public volatile Object createInstance(int i)
-        {
-            return createInstance(i);
-        }
-
-        _cls1()
-        {
-        }
-    }
-
-
-    private class _cls2
-        implements android.os.Parcelable.Creator
-    {
-
-        public SimpleMsg createFromParcel(Parcel parcel)
-        {
-            return new SimpleMsg(parcel);
-        }
-
-        public volatile Object createFromParcel(Parcel parcel)
-        {
-            return createFromParcel(parcel);
-        }
-
-        public SimpleMsg[] newArray(int i)
-        {
-            return new SimpleMsg[i];
-        }
-
-        public volatile Object[] newArray(int i)
-        {
-            return newArray(i);
-        }
-
-        _cls2()
-        {
-        }
-    }
-
+//    private class _cls1
+//        implements DecodingFactory
+//    {
+//
+//        public SimpleMsg[] createArray(int i)
+//        {
+//            return new SimpleMsg[i];
+//        }
+//
+//        public volatile Object[] createArray(int i)
+//        {
+//            return createArray(i);
+//        }
+//
+//        public SimpleMsg createInstance(int i)
+//        {
+//            SimpleMsg simplemsg;
+//            if(i == 37021)
+//                simplemsg = new SimpleMsg();
+//            else
+//                simplemsg = null;
+//            return simplemsg;
+//        }
+//
+//        public volatile Object createInstance(int i)
+//        {
+//            return createInstance(i);
+//        }
+//
+//        _cls1()
+//        {
+//        }
+//    }
 }

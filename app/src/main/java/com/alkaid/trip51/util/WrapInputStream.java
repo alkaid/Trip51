@@ -1,20 +1,14 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) fieldsfirst 
-
 package com.alkaid.trip51.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class WrapInputStream extends InputStream
-{
+public abstract class WrapInputStream extends InputStream {
 
     private IOException ex;
     private InputStream ins;
 
-    public WrapInputStream()
-    {
+    public WrapInputStream() {
     }
 
     /**
@@ -22,69 +16,43 @@ public abstract class WrapInputStream extends InputStream
      */
 
     private InputStream inputStream()
-        throws IOException
-    {
-        this;
-        JVM INSTR monitorenter ;
-        if(ex != null)
-            throw ex;
-        break MISSING_BLOCK_LABEL_19;
-        Exception exception;
-        exception;
-        this;
-        JVM INSTR monitorexit ;
-        throw exception;
-        InputStream inputstream = ins;
-        if(inputstream != null)
-            break MISSING_BLOCK_LABEL_36;
-        ins = wrappedInputStream();
-        InputStream inputstream1 = ins;
-        this;
-        JVM INSTR monitorexit ;
-        return inputstream1;
-        IOException ioexception;
-        ioexception;
-        ex = ioexception;
-        throw ex;
+            throws IOException {
+        if (null == ins) {
+            ins = wrappedInputStream();
+        }
+        return ins;
     }
 
     public int available()
-        throws IOException
-    {
+            throws IOException {
         return inputStream().available();
     }
 
     public void close()
-        throws IOException
-    {
-        if(ins != null)
+            throws IOException {
+        if (ins != null)
             inputStream().close();
     }
 
-    public void mark(int i)
-    {
+    public void mark(int i) {
     }
 
-    public boolean markSupported()
-    {
+    public boolean markSupported() {
         return true;
     }
 
     public int read()
-        throws IOException
-    {
+            throws IOException {
         return inputStream().read();
     }
 
     public int read(byte abyte0[])
-        throws IOException
-    {
+            throws IOException {
         return inputStream().read(abyte0);
     }
 
     public int read(byte abyte0[], int i, int j)
-        throws IOException
-    {
+            throws IOException {
         return inputStream().read(abyte0, i, j);
     }
 
@@ -93,25 +61,15 @@ public abstract class WrapInputStream extends InputStream
      */
 
     public void reset()
-        throws IOException
-    {
-        this;
-        JVM INSTR monitorenter ;
+            throws IOException {
         ins = null;
-        this;
-        JVM INSTR monitorexit ;
-        return;
-        Exception exception;
-        exception;
-        throw exception;
     }
 
     public long skip(long l)
-        throws IOException
-    {
+            throws IOException {
         return inputStream().skip(l);
     }
 
     protected abstract InputStream wrappedInputStream()
-        throws IOException;
+            throws IOException;
 }
