@@ -92,6 +92,7 @@
         <activity android:name=".usercenter.UserInfoActivity"/>
         <activity android:name=".usercenter.MyFavoriteActivity"/>
         <activity android:name=".usercenter.MyDiscussActivity"/>
+        <activity android:name=".usercenter.MyCouponActivity"/>
     </application>
 
 </manifest>
