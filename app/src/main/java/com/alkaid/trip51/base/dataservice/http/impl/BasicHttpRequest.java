@@ -2,6 +2,7 @@ package com.alkaid.trip51.base.dataservice.http.impl;
 
 import com.alkaid.trip51.base.dataservice.BasicRequest;
 import com.alkaid.trip51.base.dataservice.http.HttpRequest;
+
 import java.io.InputStream;
 import java.util.List;
 
@@ -40,6 +41,20 @@ public class BasicHttpRequest extends BasicRequest
     public static HttpRequest httpGet(String url)
     {
         return new BasicHttpRequest(url, "GET", null, null);
+
+        /*android.net.Uri.Builder builder;
+        if(mRgcReq != null)
+        {
+            mMApiService.abort(mRgcReq, this, true);
+            mRgcReq = null;
+        }
+        builder = Uri.parse("http://l.api.dianping.com/rgc.bin").buildUpon();
+        builder.appendQueryParameter("impl", String.valueOf(286));
+        builder.appendQueryParameter("city", String.valueOf(i));
+        builder.appendQueryParameter("lat", String.valueOf(d));
+        builder.appendQueryParameter("lng", String.valueOf(d1));
+        builder.appendQueryParameter("acc", String.valueOf(j));
+        mRgcReq = BasicMApiRequest.mapiGet(builder.build().toString(), CacheType.DISABLED);*/
     }
 //    public static transient HttpRequest httpPost(String s, String as[])
 //    {

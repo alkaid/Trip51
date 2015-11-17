@@ -28,4 +28,5 @@ dependencies {
     compile project(':base')
     compile project(':popupbuttonlibrary')
     compile project(':pullToRefreshLib')
+    compile project(':volley')
 }

@@ -12,78 +12,67 @@ import org.apache.http.conn.HttpHostConnectException;
 import java.net.UnknownHostException;
 import java.util.List;
 
-public class BasicMApiResponse<E,R> extends BasicHttpResponse<E,R>
-    implements MApiResponse<E,R>
-{
+public class BasicMApiResponse<E, R> extends BasicHttpResponse<E, R>
+        implements MApiResponse<E, R> {
 
-    public static final Object ERROR_MALFORMED = "malformed content";
-    public static final Object ERROR_STATUS = "server status error";
+    public static final String ERROR_MALFORMED = "malformed content";
+    public static final String ERROR_STATUS = "server status error";
     static SparseArray statusCodeArray;
     private byte rawData[];
 
-    public BasicMApiResponse(int statusCode, byte[] rawData, R result, List<NameValuePair> headers, E error)
-    {
+    public BasicMApiResponse(int statusCode, byte[] rawData, R result, List<NameValuePair> headers, E error) {
         super(statusCode, result, headers, error);
         this.rawData = rawData;
     }
 
-    private String getErrorMessage(int i)
-    {
-        return (String)statusCodeArray.get(i, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u6EE1\u6C49\u5168\u5E2D\u4E86");
+    private String getErrorMessage(int i) {
+        return (String) statusCodeArray.get(i, "无小忧去吃满汉全席了");
     }
 
-    public SimpleMsg message()
-    {
+    public SimpleMsg message() {
         Object obj = error();
         SimpleMsg simplemsg;
-        if(obj instanceof SimpleMsg)
-            simplemsg = (SimpleMsg)obj;
-        else
-        if(obj == ERROR_MALFORMED)
-            simplemsg = new SimpleMsg("\u70B9\u5C0F\u8BC4\u9189\u4E86", getErrorMessage(statusCode()), 0, 0);
-        else
-        if(obj == ERROR_STATUS)
-            simplemsg = new SimpleMsg("\u51FA\u9519\u4E86", getErrorMessage(statusCode()), 0, 0);
-        else
-        if(obj instanceof Exception)
-        {
-            if((obj instanceof UnknownHostException) || (obj instanceof HttpHostConnectException))
-                simplemsg = new SimpleMsg("\u9519\u8BEF", "\u7F51\u7EDC\u4E0D\u7ED9\u529B\u54E6", 0, 0);
+        if (obj instanceof SimpleMsg)
+            simplemsg = (SimpleMsg) obj;
+        else if (ERROR_MALFORMED.equals(obj))
+            simplemsg = new SimpleMsg("无小忧醉了", getErrorMessage(statusCode()), 0, 0);
+        else if (ERROR_STATUS.equals(obj))
+            simplemsg = new SimpleMsg("出错了", getErrorMessage(statusCode()), 0, 0);
+        else if (obj instanceof Exception) {
+            if ((obj instanceof UnknownHostException) || (obj instanceof HttpHostConnectException))
+                simplemsg = new SimpleMsg("错误", "网络不给力哦", 0, 0);
             else
-                simplemsg = new SimpleMsg("\u70B9\u5C0F\u8BC4\u6655\u4E86", getErrorMessage(statusCode()), 0, 0);
-        } else
-        {
-            simplemsg = new SimpleMsg("\u9519\u8BEF", getErrorMessage(statusCode()), 0, 0);
+                simplemsg = new SimpleMsg("无小忧晕了", getErrorMessage(statusCode()), 0, 0);
+        } else {
+            simplemsg = new SimpleMsg("错误", getErrorMessage(statusCode()), 0, 0);
         }
         return simplemsg;
     }
 
-    public byte[] rawData()
-    {
+    public byte[] rawData() {
         return rawData;
     }
 
-    static 
-    {
+    static {
         statusCodeArray = new SparseArray();
-        statusCodeArray.put(-103, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u7CD6\u918B\u6392\u9AA8\u4E86");
-        statusCodeArray.put(-100, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u9999\u8FA3\u4E94\u82B1\u8089\u4E86");
-        statusCodeArray.put(-104, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u70E7\u5B50\u9E45\u4E86");
-        statusCodeArray.put(-102, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u70E7\u82B1\u9E2D\u4E86");
-        statusCodeArray.put(-105, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u677E\u82B1\u5C0F\u809A\u4E86");
-        statusCodeArray.put(-106, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u70E9\u9E2D\u6761\u4E86");
-        statusCodeArray.put(502, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u9999\u9165\u9E21\u4E86");
-        statusCodeArray.put(-109, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u7198\u87F9\u8089\u4E86");
-        statusCodeArray.put(450, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u7092\u8170\u82B1\u513F\u4E86");
-        statusCodeArray.put(-108, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u9505\u70E7\u767D\u83DC\u4E86");
-        statusCodeArray.put(403, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u6C34\u6676\u8098\u5B50\u4E86");
-        statusCodeArray.put(-107, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u7116\u9EC4\u9CDD\u4E86");
-        statusCodeArray.put(504, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u4EC0\u9526\u8C46\u8150\u4E86");
-        statusCodeArray.put(500, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u6E05\u84B8\u9E21\u4E86");
-        statusCodeArray.put(404, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u5C0F\u809A\u513F\u4E86");
-        statusCodeArray.put(-111, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u70E9\u87F9\u8089\u4E86");
-        statusCodeArray.put(408, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u871C\u8721\u8098\u5B50\u4E86");
-        statusCodeArray.put(401, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u70B8\u5B50\u87F9\u4E86");
-        statusCodeArray.put(503, "\u70B9\u5C0F\u8BC4\u53BB\u5403\u8F6F\u70B8\u91CC\u810A\u4E86");
+        statusCodeArray.put(-103, "无小忧去吃糖醋排骨了");
+        statusCodeArray.put(-100, "无小忧去吃香辣五花肉了");
+        statusCodeArray.put(-104, "无小忧去吃烧子鹅了");
+        statusCodeArray.put(-102, "无小忧去吃烧花鸭了");
+        statusCodeArray.put(-105, "无小忧去吃松花小肚了");
+        statusCodeArray.put(-106, "无小忧去吃烩鸭条了");
+        statusCodeArray.put(502, "无小忧去吃香酥鸡了");
+        statusCodeArray.put(-109, "无小忧去吃熘蟹肉了");
+        statusCodeArray.put(450, "无小忧去吃炒腰花儿了");
+        statusCodeArray.put(-108, "无小忧去吃锅烧白菜了");
+        statusCodeArray.put(403, "无小忧去吃水晶肘子了");
+        statusCodeArray.put(-107, "无小忧去吃焖黄鳝了");
+        statusCodeArray.put(504, "无小忧去吃什锦豆腐了");
+        statusCodeArray.put(500, "无小忧去吃清蒸鸡了");
+        statusCodeArray.put(404, "无小忧去吃小肚儿了");
+        statusCodeArray.put(-111, "无小忧去吃烩蟹肉了");
+        statusCodeArray.put(408, "无小忧去吃蜜蜡肘子了");
+        statusCodeArray.put(401, "无小忧去吃炸子蟹了");
+        statusCodeArray.put(503, "无小忧去吃软炸里脊了");
     }
 }

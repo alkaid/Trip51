@@ -5,17 +5,12 @@ import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.dataservice.mapi.MApiFormInputStream;
 import com.alkaid.trip51.base.dataservice.mapi.MApiRequest;
 
-import org.apache.http.message.BasicNameValuePair;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.GZIPOutputStream;
+import org.apache.http.NameValuePair;
 
-// Referenced classes of package com.dianping.dataservice.mapi:
-//            MApiRequest, MApiFileInputStream, MApiFormInputStream, CacheType
+import java.io.InputStream;
+import java.util.List;
+
+
 
 public class BasicMApiRequest extends BasicHttpRequest
     implements MApiRequest
@@ -24,12 +19,12 @@ public class BasicMApiRequest extends BasicHttpRequest
     private CacheType defaultCacheType;
     private boolean disableStatistics;
 
-    public BasicMApiRequest(String s, String s1, InputStream inputstream, CacheType cachetype, boolean flag, List list)
+    public BasicMApiRequest(String s, String s1, InputStream inputstream, CacheType cachetype, boolean flag, List<NameValuePair> list)
     {
         this(s, s1, inputstream, cachetype, flag, list, 0L);
     }
 
-    public BasicMApiRequest(String s, String s1, InputStream inputstream, CacheType cachetype, boolean flag, List list, long l)
+    public BasicMApiRequest(String s, String s1, InputStream inputstream, CacheType cachetype, boolean flag, List<NameValuePair> list, long l)
     {
         super(s, s1, inputstream, list, l);
         defaultCacheType = cachetype;
@@ -60,14 +55,14 @@ public class BasicMApiRequest extends BasicHttpRequest
         return new BasicMApiRequest(s, "POST", new MApiFormInputStream(as), CacheType.DISABLED, false, null);
     }
 
-//    public static MApiRequest mapiPostGzipString(String s, String s1, boolean flag, List list)
+//    public static MApiRequest mapiPostGzipString(String s, String s1, boolean flag, List<NameValuePair> list)
 //    {
 //        InputStream inputstream = null;
 //        try
 //        {
 //            inputstream = compress(s1);
 //            if(list == null)
-//                list = new ArrayList(1);
+//                list = new ArrayList<NameValuePair>(1);
 //            list.add(new BasicNameValuePair("Content-Encoding", "gzip"));
 //        }
 //        catch(IOException ioexception)

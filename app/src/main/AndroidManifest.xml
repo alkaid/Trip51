@@ -42,7 +42,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.alkaid.trip51.base.widget.BaseApp"
+        android:name="com.alkaid.trip51.base.widget.App"
         android:theme="@style/AppThemeOrangeTab" >
         <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="com.alkaid.trip51.main.nav.SplashScreenActivity" android:screenOrientation="nosensor" android:theme="@style/Theme.DianpingNoTitle.SplashBackground">
             <intent-filter>
