@@ -64,7 +64,7 @@ public class DefaultHttpService
         protected int statusCode;
 
         @Override
-        public HttpResponse doInBackground(Void... params) {
+        public HttpResponse<Exception,byte[]> doInBackground(Void... params) {
             InputStream inputstream;
             inputstream = null;
             InputStream inputstream1 = req.input();
@@ -77,7 +77,7 @@ public class DefaultHttpService
             InputStream responseStream = null;
             HttpEntity httpentity;
             List<BasicNameValuePair> headers = null;
-            BasicHttpResponse basichttpresponse = null;
+            BasicHttpResponse<Exception,byte[]> basichttpresponse = null;
 
             try {
                 request = getUriRequest();

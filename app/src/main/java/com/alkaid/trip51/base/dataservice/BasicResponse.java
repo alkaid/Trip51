@@ -1,28 +1,24 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) fieldsfirst 
-
 package com.alkaid.trip51.base.dataservice;
 
-public class BasicResponse
-    implements Response
+public class BasicResponse<E, R>
+    implements Response<E, R>
 {
 
-    private Object error;
-    private Object result;
+    private E error;
+    private R result;
 
-    public BasicResponse(Object result, Object error)
+    public BasicResponse(R result, E error)
     {
         this.result = result;
         this.error = error;
     }
 
-    public Object error()
+    public E error()
     {
         return error;
     }
 
-    public Object result()
+    public R result()
     {
         return result;
     }

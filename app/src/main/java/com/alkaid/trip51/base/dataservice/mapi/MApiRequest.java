@@ -8,9 +8,8 @@ public interface MApiRequest
     extends HttpRequest
 {
 
-    public abstract CacheType defaultCacheType();
+    public CacheType defaultCacheType();
 
-    public abstract boolean disableStatistics();
+//    public abstract boolean disableStatistics();
 
-    public abstract InputStream input();
 }

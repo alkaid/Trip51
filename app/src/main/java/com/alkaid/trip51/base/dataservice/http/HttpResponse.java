@@ -6,8 +6,8 @@ import org.apache.http.NameValuePair;
 
 import java.util.List;
 
-public interface HttpResponse
-    extends Response
+public interface HttpResponse<E, R>
+    extends Response<E, R>
 {
 
     public abstract List<NameValuePair> headers();
