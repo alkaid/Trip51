@@ -550,6 +550,15 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
+        <!--表单右边正文样式-->
+    <style name="TextViewArticle.Gray.centerVertical.FormEditText">
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">14dp</item>
+    </style>
+        <!--正文大小的超链接样式-->
+    <style name="TextViewArticle.Link">
+        <item name="android:textColor">@color/text_orange_to_gray</item>
+    </style>
     <style name="TextViewTitle1">
         <item name="android:textSize">@dimen/text_title_1</item>
         <item name="android:layout_width">wrap_content</item>
@@ -567,6 +576,27 @@
     <style name="TextViewTitle2.centerVertical">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+    <!--注脚小字样式-->
+    <style name="TextViewSubscript">
+        <item name="android:textSize">@dimen/text_subscript</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextViewSubscript.Gray">
+        <item name="android:textColor">@color/text_color_light_gray</item>
+    </style>
+        <!--注脚超链接样式-->
+    <style name="TextViewSubscript.Link">
+        <item name="android:textColor">@color/text_orange_to_gray</item>
+    </style>
+    <!--titleBar上左右两边的TextView的样式-->
+    <style name="TextViewTitleBarSide">
+        <item name="android:textSize">@dimen/text_titlebar_normal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <!--ListView单个Item外层容器样式-->
     <style name="ListViewItem">
@@ -634,5 +664,9 @@
     <style name="DividerViewVertical.left">
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_gravity">left</item>
+    </style>
+    <style name="SingleItem.FormInputItem">
+        <item name="android:background">@drawable/shape_default_edittext</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

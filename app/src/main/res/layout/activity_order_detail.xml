@@ -71,7 +71,7 @@
             </LinearLayout>.
             <LinearLayout style="@style/SingleItem" >
                 <ImageView android:src="@drawable/trip51_info" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                <TextView style="@style/TextViewArticle.centerVertical" android:textColor="@color/orange" android:layout_marginLeft="3dp"
+                <TextView style="@style/TextViewArticle.Link" android:layout_marginLeft="3dp"
                     android:text="优惠规则详解"/>
             </LinearLayout>
         </LinearLayout>

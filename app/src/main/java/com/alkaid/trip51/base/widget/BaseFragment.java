@@ -7,7 +7,7 @@ import com.alkaid.base.view.base.BFragment;
 
 public class BaseFragment extends BFragment {
 	private BaseContextWrap baseContextWrap;
-	protected BaseApp baseApp;
+	protected App app;
 	@Override
 	protected BContextWrap createContextWrap() {
 		baseContextWrap=BaseContextWrap.wrap(context);
@@ -17,6 +17,6 @@ public class BaseFragment extends BFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		baseApp=baseContextWrap.baseApp;
+		app=baseContextWrap.app;
 	}
 }

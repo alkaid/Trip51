@@ -25,9 +25,10 @@ public class MApiService {
         return instance;
     }
 
-    public static void create(Context context){
+    public static MApiService create(Context context){
         instance=new MApiService(context);
         instance.reqQueue= Volley.newRequestQueue(context);
+        return instance;
     }
 
     public<T> void exec(Request<T> req, String tag){

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:paddingLeft="@dimen/margin_page_medium" android:paddingRight="@dimen/margin_page_medium"
+    android:orientation="vertical">
+    <LinearLayout style="@style/SingleItem.FormInputItem" android:layout_marginTop="20dp">
+        <TextView android:text="账号" style="@style/TextViewArticle" />
+        <EditText style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入账号" />
+    </LinearLayout>
+    <LinearLayout style="@style/SingleItem.FormInputItem" android:layout_marginTop="20dp">
+        <TextView android:text="密码" style="@style/TextViewArticle" />
+        <EditText style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入密码" android:inputType="textPassword" />
+    </LinearLayout>
+    <Button android:text="登录" style="@style/ButtonLarger.Red" android:layout_marginLeft="0dp" android:layout_marginRight="0dp" android:layout_marginTop="24dp"/>
+    <TextView android:text="忘记密码？" style="@style/TextViewSubscript.Link" android:layout_gravity="right" android:layout_marginTop="8dp" />
+</LinearLayout>

@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
 import com.alkaid.trip51.usercenter.MyCouponActivity;
@@ -18,6 +18,7 @@ import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
 import com.alkaid.trip51.usercenter.UserInfoActivity;
+import com.alkaid.trip51.usercenter.UserLoginActivity;
 
 /**
  * Created by alkaid on 2015/11/9.
@@ -40,6 +41,14 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         initItem(R.drawable.user_icon_server, "服务中心");
         initItem(R.drawable.user_icon_praise, "去鼓励我");
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!App.accountService().isLogined()){
+            startActivity(new Intent(getActivity(),UserLoginActivity.class));
+        }
     }
 
     private void initTitleBar(View v) {

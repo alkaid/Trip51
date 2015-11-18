@@ -26,7 +26,7 @@ public class BaseContextWrap extends BContextWrap {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//TODO 这里needInitApp参数为false意为由子类自己手动控制BaseApp的初始化时机 。一般初始化都放在欢迎界面的异步线程里。
-		baseApp=BaseApp.getBaseApp(context,false);
+		baseApp=BaseApp.instance();
 	}
 	
 }
