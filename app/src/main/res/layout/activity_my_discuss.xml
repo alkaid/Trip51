@@ -11,5 +11,5 @@
         android:id="@+id/lv_my_discuss"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"></ListView>
+        android:background="@android:color/white" android:paddingLeft="@dimen/margin_page_small" android:paddingRight="@dimen/margin_page_small"></ListView>
 </LinearLayout>

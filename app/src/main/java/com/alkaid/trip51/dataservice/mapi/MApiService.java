@@ -11,6 +11,9 @@ import com.android.volley.toolbox.Volley;
  * Created by df on 2015/11/18.
  */
 public class MApiService {
+    public static final String PROTOCOL_VERSION="v1";
+    private static final String weburl="http://admeng-huasheng.xicp.net:8005/api/";
+    public static final String URL_SMSCODE=weburl+"register/getsmscode/"+PROTOCOL_VERSION;
     private static final String TAG="MApiService";
     private static MApiService instance;
     private Context context;

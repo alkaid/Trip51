@@ -40,15 +40,16 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         initItem(R.drawable.user_icon_mall, "积分商城");
         initItem(R.drawable.user_icon_server, "服务中心");
         initItem(R.drawable.user_icon_praise, "去鼓励我");
+        if(!App.accountService().isLogined()){
+            startActivity(new Intent(getActivity(),UserLoginActivity.class));
+        }
         return v;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(!App.accountService().isLogined()){
-            startActivity(new Intent(getActivity(),UserLoginActivity.class));
-        }
+
     }
 
     private void initTitleBar(View v) {

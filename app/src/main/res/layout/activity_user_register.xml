@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include android:id="@+id/layTitleBar" layout="@layout/default_title_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="match_parent" android:paddingLeft="@dimen/margin_page_medium" android:paddingRight="@dimen/margin_page_medium"
+        android:orientation="vertical">
+        <LinearLayout style="@style/SingleItem.FormInputItem" android:layout_marginTop="20dp">
+            <TextView android:text="账号" style="@style/TextViewArticle" />
+            <EditText android:id="@+id/etAccountId" style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入账号" />
+        </LinearLayout>
+        <LinearLayout style="@style/SingleItem.FormInputItem" android:layout_marginTop="20dp">
+            <TextView android:text="密码" style="@style/TextViewArticle" />
+            <EditText android:id="@+id/etPwd" style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入密码" android:inputType="textPassword" />
+        </LinearLayout>
+        <Button android:text="获取手机验证码" android:id="@+id/btnGetSms" style="@style/ButtonLarger.Red" android:layout_marginLeft="0dp" android:layout_marginRight="0dp" android:layout_marginTop="24dp"/>
+        <LinearLayout style="@style/SingleItem">
+            <TextView android:text="阅读并接受" style="@style/TextViewSubscript"/>
+            <TextView android:text="《无忧出行用户协议》" style="@style/TextViewSubscript.Link"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

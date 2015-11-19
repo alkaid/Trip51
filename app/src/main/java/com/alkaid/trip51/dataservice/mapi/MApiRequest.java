@@ -1,9 +1,13 @@
 package com.alkaid.trip51.dataservice.mapi;
 
+import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
+import com.alkaid.base.common.SystemUtil;
 import com.alkaid.base.extern.security.Md5;
+import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.util.Constants;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 
@@ -22,10 +26,20 @@ import java.util.Map;
 public class MApiRequest extends JsonObjectRequest {
     private Map<String,String> beSignForm;
     private Map<String,String> unBeSignform;
+    private String id;
     public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
         super(Method.POST,url,null,listener,errorListener);
         this.beSignForm=beSignForm;
         this.unBeSignform=unBeSignform;
+        id=java.util.UUID.randomUUID().toString();
+        //设置公共头
+        beSignForm.put("version", MApiService.PROTOCOL_VERSION);
+        beSignForm.put("timestamp", SystemClock.uptimeMillis()+"");
+
+        unBeSignform.put("phonetype","android");
+        unBeSignform.put("accessno",id);
+        unBeSignform.put("imei", SystemUtil.getImei(App.instance()));
+        unBeSignform.put("appversion",SystemUtil.getSoftVersion(App.instance()));
     }
 
     @Override
