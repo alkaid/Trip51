@@ -1,7 +1,6 @@
 package com.alkaid.trip51.usercenter;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +13,10 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
-import com.alkaid.trip51.util.Constants;
+import com.alkaid.trip51.model.response.ResSmsValCode;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,10 +47,13 @@ public class UserRegisterActivity extends BaseActivity{
                     Map<String,String> unBeSignform=new HashMap<String, String>();
                     beSignForm.put("mobile",mobile);
                     //请求短信
-                    App.mApiService().exec(new MApiRequest(MApiService.URL_SMSCODE, beSignForm, unBeSignform, new Response.Listener<JSONObject>() {
+                    App.mApiService().exec(new MApiRequest(MApiService.URL_SMSCODE, beSignForm, unBeSignform, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(String response) {
                             LogUtil.v(response.toString());
+                            Gson gson=new Gson();
+                            ResSmsValCode resSmsValCode = gson.fromJson(response,ResSmsValCode.class);
+
                         }
                     }, new Response.ErrorListener() {
                         @Override

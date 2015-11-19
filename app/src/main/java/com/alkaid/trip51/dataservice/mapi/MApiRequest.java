@@ -5,30 +5,30 @@ import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.common.SystemUtil;
-import com.alkaid.base.extern.security.Md5;
 import com.alkaid.trip51.base.widget.App;
-import com.alkaid.trip51.util.Constants;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONObject;
-
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
  * Created by alkaid on 2015/11/18.
  */
-public class MApiRequest extends JsonObjectRequest {
+public class MApiRequest extends StringRequest {
     private Map<String,String> beSignForm;
     private Map<String,String> unBeSignform;
     private String id;
-    public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        super(Method.POST,url,null,listener,errorListener);
+    public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        super(Method.POST,url,listener,errorListener);
         this.beSignForm=beSignForm;
         this.unBeSignform=unBeSignform;
         id=java.util.UUID.randomUUID().toString();
@@ -69,9 +69,45 @@ public class MApiRequest extends JsonObjectRequest {
         String signBefore = bf.toString();
         LogUtil.v("signBefore==" + signBefore);
 
-        String signature =Md5.toMd5(signBefore).toUpperCase(Locale.ENGLISH);
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(signBefore.getBytes("utf-8"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String signature = null;
+        try {
+            signature = byte2hex(encryptMD5(signBefore));
+        } catch (IOException e) {
+            LogUtil.e(e);
+        }
         LogUtil.v("signAfter==" + signature);
         return signature;
+    }
+
+    private static byte[] encryptMD5(String data) throws IOException {
+        byte[] bytes = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            bytes = md.digest(data.getBytes("utf-8"));
+        } catch (NoSuchAlgorithmException e) {
+            LogUtil.e(e);
+        }
+        return bytes;
+    }
+
+    private static String byte2hex(byte[] bytes) {
+        StringBuilder sign = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(bytes[i] & 0xFF);
+            if (hex.length() == 1) {
+                sign.append("0");
+            }
+            sign.append(hex.toUpperCase());
+        }
+        return sign.toString();
     }
 
 }
