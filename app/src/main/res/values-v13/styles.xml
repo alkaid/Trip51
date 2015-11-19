@@ -18,4 +18,6 @@
     <style name="WidgetHoloTabOrange" parent="@android:style/Widget.Holo.Tab">
         <item name="android:background">@drawable/tab_indicator_holo</item>
     </style>
+    <style name="WidgetHoloTabTextOrange" parent="@android:style/Widget.Holo.ActionBar.TabText">
+    </style>
 </resources>

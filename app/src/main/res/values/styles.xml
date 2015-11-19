@@ -503,10 +503,12 @@
     </style>
 
 
-    <style name="WidgetHoloTabOrange" parent="Widget.Holo.Tab">
-        <item name="background">@drawable/tab_indicator_holo</item>
+    <style name="WidgetHoloTabTextOrange">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
     </style>
-
 
     <!-- 自定义RadioButton-->
     <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
