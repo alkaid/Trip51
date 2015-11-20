@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/default_title_bar" />
+    <GridView
+        android:id="@+id/gv_share_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:verticalSpacing = "25dp"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:numColumns="3"
+        ></GridView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/temp_er_wei_ma"/>
+        <TextView
+            style="@style/TextViewArticle.Gray"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="扫描邀请好友安装"
+            />
+    </LinearLayout>
+</LinearLayout>

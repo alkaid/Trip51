@@ -96,6 +96,7 @@
         <activity android:name=".usercenter.MyCouponActivity"/>
         <activity android:name=".usercenter.UserLoginActivity"/>
         <activity android:name=".usercenter.UserRegisterActivity"/>
+        <activity android:name=".usercenter.MyShareActivity"/>
     </application>
 
 </manifest>

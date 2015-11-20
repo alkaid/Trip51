@@ -17,6 +17,7 @@ import com.alkaid.trip51.usercenter.MyCouponActivity;
 import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
+import com.alkaid.trip51.usercenter.MyShareActivity;
 import com.alkaid.trip51.usercenter.UserInfoActivity;
 import com.alkaid.trip51.usercenter.UserLoginActivity;
 
@@ -90,7 +91,7 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                }else if("我的评论".equals(name)){
                    startActivity(new Intent(getActivity(), MyDiscussActivity.class));
                }else if("分享好友".equals(name)){
-
+                   startActivity(new Intent(getActivity(), MyShareActivity.class));
                }else if("积分商城".equals(name)){
 
                }else if("服务中心".equals(name)){
