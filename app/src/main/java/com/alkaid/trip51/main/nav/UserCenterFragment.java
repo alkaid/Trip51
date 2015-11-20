@@ -13,6 +13,7 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
+import com.alkaid.trip51.usercenter.MyClientCenterActivity;
 import com.alkaid.trip51.usercenter.MyCouponActivity;
 import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
@@ -95,7 +96,7 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                }else if("积分商城".equals(name)){
 
                }else if("服务中心".equals(name)){
-
+                   startActivity(new Intent(getActivity(), MyClientCenterActivity.class));
                }else if("去鼓励我".equals(name)){
 
                }

@@ -97,6 +97,7 @@
         <activity android:name=".usercenter.UserLoginActivity"/>
         <activity android:name=".usercenter.UserRegisterActivity"/>
         <activity android:name=".usercenter.MyShareActivity"/>
+        <activity android:name=".usercenter.MyClientCenterActivity"/>
     </application>
 
 </manifest>
