@@ -183,74 +183,6 @@
         <item name="android:horizontalSpacing">6.0dip</item>
         <item name="android:verticalSpacing">6.0dip</item>
     </style>
-    <style name="PriceUsageNow_1">
-        <item name="money_amount_size">@dimen/text_size_12</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="label_margin_right">4.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageNow_2">
-        <item name="money_amount_size">@dimen/text_size_15</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="label_margin_right">4.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageNow_3">
-        <item name="money_amount_size">@dimen/text_size_20</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="label_margin_right">4.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-        <item name="rmb_margin_bottom">1.0dip</item>
-    </style>
-    <style name="PriceUsageNow_4">
-        <item name="money_amount_size">@dimen/text_size_25</item>
-        <item name="money_label_size">@dimen/text_size_12</item>
-        <item name="label_margin_right">4.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-        <item name="rmb_margin_bottom">1.0dip</item>
-    </style>
-    <style name="PriceUsageNow_5">
-        <item name="money_amount_size">@dimen/text_size_40</item>
-        <item name="money_label_size">@dimen/text_size_13</item>
-        <item name="label_margin_right">4.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-        <item name="rmb_margin_bottom">2.0dip</item>
-    </style>
-    <style name="PriceUsageOrigin_1">
-        <item name="money_amount_size">@dimen/text_size_12</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageOrigin_2">
-        <item name="money_amount_size">@dimen/text_size_12</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageOrigin_3">
-        <item name="money_amount_size">@dimen/text_size_12</item>
-        <item name="money_label_size">@dimen/text_size_11</item>
-        <item name="label_margin_bottom">1.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageOrigin_4">
-        <item name="money_amount_size">@dimen/text_size_13</item>
-        <item name="money_label_size">@dimen/text_size_12</item>
-        <item name="label_margin_bottom">1.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="PriceUsageOrigin_5">
-        <item name="money_amount_size">@dimen/text_size_14</item>
-        <item name="money_label_size">@dimen/text_size_13</item>
-        <item name="label_margin_bottom">2.0dip</item>
-        <item name="rmb_margin_right">1.0dip</item>
-    </style>
-    <style name="Price_6">
-        <item name="money_amount_size">@dimen/text_size_16</item>
-        <item name="money_label_size">@dimen/text_size_14</item>
-        <item name="minus_size">@dimen/text_size_16</item>
-        <item name="rmb_margin_left">3.0dip</item>
-        <item name="rmb_margin_right">2.0dip</item>
-    </style>
     <style name="ProgressBar_Mini" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progressbar_circle</item>
     </style>
@@ -303,7 +235,7 @@
         <item name="android:radioButtonStyle">@style/CustomNormalRadioButton</item>
         <item name="android:textViewStyle">@style/CustomNormalTextView</item>
         <item name="android:drawingCacheQuality">auto</item>
-        <item name="gdQuickActionBarItemStyle">@style/Widget.QuickAction.Bar.Item</item>
+        <!--<item name="gdQuickActionBarItemStyle">@style/Widget.QuickAction.Bar.Item</item>-->
     </style>
     <style name="Theme.Dialog.NoTitle" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@null</item>
@@ -502,14 +434,24 @@
         <item name="android:windowIsTranslucent">false</item>
     </style>
 
-
+    <!--默认TabWidget样式-->
+    <style name="WidgetHoloTabOrange" parent="@style/Widget.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_holo</item>
+        <!--<item name="android:layout_height">@dimen/home_tab_height</item>-->
+    </style>
+    <!--默认TabWidge中文字样式-->
     <style name="WidgetHoloTabTextOrange">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:maxLines">2</item>
     </style>
-
+    <!--<style name="CustomTabLayout" parent="Widget.Design.TabLayout">-->
+        <!--<item name="tabIndicatorColor">@color/text_orange_to_gray</item>-->
+        <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
+        <!--<item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>-->
+        <!--<item name="tabSelectedTextColor">@color/text_orange_to_gray</item>-->
+    <!--</style>-->
     <!-- 自定义RadioButton-->
     <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/btn_radio_default</item>
@@ -672,8 +614,19 @@
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_gravity">left</item>
     </style>
+    <!--带左Labele的表单输入框-->
     <style name="SingleItem.FormInputItem">
         <item name="android:background">@drawable/shape_default_edittext</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
+    <!--默认RatingBar样式-->
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="CustomRatingBar.Small">
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
     </style>
 </resources>

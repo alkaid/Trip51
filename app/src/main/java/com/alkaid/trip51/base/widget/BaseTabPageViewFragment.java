@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 
@@ -22,6 +23,7 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
     private TabHost mTabHost;
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
+    private LayoutInflater inflater;
 
     protected abstract ViewGroup creatContetView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
     protected abstract void addTabs(TabHost tabHost,TabsAdapter tabsAdapter);
@@ -29,12 +31,13 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup v=creatContetView(inflater,container,savedInstanceState);
+        this.inflater=inflater;
         mTabHost = (TabHost)v.findViewById(android.R.id.tabhost);
         mTabHost.setup();
 
         mViewPager = (ViewPager)v.findViewById(R.id.viewpager);
 
-        mTabsAdapter = new TabsAdapter(getActivity(),this, mTabHost, mViewPager);
+        mTabsAdapter = new TabsAdapter(inflater,getActivity(),this, mTabHost, mViewPager);
 
         addTabs(mTabHost,mTabsAdapter);
 //        mTabsAdapter.addTab(mTabHost.newTabSpec("楼盘").setIndicator("楼盘"),
@@ -71,6 +74,7 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
         private final TabHost mTabHost;
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+        private LayoutInflater inflater;
 
         static final class TabInfo {
             private final String tag;
@@ -100,7 +104,7 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
             }
         }
 
-        public TabsAdapter(Context context,Fragment fragment, TabHost tabHost,ViewPager pager) {
+        public TabsAdapter(LayoutInflater inflater,Context context,Fragment fragment, TabHost tabHost,ViewPager pager) {
             super(fragment.getChildFragmentManager());
             mContext = context;
             mTabHost = tabHost;
@@ -108,9 +112,17 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
             mTabHost.setOnTabChangedListener(this);
             mViewPager.setAdapter(this);
             mViewPager.setOnPageChangeListener(this);
+            this.inflater=inflater;
         }
 
-        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
+        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args){
+            addTab(tabSpec,clss,args,-1);
+        }
+        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args,int layouId) {
+            View v=inflater.inflate(layouId>0?layouId:R.layout.tab_indicator_holo, null,false);
+            TextView tv = (TextView) v.findViewById(android.R.id.title);
+            tv.setText(tabSpec.getTag());
+            tabSpec.setIndicator(v);
             tabSpec.setContent(new DummyTabFactory(mContext));
             String tag = tabSpec.getTag();
 
