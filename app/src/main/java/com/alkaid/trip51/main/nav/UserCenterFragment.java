@@ -13,11 +13,13 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
+import com.alkaid.trip51.usercenter.MyClientCenterActivity;
 import com.alkaid.trip51.usercenter.MyCouponActivity;
 import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
 import com.alkaid.trip51.usercenter.MyShareActivity;
+import com.alkaid.trip51.usercenter.SettingActivity;
 import com.alkaid.trip51.usercenter.UserInfoActivity;
 import com.alkaid.trip51.usercenter.UserLoginActivity;
 
@@ -41,8 +43,8 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         initItem(R.drawable.user_icon_mall, "积分商城");
         initItem(R.drawable.user_icon_server, "服务中心");
         initItem(R.drawable.user_icon_praise, "去鼓励我");
-        if(!App.accountService().isLogined()){
-            startActivity(new Intent(getActivity(),UserLoginActivity.class));
+        if (!App.accountService().isLogined()) {
+            startActivity(new Intent(getActivity(), UserLoginActivity.class));
         }
         return v;
     }
@@ -61,6 +63,12 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         tvTitle.setText("我的");
         btnLeft.setImageResource(R.drawable.home_navibar_icon_bell);
         btnRight.setImageResource(R.drawable.trip51_setting);
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+            }
+        });
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,19 +94,19 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         holder.lay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if("我的收藏".equals(name)){
-                   startActivity(new Intent(getActivity(), MyFavoriteActivity.class));
-               }else if("我的评论".equals(name)){
-                   startActivity(new Intent(getActivity(), MyDiscussActivity.class));
-               }else if("分享好友".equals(name)){
-                   startActivity(new Intent(getActivity(), MyShareActivity.class));
-               }else if("积分商城".equals(name)){
+                if ("我的收藏".equals(name)) {
+                    startActivity(new Intent(getActivity(), MyFavoriteActivity.class));
+                } else if ("我的评论".equals(name)) {
+                    startActivity(new Intent(getActivity(), MyDiscussActivity.class));
+                } else if ("分享好友".equals(name)) {
+                    startActivity(new Intent(getActivity(), MyShareActivity.class));
+                } else if ("积分商城".equals(name)) {
 
-               }else if("服务中心".equals(name)){
+                } else if ("服务中心".equals(name)) {
+                    startActivity(new Intent(getActivity(), MyClientCenterActivity.class));
+                } else if ("去鼓励我".equals(name)) {
 
-               }else if("去鼓励我".equals(name)){
-
-               }
+                }
 
             }
         });

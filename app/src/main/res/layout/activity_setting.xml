@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/default_title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="启动时自动定位到当前位置" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/toggle_background"
+                android:button="@drawable/toggle_btn_background"
+                android:gravity="center_vertical" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/SingleItem"
+            android:background="@color/gray_background">
+
+            <TextView
+                style="@style/TextViewTitle2"
+                android:layout_centerInParent="true"
+                android:textSize="13sp"
+                android:text="关闭自动定位后，每次打开应用会默认使用上一次地址" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="清除图片缓存" />
+
+            <ImageView
+                android:id="@+id/ivArrow0"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle.Gray.centerVertical"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/ivArrow0"
+                android:text="6.5M" />
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="消息提醒设置" />
+
+            <ImageView
+                android:id="@+id/ivArrow1"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="用户服务协议" />
+
+            <ImageView
+                android:id="@+id/ivArrow2"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="商务合作" />
+
+            <ImageView
+                android:id="@+id/ivArrow3"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewTitle2.centerVertical"
+                android:text="系统版本" />
+
+            <ImageView
+                android:id="@+id/ivArrow4"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

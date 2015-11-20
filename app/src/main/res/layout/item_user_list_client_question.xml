@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    style="@style/SingleItem">
+
+    <TextView
+        android:id="@+id/tv_question_name"
+        style="@style/TextViewTitle2.centerVertical"
+        android:text="支付问题" />
+
+    <ImageView
+        android:id="@+id/ivArrow"
+        style="@style/ImageViewRightArrow" />
+</RelativeLayout>
