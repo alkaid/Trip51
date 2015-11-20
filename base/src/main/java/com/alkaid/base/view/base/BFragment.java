@@ -14,7 +14,7 @@ public abstract class BFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		context=getActivity();
 		bContextWrap = createContextWrap();
-//		bContextWrap.onCreate(savedInstanceState);
+		bContextWrap.onCreate(savedInstanceState);
 	}
 	/**
 	 * 在 {@link #onCreate(Bundle)}中会调用此方法生成一个  {@link BContextWrap}实例
