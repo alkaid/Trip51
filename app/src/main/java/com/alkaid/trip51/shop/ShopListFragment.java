@@ -18,7 +18,6 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.enums.ShopType;
 import com.alkaid.trip51.model.response.ResShopList;
-import com.alkaid.trip51.model.response.ResSmsValCode;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -42,7 +41,7 @@ public class ShopListFragment extends BaseFragment {
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), MenuListActivity.class);
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
                 startActivity(intent);
             }
         });

@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingFilterActivity;
-import com.alkaid.trip51.shop.MenuListActivity;
+import com.alkaid.trip51.shop.MenuActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class    MainHomeFragment extends BaseFragment {
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),MenuListActivity.class);
+                Intent intent = new Intent(getActivity(),MenuActivity.class);
                 startActivity(intent);
             }
         });
