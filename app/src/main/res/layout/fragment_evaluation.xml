@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/ListViewItem"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="vertical">
+            bac
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_gravity="center_horizontal"
+                android:text="4.4"
+                android:textColor="@color/light_red"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_gravity="center_horizontal"
+                android:text="整体评价" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/ListViewArticleLay"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:text="口味" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_unfav" />
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="10dp"
+                    android:text="4.3"
+                    android:textColor="@color/light_red" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:text="环境" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_unfav" />
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="10dp"
+                    android:text="4.8"
+                    android:textColor="@color/light_red" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:text="服务" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_fav" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="0dp"
+                    android:src="@drawable/star_thumb_unfav" />
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="10dp"
+                    android:text="4.4"
+                    android:textColor="@color/light_red" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/ListViewArticleLay"
+            android:gravity="center">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:background="@drawable/btn_evaluation_selected"
+                android:gravity="center"
+                android:text="全部(116)" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:background="@drawable/btn_evaluation_normal"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="好评(96)" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:background="@drawable/btn_evaluation_normal"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="中评(96)" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:background="@drawable/btn_evaluation_normal"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="差评(96)" />
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="对显示有文字评论的内容" />
+        <ListView
+            android:id="@+id/lv_evaluation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+</LinearLayout>

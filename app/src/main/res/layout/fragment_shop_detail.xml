@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/ListViewItem"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgShopThumb"
+            style="@style/ListViewShopImage"
+            android:src="@drawable/temp_shop_thumb" />
+
+        <LinearLayout
+            style="@style/ListViewArticleLay"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextViewTitle2.centerVertical"
+                    android:text="和太郎寿司" />
+
+                <TextView
+                    style="@style/TextViewArticle.Gray.centerVertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="2015-9-12" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/star_thumb_fav" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/star_thumb_fav" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/star_thumb_fav" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/star_thumb_fav" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/star_thumb_unfav" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:text="口味4分" />
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="5dp"
+                    android:text="环境4分" />
+
+                <TextView
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="5dp"
+                    android:text="服务4分" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_dingwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/dingwei" />
+
+            <ImageView
+                android:id="@+id/ivArrow0"
+                style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_dingwei"
+                android:text="鲁班路心宇江东路三之路建行路口进来150米" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <ImageView
+                android:id="@+id/iv_dianhua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/phone" />
+
+            <ImageView style="@style/ImageViewRightArrow" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_dianhua"
+                android:text="3225678  17856873882" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="网友点评（5）" />
+
+            <ImageView
+                android:id="@+id/ivArrow2"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_evaluation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="商户信息" />
+
+            <ImageView
+                android:id="@+id/ivArrow3"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="距离位置：距离较近，步行约30分钟" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
