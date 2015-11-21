@@ -31,7 +31,7 @@ public class ResShopList extends  ResponseData {
         private String avgpay;
         private String imageurl;
         private String diningtypename;
-        private int starlevel;
+        private float totallevel;
         private String areaname;
         private int privaterroomstatus;
         private int loungestatus;
@@ -78,12 +78,12 @@ public class ResShopList extends  ResponseData {
             this.diningtypename = diningtypename;
         }
 
-        public int getStarlevel() {
-            return starlevel;
+        public float getTotallevel() {
+            return totallevel;
         }
 
-        public void setStarlevel(int starlevel) {
-            this.starlevel = starlevel;
+        public void setTotallevel(float totallevel) {
+            this.totallevel = totallevel;
         }
 
         public String getAreaname() {

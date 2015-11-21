@@ -69,7 +69,7 @@ public class ShopListAdapter extends BaseAdapter {
             return convertView;
         }
         ResShopList.Shop shop=shops.get(position);
-        holder.rtbProductRating.setProgress(shop.getStarlevel());
+        holder.rtbProductRating.setRating(shop.getTotallevel());
         holder.tvTitle.setText(shop.getShopname());
         holder.tvAvgPay.setText(shop.getAvgpay());
         String status="";
