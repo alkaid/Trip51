@@ -142,4 +142,5 @@
     <dimen name="vertical_layout4_height">78.0dip</dimen>
     <dimen name="vertical_layout5_height">124.0dip</dimen>
     <dimen name="wed_textsize_14">7.0sp</dimen>
+    <dimen name="holo_tab_height">49.0dip</dimen>
 </resources>

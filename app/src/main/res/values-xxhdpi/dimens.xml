@@ -82,4 +82,5 @@
     <dimen name="vertical_layout3_height">137.0dip</dimen>
     <dimen name="vertical_layout4_height">65.0dip</dimen>
     <dimen name="vertical_layout5_height">103.0dip</dimen>
+    <dimen name="holo_tab_height">46.0dip</dimen>
 </resources>

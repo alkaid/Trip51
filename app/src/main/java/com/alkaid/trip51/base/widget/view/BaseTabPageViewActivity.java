@@ -2,7 +2,6 @@ package com.alkaid.trip51.base.widget.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.widget.TextView;
 
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.base.widget.BaseFragmentActivity;
 
 import java.util.ArrayList;
@@ -79,6 +78,7 @@ public abstract class BaseTabPageViewActivity extends BaseFragmentActivity {
         private final TabHost mTabHost;
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+        private LayoutInflater inflater;
 
         static final class TabInfo {
             private final String tag;
@@ -116,9 +116,16 @@ public abstract class BaseTabPageViewActivity extends BaseFragmentActivity {
             mTabHost.setOnTabChangedListener(this);
             mViewPager.setAdapter(this);
             mViewPager.setOnPageChangeListener(this);
+            inflater=LayoutInflater.from(mContext);
         }
-
-        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
+        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args){
+            addTab(tabSpec,clss,args,-1);
+        }
+        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args,int layouId) {
+            View v=inflater.inflate(layouId>0?layouId:R.layout.tab_indicator_holo, null,false);
+            TextView tv = (TextView) v.findViewById(android.R.id.title);
+            tv.setText(tabSpec.getTag());
+            tabSpec.setIndicator(v);
             tabSpec.setContent(new DummyTabFactory(mContext));
             String tag = tabSpec.getTag();
 

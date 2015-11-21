@@ -9,6 +9,22 @@ public class ResShopList extends  ResponseData {
     private int total;
     private List<Shop> data;
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public List<Shop> getData() {
+        return data;
+    }
+
+    public void setData(List<Shop> data) {
+        this.data = data;
+    }
+
     public static class Shop{
         private int shopid;
         private String shopname;
