@@ -1,5 +1,6 @@
 package com.alkaid.trip51.model.response;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class ResShopList extends  ResponseData {
         this.data = data;
     }
 
-    public static class Shop{
+    public static class Shop implements Serializable{
         private int shopid;
         private String shopname;
         private String avgpay;

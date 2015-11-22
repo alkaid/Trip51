@@ -10,11 +10,11 @@
             <TextView android:text="已发送验证码短信到" style="@style/TextViewArticle.Gray" />
         </LinearLayout>
         <LinearLayout style="@style/SingleItem" android:gravity="center_horizontal" android:paddingTop="0dp">
-            <TextView android:text="+86 18575514121" style="@style/TextViewTitle2" />
+            <TextView android:id="@+id/tvPhone" android:text="+86 18575514121" style="@style/TextViewTitle2" />
         </LinearLayout>
         <LinearLayout style="@style/SingleItem.FormInputItem">
             <TextView android:text="验证码" style="@style/TextViewArticle" />
-            <EditText style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入验证码" />
+            <EditText android:id="@+id/etValCode" style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="输入验证码" />
         </LinearLayout>
         <Button android:text="下一步" android:id="@+id/btnSure" style="@style/ButtonLarger.Red" android:layout_marginLeft="0dp" android:layout_marginRight="0dp" android:layout_marginTop="24dp"/>
         <LinearLayout style="@style/SingleItem">

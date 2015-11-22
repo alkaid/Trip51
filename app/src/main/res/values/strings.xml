@@ -305,7 +305,7 @@
     <string name="sd_special_dishes">特价菜</string>
     <string name="sd_submitorder_close">商户目前不能点菜</string>
     <string name="sd_submitorder_close_hint">请试试其他活动吧</string>
-    <string name="sd_submitorder_error">点小评遇到问题了，请重试</string>
+    <string name="sd_submitorder_error">遇到问题了，请稍后重试</string>
     <string name="sd_submitorder_order_exist">此桌已下单</string>
     <string name="sd_submitorder_order_exist_hint">是否需要下单加菜？</string>
     <string name="sd_submitorder_tableid_error">您输入的桌号有误</string>
@@ -443,4 +443,5 @@
     <string name="wifi_changing_network">请求连接到网络…</string>
     <string name="wifi_ssid_label">网络SSID</string>
     <string name="wifi_type_label">类型</string>
+
 </resources>

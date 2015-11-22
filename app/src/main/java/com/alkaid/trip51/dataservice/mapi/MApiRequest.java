@@ -5,15 +5,13 @@ import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.common.SystemUtil;
+import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,8 +25,19 @@ public class MApiRequest extends StringRequest {
     private Map<String,String> beSignForm;
     private Map<String,String> unBeSignform;
     private String id;
+    private CacheType cacheType;
     public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        this(CacheType.NORMAL,url,beSignForm,unBeSignform,listener,errorListener);
+    }
+    public MApiRequest(CacheType cacheType,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(Method.POST,url,listener,errorListener);
+        this.cacheType=cacheType;
+        switch (cacheType){
+            case DISABLED:
+                setShouldCache(false);
+                break;
+            //TODO 缓存策略的其他情况
+        }
         this.beSignForm=beSignForm;
         this.unBeSignform=unBeSignform;
         id=java.util.UUID.randomUUID().toString();
@@ -37,7 +46,7 @@ public class MApiRequest extends StringRequest {
         beSignForm.put("timestamp", SystemClock.uptimeMillis()+"");
 
         unBeSignform.put("phonetype","android");
-        unBeSignform.put("accessno",id);
+        unBeSignform.put("accessno", id);
         unBeSignform.put("imei", SystemUtil.getImei(App.instance()));
         unBeSignform.put("appversion",SystemUtil.getSoftVersion(App.instance()));
     }
@@ -46,68 +55,41 @@ public class MApiRequest extends StringRequest {
     protected Map<String, String> getParams() throws AuthFailureError {
         Map<String, String> params=new HashMap<String,String>();
         //TODO 合并beSignForm和unBeSignForm
-        String sign=signature(beSignForm,"3de8d0f8079b1dc3e4397b8c540823e8");
-        params.put("sign",sign);
+        String sign=signature(beSignForm);
+        params.put("sign", sign);
         params.putAll(beSignForm);
         params.putAll(unBeSignform);
+
+        if(LogUtil.D){
+            StringBuilder sb=new StringBuilder("params:");
+            for (String key:params.keySet()){
+                sb.append(key+"="+params.get(key)+"&");
+            }
+            LogUtil.v(sb.toString());
+        }
         return params;
     }
 
-    private String signature(Map<String, String> params,String secrect){
+    private String signature(Map<String, String> params){
         //排序签名
         List<String> keys=new ArrayList<String>();
         for (String key : params.keySet()) {
             keys.add(key);
         }
         Collections.sort(keys);
-        StringBuffer bf = new StringBuffer(secrect);
+        StringBuffer bf = new StringBuffer();
         for (String key : keys) {
             if(!TextUtils.isEmpty(params.get(key)))
                 bf.append(key + params.get(key));
         }
-        bf.append(secrect);
         String signBefore = bf.toString();
-        LogUtil.v("signBefore==" + signBefore);
-
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] bytes = md.digest(signBefore.getBytes("utf-8"));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        LogUtil.v("signBefore==" + signBefore);
         String signature = null;
-        try {
-            signature = byte2hex(encryptMD5(signBefore));
-        } catch (IOException e) {
-            LogUtil.e(e);
-        }
-        LogUtil.v("signAfter==" + signature);
+        signature = SecurityUtil.getMD5WithSalt(signBefore);
+//        LogUtil.v("signAfter==" + signature);
         return signature;
     }
 
-    private static byte[] encryptMD5(String data) throws IOException {
-        byte[] bytes = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            bytes = md.digest(data.getBytes("utf-8"));
-        } catch (NoSuchAlgorithmException e) {
-            LogUtil.e(e);
-        }
-        return bytes;
-    }
 
-    private static String byte2hex(byte[] bytes) {
-        StringBuilder sign = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(bytes[i] & 0xFF);
-            if (hex.length() == 1) {
-                sign.append("0");
-            }
-            sign.append(hex.toUpperCase());
-        }
-        return sign.toString();
-    }
 
 }

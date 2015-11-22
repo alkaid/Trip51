@@ -11,12 +11,14 @@ import com.android.volley.toolbox.Volley;
  * Created by df on 2015/11/18.
  */
 public class MApiService {
+    private static final String TAG="MApiService";
     public static final String PROTOCOL_VERSION="v1";
     private static final String weburl="http://admeng-huasheng.xicp.net:8005/api/";
     public static final String URL_SMSCODE=weburl+"register/getsmscode/"+PROTOCOL_VERSION;
+    //    public static final String URL_SMSCODE="http://192.168.1.188/test/a.php";
     public static final String URL_SHOP_LIST=weburl+"shop/list/"+PROTOCOL_VERSION;
-//    public static final String URL_SMSCODE="http://192.168.1.188/test/a.php";
-    private static final String TAG="MApiService";
+    public static final String URL_REGISTER=weburl+"register/"+PROTOCOL_VERSION;
+
     private static MApiService instance;
     private Context context;
     private RequestQueue reqQueue;

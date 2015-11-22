@@ -3,6 +3,8 @@
  */
 package com.alkaid.base.exception;
 
+import android.text.TextUtils;
+
 import com.example.com.alkaid.base.R;
 
 
@@ -18,6 +20,12 @@ public class TradException extends Exception {
 	}
 	public TradException(String msg){
 		super(msg);
+	}
+	public static TradException create(String msg){
+		if(TextUtils.isEmpty(msg)){
+			return new TradException(0);
+		}
+		return new TradException(msg);
 	}
 	public TradException(Throwable e) {
 		super(null,e);
