@@ -30,12 +30,12 @@ public class LocationService {
     private LocationService(Context context){
         this.context=context;
     }
-    public LocationService instance(){
-        if(null==instance){
-            throw new RuntimeException("instance is null!You must calll create() to init!");
-        }
-        return instance;
-    }
+//    public LocationService instance(){
+//        if(null==instance){
+//            throw new RuntimeException("instance is null!You must calll create() to init!");
+//        }
+//        return instance;
+//    }
 
     public static LocationService create(Context context){
         instance=new LocationService(context);

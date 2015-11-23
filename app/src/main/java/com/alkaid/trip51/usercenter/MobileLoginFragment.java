@@ -20,7 +20,6 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResLogin;
 import com.alkaid.trip51.model.response.ResSmsValCode;
-import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -53,6 +52,7 @@ public class MobileLoginFragment extends BaseFragment {
                     Map<String,String> beSignForm=new HashMap<String, String>();
                     Map<String,String> unBeSignform=new HashMap<String, String>();
                     beSignForm.put("mobile", mobile);
+                    unBeSignform.put("flag",MApiService.SMSCODE_FOR_LOGIN+"");
                     final String tag="smscode"+(int)(Math.random()*1000);
                     setDefaultPdgCanceListener(tag);
                     showPdg();
@@ -80,6 +80,7 @@ public class MobileLoginFragment extends BaseFragment {
                         public void onErrorResponse(VolleyError error) {
                             LogUtil.v(error.toString());
                             dismissPdg();
+                            //TODO 暂时用handleException 应该换成失败时的正式UI
                             handleException(new TradException());
                         }
                     }), tag);

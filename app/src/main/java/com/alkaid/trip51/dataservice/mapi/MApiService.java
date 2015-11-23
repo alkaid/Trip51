@@ -22,6 +22,12 @@ public class MApiService {
     public static final String URL_LOGIN_NORMAL=weburl+"login/common/"+PROTOCOL_VERSION;
     public static final String URL_CITY_LIST=weburl+"city/list/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_FOODS=weburl+"shop/foodlist/"+PROTOCOL_VERSION;
+    public static final String URL_SHOP_COMMENTS=weburl+"shop/commontlist/"+PROTOCOL_VERSION;
+    public static final String URL_SHOP_SHOP_DETAIL=weburl+"shop/detail/"+PROTOCOL_VERSION;
+
+    public static final int SMSCODE_FOR_REGISTER=1;
+    public static final int SMSCODE_FOR_LOGIN=2;
+    public static final int SMSCODE_FOR_CHANGE_PWD=3;
 
     private static MApiService instance;
     private Context context;
@@ -29,12 +35,12 @@ public class MApiService {
     private MApiService(Context context){
         this.context=context;
     }
-    public MApiService instance(){
-        if(null==instance){
-            throw new RuntimeException("instance is null!You must calll create() to init!");
-        }
-        return instance;
-    }
+//    public MApiService instance(){
+//        if(null==instance){
+//            throw new RuntimeException("instance is null!You must calll create() to init!");
+//        }
+//        return instance;
+//    }
 
     public static MApiService create(Context context){
         instance=new MApiService(context);

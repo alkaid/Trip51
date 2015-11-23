@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingFilterActivity;
 import com.alkaid.trip51.shop.MenuActivity;
@@ -48,6 +49,8 @@ public class    MainHomeFragment extends BaseFragment {
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO Adapter里实现getItemid()返回shopid
+                App.shopService().setCurrShopid(id);    //保存当前shopid
                 Intent intent = new Intent(getActivity(),MenuActivity.class);
                 startActivity(intent);
             }

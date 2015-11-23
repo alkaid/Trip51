@@ -120,6 +120,7 @@ public class UserRegisterActivity extends BaseActivity{
             unBeSignform.put("userpwd", SecurityUtil.getSHA1WithSalt(pwd));
             unBeSignform.put("valcode",valcode);
             unBeSignform.put("smsid",smsid==null?"1111":smsid); //TODO 测试用 正式版本要验证smsid
+            unBeSignform.put("flag",MApiService.SMSCODE_FOR_REGISTER+"");
             final String tag="userregister"+(int)(Math.random()*1000);
             setDefaultPdgCanceListener(tag);
             showPdg();

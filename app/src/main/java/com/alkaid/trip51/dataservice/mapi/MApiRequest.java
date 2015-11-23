@@ -9,6 +9,7 @@ import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
@@ -38,6 +39,7 @@ public class MApiRequest extends StringRequest {
                 break;
             //TODO 缓存策略的其他情况
         }
+        this.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         this.beSignForm=beSignForm;
         this.unBeSignform=unBeSignform;
         id=java.util.UUID.randomUUID().toString();

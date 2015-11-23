@@ -30,12 +30,12 @@ public class AccountService {
     private AccountService(Context context){
         this.context=context;
     }
-    public AccountService instance(){
-        if(null==instance){
-            throw new RuntimeException("instance is null!You must calll create() to init!");
-        }
-        return instance;
-    }
+//    public AccountService instance(){
+//        if(null==instance){
+//            throw new RuntimeException("instance is null!You must calll create() to init!");
+//        }
+//        return instance;
+//    }
 
     public static AccountService create(Context context){
         instance=new AccountService(context);

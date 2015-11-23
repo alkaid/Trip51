@@ -45,6 +45,7 @@ public class ShopListFragment extends BaseFragment {
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                App.shopService().setCurrShopid(id);    //保存当前shopid
                 Intent intent = new Intent(getActivity(), MenuActivity.class);
                 startActivity(intent);
             }

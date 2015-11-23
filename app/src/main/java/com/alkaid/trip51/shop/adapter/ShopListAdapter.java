@@ -45,7 +45,7 @@ public class ShopListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return shops.get(position).getShopid();
     }
 
     @Override
