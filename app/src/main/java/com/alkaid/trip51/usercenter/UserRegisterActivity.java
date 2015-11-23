@@ -17,6 +17,7 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.model.response.ResLogin;
 import com.alkaid.trip51.model.response.ResSmsValCode;
 import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.Response;
@@ -118,7 +119,7 @@ public class UserRegisterActivity extends BaseActivity{
             beSignForm.put("mobile", mobile);
             unBeSignform.put("userpwd", SecurityUtil.getSHA1WithSalt(pwd));
             unBeSignform.put("valcode",valcode);
-            unBeSignform.put("smsid",smsid);
+            unBeSignform.put("smsid",smsid==null?"1111":smsid); //TODO 测试用 正式版本要验证smsid
             final String tag="userregister"+(int)(Math.random()*1000);
             setDefaultPdgCanceListener(tag);
             showPdg();
@@ -128,16 +129,16 @@ public class UserRegisterActivity extends BaseActivity{
                 public void onResponse(String response) {
                     LogUtil.v(response.toString());
                     Gson gson = new Gson();
-                    ResSmsValCode resSmsValCode = gson.fromJson(response, ResSmsValCode.class);
-                    if (resSmsValCode.isSuccess()) {
-                        Intent intent = new Intent(context, SmsValcodeActivity.class);
-                        dismissPdg();
-                        intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
-                        startActivityForResult(intent, 1);
+                    ResLogin resLogin=gson.fromJson(response,ResLogin.class);
+                    dismissPdg();
+                    if(resLogin.isSuccess()){
+                        toastShort("注册/登录成功");
+                        App.accountService().handleLogined(resLogin);
+                        setResult(Activity.RESULT_OK);
+                        finish();
                     } else {
-                        dismissPdg();
                         //TODO 暂时用handleException 应该换成失败时的正式UI
-                        handleException(TradException.create(resSmsValCode.getMsg()));
+                        handleException(TradException.create(resLogin.getMsg()));
                     }
                 }
             }, new Response.ErrorListener() {
@@ -145,6 +146,7 @@ public class UserRegisterActivity extends BaseActivity{
                 public void onErrorResponse(VolleyError error) {
                     LogUtil.v(error.toString());
                     dismissPdg();
+                    //TODO 暂时用handleException 应该换成失败时的正式UI
                     handleException(new TradException());
                 }
             }), tag);

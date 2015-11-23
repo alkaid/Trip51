@@ -13,7 +13,6 @@ import com.alkaid.base.view.base.BContextWrap;
 public class BaseActivity extends BActivity {
 	private BaseContextWrap baseContextWrap;
 	protected App app;
-	protected ProgressDialog pdg;
 	@Override
 	protected BContextWrap createContextWrap() {
 		baseContextWrap=BaseContextWrap.wrap(context);
@@ -25,36 +24,25 @@ public class BaseActivity extends BActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		app=baseContextWrap.app;
-		pdg=new ProgressDialog(context);
 	}
+
 	protected void setDefaultPdgCanceListener(final String tag){
-		pdg.setOnCancelListener(new DialogInterface.OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				App.mApiService().abort(tag);
-			}
-		});
+		baseContextWrap.setDefaultPdgCanceListener(tag);
 	}
 	protected void dismissPdg(){
-		if(null!=pdg&&pdg.isShowing())
-			pdg.dismiss();
+		baseContextWrap.dismissPdg();
 	}
 	protected void showPdg(){
-		showPdg(null);
+		baseContextWrap.showPdg();
 	}
 	protected void showPdg(String msg){
-		if(null==pdg){
-			pdg=new ProgressDialog(context);
-		}
-		pdg.setMessage(msg);
-		pdg.show();
+		baseContextWrap.showPdg(msg);
 	}
 	protected void toastShort(String msg){
-		Toast.makeText(context,msg,Toast.LENGTH_SHORT);
+		baseContextWrap.toastShort(msg);
 	}
 	protected void toastShortAsync(String msg){
-		Looper.prepare();
-		Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-		Looper.loop();
+		baseContextWrap.toastShortAsync(msg);
 	}
+
 }

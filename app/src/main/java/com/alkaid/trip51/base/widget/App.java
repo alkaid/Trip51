@@ -7,6 +7,7 @@ import com.alkaid.base.view.base.BApp;
 import com.alkaid.trip51.dataservice.account.AccountService;
 import com.alkaid.trip51.dataservice.location.LocationService;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.dataservice.shop.ShopService;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -24,7 +25,7 @@ public class App extends BApp {
     private MApiService mApiService;
     private AccountService accountService;
     private LocationService locationService;
-
+    private ShopService shopService;
 
     @Override
     public void onCreate() {
@@ -33,6 +34,7 @@ public class App extends BApp {
         mApiService=MApiService.create(this);
         accountService=AccountService.create(this);
         locationService=LocationService.create(this);
+        shopService=ShopService.create(this);
     }
 
     /**

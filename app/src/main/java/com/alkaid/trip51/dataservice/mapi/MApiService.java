@@ -18,6 +18,10 @@ public class MApiService {
     //    public static final String URL_SMSCODE="http://192.168.1.188/test/a.php";
     public static final String URL_SHOP_LIST=weburl+"shop/list/"+PROTOCOL_VERSION;
     public static final String URL_REGISTER=weburl+"register/"+PROTOCOL_VERSION;
+    public static final String URL_LOGIN_MOBILE=weburl+"login/mobile/"+PROTOCOL_VERSION;
+    public static final String URL_LOGIN_NORMAL=weburl+"login/common/"+PROTOCOL_VERSION;
+    public static final String URL_CITY_LIST=weburl+"city/list/"+PROTOCOL_VERSION;
+    public static final String URL_SHOP_FOODS=weburl+"shop/foodlist/"+PROTOCOL_VERSION;
 
     private static MApiService instance;
     private Context context;

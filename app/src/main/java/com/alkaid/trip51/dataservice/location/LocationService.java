@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.alkaid.base.common.LogUtil;
+import com.alkaid.trip51.util.SpUtil;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -24,6 +25,7 @@ public class LocationService {
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
     private String coordinates=null;
+    private String provinceName="西安";
 
     private LocationService(Context context){
         this.context=context;
@@ -42,6 +44,7 @@ public class LocationService {
     }
 
     private void init(){
+        provinceName= SpUtil.getString(SpUtil.key_provincename,provinceName);
         mLocationClient = new LocationClient(context);
         mLocationClient.setLocOption(getDefaultOption());
         mMyLocationListener = new MyLocationListener();
@@ -76,6 +79,8 @@ public class LocationService {
             sb.append(location.getLongitude());
             sb.append("\nradius : ");
             sb.append(location.getRadius());
+            sb.append("\nprovince:");
+            sb.append(location.getProvince());
             if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
                 sb.append("\nspeed : ");
                 sb.append(location.getSpeed());// 单位：公里每小时
@@ -150,4 +155,11 @@ public class LocationService {
         return option;
     }
 
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
 }

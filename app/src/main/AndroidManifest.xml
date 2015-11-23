@@ -99,6 +99,7 @@
         <activity android:name=".usercenter.MyShareActivity"/>
         <activity android:name=".usercenter.MyClientCenterActivity"/>
         <activity android:name=".usercenter.SettingActivity"/>
+        <activity android:name=".usercenter.SmsValcodeActivity"/>
 
         <!--==================第三方SDK配置区域================-->
         <!--百度SDK-->

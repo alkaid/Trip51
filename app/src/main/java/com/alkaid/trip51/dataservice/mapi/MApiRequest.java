@@ -61,7 +61,8 @@ public class MApiRequest extends StringRequest {
         params.putAll(unBeSignform);
 
         if(LogUtil.D){
-            StringBuilder sb=new StringBuilder("params:");
+            LogUtil.v(getUrl());
+            StringBuilder sb=new StringBuilder();
             for (String key:params.keySet()){
                 sb.append(key+"="+params.get(key)+"&");
             }

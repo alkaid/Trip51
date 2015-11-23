@@ -10,12 +10,15 @@ import com.alkaid.trip51.base.widget.App;
  */
 public class SpUtil {
     public static final String default_sp_name="trip51";
-    public static final String key_mobile="key_mobile";
+//    public static final String key_mobile="key_mobile";
 //    public static final String key_userpwd="key_userpwd";
-    public static final String key_openid="key_openid";
-    public static final String key_accesstoken="key_accesstoken";
-    public static final String key_expiresin="key_expiresin";
-    public static final String key_memberid="key_memberid";
+//    public static final String key_openid="key_openid";
+//    public static final String key_accesstoken="key_accesstoken";
+//    public static final String key_expiresin="key_expiresin";
+//    public static final String key_memberid="key_memberid";
+    public static final String key_openinfo="key_openinfo";
+    public static final String key_account="key_account";
+    public static final String key_provincename="key_provincename";
 
     public static SharedPreferences getSp(){
         return App.instance().getSharedPreferences(default_sp_name, Context.MODE_PRIVATE);

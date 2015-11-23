@@ -1,6 +1,7 @@
 package com.alkaid.trip51.util;
 
 import com.alkaid.base.common.LogUtil;
+import com.alkaid.trip51.base.widget.App;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -44,6 +45,9 @@ public class SecurityUtil {
 
     public static String getMD5WithSalt(String data) {
         String salt="3de8d0f8079b1dc3e4397b8c540823e8";
+        if(App.accountService().isLogined()){
+            salt=App.accountService().getOpenInfo().getAccesstoken();
+        }
         data=salt+data+salt;
         try {
             return byte2hex(encryptMD5(data));
