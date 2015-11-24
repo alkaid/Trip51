@@ -45,6 +45,8 @@ public class ShopListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+        if(shops==null||shops.isEmpty())
+            return position;
         return shops.get(position).getShopid();
     }
 
