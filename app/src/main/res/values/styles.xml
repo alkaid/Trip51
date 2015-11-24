@@ -482,6 +482,13 @@
     <style name="ButtonLarger.Green">
         <item name="android:background">@drawable/btn_default_green</item>
     </style>
+    <!--大按钮白色字体默认灰色-->
+    <style name="ButtonLarger.White">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/btn_default_white_corner</item>
+    </style>
     <!--TextView正文样式-->
     <style name="TextViewArticle">
         <item name="android:textSize">@dimen/text_article_normal</item>
@@ -522,13 +529,19 @@
     </style>
     <!--TextView一般标题样式 如商店列表单项里的商店名称-->
     <style name="TextViewTitle2">
-        <item name="android:textSize">@dimen/text_title_2</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
+    <item name="android:textSize">@dimen/text_title_2</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+</style>
     <style name="TextViewTitle2.centerVertical">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+    <!--TextView 3级标题-->
+    <style name="TextViewTitle3">
+        <item name="android:textSize">@dimen/text_title_3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     <!--注脚小字样式-->
     <style name="TextViewSubscript">
@@ -632,5 +645,39 @@
     <style name="CustomRatingBar.Small">
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
+    </style>
+
+    <!--下边滑入，下边滑出动画-->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+    <!--下边动画style-->
+    <style name="BottomDialogStyle" parent="android:Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++单独界面的style++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <style name="ButtonHeadSetting">
+        <item name="android:textSize">@dimen/text_button_normal</item>
+        <item name="android:textColor">#ffd22b00</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/transparent_bg</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -14,7 +14,8 @@ import com.alkaid.trip51.base.widget.BaseActivity;
  */
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener
 {
-    private RelativeLayout relTelphone;
+    private RelativeLayout relTelphone;//电话绑定
+    private RelativeLayout relHeadSetting;//头像设置
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
         relTelphone = (RelativeLayout) findViewById(R.id.rl_tel);
         relTelphone.setOnClickListener(this);
+        relHeadSetting = (RelativeLayout) findViewById(R.id.rl_head_setting);
+        relHeadSetting.setOnClickListener(this);
     }
 
 
@@ -47,6 +50,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()){
             case R.id.rl_tel:
                 startActivity(new Intent(this,ModifyTelBindActivity.class));
+                break;
+            case R.id.rl_head_setting:
+                startActivity(new Intent(this,TakePhoneActivity.class));
                 break;
         }
     }
