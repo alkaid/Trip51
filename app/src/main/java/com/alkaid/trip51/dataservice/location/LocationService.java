@@ -2,17 +2,34 @@ package com.alkaid.trip51.dataservice.location;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.alkaid.base.common.LogUtil;
+import com.alkaid.base.exception.TradException;
+import com.alkaid.trip51.base.dataservice.mapi.CacheType;
+import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.dataservice.mapi.MApiRequest;
+import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.model.SimpleCity;
+import com.alkaid.trip51.model.response.ResCityId;
+import com.alkaid.trip51.model.response.ResCityList;
+import com.alkaid.trip51.model.response.ResFoodList;
 import com.alkaid.trip51.util.SpUtil;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by alkaid on 2015/11/19.
@@ -25,7 +42,11 @@ public class LocationService {
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
     private String coordinates=null;
-    private String provinceName="西安";
+    private String provinceName="陕西";
+    private String cityName="西安";
+    private long cityId=311;
+    private List<SimpleCity> cities=new ArrayList<SimpleCity>();
+    private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
 
     private LocationService(Context context){
         this.context=context;
@@ -44,7 +65,10 @@ public class LocationService {
     }
 
     private void init(){
-        provinceName= SpUtil.getString(SpUtil.key_provincename,provinceName);
+        SharedPreferences sp=SpUtil.getSp();
+        provinceName= sp.getString(SpUtil.key_provincename,provinceName);
+        cityName= sp.getString(SpUtil.key_cityname,cityName);
+        cityId= sp.getLong(SpUtil.key_cityid, cityId);
         mLocationClient = new LocationClient(context);
         mLocationClient.setLocOption(getDefaultOption());
         mMyLocationListener = new MyLocationListener();
@@ -128,10 +152,92 @@ public class LocationService {
                 }
             }
             Log.i("BaiduLocationApiDem", sb.toString());
+            //广播
             Intent intent=new Intent(ACTION_RECIVE_LOCATION);
             intent.putExtra(BUNDLE_KEY_LOCATION, location);
             coordinates=location.getLongitude()+","+location.getLatitude();
             context.sendBroadcast(intent);
+            //保存
+            if(!TextUtils.isEmpty(location.getProvince())){
+                provinceName=location.getProvince();
+            }
+            if(!TextUtils.isEmpty(location.getCity())){
+                cityName=location.getCity();
+            }
+            //获取城市列表
+            requestCityList(false,new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    LogUtil.v("cities==="+response);
+                    Gson gson = new Gson();
+                    ResCityList resdata = gson.fromJson(response, ResCityList.class);
+                    if (resdata.isSuccess()) {
+                        //保存
+                        cities=resdata.getCitylist();
+                    } else {
+                        LogUtil.w("获取城市列表失败:" + resdata.getErrcode() + " " + resdata.getMsg());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    LogUtil.e(error);
+                }
+            });
+            requestCityList(true,new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    LogUtil.v("hotcities==="+response);
+                    Gson gson = new Gson();
+                    ResCityList resdata = gson.fromJson(response, ResCityList.class);
+                    if (resdata.isSuccess()) {
+                        //保存
+                        hotCities=resdata.getCitylist();
+                    } else {
+                        LogUtil.w("获取热门城市列表失败:"+resdata.getErrcode()+" "+resdata.getMsg());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    LogUtil.e(error);
+                }
+            });
+            //匹配当前城市id
+            boolean isMatch=false;
+            for (SimpleCity c:cities){
+                if(c.getCityname().equals(cityName)){
+                    cityId=c.getCityid();
+                    isMatch=true;
+                    break;
+                }
+            }
+            //匹配不到则接口获取cityid
+            if(!isMatch){
+                requestCityId(new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        ResCityId resdata = gson.fromJson(response, ResCityId.class);
+                        if (resdata.isSuccess()) {
+                            //保存
+                            cityId=resdata.getCityid();
+                        } else {
+                            LogUtil.w("获取城市ID失败:" + resdata.getErrcode() + " " + resdata.getMsg());
+                        }
+                        saveSp();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        LogUtil.e(error);
+                        saveSp();
+                    }
+                });
+            }else{
+                saveSp();
+            }
+
         }
     }
 
@@ -155,11 +261,84 @@ public class LocationService {
         return option;
     }
 
+    /**
+     * 获取城市列表
+     * @param ishotlist 是否是热门城市
+     * @param listener
+     * @param errorListener
+     */
+    public void requestCityList(boolean ishotlist,Response.Listener<String> listener,Response.ErrorListener errorListener){
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        unBeSignform.put("provincename", provinceName);
+        final String tag="citylist"+(int)(Math.random()*1000);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
+    }
+    private void requestCityId(Response.Listener<String> listener,Response.ErrorListener errorListener){
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        unBeSignform.put("cityname", cityName);
+        final String tag="getcityid"+(int)(Math.random()*1000);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_CITY_GETID, beSignForm, unBeSignform,listener,errorListener), tag);
+    }
+
+    private void saveSp(){
+        SharedPreferences.Editor ed=SpUtil.getSp().edit();
+        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid,cityId).putString(SpUtil.key_cityname,cityName).commit();
+    }
+
+    /**
+     * 切换城市
+     * @param cityId
+     * @param cityName
+     */
+    public void changeCity(long cityId,String cityName){
+        this.cityId=cityId;
+        this.cityName=cityName;
+        saveSp();
+    }
+
     public String getProvinceName() {
         return provinceName;
     }
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(long cityId) {
+        this.cityId = cityId;
+    }
+
+    public List<SimpleCity> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<SimpleCity> cities) {
+        this.cities = cities;
+    }
+
+    public List<SimpleCity> getHotCities() {
+        return hotCities;
+    }
+
+    public void setHotCities(List<SimpleCity> hotCities) {
+        this.hotCities = hotCities;
     }
 }

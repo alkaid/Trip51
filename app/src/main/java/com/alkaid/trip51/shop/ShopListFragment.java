@@ -74,7 +74,6 @@ public class ShopListFragment extends BaseFragment {
                 App.mApiService().exec(new MApiRequest(MApiService.URL_SHOP_LIST, beSignForm, unBeSignform, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        LogUtil.v(response.toString());
                         Gson gson = new Gson();
                         ResShopList resShopList = gson.fromJson(response, ResShopList.class);
                         shopListAdapter.setData(resShopList.getData());
@@ -85,7 +84,7 @@ public class ShopListFragment extends BaseFragment {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        LogUtil.v(error.toString());
+                        LogUtil.e(error);
                         ptrlv.getLoadingLayoutProxy().setRefreshingLabel("出错了");
                         ptrlv.setShowViewWhileRefreshing(false);
 

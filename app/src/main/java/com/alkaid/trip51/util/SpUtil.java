@@ -19,6 +19,8 @@ public class SpUtil {
     public static final String key_openinfo="key_openinfo";
     public static final String key_account="key_account";
     public static final String key_provincename="key_provincename";
+    public static final String key_cityname="key_cityname";
+    public static final String key_cityid="key_cityid";
 
     public static SharedPreferences getSp(){
         return App.instance().getSharedPreferences(default_sp_name, Context.MODE_PRIVATE);

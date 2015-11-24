@@ -63,7 +63,6 @@ public class NormalLoginFragment extends BaseFragment {
                     App.mApiService().exec(new MApiRequest(CacheType.DISABLED, MApiService.URL_LOGIN_NORMAL, beSignForm, unBeSignform, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            LogUtil.v(response.toString());
                             Gson gson = new Gson();
                             ResLogin resLogin = gson.fromJson(response, ResLogin.class);
                             dismissPdg();
@@ -80,9 +79,9 @@ public class NormalLoginFragment extends BaseFragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            LogUtil.v(error.toString());
+                            LogUtil.e(error);
                             dismissPdg();
-                            handleException(new TradException());
+                            handleException(new TradException(error));
                         }
                     }), tag);
                 }

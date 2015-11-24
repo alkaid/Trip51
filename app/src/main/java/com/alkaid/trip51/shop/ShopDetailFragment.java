@@ -34,6 +34,7 @@ public class ShopDetailFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         shopid=getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
         View v=inflater.inflate(R.layout.fragment_shop_detail,container,false);
+        loadData();
         return v;
     }
     private void loadData(){
@@ -42,19 +43,18 @@ public class ShopDetailFragment extends BaseFragment{
         unBeSignform.put("shopid", shopid+"");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
-        final String tag="smscode"+(int)(Math.random()*1000);
+        final String tag="shopdetail"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_SHOP_DETAIL, beSignForm, unBeSignform, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                LogUtil.v(response.toString());
                 Gson gson = new Gson();
                 ResBaseInfo resdata = gson.fromJson(response, ResBaseInfo.class);
+                dismissPdg();
                 if (resdata.isSuccess()) {
                     //TODO 刷新UI
                 } else {
-                    dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
                     handleException(TradException.create(resdata.getMsg()));
                 }
@@ -62,10 +62,10 @@ public class ShopDetailFragment extends BaseFragment{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.v(error.toString());
+                LogUtil.e(error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException());
+                handleException(new TradException(error));
             }
         }), tag);
     }

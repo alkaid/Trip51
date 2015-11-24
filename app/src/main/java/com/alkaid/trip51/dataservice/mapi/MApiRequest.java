@@ -23,10 +23,10 @@ import java.util.Map;
  * Created by alkaid on 2015/11/18.
  */
 public class MApiRequest extends StringRequest {
-    private Map<String,String> beSignForm;
-    private Map<String,String> unBeSignform;
+    protected Map<String,String> beSignForm;
+    protected Map<String,String> unBeSignform;
     private String id;
-    private CacheType cacheType;
+    protected CacheType cacheType;
     public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
         this(CacheType.NORMAL,url,beSignForm,unBeSignform,listener,errorListener);
     }
@@ -71,6 +71,12 @@ public class MApiRequest extends StringRequest {
             LogUtil.v(sb.toString());
         }
         return params;
+    }
+
+    @Override
+    protected void deliverResponse(String response) {
+        LogUtil.v(response);
+        super.deliverResponse(response);
     }
 
     private String signature(Map<String, String> params){

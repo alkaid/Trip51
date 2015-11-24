@@ -36,6 +36,7 @@ public class MenuListFragment extends BaseFragment{
         if(shopid<=0){
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }
+        loadData();
         return v;
     }
 
@@ -45,19 +46,18 @@ public class MenuListFragment extends BaseFragment{
         unBeSignform.put("shopid", shopid+"");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
-        final String tag="smscode"+(int)(Math.random()*1000);
+        final String tag="foodlist"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                LogUtil.v(response.toString());
                 Gson gson = new Gson();
                 ResFoodList resdata = gson.fromJson(response, ResFoodList.class);
+                dismissPdg();
                 if (resdata.isSuccess()) {
                     //TODO 刷新UI
                 } else {
-                    dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
                     handleException(TradException.create(resdata.getMsg()));
                 }
@@ -65,10 +65,10 @@ public class MenuListFragment extends BaseFragment{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.v(error.toString());
+                LogUtil.e(error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException());
+                handleException(new TradException(error));
             }
         }), tag);
     }

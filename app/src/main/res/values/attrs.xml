@@ -18,5 +18,6 @@
         <attr name="opAddBtnBackground" format="reference|color" />
         <attr name="opMaxCount" format="integer" />
         <attr name="opMinCount" format="integer" />
+        <attr name="numMinWidth" format="dimension|reference" />
     </declare-styleable>
 </resources>

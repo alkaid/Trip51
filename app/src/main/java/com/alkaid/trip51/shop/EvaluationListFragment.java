@@ -38,6 +38,7 @@ public class EvaluationListFragment extends BaseFragment{
         View v=inflater.inflate(R.layout.fragment_evaluation,container,false);
         ListView lvEvaluation = (ListView) v.findViewById(R.id.lv_evaluation);
         lvEvaluation.setAdapter(new EvaluationAdapter(getContext()));
+        loadData();
         return v;
     }
     private void loadData(){
@@ -46,19 +47,18 @@ public class EvaluationListFragment extends BaseFragment{
         unBeSignform.put("shopid", shopid+"");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
-        final String tag="smscode"+(int)(Math.random()*1000);
+        final String tag="comments"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<String>() {
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                LogUtil.v(response.toString());
                 Gson gson = new Gson();
                 ResComments resdata = gson.fromJson(response, ResComments.class);
+                dismissPdg();
                 if (resdata.isSuccess()) {
                     //TODO 刷新UI
                 } else {
-                    dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
                     handleException(TradException.create(resdata.getMsg()));
                 }
@@ -66,10 +66,10 @@ public class EvaluationListFragment extends BaseFragment{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.v(error.toString());
+                LogUtil.e("statuscode="+error.networkResponse.statusCode,error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException());
+                handleException(new TradException(error));
             }
         }), tag);
     }

@@ -64,17 +64,15 @@ public class UserRegisterActivity extends BaseActivity{
                     App.mApiService().exec(new MApiRequest(CacheType.DISABLED,MApiService.URL_SMSCODE, beSignForm, unBeSignform, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            LogUtil.v(response.toString());
                             Gson gson = new Gson();
                             ResSmsValCode resSmsValCode = gson.fromJson(response, ResSmsValCode.class);
+                            dismissPdg();
                             if (resSmsValCode.isSuccess()) {
                                 smsid=resSmsValCode.getSmsid();
                                 Intent intent = new Intent(context, SmsValcodeActivity.class);
-                                dismissPdg();
                                 intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
                                 startActivityForResult(intent, 1);
                             } else {
-                                dismissPdg();
                                 //TODO 暂时用handleException 应该换成失败时的正式UI
                                 handleException(TradException.create(resSmsValCode.getMsg()));
                             }
@@ -82,9 +80,9 @@ public class UserRegisterActivity extends BaseActivity{
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            LogUtil.v(error.toString());
+                            LogUtil.e(error);
                             dismissPdg();
-                            handleException(new TradException());
+                            handleException(new TradException(error));
                         }
                     }), tag);
                 }
@@ -128,7 +126,6 @@ public class UserRegisterActivity extends BaseActivity{
             App.mApiService().exec(new MApiRequest(CacheType.DISABLED,MApiService.URL_REGISTER, beSignForm, unBeSignform, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    LogUtil.v(response.toString());
                     Gson gson = new Gson();
                     ResLogin resLogin=gson.fromJson(response,ResLogin.class);
                     dismissPdg();
@@ -145,10 +142,10 @@ public class UserRegisterActivity extends BaseActivity{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    LogUtil.v(error.toString());
+                    LogUtil.e(error);
                     dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(new TradException());
+                    handleException(new TradException(error));
                 }
             }), tag);
         }else{
