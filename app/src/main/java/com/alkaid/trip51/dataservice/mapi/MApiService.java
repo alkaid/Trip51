@@ -24,7 +24,7 @@ public class MApiService {
     public static final String URL_CITY_HOTLIST=weburl+"city/hotlist/"+PROTOCOL_VERSION;
     public static final String URL_CITY_GETID=weburl+"city/getcityid/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_FOODS=weburl+"shop/foodlist/"+PROTOCOL_VERSION;
-    public static final String URL_SHOP_COMMENTS=weburl+"shop/commontlist/"+PROTOCOL_VERSION;
+    public static final String URL_SHOP_COMMENTS=weburl+"shop/commentlist/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_SHOP_DETAIL=weburl+"shop/detail/"+PROTOCOL_VERSION;
 
     public static final int SMSCODE_FOR_REGISTER=1;

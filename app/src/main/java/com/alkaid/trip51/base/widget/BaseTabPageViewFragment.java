@@ -54,6 +54,7 @@ public abstract class BaseTabPageViewFragment extends BaseFragment {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
         mTabHost.getTabWidget().setBackgroundColor(0xffffffff);
+        mViewPager.setOffscreenPageLimit(5);    //设置PageView缓存Fragment的数量
         return v;
     }
 
