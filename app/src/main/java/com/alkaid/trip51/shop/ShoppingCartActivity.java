@@ -1,4 +1,4 @@
-package com.alkaid.trip51.usercenter;
+package com.alkaid.trip51.shop;
 
 
 import android.app.Activity;
@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.alkaid.trip51.R;
 
-public class TakePhoneActivity extends Activity implements OnClickListener {
+public class ShoppingCartActivity extends Activity implements OnClickListener {
 
 	private Button btn_take_photo, btn_pick_photo, btn_cancel;
 	private LinearLayout layout;

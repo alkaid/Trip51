@@ -101,7 +101,7 @@
         <activity android:name=".usercenter.SettingActivity"/>
         <activity android:name=".usercenter.SmsValcodeActivity"/>
         <activity android:name=".usercenter.ModifyTelBindActivity"/>
-        <activity android:name=".usercenter.TakePhoneActivity" android:theme="@style/BottomDialogStyle"/>
+        <activity android:name=".usercenter.TakePhotoActivity" android:theme="@style/BottomDialogStyle"/>
 
         <!--==================第三方SDK配置区域================-->
         <!--百度SDK-->

@@ -52,7 +52,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this,ModifyTelBindActivity.class));
                 break;
             case R.id.rl_head_setting:
-                startActivity(new Intent(this,TakePhoneActivity.class));
+                startActivity(new Intent(this,TakePhotoActivity.class));
                 break;
         }
     }
