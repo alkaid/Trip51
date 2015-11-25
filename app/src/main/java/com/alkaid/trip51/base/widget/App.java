@@ -1,6 +1,7 @@
 package com.alkaid.trip51.base.widget;
 
 import com.alkaid.base.view.base.BApp;
+import com.alkaid.trip51.dataservice.OrderService;
 import com.alkaid.trip51.dataservice.account.AccountService;
 import com.alkaid.trip51.dataservice.location.LocationService;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -17,6 +18,7 @@ public class App extends BApp {
     private AccountService accountService;
     private LocationService locationService;
     private ShopService shopService;
+    private OrderService orderService;
 
     @Override
     public void onCreate() {
@@ -26,6 +28,7 @@ public class App extends BApp {
         accountService=AccountService.create(this);
         locationService=LocationService.create(this);
         shopService=ShopService.create(this);
+        orderService=OrderService.create(this);
     }
 
     /**
@@ -48,6 +51,9 @@ public class App extends BApp {
     }
     public static ShopService shopService(){
         return instance().shopService;
+    }
+    public static OrderService orderService(){
+        return instance().orderService;
     }
 
 

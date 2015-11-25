@@ -1,6 +1,5 @@
 package com.alkaid.trip51.booking;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,8 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.request.ReqOrderInfo;
-import com.alkaid.trip51.model.response.ResBaseInfo;
 import com.alkaid.trip51.model.response.ResOrder;
 import com.alkaid.trip51.model.shop.Food;
-import com.alkaid.trip51.shop.ShopListActivity;
 import com.alkaid.trip51.widget.Operator;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -77,6 +74,8 @@ public class BookingActivity extends BaseActivity {
         order.setRoomtype(NetDataConstants.SEAT_TYPE_HALL);
         order.setSex(NetDataConstants.SEX_FEMALE);
         order.setShopid(37);
+        order.setFoodamount(23.00f);
+        order.setOrderamount(23.00f);
         List<ReqOrderInfo.ReqFood> foods=new ArrayList<ReqOrderInfo.ReqFood>();
         Food orginFood=new Food();
         orginFood.setFoodid(12);

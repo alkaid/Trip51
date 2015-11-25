@@ -1,23 +1,8 @@
 package com.alkaid.trip51.dataservice;
 
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.SystemClock;
-import android.text.TextUtils;
 
-import com.alkaid.base.common.LogUtil;
-import com.alkaid.trip51.model.account.Account;
-import com.alkaid.trip51.model.account.OpenInfo;
 import com.alkaid.trip51.model.request.ReqOrderInfo;
-import com.alkaid.trip51.model.response.ResLogin;
-import com.alkaid.trip51.model.response.ResponseCode;
-import com.alkaid.trip51.model.response.ResponseData;
-import com.alkaid.trip51.usercenter.UserLoginActivity;
-import com.alkaid.trip51.util.SpUtil;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +14,7 @@ public class OrderService {
     private static OrderService instance;
     private Context context;
     /**购物车 存放的是订单列表*/
-    private Map<String,ReqOrderInfo> cart;
+    private Map<Integer,ReqOrderInfo> cart;
 
     private OrderService(Context context){
         this.context=context;
@@ -48,10 +33,10 @@ public class OrderService {
         return instance;
     }
     private void init(){
-        cart=new HashMap<String,ReqOrderInfo>();
+        cart=new HashMap<Integer,ReqOrderInfo>();
     }
 
-    public Map<String, ReqOrderInfo> getCart() {
+    public Map<Integer, ReqOrderInfo> getCart() {
         return cart;
     }
 }
