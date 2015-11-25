@@ -1,22 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@android:color/white">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  xmlns:coodOper="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
     <include layout="@layout/default_title_bar" />
-    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-            <LinearLayout android:id="@+id/content" android:orientation="vertical"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:focusable="true" android:focusableInTouchMode="true" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
                 <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-                    <ImageView android:id="@+id/ivArrow" style="@style/ImageViewRightArrow"/>
-                    <TextView android:id="@+id/tvItemName" android:text="人数" style="@style/TextViewTitle2.centerVertical"
-                        android:layout_toRightOf="@+id/ivItemIcon"  android:layout_marginLeft="10dp"/>
-                    <TextView android:id="@+id/tvItemValue" android:text="4人" android:layout_toLeftOf="@+id/ivArrow" android:layout_marginRight="8dp" style="@style/TextViewArticle.Gray.centerVertical"/>
+
+                    <ImageView
+                        android:id="@+id/ivArrow"
+                        style="@style/ImageViewRightArrow" />
+
+                    <TextView
+                        android:id="@+id/tvItemName"
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="人数" />
+
+                    <TextView
+                        android:id="@+id/tvItemValue"
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/ivArrow"
+                        android:text="4人" />
                 </RelativeLayout>
-                <View style="@style/DividerViewHorizon"/>
+
+                <View style="@style/DividerViewHorizon" />
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <ImageView
+                        android:id="@+id/ivArrow1"
+                        style="@style/ImageViewRightArrow" />
+
+                    <TextView
+                        android:id="@+id/tvBookingTime"
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="时间" />
+
+                    <TextView
+                        android:id="@+id/tvBookingTimeValue"
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/ivArrow1"
+                        android:text="08月26日  今天  18：00" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_alignParentRight="true">
+
+                        <CheckBox
+                            style="@style/CustomCheckBoxDefault"
+                            android:layout_alignParentRight="true"
+                            android:text="大厅" />
+
+                        <CheckBox
+                            style="@style/CustomCheckBoxDefault"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="10dp"
+                            android:text="雅座" />
+
+                        <CheckBox
+                            style="@style/CustomCheckBoxDefault"
+                            android:layout_marginLeft="10dp"
+                            android:checked="true"
+                            android:text="包房" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvBookingSeat"
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="座位" />
+
+                </RelativeLayout>
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"/>
+
+                    <TextView
+                        android:id="@+id/tvBookingSeatNum"
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="餐桌数" />
+
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <Button android:id="@+id/btnSure" android:text="确认订单" style="@style/ButtonLarger.Red" android:layout_marginBottom="14dp"/>
+
+    <Button
+        android:id="@+id/btnSure"
+        style="@style/ButtonLarger.Red"
+        android:layout_marginBottom="14dp"
+        android:text="确认订单" />
 </LinearLayout>

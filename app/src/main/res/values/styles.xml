@@ -76,10 +76,6 @@
         <item name="android:background">@drawable/btn_light</item>
     </style>
 
-    <style name="CustomNormalCheckbox" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/checkbox_normal</item>
-    </style>
-
     <style name="CustomNormalRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/btn_radio_holo_light</item>
     </style>
@@ -277,7 +273,7 @@
         <item name="android:buttonStyle">@style/CustomNormalButton</item>
         <item name="android:windowTitleSize">@dimen/titlebar_height</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
-        <item name="android:checkboxStyle">@style/CustomNormalCheckbox</item>
+        <item name="android:checkboxStyle">@style/CustomCheckBoxDefault</item>
         <item name="android:radioButtonStyle">@style/CustomNormalRadioButton</item>
         <item name="android:textViewStyle">@style/CustomNormalTextView</item>
         <item name="android:drawingCacheQuality">auto</item>
@@ -536,7 +532,7 @@
     <!--</style>-->
     <!-- 自定义RadioButton-->
     <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:button">@drawable/btn_radio_default</item>
+        <item name="android:button">@drawable/btn_radio_default1</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_article_normal</item>
@@ -544,6 +540,14 @@
 
     <style name="CustomRadioButtonDefault.textGray">
         <item name="android:textColor">@color/text_color_light_gray</item>
+    </style>
+
+    <!--自定义checkbox-->
+    <style name="CustomCheckBoxDefault" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textSize">@dimen/text_article_normal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@drawable/btn_checkbox_default</item>
     </style>
 
     <!--自定义大按钮-->
@@ -821,6 +825,24 @@
     <style name="TitleBarShoppingCart" parent="ListViewItem">
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
+    </style>
+
+    <!--RadionGroup预定页面样式 -->
+    <style name="RadioGroupBooking">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/white_background</item>
+    </style>
+
+    <!--选择预定页面样式 -->
+    <style name="SelectedBooking">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/white_background</item>
     </style>
 
 
