@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.alkaid.base.common.LogUtil;
@@ -13,6 +14,7 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.booking.BookingActivity;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResFoodList;
@@ -32,7 +34,7 @@ import java.util.Map;
  */
 public class MenuListFragment extends BaseFragment implements View.OnClickListener {
     private long shopid;
-
+    private Button btnBooking;
     private LinearLayout llShoppingCart;//购物车进入按钮
 
     @Override
@@ -44,6 +46,13 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }
         loadData();
+        btnBooking= (Button) v.findViewById(R.id.btn_pay);
+        btnBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, BookingActivity.class));
+            }
+        });
         return v;
     }
 

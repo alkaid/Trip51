@@ -51,7 +51,7 @@ public class DateUtil {
 	/**
 	 * @param strData
 	 *            时间字串
-	 * @param dataFormat
+	 * @param dateFormat
 	 *            时间格式
 	 * */
 	public static Date converStringToDate(String strData, String dateFormat) {
@@ -68,10 +68,9 @@ public class DateUtil {
     /**
      * 格式化时间字串
      */
-    public static String formatDateString(String strData,String dateFormat){
+    public static String formatDateString(Date date,String dateFormat){
     	SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);  
         try {   
-            Date date = sdf.parse(strData);   
             return sdf.format(date);
         } catch (Exception ex) {   
             ex.printStackTrace();
@@ -82,7 +81,7 @@ public class DateUtil {
    
     /**
      * @param strData  时间字串
-     * @param dataFormat 时间格式
+     * @param dateFormat 时间格式
      * */
     public static Calendar converStringToCalendar(String strData,String dateFormat){
     	 SimpleDateFormat df = new SimpleDateFormat(dateFormat);  

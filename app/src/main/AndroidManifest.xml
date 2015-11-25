@@ -103,6 +103,7 @@
         <activity android:name=".usercenter.ModifyTelBindActivity"/>
         <activity android:name=".usercenter.TakePhotoActivity" android:theme="@style/BottomDialogStyle"/>
         <activity android:name=".shop.ShoppingCartActivity" android:theme="@style/BottomDialogStyle2"/>
+        <activity android:name=".booking.BookingActivity"/>
 
         <!--==================第三方SDK配置区域================-->
         <!--百度SDK-->

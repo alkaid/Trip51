@@ -26,6 +26,8 @@ public class MApiService {
     public static final String URL_SHOP_FOODS=weburl+"shop/foodlist/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_COMMENTS=weburl+"shop/commentlist/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_SHOP_DETAIL=weburl+"shop/detail/"+PROTOCOL_VERSION;
+    public static final String URL_BOOKING=weburl+"order/add/"+PROTOCOL_VERSION;
+
 
     public static final int SMSCODE_FOR_REGISTER=1;
     public static final int SMSCODE_FOR_LOGIN=2;

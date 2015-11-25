@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@android:color/white">
+    <include layout="@layout/default_title_bar" />
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+            <LinearLayout android:id="@+id/content" android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:focusable="true" android:focusableInTouchMode="true" >
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                    <ImageView android:id="@+id/ivArrow" style="@style/ImageViewRightArrow"/>
+                    <TextView android:id="@+id/tvItemName" android:text="人数" style="@style/TextViewTitle2.centerVertical"
+                        android:layout_toRightOf="@+id/ivItemIcon"  android:layout_marginLeft="10dp"/>
+                    <TextView android:id="@+id/tvItemValue" android:text="4人" android:layout_toLeftOf="@+id/ivArrow" android:layout_marginRight="8dp" style="@style/TextViewArticle.Gray.centerVertical"/>
+                </RelativeLayout>
+                <View style="@style/DividerViewHorizon"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button android:id="@+id/btnSure" android:text="确认订单" style="@style/ButtonLarger.Red" android:layout_marginBottom="14dp"/>
+</LinearLayout>

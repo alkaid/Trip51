@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
+import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.model.account.Account;
@@ -85,10 +86,25 @@ public class AccountService {
         sp.edit().putString(SpUtil.key_openinfo,openInfoJson).putString(SpUtil.key_account,accountJson).commit();
     }
 
-    public void checkIsNeedRelogin(ResponseData responseData,Activity context){
+    /**
+     * 检查是否已登录 若未登录 启动登录页面
+     * @param context
+     * @return
+     */
+    public boolean checkLogined(Activity context){
+        if(TextUtils.isEmpty(openInfo.getOpenid())){
+            context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkIsNeedRelogin(ResponseData responseData,Activity context){
         if(checkIsNeedRelogin(responseData)) {
             context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
+            return true;
         }
+        return false;
     }
     public boolean checkIsNeedRelogin(ResponseData responseData){
         if(!responseData.isSuccess()&&responseData.getErrcode()== ResponseCode.ERROR_NEED_RELOGIN){
