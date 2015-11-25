@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:coodOper="http://schemas.android.com/apk/res-auto"
+     style="@style/ListViewItemShoppingCart" android:descendantFocusability="blocksDescendants">
+    <TextView
+        android:id="@+id/tv_food_name"
+        style="@style/TextViewTitle3.Gray"
+        android:text="清蒸鲈鱼"
+        android:layout_marginLeft="15dp"/>
+
+    <com.alkaid.trip51.widget.Operator
+        android:id="@+id/op_food_num"
+        android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/tv_food_price"
+        style="@style/TextViewTitle3.Red"
+        android:text="+32.8"
+        android:layout_toLeftOf="@id/op_food_num"
+        android:textColor="@color/red"
+        android:layout_marginRight="10dp"/>
+
+
+</RelativeLayout>
