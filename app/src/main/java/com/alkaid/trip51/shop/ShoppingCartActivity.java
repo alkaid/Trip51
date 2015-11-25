@@ -8,32 +8,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.shop.adapter.ShoppingCartListAdapter;
 
 public class ShoppingCartActivity extends Activity implements OnClickListener {
 
-	private Button btn_take_photo, btn_pick_photo, btn_cancel;
 	private LinearLayout layout;
+	private ListView lvShoppingCartList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_take_photo);
-		btn_take_photo = (Button) this.findViewById(R.id.btn_take_photo);
-		btn_pick_photo = (Button) this.findViewById(R.id.btn_pick_photo);
-		btn_cancel = (Button) this.findViewById(R.id.btn_cancel);
-		
-		layout=(LinearLayout)findViewById(R.id.pop_layout);
-		
-		layout.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-			}
-		});
-		btn_cancel.setOnClickListener(this);
-		btn_pick_photo.setOnClickListener(this);
-		btn_take_photo.setOnClickListener(this);
+		setContentView(R.layout.activity_shopping_cart);
+		initView();
+	}
+
+	private void initView(){
+		lvShoppingCartList = (ListView) findViewById(R.id.lv_shopping_cart_list);
+		lvShoppingCartList.setAdapter(new ShoppingCartListAdapter(this));
+
 	}
 	
 	@Override
@@ -44,12 +39,6 @@ public class ShoppingCartActivity extends Activity implements OnClickListener {
 
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btn_take_photo:
-			break;
-		case R.id.btn_pick_photo:				
-			break;
-		case R.id.btn_cancel:				
-			break;
 		default:
 			break;
 		}

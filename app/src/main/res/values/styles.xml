@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppBaseTheme" parent="@android:style/Theme.Light" />
-    <style name="AppTheme" parent="@style/AppBaseTheme" >
+
+    <style name="AppTheme" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
-   <style name="AppThemeOrangeTab" parent="AppTheme" />
+
+    <style name="AppThemeOrangeTab" parent="AppTheme" />
 
     <style name="Theme.Dianping" parent="@style/Theme.Base" />
+
     <style name="NotificationText">
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
+
     <style name="NotificationTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
+
     <style name="CommonPadding">
         <item name="android:paddingLeft">@dimen/table_item_padding</item>
         <item name="android:paddingTop">10.0dip</item>
         <item name="android:paddingRight">@dimen/table_item_padding</item>
         <item name="android:paddingBottom">10.0dip</item>
     </style>
+
     <style name="CustomBigOrangeButton" parent="@android:style/Widget.Button">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/custom_small_orange_btn_color</item>
@@ -30,12 +37,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">10.0dip</item>
     </style>
+
     <style name="CustomButtonMargin">
         <item name="android:layout_marginLeft">3.0dip</item>
         <item name="android:layout_marginTop">1.0dip</item>
         <item name="android:layout_marginRight">3.0dip</item>
         <item name="android:layout_marginBottom">4.0dip</item>
     </style>
+
     <style name="CustomChannelItem">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">#ff8c8c8c</item>
@@ -43,12 +52,15 @@
         <item name="android:paddingLeft">@dimen/table_item_padding</item>
         <item name="android:layout_height">45.0dip</item>
     </style>
+
     <style name="CustomHorizontal" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal</item>
     </style>
+
     <style name="CustomListItem">
         <item name="android:listSelector">@drawable/list_item</item>
     </style>
+
     <style name="CustomListView" parent="@android:style/Widget.AbsListView">
         <item name="android:background">@color/white</item>
         <item name="android:listSelector">@drawable/list_item</item>
@@ -57,49 +69,62 @@
         <item name="android:dividerHeight">1.0px</item>
         <item name="android:choiceMode">singleChoice</item>
     </style>
+
     <style name="CustomNormalButton" parent="@android:style/Widget.Button">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/custom_btn_color</item>
         <item name="android:background">@drawable/btn_light</item>
     </style>
+
     <style name="CustomNormalCheckbox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_normal</item>
     </style>
+
     <style name="CustomNormalRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/btn_radio_holo_light</item>
     </style>
+
     <style name="CustomNormalTextView" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/text_color_default</item>
     </style>
+
     <style name="CustomShopInfoText">
         <item name="android:textColor">@color/deep_gray</item>
     </style>
+
     <style name="CustomSmallButtonMargin">
         <item name="android:layout_marginLeft">2.0dip</item>
         <item name="android:layout_marginRight">2.0dip</item>
         <item name="android:layout_marginBottom">3.0dip</item>
     </style>
+
     <style name="CustomSmallGrayButton" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/clickable_deep_black</item>
         <item name="android:background">@drawable/btn_weight_gray</item>
     </style>
+
     <style name="CustomSmallOrangeButton" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/custom_small_orange_btn_color</item>
         <item name="android:background">@drawable/btn_weight</item>
     </style>
+
     <style name="CustomSmallWhiteButton" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/light_orange</item>
         <item name="android:background">@drawable/btn_weight_white</item>
     </style>
+
     <style name="CustomTextView" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/dark_black</item>
     </style>
+
     <style name="CustomWindowTitleBackground">
         <item name="android:background">@drawable/title_background</item>
     </style>
+
     <style name="CustomWindowTitleBackgroundOrange">
         <item name="android:background">@drawable/title_background_orange</item>
     </style>
+
     <style name="FindConditionsMainSection">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -109,17 +134,21 @@
         <item name="android:layout_height">@dimen/single_line_height</item>
         <item name="android:drawablePadding">2.0dip</item>
     </style>
+
     <style name="FindConditionsMainTable">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:stretchColumns">*</item>
     </style>
+
     <style name="FullScreenDialog">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">false</item>
     </style>
+
     <style name="GreenDroid" />
+
     <style name="GuidanceBigText">
         <item name="android:textSize">27.0sp</item>
         <item name="android:textColor">@color/white</item>
@@ -129,21 +158,27 @@
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
+
     <style name="GuidanceMainImage">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
+
     <style name="HoloProgressBarHorizontal" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:maxHeight">16.0dip</item>
-        <item name="android:indeterminateDrawable">@drawable/progress_indeterminate_horizontal_holo</item>
+        <item name="android:indeterminateDrawable">
+            @drawable/progress_indeterminate_horizontal_holo
+        </item>
         <item name="android:progressDrawable">@drawable/progress_horizontal_holo_light</item>
         <item name="android:minHeight">16.0dip</item>
     </style>
+
     <style name="LibTitleBar">
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">#ff323232</item>
     </style>
+
     <style name="ListItemHeaderText">
         <item name="android:textSize">@dimen/text_medium_1</item>
         <item name="android:textStyle">bold</item>
@@ -153,6 +188,7 @@
         <item name="android:paddingRight">10.0dip</item>
         <item name="android:paddingBottom">2.0dip</item>
     </style>
+
     <style name="MC_ShowCardTips" parent="@android:style/Widget.TextView">
         <item name="android:textSize">@dimen/text_medium_1</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -161,10 +197,12 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="MainItemListView" parent="@style/CustomListView">
         <item name="android:background">#ffefebe7</item>
         <item name="android:listSelector">@android:color/transparent</item>
     </style>
+
     <style name="PhotoGridViewTheme">
         <item name="android:scrollbars">none</item>
         <item name="android:layout_marginLeft">8.0dip</item>
@@ -176,6 +214,7 @@
         <item name="android:horizontalSpacing">6.0dip</item>
         <item name="android:verticalSpacing">6.0dip</item>
     </style>
+
     <style name="PhotoGridViewThemeWithoutMargin">
         <item name="android:scrollbars">none</item>
         <item name="android:listSelector">#00000000</item>
@@ -183,9 +222,11 @@
         <item name="android:horizontalSpacing">6.0dip</item>
         <item name="android:verticalSpacing">6.0dip</item>
     </style>
+
     <style name="ProgressBar_Mini" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progressbar_circle</item>
     </style>
+
     <style name="ShopDetailTableHeaderTextView">
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -194,6 +235,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/single_line_height</item>
     </style>
+
     <style name="TableHeaderTextView">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -203,6 +245,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/single_line_height</item>
     </style>
+
     <style name="TableHeaderTextViewMedium">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -212,6 +255,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/single_line_height_meduim</item>
     </style>
+
     <style name="TableHeaderTextViewSmall">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -220,6 +264,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/section_height</item>
     </style>
+
     <style name="TakeawayButtonTheme" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_gravity">center_horizontal</item>
@@ -227,6 +272,7 @@
         <item name="android:shadowColor">#ffaa3214</item>
         <item name="android:shadowDy">-1.0</item>
     </style>
+
     <style name="Theme.Base" parent="@android:style/Theme.Light">
         <item name="android:buttonStyle">@style/CustomNormalButton</item>
         <item name="android:windowTitleSize">@dimen/titlebar_height</item>
@@ -237,37 +283,48 @@
         <item name="android:drawingCacheQuality">auto</item>
         <!--<item name="gdQuickActionBarItemStyle">@style/Widget.QuickAction.Bar.Item</item>-->
     </style>
+
     <style name="Theme.Dialog.NoTitle" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="Theme.Dianping.Transparent" parent="@style/Theme.Dianping">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
     <style name="Theme.DianpingMainActivity" parent="@style/Theme.Dianping">
-        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackgroundOrange</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackgroundOrange
+        </item>
     </style>
+
     <style name="Theme.DianpingNoTitle" parent="@style/Theme.Dianping">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
     <style name="Theme.DianpingNoTitle.SplashBackground" parent="@style/Theme.DianpingNoTitle">
         <item name="android:windowBackground">@color/white</item>
     </style>
+
     <style name="TitleBar">
         <item name="android:paddingLeft">0.0dip</item>
         <item name="android:paddingRight">15.0dip</item>
     </style>
+
     <style name="TitleBarArrrowTitleView" parent="@style/TitleBarTitleView" />
+
     <style name="TitleBarSubTitleView">
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">#ff323232</item>
     </style>
+
     <style name="TitleBarTitleView">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/titlebar_main_title_text_color</item>
     </style>
+
     <style name="Transparent">
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -278,6 +335,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
     <style name="UserProfileTableHeaderTextView">
         <item name="android:textSize">@dimen/text_medium_1</item>
         <item name="android:textColor">@color/light_gray</item>
@@ -287,12 +345,15 @@
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_marginBottom">5.0dip</item>
     </style>
+
     <style name="Widget" />
+
     <style name="Widget.ActionBar.TabView" parent="@android:style/Widget">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:paddingLeft">4.0dip</item>
         <item name="android:paddingRight">4.0dip</item>
     </style>
+
     <style name="Widget.Holo.Tab" parent="@style/Widget.ActionBar.TabView">
         <item name="android:background">@null</item>
         <item name="android:layout_width">0.0dip</item>
@@ -300,6 +361,7 @@
         <item name="android:minWidth">80.0dip</item>
         <item name="android:layout_weight">1.0</item>
     </style>
+
     <style name="Widget.Home.Holo.Tab" parent="@style/Widget.ActionBar.TabView">
         <item name="android:background">@null</item>
         <item name="android:layout_width">0.0dip</item>
@@ -307,13 +369,17 @@
         <item name="android:minWidth">80.0dip</item>
         <item name="android:layout_weight">1.0</item>
     </style>
+
     <style name="Widget.QuickAction" parent="@style/Widget" />
+
     <style name="Widget.QuickAction.Bar" parent="@style/Widget.QuickAction" />
+
     <style name="Widget.QuickAction.Bar.Item" parent="@style/Widget.QuickAction.Item">
         <item name="android:background">@drawable/quick_action_bar_item</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">80.0dip</item>
     </style>
+
     <style name="Widget.QuickAction.Item" parent="@style/Widget.QuickAction">
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">#ff333333</item>
@@ -322,16 +388,19 @@
         <item name="android:layout_height">fill_parent</item>
         <item name="android:drawablePadding">5.0dip</item>
     </style>
+
     <style name="ZeusTitleBar">
         <item name="android:paddingLeft">6.0dip</item>
         <item name="android:paddingRight">11.0dip</item>
     </style>
+
     <style name="content_page_gray_text">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/text_gray_color_selector</item>
         <item name="android:duplicateParentState">true</item>
         <item name="android:layout_marginRight">8.0dip</item>
     </style>
+
     <style name="content_page_large_text">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:typeface">sans</item>
@@ -341,6 +410,7 @@
         <item name="android:duplicateParentState">true</item>
         <item name="android:singleLine">true</item>
     </style>
+
     <style name="content_page_medium_text">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/text_color_selector</item>
@@ -348,6 +418,7 @@
         <item name="android:duplicateParentState">true</item>
         <item name="android:singleLine">true</item>
     </style>
+
     <style name="content_page_small_text">
         <item name="android:textSize">@dimen/text_medium_1</item>
         <item name="android:textColor">@color/text_color_selector</item>
@@ -355,6 +426,7 @@
         <item name="android:duplicateParentState">true</item>
         <item name="android:singleLine">true</item>
     </style>
+
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:backgroundDimAmount">0.6</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -365,16 +437,20 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
     <style name="dialog.NoDim" parent="@style/dialog">
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
     <style name="dialog_fullscreen">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="list_container">
         <item name="android:background">@drawable/background_view_rounded_container</item>
     </style>
+
     <style name="list_item_arrow">
         <item name="android:paddingLeft">4.0dip</item>
         <item name="android:paddingTop">2.0dip</item>
@@ -385,6 +461,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:src">@drawable/arrow</item>
     </style>
+
     <style name="list_item_bottom">
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/background_view_rounded_bottom</item>
@@ -394,6 +471,7 @@
         <item name="android:paddingBottom">10.0dip</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="list_item_middle">
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/background_view_rounded_middle</item>
@@ -403,6 +481,7 @@
         <item name="android:paddingBottom">10.0dip</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="list_item_single">
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/background_view_rounded_single</item>
@@ -412,6 +491,7 @@
         <item name="android:paddingBottom">10.0dip</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="list_item_top">
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/background_view_rounded_top</item>
@@ -421,6 +501,7 @@
         <item name="android:paddingBottom">10.0dip</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="myzone_item_number_text">
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textStyle">normal</item>
@@ -429,6 +510,7 @@
         <item name="android:duplicateParentState">true</item>
         <item name="android:singleLine">true</item>
     </style>
+
     <style name="umptheme">
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowIsTranslucent">false</item>
@@ -447,10 +529,10 @@
         <item name="android:maxLines">2</item>
     </style>
     <!--<style name="CustomTabLayout" parent="Widget.Design.TabLayout">-->
-        <!--<item name="tabIndicatorColor">@color/text_orange_to_gray</item>-->
-        <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
-        <!--<item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>-->
-        <!--<item name="tabSelectedTextColor">@color/text_orange_to_gray</item>-->
+    <!--<item name="tabIndicatorColor">@color/text_orange_to_gray</item>-->
+    <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
+    <!--<item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>-->
+    <!--<item name="tabSelectedTextColor">@color/text_orange_to_gray</item>-->
     <!--</style>-->
     <!-- 自定义RadioButton-->
     <style name="CustomRadioButtonDefault" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -459,6 +541,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_article_normal</item>
     </style>
+
     <style name="CustomRadioButtonDefault.textGray">
         <item name="android:textColor">@color/text_color_light_gray</item>
     </style>
@@ -495,18 +578,21 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="TextViewArticle.centerVertical">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
+
     <style name="TextViewArticle.Gray">
         <item name="android:textColor">@color/text_color_light_gray</item>
     </style>
+
     <style name="TextViewArticle.Gray.centerVertical">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
-        <!--表单右边正文样式-->
+    <!--表单右边正文样式-->
     <style name="TextViewArticle.Gray.centerVertical.FormEditText">
         <item name="android:background">@null</item>
         <item name="android:layout_marginLeft">14dp</item>
@@ -515,24 +601,27 @@
         <item name="android:paddingTop">3dp</item>
         <item name="android:paddingBottom">3dp</item>
     </style>
-        <!--正文大小的超链接样式-->
+    <!--正文大小的超链接样式-->
     <style name="TextViewArticle.Link">
         <item name="android:textColor">@color/text_orange_to_gray</item>
     </style>
+
     <style name="TextViewTitle1">
         <item name="android:textSize">@dimen/text_title_1</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="TextViewTitle1.TitleBar">
         <item name="android:textColor">@color/white</item>
     </style>
     <!--TextView一般标题样式 如商店列表单项里的商店名称-->
     <style name="TextViewTitle2">
-    <item name="android:textSize">@dimen/text_title_2</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-</style>
+        <item name="android:textSize">@dimen/text_title_2</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="TextViewTitle2.centerVertical">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_centerVertical">true</item>
@@ -543,16 +632,26 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="TextViewTitle3.Gray">
+        <item name="android:textColor">@color/text_color_light_gray</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="TextViewTitle3.Red">
+        <item name="android:textColor">@color/red</item>
+    </style>
     <!--注脚小字样式-->
     <style name="TextViewSubscript">
         <item name="android:textSize">@dimen/text_subscript</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="TextViewSubscript.Gray">
         <item name="android:textColor">@color/text_color_light_gray</item>
     </style>
-        <!--注脚超链接样式-->
+    <!--注脚超链接样式-->
     <style name="TextViewSubscript.Link">
         <item name="android:textColor">@color/text_orange_to_gray</item>
     </style>
@@ -572,7 +671,7 @@
         <item name="android:paddingBottom">10dp</item>
     </style>
     <!--单个Item样式 暂时和ListViewItem一样-->
-    <style name="SingleItem" parent="ListViewItem"/>
+    <style name="SingleItem" parent="ListViewItem" />
     <!--单个Item样式,包括左右padding-->
     <style name="SingleItem.mediumPaddingHorizon">
         <item name="android:paddingLeft">@dimen/margin_page_medium</item>
@@ -623,10 +722,12 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/divide_gray_default</item>
     </style>
+
     <style name="DividerViewVertical.right">
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_gravity">right</item>
     </style>
+
     <style name="DividerViewVertical.left">
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_gravity">left</item>
@@ -642,6 +743,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="CustomRatingBar.Small">
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
@@ -669,8 +771,23 @@
         <!-- 模糊 -->
     </style>
 
-    <!--+++++++++++++++++++++++++++++++++++++++++单独界面的style++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--下边动画style2 非窗口-->
+    <style name="BottomDialogStyle2">
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
 
+    <!--+++++++++++++++++++++++++++++++++++++++++单独界面的style++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--头像设置界面通用按钮style-->
     <style name="ButtonHeadSetting">
         <item name="android:textSize">@dimen/text_button_normal</item>
         <item name="android:textColor">#ffd22b00</item>
@@ -680,4 +797,31 @@
         <item name="android:padding">8dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!--购物车数字标识带红色圆形背景-->
+    <style name="OvalNumTagTextView">
+        <item name="android:textSize">@dimen/text_button_normal</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:background">@drawable/bg_default_oval_red</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--ListView单个Item外层容器样式-->
+    <style name="ListViewItemShoppingCart">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <!--购物车title标签样式-->
+    <style name="TitleBarShoppingCart" parent="ListViewItem">
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+    </style>
+
+
 </resources>

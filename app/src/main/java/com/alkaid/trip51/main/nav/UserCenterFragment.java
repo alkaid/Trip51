@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.shop.ShoppingCartActivity;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
 import com.alkaid.trip51.usercenter.MyClientCenterActivity;
 import com.alkaid.trip51.usercenter.MyCouponActivity;

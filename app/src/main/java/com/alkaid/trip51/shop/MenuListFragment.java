@@ -1,9 +1,11 @@
 package com.alkaid.trip51.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
@@ -24,29 +26,40 @@ import java.util.Map;
 /**
  * 商户菜单明细列表
  */
+
 /**
  * Created by jyz on 2015/11/8.
  */
-public class MenuListFragment extends BaseFragment{
+public class MenuListFragment extends BaseFragment implements View.OnClickListener {
     private long shopid;
+
+    private LinearLayout llShoppingCart;//购物车进入按钮
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.menu_list_fragment,container,false);
-        shopid=getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
-        if(shopid<=0){
+        View v = inflater.inflate(R.layout.menu_list_fragment, container, false);
+        initView(v);
+        shopid = getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
+        if (shopid <= 0) {
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }
         loadData();
         return v;
     }
 
-    private void loadData(){
-        Map<String,String> beSignForm=new HashMap<String, String>();
-        Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("shopid", shopid+"");
+    private void initView(View v) {
+       llShoppingCart = (LinearLayout) v.findViewById(R.id.ll_shoppinp_cart);
+        llShoppingCart.setOnClickListener(this);
+    }
+
+
+    private void loadData() {
+        Map<String, String> beSignForm = new HashMap<String, String>();
+        Map<String, String> unBeSignform = new HashMap<String, String>();
+        unBeSignform.put("shopid", shopid + "");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
-        final String tag="foodlist"+(int)(Math.random()*1000);
+        final String tag = "foodlist" + (int) (Math.random() * 1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<String>() {
@@ -71,5 +84,14 @@ public class MenuListFragment extends BaseFragment{
                 handleException(new TradException(error));
             }
         }), tag);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_shoppinp_cart:
+                startActivity(new Intent(getActivity(), ShoppingCartActivity.class));
+                break;
+        }
     }
 }
