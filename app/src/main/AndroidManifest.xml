@@ -105,8 +105,8 @@
         <activity android:name=".shop.ShoppingCartActivity" android:theme="@style/BottomDialogStyle2"/>
         <activity android:name=".booking.BookingActivity"/>
 
-        <!--==================第三方SDK配置区域================-->
-        <!--百度SDK-->
+        <!--==================第三方SDK配置区域  begin================-->
+        <!--百度SDK begin-->
         <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="syobp6kfDCgmVcNNpdloSpHp" />
         <service
             android:name="com.baidu.location.f"
@@ -117,6 +117,18 @@
                 </action>
             </intent-filter>
         </service>
+        <!--百度SDK end-->
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <!-- alipay sdk end -->
+
+        <!--==================第三方SDK配置区域  end================-->
     </application>
 
 </manifest>

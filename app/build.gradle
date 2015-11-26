@@ -43,5 +43,4 @@ dependencies {
     compile project(':popupbuttonlibrary')
     compile project(':pullToRefreshLib')
     compile project(':volley')
-    compile files('libs/BaiduLBS_Android.jar')
 }
