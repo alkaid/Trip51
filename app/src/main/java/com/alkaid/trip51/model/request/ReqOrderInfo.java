@@ -9,25 +9,25 @@ import java.util.List;
  * Created by df on 2015/11/25.
  */
 public class ReqOrderInfo implements Serializable {
-//    private float orderamount;
-//    private float foodamount;
+    private float orderamount;
+    private float foodamount;
     private long shopid;
     private int personnum;
-    private String dinnertime;
+    private String dinnertime="";
     private int roomtype;
     private int roomnum;
     private int sex;
-    private String mobile;
+    private String mobile="";
     private int isreplaceother;
     private int othersex;
-    private String otherusername;
-    private String othermobile;
+    private String otherusername="";
+    private String othermobile="";
     private int iscontainfood;
     private List<ReqFood> foods;
 
     public static class ReqFood implements Serializable{
         private long foodid;
-        private String foodname;
+        private String foodname="";
         private float foodprice;
         private int foodnum;
         public ReqFood(Food food,int foodnum){
@@ -172,6 +172,22 @@ public class ReqOrderInfo implements Serializable {
 
     public void setIscontainfood(int iscontainfood) {
         this.iscontainfood = iscontainfood;
+    }
+
+    public float getOrderamount() {
+        return orderamount;
+    }
+
+    public void setOrderamount(float orderamount) {
+        this.orderamount = orderamount;
+    }
+
+    public float getFoodamount() {
+        return foodamount;
+    }
+
+    public void setFoodamount(float foodamount) {
+        this.foodamount = foodamount;
     }
 
     public List<ReqFood> getFoods() {
