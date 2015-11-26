@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  xmlns:coodOper="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:coodOper="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -46,7 +47,7 @@
                         android:text="4人" />
                 </RelativeLayout>
 
-                <View style="@style/DividerViewHorizon" />
+                <View style="@style/DividerViewHorizon.Margin" />
 
                 <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
 
@@ -69,13 +70,15 @@
                         android:text="08月26日  今天  18：00" />
                 </RelativeLayout>
 
+                <View style="@style/DividerViewHorizon.Margin" />
+
                 <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentRight="true">
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
 
                         <CheckBox
                             style="@style/CustomCheckBoxDefault"
@@ -102,10 +105,18 @@
                         android:text="座位" />
 
                 </RelativeLayout>
+
+                <View style="@style/DividerViewHorizon.Margin" />
+
                 <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
 
-                    <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"/>
+                    <com.alkaid.trip51.widget.Operator
+                        android:id="@+id/opNums"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        coodOper:opMaxCount="100"
+                        coodOper:opMinCount="1" />
 
                     <TextView
                         android:id="@+id/tvBookingSeatNum"
@@ -115,6 +126,150 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
+
+                    <ImageView
+                        android:id="@+id/iv_tip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/trip51_info" />
+
+                    <TextView
+                        style="@style/TextViewTitle3.Red"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/iv_tip"
+                        android:text="小包最低消费288，大包最低消费388" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <TextView
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="订单总额" />
+
+                    <TextView
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/ivArrow3"
+                        android:text="￥256" />
+                </RelativeLayout>
+
+                <View style="@style/DividerViewHorizon.Margin" />
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            style="@style/CustomRadioButtonDefault1.Gray"
+                            android:text="女士" />
+
+                        <RadioButton
+                            style="@style/CustomRadioButtonDefault1.Gray"
+                            android:layout_marginLeft="10dp"
+                            android:checked="true"
+                            android:text="先生" />
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <View style="@style/DividerViewHorizon.Margin" />
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <TextView
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="86" />
+
+                    <TextView
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/ivArrow3"
+                        android:text="18929322253" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
+
+                    <TextView
+                        style="@style/TextViewTitle3.Gray"
+                        android:layout_marginLeft="5dp"
+                        android:text="如有附加需求，可填写，我们会尽量安排" />
+                </RelativeLayout>
+
+                <View style="@style/DividerViewHorizon.Margin" />
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <ToggleButton
+                        android:id="@+id/tb_help_booking"
+                        style="@style/CustomToggleButtonDefault"
+                        android:layout_alignParentRight="true" />
+
+                    <TextView
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="帮他人定" />
+
+                    <TextView
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/tb_help_booking"
+                        android:text="是否帮他人订" />
+                </RelativeLayout>
+
+                <View style="@style/DividerViewHorizon.Margin" />
+
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <TextView
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="用他人姓名" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            style="@style/CustomRadioButtonDefault1.Gray"
+                            android:text="女士" />
+
+                        <RadioButton
+                            style="@style/CustomRadioButtonDefault1.Gray"
+                            android:layout_marginLeft="10dp"
+                            android:checked="true"
+                            android:text="先生" />
+                    </RadioGroup>
+                </RelativeLayout>
+                <View style="@style/DividerViewHorizon.Margin" />
+                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                    <TextView
+                        style="@style/TextViewTitle2.centerVertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivItemIcon"
+                        android:text="86" />
+
+                    <TextView
+                        style="@style/TextViewArticle.Gray.centerVertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/ivArrow3"
+                        android:text="18929322253" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -46,7 +46,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }
         loadData();
-        btnBooking= (Button) v.findViewById(R.id.btn_pay);
+        btnBooking= (Button) v.findViewById(R.id.btn_booking);
         btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

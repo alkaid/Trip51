@@ -22,12 +22,8 @@
                 android:text="启动时自动定位到当前位置" />
 
             <ToggleButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/toggle_background"
-                android:button="@drawable/toggle_btn_background"
-                android:gravity="center_vertical" />
+                style="@style/CustomToggleButtonDefault"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 
@@ -38,8 +34,8 @@
             <TextView
                 style="@style/TextViewTitle2"
                 android:layout_centerInParent="true"
-                android:textSize="13sp"
-                android:text="关闭自动定位后，每次打开应用会默认使用上一次地址" />
+                android:text="关闭自动定位后，每次打开应用会默认使用上一次地址"
+                android:textSize="13sp" />
 
 
         </RelativeLayout>
