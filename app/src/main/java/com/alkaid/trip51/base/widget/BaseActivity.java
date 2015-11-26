@@ -1,11 +1,8 @@
 package com.alkaid.trip51.base.widget;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.alkaid.base.view.base.BActivity;
 import com.alkaid.base.view.base.BContextWrap;
@@ -38,6 +35,10 @@ public class BaseActivity extends BActivity {
 	protected void showPdg(String msg){
 		baseContextWrap.showPdg(msg);
 	}
+	protected ProgressDialog getProgressDialog(){
+		return baseContextWrap.getProgressDialog();
+	}
+
 	protected void toastShort(String msg){
 		baseContextWrap.toastShort(msg);
 	}

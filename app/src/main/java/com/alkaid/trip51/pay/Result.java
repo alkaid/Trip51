@@ -83,7 +83,7 @@ public class Result implements Serializable{
 		return orderno;
 	}
 
-	void setOrderno(String orderno) {
+	public void setOrderno(String orderno) {
 		this.orderno = orderno;
 	}
 	

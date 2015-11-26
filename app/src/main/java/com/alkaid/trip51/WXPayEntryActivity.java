@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.alkaid.trip51.pay.Result;
 import com.alkaid.trip51.pay.WXPayment;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 
@@ -20,6 +20,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 	private static final String TAG = "WXPayEntryActivity";
 	
     private IWXAPI api;
+	private String orderno;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 
 	@Override
 	public void onReq(BaseReq req) {
+		if(req instanceof PayReq){
+			orderno = ((PayReq)req).extData;
+		}
 	}
 
 	@Override
@@ -53,6 +57,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 //			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
 //			builder.show();
 			Result result=new Result();
+			result.setOrderno(orderno);
+
 			switch (resp.errCode) {
 			case 0:
 				//支付成功

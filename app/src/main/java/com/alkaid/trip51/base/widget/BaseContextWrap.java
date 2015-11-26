@@ -35,6 +35,7 @@ public class BaseContextWrap extends BContextWrap {
 
 	protected ProgressDialog pdg;
 	protected void setDefaultPdgCanceListener(final String tag){
+		getProgressDialog();
 		pdg.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -50,9 +51,11 @@ public class BaseContextWrap extends BContextWrap {
 		showPdg(null);
 	}
 	protected void showPdg(String msg){
-		if(null==pdg){
-			pdg=new ProgressDialog(context);
-		}
+		showPdg(true,msg);
+	}
+	protected void showPdg(boolean cancelable,String msg){
+		getProgressDialog();
+		pdg.setCancelable(cancelable);
 		pdg.setMessage(msg);
 		pdg.show();
 	}
@@ -63,5 +66,11 @@ public class BaseContextWrap extends BContextWrap {
 		Looper.prepare();
 		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 		Looper.loop();
+	}
+	public ProgressDialog getProgressDialog(){
+		if(null==pdg){
+			pdg=new ProgressDialog(context);
+		}
+		return pdg;
 	}
 }

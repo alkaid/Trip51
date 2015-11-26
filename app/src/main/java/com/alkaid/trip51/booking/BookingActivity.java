@@ -1,5 +1,6 @@
 package com.alkaid.trip51.booking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.request.ReqOrderInfo;
 import com.alkaid.trip51.model.response.ResOrder;
 import com.alkaid.trip51.model.shop.Food;
+import com.alkaid.trip51.shop.OrderDetailActivity;
 import com.alkaid.trip51.widget.Operator;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -61,7 +63,7 @@ public class BookingActivity extends BaseActivity {
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         //构造订单伪数据
-        ReqOrderInfo order=new ReqOrderInfo();
+        final ReqOrderInfo order=new ReqOrderInfo();
         order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
         order.setIscontainfood(NetDataConstants.TRUE);
         order.setIsreplaceother(NetDataConstants.FALSE);
@@ -100,8 +102,12 @@ public class BookingActivity extends BaseActivity {
                 ResOrder resdata = gson.fromJson(response, ResOrder.class);
                 dismissPdg();
                 if (resdata.isSuccess()) {
-                    //TODO 刷新UI
-
+                    //TODO 下单成功 刷新UI
+                    String orderNo=resdata.getOuttradeno();
+                    Intent intent=new Intent(context, OrderDetailActivity.class);
+                    intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO,orderNo);
+                    startActivity(intent);
+                    finish();
                 } else {
                     //TODO 暂时用handleException 应该换成失败时的正式UI
                     handleException(TradException.create(resdata.getMsg()));
