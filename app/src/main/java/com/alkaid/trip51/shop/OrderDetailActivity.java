@@ -42,7 +42,7 @@ public class OrderDetailActivity extends BaseActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pay(Payment.PAYTYPE_WECHAT);
+                pay(Payment.PAYTYPE_ALI);
             }
         });
     }

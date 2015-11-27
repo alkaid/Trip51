@@ -94,7 +94,8 @@ public class AlixPayment extends Payment{
 		super.pay(orderNo, p, paymentCallback);
 		final String orderInfo=getOrderInfo(p);
 		final String payInfo = orderInfo + "&sign=\"" + p.sign + "\"&"
-				+ p.sign_type;
+				+"sign_type=\"" +p.sign_type+"\"";
+		LogUtil.v(payInfo);
 		// 获取订单组装字符串
 		new Thread() {
 			public void run() {

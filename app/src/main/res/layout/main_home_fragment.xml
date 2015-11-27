@@ -1,101 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
   xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:popupbtn="http://schemas.android.com/apk/res-auto"  android:background="@android:color/white">
+    xmlns:popupbtn="http://schemas.android.com/apk/res-auto" xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
     <LinearLayout android:orientation="vertical" android:id="@id/title_bar_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?android:attr/windowTitleBackgroundStyle" />
     <!--<com.dianping.widget.TopCropImageView android:id="@id/listview_skin" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="matrix" android:layout_below="@id/title_bar_layout" />
     <RelativeLayout android:id="@id/anim_Layout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/title_bar_layout" />
     <com.dianping.widget.pulltorefresh.PullToRefreshRecyclerView android:id="@id/main_listview" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/title_bar_layout" />-->
-    <com.alkaid.trip51.widget.SlideShowView
-      android:id="@+id/slideshowView"
-      android:layout_width="match_parent"
-      android:layout_height="80dp"
-      android:layout_centerHorizontal="true"
-      android:layout_below="@id/title_bar_layout"
-      />
-    <LinearLayout android:id="@+id/layMainMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" android:layout_marginBottom="12dp" android:layout_below="@+id/slideshowView">
-        <LinearLayout android:id="@+id/layOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_main_menu_ctyd"/>
-            <TextView style="@style/TextViewArticle" android:text="餐厅预订"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_main_menu_qcmr2"/>
-            <TextView style="@style/TextViewArticle" android:text="爱车保养"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_main_menu_ktv2"/>
-            <TextView style="@style/TextViewArticle" android:text="KTV预订"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:id="@+id/laySelector" android:layout_below="@+id/layMainMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="30dp"
-            android:text="商家分类"
-            android:textSize="@dimen/text_article_normal"
-            popupbtn:normalBg="@drawable/tab_bkg_line"
-            popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
-            popupbtn:pressIcon="@drawable/arrow_up_shop"
-            />
-        <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="30dp"
-            android:text="排序"
-            android:textSize="@dimen/text_article_normal"
-            popupbtn:normalBg="@drawable/tab_bkg_line"
-            popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
-            popupbtn:pressIcon="@drawable/arrow_up_shop"
-            />
-        <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="30dp"
-            android:text="附近(位置)"
-            android:textSize="@dimen/text_article_normal"
-            popupbtn:normalBg="@drawable/tab_bkg_line"
-            popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
-            popupbtn:pressIcon="@drawable/arrow_up_shop"
-            />
-    </LinearLayout>
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" android:layout_below="@+id/laySelector" android:orientation="vertical">
-        <include android:id="@+id/list_item1" layout="@layout/main_home_list_item"/>
-    </LinearLayout>-->
-    <ListView android:id="@android:id/list"
-        android:layout_width="match_parent" android:background="@android:color/white"
-        android:layout_height="match_parent" android:layout_below="@+id/laySelector" android:layout_marginLeft="@dimen/margin_page_small" android:layout_marginRight="@dimen/margin_page_small">
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:background="@android:color/transparent"
+        android:id="@+id/ptrList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@color/divide_gray_default"
+        android:dividerHeight="1dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true"
+        ptr:ptrListViewExtrasEnabled="false"
+        android:layout_below="@+id/title_bar_layout"/>
 
-    </ListView>
+    <!--<ListView android:id="@android:id/list"-->
+        <!--android:layout_width="match_parent" android:background="@android:color/white"-->
+        <!--android:layout_height="match_parent" android:layout_below="@+id/title_bar_layout" android:layout_marginLeft="@dimen/margin_page_small" android:layout_marginRight="@dimen/margin_page_small">-->
+
+    <!--</ListView>-->
 </RelativeLayout>

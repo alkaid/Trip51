@@ -16,7 +16,7 @@
             </RadioGroup>
             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
                 <TextView android:id="@+id/tvItemValue" android:text="餐桌数" style="@style/TextViewArticle.Gray.centerVertical"/>
-                <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true"
+                <com.alkaid.trip51.widget.Operator android:id="@+id/opNums" android:layout_alignParentRight="true" coodOper:colorStyle="green"
                     android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"/>
             </RelativeLayout>
         </LinearLayout>

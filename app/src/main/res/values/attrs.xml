@@ -19,5 +19,9 @@
         <attr name="opMaxCount" format="integer" />
         <attr name="opMinCount" format="integer" />
         <attr name="numMinWidth" format="dimension|reference" />
+        <attr name="colorStyle" format="enum">
+            <enum name="orange" value="0" />
+            <enum name="green" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

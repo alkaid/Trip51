@@ -44,8 +44,12 @@ public class Operator extends LinearLayout {
     public int maxCount;
     public int minCount;
     public int selectedCount;
-    private int resMinusIconId;
-    private int resAddIconId;
+    private int resMinusIconId=-1;
+    private int resAddIconId=-1;
+    private int colorStyle;
+    private int numMinWidth;
+    private static final int COLOR_STYLE_ORANGE=0;
+    private static final int COLOR_STYLE_GREEN=1;
 
     public Operator(Context context) {
         this(context, null);
@@ -61,10 +65,22 @@ public class Operator extends LinearLayout {
         resAddIconId = R.drawable.purchase_amount_add;
         if(null!=attributeset) {
             TypedArray typedArray = context.obtainStyledAttributes(attributeset, R.styleable.coodOper);
-            maxCount = typedArray.getResourceId(R.styleable.coodOper_opMaxCount, 30);
-            minCount = typedArray.getResourceId(R.styleable.coodOper_opMinCount, 0);
-            resMinusIconId = typedArray.getResourceId(R.styleable.coodOper_opAddBtnBackground, R.drawable.purchase_amount_minus);
-            resAddIconId = typedArray.getResourceId(R.styleable.coodOper_opMinusBtnBackground, R.drawable.purchase_amount_add);
+            maxCount = typedArray.getInteger(R.styleable.coodOper_opMaxCount, 30);
+            minCount = typedArray.getInteger(R.styleable.coodOper_opMinCount, 0);
+            colorStyle=typedArray.getInteger(R.styleable.coodOper_colorStyle, -1);
+//            numMinWidth=typedArray.getDimensionPixelSize()
+            switch (colorStyle){
+                case COLOR_STYLE_GREEN:
+                    resMinusIconId=R.drawable.purchase_amount_minus;
+                    resAddIconId=R.drawable.purchase_amount_add;
+                    break;
+                case COLOR_STYLE_ORANGE:
+                    resMinusIconId=R.drawable.purchase_amount_minus_orange;
+                    resAddIconId=R.drawable.purchase_amount_add_orange;
+                    break;
+            }
+            resMinusIconId = typedArray.getResourceId(R.styleable.coodOper_opAddBtnBackground,resMinusIconId);
+            resAddIconId = typedArray.getResourceId(R.styleable.coodOper_opMinusBtnBackground,resAddIconId);
         }
         init(context);
     }
@@ -87,8 +103,10 @@ public class Operator extends LinearLayout {
         mSubBtn = (ImageButton) findViewById(R.id.sub_btn);
         mAddBtn = (ImageButton) findViewById(R.id.add_btn);
         mEditNum = (EditText) findViewById(R.id.edit_num);
-        mSubBtn.setImageResource(resMinusIconId);
-        mAddBtn.setImageResource(resAddIconId);
+        if(resMinusIconId>0)
+            mSubBtn.setImageResource(resMinusIconId);
+        if(resAddIconId>0)
+            mAddBtn.setImageResource(resAddIconId);
         mEditNum.addTextChangedListener(new TextWatcher() {
                                             public void afterTextChanged(Editable editable) {
                                                 isFromInput = true;

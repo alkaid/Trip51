@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:popupbtn="http://schemas.android.com/apk/res-auto"  android:background="@android:color/white">
+    <com.alkaid.trip51.widget.SlideShowView
+      android:id="@+id/slideshowView"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/title_bar_layout"
+      />
+    <LinearLayout android:id="@+id/layMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:layout_marginBottom="12dp" android:layout_below="@+id/slideshowView">
+        <LinearLayout android:id="@+id/layOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_main_menu_ctyd"/>
+            <TextView style="@style/TextViewArticle" android:text="餐厅预订"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_main_menu_qcmr2"/>
+            <TextView style="@style/TextViewArticle" android:text="爱车保养"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_weight="1" android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_main_menu_ktv2"/>
+            <TextView style="@style/TextViewArticle" android:text="KTV预订"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/laySelector" android:layout_below="@+id/layMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="商家分类"
+            android:textSize="@dimen/text_article_normal"
+            popupbtn:normalBg="@drawable/tab_bkg_line"
+            popupbtn:normalIcon="@drawable/arrow_down_shop"
+            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressIcon="@drawable/arrow_up_shop"
+            />
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="排序"
+            android:textSize="@dimen/text_article_normal"
+            popupbtn:normalBg="@drawable/tab_bkg_line"
+            popupbtn:normalIcon="@drawable/arrow_down_shop"
+            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressIcon="@drawable/arrow_up_shop"
+            />
+        <pw.h57.popupbuttonlibrary.PopupButton
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="附近(位置)"
+            android:textSize="@dimen/text_article_normal"
+            popupbtn:normalBg="@drawable/tab_bkg_line"
+            popupbtn:normalIcon="@drawable/arrow_down_shop"
+            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressIcon="@drawable/arrow_up_shop"
+            />
+    </LinearLayout>
+</RelativeLayout>

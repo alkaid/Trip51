@@ -9,15 +9,32 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingFilterActivity;
+import com.alkaid.trip51.dataservice.mapi.MApiRequest;
+import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.model.enums.ShopType;
+import com.alkaid.trip51.model.response.ResShopList;
 import com.alkaid.trip51.shop.MenuActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
+import com.alkaid.trip51.widget.ShopListViewUtil;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import pw.h57.popupbuttonlibrary.PopupButton;
 import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
@@ -33,9 +50,11 @@ public class    MainHomeFragment extends BaseFragment {
         ViewGroup layBar = (ViewGroup) v.findViewById(R.id.title_bar_layout);
         View titleBar=inflater.inflate(R.layout.main_home_title_bar,layBar,true);
 
-        slideshowView=v.findViewById(R.id.slideshowView);
-        layMainMenu=v.findViewById(R.id.layMainMenu);
-        layOrder=v.findViewById(R.id.layOrder);
+        View header=inflater.inflate(R.layout.main_home_header,null,false);
+
+        slideshowView=header.findViewById(R.id.slideshowView);
+        layMainMenu=header.findViewById(R.id.layMainMenu);
+        layOrder=header.findViewById(R.id.layOrder);
 
         layOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,17 +63,10 @@ public class    MainHomeFragment extends BaseFragment {
             }
         });
 
-        ListView shopListView= (ListView) v.findViewById(android.R.id.list);
-        shopListView.setAdapter(new ShopListAdapter(getActivity()));
-        shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO Adapter里实现getItemid()返回shopid
-                App.shopService().setCurrShopid(id);    //保存当前shopid
-                Intent intent = new Intent(getActivity(),MenuActivity.class);
-                startActivity(intent);
-            }
-        });
+        ShopListViewUtil shopListViewUtil=new ShopListViewUtil();
+        PullToRefreshListView shopListView= shopListViewUtil.onCreateView(inflater,v,getActivity(),this);
+        shopListView.getRefreshableView().addHeaderView(header);
+//        ListView shopListView= (ListView) v.findViewById(android.R.id.list);
         shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             private int mListViewFirstItem = 0;
             //listView中第一项的在屏幕中的位置

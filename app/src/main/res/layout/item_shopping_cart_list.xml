@@ -9,7 +9,7 @@
 
     <com.alkaid.trip51.widget.Operator
         android:id="@+id/op_food_num"
-        android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1"
+        android:layout_width="wrap_content" android:layout_height="20dp" coodOper:opMaxCount="100" coodOper:opMinCount="1" coodOper:colorStyle="orange"
         android:layout_alignParentRight="true"/>
 
     <TextView
