@@ -14,8 +14,6 @@ import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.Result;
 
-import java.net.URLEncoder;
-
 public class AlixPayment extends Payment{
 	private final static String TAG = "AlixPayment";
 	private Handler mHandler;
@@ -86,7 +84,7 @@ public class AlixPayment extends Payment{
 	}
 
 	@Override
-	public void pay(final String orderNo, ResPayInfo.PayInfo params, PaymentCallback paymentCallback) {
+	public void pay(final String orderNo, final ResPayInfo.PayInfo params, PaymentCallback paymentCallback) {
 		ResPayInfo.AliPayInfo p=null;
 		if(params instanceof ResPayInfo.AliPayInfo){
 			p=(ResPayInfo.AliPayInfo)params;
@@ -94,17 +92,16 @@ public class AlixPayment extends Payment{
 			throw new RuntimeException("The pay params must be ResPayInfo.AliPayInfo");
 		}
 		super.pay(orderNo, p, paymentCallback);
-		final String orderInfo=getOrderInfo(p);
-		final String payInfo = orderInfo + "&sign=\"" + URLEncoder.encode(p.sign) + "\"&"
-				+"sign_type=\"" +p.sign_type+"\"";
-		LogUtil.v(payInfo);
+//		final String payInfo = orderInfo + "&sign=\"" + URLEncoder.encode(p.sign) + "\"&"
+//				+"sign_type=\"" +p.sign_type+"\"";
+//		LogUtil.v(payInfo);
 		// 获取订单组装字符串
 		new Thread() {
 			public void run() {
 				// 构造PayTask 对象
 				PayTask alipay = new PayTask((Activity) mContext);
 				// 调用支付接口，获取支付结果
-				String result = alipay.pay(payInfo);
+				String result = alipay.pay(((ResPayInfo.AliPayInfo) params).payinfourl);
 				LogUtil.v("alipay=" + result);
 				Message msg = mHandler.obtainMessage(MSG_WHAT_PAY_COMPLETE);
 				msg.what = MSG_WHAT_PAY_COMPLETE;
@@ -141,7 +138,7 @@ public class AlixPayment extends Payment{
 	 * create the order info. 创建订单信息
 	 *
 	 */
-	public String getOrderInfo(ResPayInfo.AliPayInfo p) {
+	/*public String getOrderInfo(ResPayInfo.AliPayInfo p) {
 
 		// 签约合作者身份ID
 		String orderInfo = "partner=" + "\"" + p.partner + "\"";
@@ -190,5 +187,5 @@ public class AlixPayment extends Payment{
 		// orderInfo += "&paymethod=\"expressGateway\"";
 
 		return orderInfo;
-	}
+	}*/
 }

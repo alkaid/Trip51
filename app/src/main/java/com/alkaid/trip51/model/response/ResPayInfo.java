@@ -26,19 +26,20 @@ public class ResPayInfo extends ResponseData{
     public static class PayInfo implements Serializable{}
 
     public static class AliPayInfo extends PayInfo {
-        public String notifyurl;
-        public String outtradeno;
-        public String partner;
-        public String _input_charset;
-        public String sign_type;
-        public String seller_id;
-        public String subject;
-        public String payment_type;
-        public String total_fee;
-        public String body;
-        public String sign;
-        public String service;
-        public String it_b_pay;
+//        public String notifyurl;
+//        public String outtradeno;
+//        public String partner;
+//        public String _input_charset;
+//        public String sign_type;
+//        public String seller_id;
+//        public String subject;
+//        public String payment_type;
+//        public String total_fee;
+//        public String body;
+//        public String sign;
+//        public String service;
+//        public String it_b_pay;
+        public String payinfourl;
     }
 
     public static class WechatPayInfo extends PayInfo{
