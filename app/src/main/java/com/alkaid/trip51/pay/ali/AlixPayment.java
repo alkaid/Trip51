@@ -14,6 +14,8 @@ import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.Result;
 
+import java.net.URLEncoder;
+
 public class AlixPayment extends Payment{
 	private final static String TAG = "AlixPayment";
 	private Handler mHandler;
@@ -93,7 +95,7 @@ public class AlixPayment extends Payment{
 		}
 		super.pay(orderNo, p, paymentCallback);
 		final String orderInfo=getOrderInfo(p);
-		final String payInfo = orderInfo + "&sign=\"" + p.sign + "\"&"
+		final String payInfo = orderInfo + "&sign=\"" + URLEncoder.encode(p.sign) + "\"&"
 				+"sign_type=\"" +p.sign_type+"\"";
 		LogUtil.v(payInfo);
 		// 获取订单组装字符串

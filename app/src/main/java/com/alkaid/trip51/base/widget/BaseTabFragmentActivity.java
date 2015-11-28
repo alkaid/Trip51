@@ -107,10 +107,13 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
             info.fragment = this.mActivity.getSupportFragmentManager().findFragmentByTag(tag);
             if ((info.fragment != null) && (!info.fragment.isHidden()) /*&& !info.fragment.isDetached()*/)
             {
-                FragmentTransaction transaction = this.mActivity.getSupportFragmentManager().beginTransaction();
-//                transaction.detach(info.fragment);
-                transaction.hide(info.fragment);
-                transaction.commitAllowingStateLoss();
+                LogUtil.v("addTab "+tag+": fragment isn't null,will hide this fragment!");
+                //TODO 当从订单Fragment进入其他界面APP崩溃后会自动重启(还不知道为什么)  重启后onCreat()里添加订单Fragment发现Fragment已存在会执行下面的隐藏Fragment的代码，导致白屏
+                //1.为什么会自动重启 2.为什么Fragment已存在(猜测是Android恢复现场自动创建了Fragment)
+//                FragmentTransaction transaction = this.mActivity.getSupportFragmentManager().beginTransaction();
+////                transaction.detach(info.fragment);
+//                transaction.hide(info.fragment);
+//                transaction.commitAllowingStateLoss();
             }
             this.mTabs.put(tag, info);
             this.mTabHost.addTab(tabSpec);
@@ -118,6 +121,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
 
         public void onTabChanged(String tag)
         {
+            LogUtil.v("onTabChanged tag="+tag);
             TabInfo newTab = (TabInfo)this.mTabs.get(tag);
             FragmentTransaction transaction;
             if (this.mLastTab != newTab)
