@@ -1,18 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@android:color/white">
-    <include layout="@layout/default_title_bar" />
-    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-            <LinearLayout android:id="@+id/content" android:orientation="vertical"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:focusable="true" android:focusableInTouchMode="true" />
-                <EditText android:id="@+id/etKeywords"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/text_title_2" android:background="@drawable/shape_default_edittext" android:layout_marginLeft="@dimen/margin_page_medium" android:layout_marginRight="@dimen/margin_page_medium" android:layout_marginTop="20dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/default_title_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical" />
+
+                <EditText
+                    android:id="@+id/etKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_page_medium"
+                    android:layout_marginRight="@dimen/margin_page_medium"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_default_edittext"
+                    android:hint="输入餐厅关键字"
                     android:paddingBottom="10dp"
-                    android:hint="输入餐厅关键字"/>
+                    android:textSize="@dimen/text_title_2" />
             </LinearLayout>
-    </ScrollView>
-    <Button android:id="@+id/btnSearch" android:text="搜索" style="@style/ButtonLarger.Red" android:layout_marginBottom="14dp"/>
-</LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnSearch"
+            style="@style/ButtonLarger.Red"
+            android:layout_marginBottom="14dp"
+            android:text="搜索" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_select_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:id="@+id/rl_complete"
+                style="@style/SingleItem.mediumPaddingHorizon.Gray">
+
+                <TextView
+                    style="@style/TextViewTitle3.Gray"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="完成" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_select_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:paddingBottom="50dp"
+                android:background="@drawable/white_bg"
+                android:layout_below="@id/rl_complete">
+                <com.alkaid.trip51.widget.WheelView
+                    android:id="@+id/wv_select_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
