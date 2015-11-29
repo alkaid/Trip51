@@ -38,7 +38,7 @@ public class LocationService {
     private Context context;
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
-    private String coordinates=null;
+    private String coordinates="";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
     private String provinceName="陕西";
     private String cityName="西安";
     private long cityId=311;

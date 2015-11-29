@@ -88,7 +88,7 @@ public class NetworkDispatcher extends Thread {
             try {
                 // Take a request from the queue.
                 request = mQueue.take();
-                if (VolleyLog.DEBUG) VolleyLog.v("NetworkDispatcher request tag:"+request.getTag());
+                if (VolleyLog.DEBUG) VolleyLog.v("NetworkDispatcher request key:"+request.getCacheKey());
             } catch (InterruptedException e) {
                 // We may have been interrupted because it was time to quit.
                 if (mQuit) {

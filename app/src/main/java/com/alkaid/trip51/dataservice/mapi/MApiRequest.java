@@ -9,6 +9,7 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.model.response.ResponseData;
 import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -145,12 +146,41 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         Gson gson = new Gson();
         T resData= (T) gson.fromJson(parsed,mResponseClss);
         if(resData.isSuccess()){
+            removeAllPageCachesExcludeFirstPage(response);
             return Response.success(resData, HttpHeaderParser.parseCacheHeaders(response));
         } else {
             MApiError e=new MApiError(resData);
             LogUtil.e(e);
             return Response.error(e);
         }
+    }
+
+    /**
+     * 清除除第一页外的所有缓存，用于强制刷新缓存后删除关联缓存，仅对存在多页的缓存有效
+     */
+    private void removeAllPageCachesExcludeFirstPage(NetworkResponse response){
+        LogUtil.v("开始判断是否应该删除其他页缓存,cacheKey="+cacheKey);
+        if(response.isFromCache){
+            LogUtil.v("response.isFromCache==true，无需删除其他页缓存");
+            return;
+        }
+        if(!this.cacheKey.contains("pageindex=1&")){
+            LogUtil.v("不存在页码或当前刷新页不是第一页，无需删除其他页缓存");
+            return;
+        }
+        LogUtil.v("开始从第二页开始逐一删除缓存");
+        int i=2;
+        Cache cache=App.mApiService().getCache();
+        while (true){
+            String key=this.cacheKey.replaceFirst("pageindex=%d","pageindex="+i);
+            if(cache.get(key)==null){
+                LogUtil.v("共删除至第"+i+"页缓存");
+                break;
+            }
+            cache.remove(key);
+            i++;
+        }
+
     }
 
     private String signature(Map<String, String> params){

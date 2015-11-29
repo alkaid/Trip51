@@ -32,9 +32,10 @@ import java.util.Map;
 /**
  * Created by df on 2015/11/27.
  */
-public class ShopListViewUtil {
-    PullToRefreshListView shopListView;
-    ShopListAdapter shopListAdapter;
+public class ShopListViewAgent {
+    public PullToRefreshListView shopListView;
+    public ShopListAdapter shopListAdapter;
+
 
     public PullToRefreshListView onCreateView(LayoutInflater inflater, View v, final Activity context, final Fragment fragment){
         shopListView = (PullToRefreshListView) v.findViewById(R.id.ptrList);
@@ -53,7 +54,6 @@ public class ShopListViewUtil {
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 
                 String label = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.CHINESE).format(new Date());
-
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("上次更新：" + label);
                 final String tag="shoplist"+(int)(Math.random()*1000);
@@ -69,7 +69,7 @@ public class ShopListViewUtil {
                 unBeSignform.put("coordinates", App.locationService().getCoordinates());
 
                 //请求商店列表
-                App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResShopList.class,MApiService.URL_SHOP_LIST, beSignForm, unBeSignform, new Response.Listener<ResShopList>() {
+                App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResShopList.class,MApiService.URL_MAIN_HOME, beSignForm, unBeSignform, new Response.Listener<ResShopList>() {
                     @Override
                     public void onResponse(ResShopList response) {
                         shopListAdapter.setData(response.getData());

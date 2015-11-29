@@ -51,9 +51,17 @@ public class NetworkResponse {
         this(HttpStatus.SC_OK, data, Collections.<String, String>emptyMap(), false, 0);
     }
 
-    public NetworkResponse(byte[] data, Map<String, String> headers) {
+    //--------------------------------modified by alkaid 20151129 begin----------------------------
+    public boolean isFromCache=false;     //added
+    public NetworkResponse(byte[] data, Map<String, String> headers, boolean isFromCache) {     //modified
         this(HttpStatus.SC_OK, data, headers, false, 0);
+        this.isFromCache=isFromCache;
     }
+
+//    public NetworkResponse(byte[] data, Map<String, String> headers) {        //orgin
+//         this(HttpStatus.SC_OK, data, headers, false, 0);
+//    }
+    //--------------------------------modified by alkaid 20151129 end----------------------------
 
     /** The HTTP status code. */
     public final int statusCode;

@@ -15,5 +15,6 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true"
-        ptr:ptrListViewExtrasEnabled="false"/>
+        ptr:ptrListViewExtrasEnabled="false"
+        ptr:ptrMode="both"/>
 </LinearLayout>

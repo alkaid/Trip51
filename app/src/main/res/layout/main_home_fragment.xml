@@ -21,7 +21,8 @@
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true"
         ptr:ptrListViewExtrasEnabled="false"
-        android:layout_below="@+id/title_bar_layout"/>
+        android:layout_below="@+id/title_bar_layout"
+        ptr:ptrMode="both"/>
 
     <!--<ListView android:id="@android:id/list"-->
         <!--android:layout_width="match_parent" android:background="@android:color/white"-->

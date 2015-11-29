@@ -10,7 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.model.response.ResShopList;
+import com.alkaid.trip51.model.shop.Shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +20,22 @@ import java.util.List;
  */
 public class ShopListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<ResShopList.Shop> shops=new ArrayList<ResShopList.Shop>();
+    private List<Shop> shops=new ArrayList<Shop>();
 
     public ShopListAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
     }
 
-    public void setData(List<ResShopList.Shop> shops){
+    public void setData(List<Shop> shops){
         this.shops=shops;
     }
-    public List<ResShopList.Shop> getData(){
+    public List<Shop> getData(){
         return shops;
     }
 
     @Override
     public int getCount() {
-        return shops.size()==0?20:shops.size();
+        return /*shops.isEmpty()?20:*/shops.size();
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ShopListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        if(shops==null||shops.isEmpty())
-            return position;
+//        if(shops==null||shops.isEmpty())
+//            return position;
         return shops.get(position).getShopid();
     }
 
@@ -67,10 +67,10 @@ public class ShopListAdapter extends BaseAdapter {
         } else {
                 holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
         }
-        if(shops.isEmpty()){
-            return convertView;
-        }
-        ResShopList.Shop shop=shops.get(position);
+//        if(shops.isEmpty()){
+//            return convertView;
+//        }
+        Shop shop=shops.get(position);
         holder.rtbProductRating.setRating(shop.getTotallevel());
         holder.tvTitle.setText(shop.getShopname());
         holder.tvAvgPay.setText(shop.getAvgpay());
