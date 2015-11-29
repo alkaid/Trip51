@@ -98,6 +98,12 @@ public class BasicNetwork implements Network {
                 int statusCode = statusLine.getStatusCode();
 
                 responseHeaders = convertHeaders(httpResponse.getAllHeaders());
+                //--------------------------------added by alkaid 20151129 begin-----------------------------------
+                //从这里开始设置缓存信息，如果设置了缓存的缓存时间，则把它添加到头部信息中
+                if(request.getCacheTime() != 0){
+                    responseHeaders.put("Cache-Control","max-age=" + request.getCacheTime());
+                }
+                //--------------------------------added by alkaid 20151129 end-----------------------------------
                 // Handle cache validation.
                 if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
 

@@ -8,19 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingActivity;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResFoodList;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,23 +69,14 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         final String tag = "foodlist" + (int) (Math.random() * 1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<String>() {
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                ResFoodList resdata = gson.fromJson(response, ResFoodList.class);
+            public void onResponse(ResFoodList response) {
                 dismissPdg();
-                if (resdata.isSuccess()) {
-                    //TODO 刷新UI
-                } else {
-                    //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(TradException.create(resdata.getMsg()));
-                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.e(error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));

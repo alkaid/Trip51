@@ -9,32 +9,14 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.booking.BookingFilterActivity;
-import com.alkaid.trip51.dataservice.mapi.MApiRequest;
-import com.alkaid.trip51.dataservice.mapi.MApiService;
-import com.alkaid.trip51.model.enums.ShopType;
-import com.alkaid.trip51.model.response.ResShopList;
-import com.alkaid.trip51.shop.MenuActivity;
-import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.alkaid.trip51.widget.ShopListViewUtil;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.google.gson.Gson;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import pw.h57.popupbuttonlibrary.PopupButton;
 import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
@@ -42,7 +24,7 @@ import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
 /**
  * Created by alkaid on 2015/10/31.
  */
-public class    MainHomeFragment extends BaseFragment {
+public class MainHomeFragment extends BaseFragment {
     private View slideshowView,layMainMenu,layOrder;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

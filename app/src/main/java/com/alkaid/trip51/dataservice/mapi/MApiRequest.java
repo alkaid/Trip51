@@ -5,14 +5,18 @@ import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.common.SystemUtil;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.model.response.ResponseData;
 import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.google.gson.Gson;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,22 +26,41 @@ import java.util.Map;
 /**
  * Created by alkaid on 2015/11/18.
  */
-public class MApiRequest extends StringRequest {
+public class MApiRequest<T extends ResponseData> extends Request<T> {
+    private Response.Listener<T> mListener=null;
     protected Map<String,String> beSignForm;
     protected Map<String,String> unBeSignform;
     private String id;
     protected CacheType cacheType;
-    public MApiRequest(String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        this(CacheType.NORMAL,url,beSignForm,unBeSignform,listener,errorListener);
-    }
-    public MApiRequest(CacheType cacheType,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(Method.POST,url,listener,errorListener);
+    protected Map<String, String> params=new HashMap<String,String>();
+    protected String cacheKey;
+    private Class mResponseClss;
+    public MApiRequest(CacheType cacheType,boolean shouldRefreshCache,Class<T> responseClss,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<T> listener, Response.ErrorListener errorListener) {
+//        super(Method.POST,url,listener,errorListener);
+        super(Method.POST, url, errorListener);
+        mResponseClss=responseClss;
+        mListener = listener;
+        setShouldRefreshCache(shouldRefreshCache);
         this.cacheType=cacheType;
         switch (cacheType){
             case DISABLED:
                 setShouldCache(false);
                 break;
-            //TODO 缓存策略的其他情况
+            case SERVICE:
+                setShouldCache(true);
+                break;
+            case NORMAL:
+                setShouldCache(true);
+                setCacheTime(3600*24*365*10);
+                break;
+            case DAILY:
+                setShouldCache(true);
+                setCacheTime(3600*24);
+                break;
+            case HOURLY:
+                setShouldCache(true);
+                setCacheTime(3600*24);
+                break;
         }
         this.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         this.beSignForm=beSignForm;
@@ -51,17 +74,12 @@ public class MApiRequest extends StringRequest {
         unBeSignform.put("accessno", id);
         unBeSignform.put("imei", SystemUtil.getImei(App.instance()));
         unBeSignform.put("appversion",SystemUtil.getSoftVersion(App.instance()));
-    }
 
-    @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
-        Map<String, String> params=new HashMap<String,String>();
-        //TODO 合并beSignForm和unBeSignForm
+        // 合并beSignForm和unBeSignForm
         String sign=signature(beSignForm);
         params.put("sign", sign);
         params.putAll(beSignForm);
         params.putAll(unBeSignform);
-
         if(LogUtil.D){
             LogUtil.v(getUrl());
             StringBuilder sb=new StringBuilder();
@@ -70,13 +88,69 @@ public class MApiRequest extends StringRequest {
             }
             LogUtil.v(sb.toString());
         }
+
+        //设置cachekey
+        Map<String, String> cacheKeyParams=new HashMap<String,String>();
+        cacheKeyParams.putAll(params);
+        //排除公共头里需要参与cacheKey的字段
+        cacheKeyParams.remove("timestamp");
+        cacheKeyParams.remove("phonetype");
+        cacheKeyParams.remove("accessno");
+        cacheKeyParams.remove("imei");
+        cacheKeyParams.remove("appversion");
+        cacheKeyParams.remove("sign");
+        cacheKeyParams.remove("openid");
+        //排除特别字段
+        cacheKeyParams.remove("location");
+        cacheKeyParams.remove("coordinates");
+        cacheKeyParams.remove("sortid");
+        StringBuilder sb=new StringBuilder(getUrl());
+        sb.append("?");
+        for (String key:cacheKeyParams.keySet()){
+            sb.append(key+"="+cacheKeyParams.get(key)+"&");
+        }
+        cacheKey=sb.toString();
+    }
+
+//    public MApiRequest(CacheType disabled, boolean b, String url, Map<String, String> beSignForm, Map<String, String> unBeSignform, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+//        super(Method.POST, url, errorListener);
+//    }
+
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
         return params;
     }
 
     @Override
-    protected void deliverResponse(String response) {
-        LogUtil.v(response);
-        super.deliverResponse(response);
+    public String getCacheKey() {
+//        return super.getCacheKey();
+        return cacheKey;
+    }
+
+    @Override
+    protected void deliverResponse(T response) {
+        mListener.onResponse(response);
+    }
+
+    @Override
+    protected Response<T> parseNetworkResponse(NetworkResponse response) {
+        String parsed;
+        try {
+            parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+        } catch (UnsupportedEncodingException e) {
+            parsed = new String(response.data);
+        }
+        LogUtil.v(parsed);
+//        return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+        Gson gson = new Gson();
+        T resData= (T) gson.fromJson(parsed,mResponseClss);
+        if(resData.isSuccess()){
+            return Response.success(resData, HttpHeaderParser.parseCacheHeaders(response));
+        } else {
+            MApiError e=new MApiError(resData);
+            LogUtil.e(e);
+            return Response.error(e);
+        }
     }
 
     private String signature(Map<String, String> params){
@@ -98,7 +172,4 @@ public class MApiRequest extends StringRequest {
 //        LogUtil.v("signAfter==" + signature);
         return signature;
     }
-
-
-
 }

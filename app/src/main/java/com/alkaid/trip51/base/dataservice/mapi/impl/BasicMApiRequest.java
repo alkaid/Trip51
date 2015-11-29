@@ -1,7 +1,7 @@
 package com.alkaid.trip51.base.dataservice.mapi.impl;
 
 import com.alkaid.trip51.base.dataservice.http.impl.BasicHttpRequest;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.dataservice.mapi.MApiFormInputStream;
 import com.alkaid.trip51.base.dataservice.mapi.MApiRequest;
 

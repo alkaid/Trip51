@@ -7,15 +7,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alkaid.base.common.LogUtil;
-import com.alkaid.base.exception.TradException;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.SimpleCity;
 import com.alkaid.trip51.model.response.ResCityId;
 import com.alkaid.trip51.model.response.ResCityList;
-import com.alkaid.trip51.model.response.ResFoodList;
 import com.alkaid.trip51.util.SpUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,7 +22,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,47 +157,35 @@ public class LocationService {
             //保存
             if(!TextUtils.isEmpty(location.getProvince())){
                 provinceName=location.getProvince();
+                if(provinceName.endsWith("省"))
+                    provinceName = provinceName.substring(0,provinceName.length()-1);
             }
             if(!TextUtils.isEmpty(location.getCity())){
                 cityName=location.getCity();
+                if(cityName.endsWith("市"))
+                    cityName = cityName.substring(0,cityName.length()-1);
             }
             //获取城市列表
-            requestCityList(false,new Response.Listener<String>() {
+            requestCityList(false,new Response.Listener<ResCityList>() {
                 @Override
-                public void onResponse(String response) {
-                    LogUtil.v("cities==="+response);
-                    Gson gson = new Gson();
-                    ResCityList resdata = gson.fromJson(response, ResCityList.class);
-                    if (resdata.isSuccess()) {
-                        //保存
-                        cities=resdata.getCitylist();
-                    } else {
-                        LogUtil.w("获取城市列表失败:" + resdata.getErrcode() + " " + resdata.getMsg());
-                    }
+                public void onResponse(ResCityList resdata) {
+                    //保存
+                    cities=resdata.getCitylist();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    LogUtil.e(error);
                 }
             });
-            requestCityList(true,new Response.Listener<String>() {
+            requestCityList(true,new Response.Listener<ResCityList>() {
                 @Override
-                public void onResponse(String response) {
-                    LogUtil.v("hotcities==="+response);
-                    Gson gson = new Gson();
-                    ResCityList resdata = gson.fromJson(response, ResCityList.class);
-                    if (resdata.isSuccess()) {
-                        //保存
-                        hotCities=resdata.getCitylist();
-                    } else {
-                        LogUtil.w("获取热门城市列表失败:"+resdata.getErrcode()+" "+resdata.getMsg());
-                    }
+                public void onResponse(ResCityList resdata) {
+                    //保存
+                    hotCities=resdata.getCitylist();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    LogUtil.e(error);
                 }
             });
             //匹配当前城市id
@@ -214,23 +199,15 @@ public class LocationService {
             }
             //匹配不到则接口获取cityid
             if(!isMatch){
-                requestCityId(new Response.Listener<String>() {
+                requestCityId(new Response.Listener<ResCityId>() {
                     @Override
-                    public void onResponse(String response) {
-                        Gson gson = new Gson();
-                        ResCityId resdata = gson.fromJson(response, ResCityId.class);
-                        if (resdata.isSuccess()) {
-                            //保存
-                            cityId=resdata.getCityid();
-                        } else {
-                            LogUtil.w("获取城市ID失败:" + resdata.getErrcode() + " " + resdata.getMsg());
-                        }
+                    public void onResponse(ResCityId resdata) {
+                        cityId=resdata.getCityid();
                         saveSp();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        LogUtil.e(error);
                         saveSp();
                     }
                 });
@@ -267,19 +244,19 @@ public class LocationService {
      * @param listener
      * @param errorListener
      */
-    public void requestCityList(boolean ishotlist,Response.Listener<String> listener,Response.ErrorListener errorListener){
+    public void requestCityList(boolean ishotlist,Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("provincename", provinceName);
         final String tag="citylist"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,false,ResCityList.class, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
     }
-    private void requestCityId(Response.Listener<String> listener,Response.ErrorListener errorListener){
+    private void requestCityId(Response.Listener<ResCityId> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("cityname", cityName);
         final String tag="getcityid"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_CITY_GETID, beSignForm, unBeSignform,listener,errorListener), tag);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,false,ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform,listener,errorListener), tag);
     }
 
     private void saveSp(){

@@ -12,7 +12,7 @@ import com.alkaid.base.common.DateUtil;
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
@@ -95,28 +95,20 @@ public class BookingActivity extends BaseActivity {
         final String tag="booking"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_BOOKING, beSignForm, unBeSignform, new Response.Listener<String>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,false,ResOrder.class, MApiService.URL_BOOKING, beSignForm, unBeSignform, new Response.Listener<ResOrder>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                ResOrder resdata = gson.fromJson(response, ResOrder.class);
+            public void onResponse(ResOrder response) {
                 dismissPdg();
-                if (resdata.isSuccess()) {
-                    //TODO 下单成功 刷新UI
-                    String orderNo=resdata.getOuttradeno();
-                    Intent intent=new Intent(context, OrderDetailActivity.class);
-                    intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO,orderNo);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(TradException.create(resdata.getMsg()));
-                }
+                //TODO 下单成功 刷新UI
+                String orderNo=response.getOuttradeno();
+                Intent intent=new Intent(context, OrderDetailActivity.class);
+                intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO,orderNo);
+                startActivity(intent);
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.e("statusCode="+error.networkResponse.statusCode,error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));

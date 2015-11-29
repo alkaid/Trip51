@@ -5,12 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResPayInfo;
@@ -20,7 +19,6 @@ import com.alkaid.trip51.pay.PaymentFactory;
 import com.alkaid.trip51.pay.Result;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,41 +72,33 @@ public class OrderDetailActivity extends BaseActivity {
 //        setDefaultPdgCanceListener(tag);
         getProgressDialog().setCancelable(false);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_PAY, beSignForm, unBeSignform, new Response.Listener<String>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResPayInfo.class, MApiService.URL_PAY, beSignForm, unBeSignform, new Response.Listener<ResPayInfo>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                ResPayInfo resdata = gson.fromJson(response, ResPayInfo.class);
+            public void onResponse(ResPayInfo response) {
                 dismissPdg();
-                if (resdata.isSuccess()) {
-                    //得到支付信息 调用SDK
-                    Payment payment= PaymentFactory.instance(payType, context);
-                    payment.pay(orderNo, resdata.getPayInfo(payType), new PaymentCallback() {
-                        @Override
-                        public void onComplete(Result result) {
-                            switch (result.getCode()){
-                                case RESULT_CANCELED:
-                                    toastShort("您已取消支付");
-                                   break;
-                                case RESULT_OK:
-                                    //TODO 验证支付结果
-                                    break;
-                                default:
-                                    //TODO　支付失败，暂时toast 需换UI
-                                    toastShort("支付失败:"+result.getError());
-                                    break;
-                            }
+                //得到支付信息 调用SDK
+                Payment payment= PaymentFactory.instance(payType, context);
+                payment.pay(orderNo, response.getPayInfo(payType), new PaymentCallback() {
+                    @Override
+                    public void onComplete(Result result) {
+                        switch (result.getCode()) {
+                            case RESULT_CANCELED:
+                                toastShort("您已取消支付");
+                                break;
+                            case RESULT_OK:
+                                //TODO 验证支付结果
+                                break;
+                            default:
+                                //TODO　支付失败，暂时toast 需换UI
+                                toastShort("支付失败:" + result.getError());
+                                break;
                         }
-                    });
-                } else {
-                    //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(TradException.create(resdata.getMsg()));
-                }
+                    }
+                });
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.e("statusCode="+error.networkResponse.statusCode,error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));

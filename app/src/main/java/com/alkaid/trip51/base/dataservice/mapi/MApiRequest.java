@@ -1,8 +1,7 @@
 package com.alkaid.trip51.base.dataservice.mapi;
 
 import com.alkaid.trip51.base.dataservice.http.HttpRequest;
-
-import java.io.InputStream;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 
 public interface MApiRequest
     extends HttpRequest

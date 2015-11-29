@@ -1,25 +1,15 @@
 package com.alkaid.trip51.dataservice.mapi;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-
-import com.alkaid.base.common.IOUtil;
 import com.alkaid.base.common.LogUtil;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
+import com.alkaid.trip51.model.response.ResponseData;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 //OST / HTTP/1.1
 //        Host: localhost:8000
@@ -62,7 +52,7 @@ import java.util.Map;
  * Created by df on 2015/11/24.<br/>
  * 用于multipart/form-data; 上传二进制文件等
  */
-public class MApiMultipartRequest extends MApiRequest {
+public class MApiMultipartRequest<T extends ResponseData> extends MApiRequest<T> {
     private final String twoHyphens = "--";
     private final String lineEnd = "\r\n";
     private final String boundary = "apiclient-" + System.currentTimeMillis();
@@ -71,11 +61,8 @@ public class MApiMultipartRequest extends MApiRequest {
     private ByteArrayOutputStream bos = new ByteArrayOutputStream();
     private DataOutputStream dos = new DataOutputStream(bos);
 
-    public MApiMultipartRequest(String url, Map<String,String> beSignForm, Map<String, String> unBeSignform, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(url,beSignForm,unBeSignform,listener,errorListener);
-    }
-    public MApiMultipartRequest(CacheType cacheType,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(cacheType,url,beSignForm,unBeSignform,listener,errorListener);
+    public MApiMultipartRequest(CacheType cacheType,boolean shouldRefreshCache,Class<T> responseClss,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(cacheType,shouldRefreshCache,responseClss,url,beSignForm,unBeSignform,listener,errorListener);
     }
 
 //    @Override

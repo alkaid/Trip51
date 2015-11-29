@@ -6,19 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResComments;
 import com.alkaid.trip51.shop.adapter.EvaluationAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,23 +48,14 @@ public class EvaluationListFragment extends BaseFragment{
         final String tag="comments"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<String>() {
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResComments.class, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<ResComments>() {
             @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                ResComments resdata = gson.fromJson(response, ResComments.class);
+            public void onResponse(ResComments response) {
                 dismissPdg();
-                if (resdata.isSuccess()) {
-                    //TODO 刷新UI
-                } else {
-                    //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(TradException.create(resdata.getMsg()));
-                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                LogUtil.e("statuscode="+error.networkResponse.statusCode,error);
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));

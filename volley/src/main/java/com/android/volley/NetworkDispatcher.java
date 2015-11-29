@@ -88,6 +88,7 @@ public class NetworkDispatcher extends Thread {
             try {
                 // Take a request from the queue.
                 request = mQueue.take();
+                if (VolleyLog.DEBUG) VolleyLog.v("NetworkDispatcher request tag:"+request.getTag());
             } catch (InterruptedException e) {
                 // We may have been interrupted because it was time to quit.
                 if (mQuit) {
@@ -125,7 +126,10 @@ public class NetworkDispatcher extends Thread {
 
                 // Write to cache if applicable.
                 // TODO: Only update cache metadata instead of entire record for 304s.
-                if (request.shouldCache() && response.cacheEntry != null) {
+//--------------------------modified by alkaid 20151129 begin------------------------------------------------
+//                if (request.shouldCache() && response.cacheEntry != null) {       //orgin
+                if (request.shouldCache() && response.cacheEntry != null &&  response.isSuccess()) {    //modified  只缓存成功的
+//--------------------------modified by alkaid 20151129 end------------------------------------------------
                     mCache.put(request.getCacheKey(), response.cacheEntry);
                     request.addMarker("network-cache-written");
                 }

@@ -88,6 +88,7 @@ public class CacheDispatcher extends Thread {
                 // Get a request from the cache triage queue, blocking until
                 // at least one is available.
                 final Request<?> request = mCacheQueue.take();
+                if (DEBUG) VolleyLog.v("CacheDispatcher request cache key:"+request.getCacheKey());
                 request.addMarker("cache-queue-take");
 
                 // If the request has been canceled, don't bother dispatching it.

@@ -1,7 +1,6 @@
 package com.alkaid.trip51.usercenter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,20 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResLogin;
-import com.alkaid.trip51.model.response.ResSmsValCode;
 import com.alkaid.trip51.util.SecurityUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,26 +56,17 @@ public class NormalLoginFragment extends BaseFragment {
                     setDefaultPdgCanceListener(tag);
                     showPdg();
                     //请求短信
-                    App.mApiService().exec(new MApiRequest(CacheType.DISABLED, MApiService.URL_LOGIN_NORMAL, beSignForm, unBeSignform, new Response.Listener<String>() {
+                    App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResLogin.class, MApiService.URL_LOGIN_NORMAL, beSignForm, unBeSignform, new Response.Listener<ResLogin>() {
                         @Override
-                        public void onResponse(String response) {
-                            Gson gson = new Gson();
-                            ResLogin resLogin = gson.fromJson(response, ResLogin.class);
-                            dismissPdg();
-                            if (resLogin.isSuccess()) {
-                                toastShort("登录成功");
-                                App.accountService().handleLogined(resLogin);
-                                getActivity().setResult(Activity.RESULT_OK);
-                                getActivity().finish();
-                            } else {
-                                //TODO 暂时用handleException 应该换成失败时的正式UI
-                                handleException(TradException.create(resLogin.getMsg()));
-                            }
+                        public void onResponse(ResLogin response) {
+                            toastShort("登录成功");
+                            App.accountService().handleLogined(response);
+                            getActivity().setResult(Activity.RESULT_OK);
+                            getActivity().finish();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            LogUtil.e(error);
                             dismissPdg();
                             handleException(new TradException(error));
                         }
