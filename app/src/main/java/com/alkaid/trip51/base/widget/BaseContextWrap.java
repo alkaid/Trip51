@@ -4,17 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.alkaid.base.view.base.BContextWrap;
-import com.alkaid.trip51.model.response.ResponseCode;
-import com.alkaid.trip51.model.response.ResponseData;
-import com.alkaid.trip51.usercenter.UserLoginActivity;
-import com.android.volley.VolleyError;
 
 public class BaseContextWrap extends BContextWrap {
 	protected App app;
@@ -79,20 +73,4 @@ public class BaseContextWrap extends BContextWrap {
 		}
 		return pdg;
 	}
-
-	public boolean checkIsNeedReloginInActivity(VolleyError volleyError,Activity context){
-		if(app.accountService().checkIsNeedRelogin(volleyError)) {
-			context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
-			return true;
-		}
-		return false;
-	}
-	public boolean checkIsNeedReloginInFragment(VolleyError volleyError,Fragment context){
-		if(app.accountService().checkIsNeedRelogin(volleyError)) {
-			context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), 1);
-			return true;
-		}
-		return false;
-	}
-
 }

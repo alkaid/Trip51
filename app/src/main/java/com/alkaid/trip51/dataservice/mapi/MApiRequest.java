@@ -100,7 +100,7 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         cacheKeyParams.remove("imei");
         cacheKeyParams.remove("appversion");
         cacheKeyParams.remove("sign");
-        cacheKeyParams.remove("openid");
+//        cacheKeyParams.remove("openid");
         //排除特别字段
         cacheKeyParams.remove("location");
         cacheKeyParams.remove("coordinates");

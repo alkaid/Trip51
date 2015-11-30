@@ -1,11 +1,13 @@
 package com.alkaid.trip51.base.widget;
 
 import com.alkaid.base.view.base.BApp;
+import com.alkaid.trip51.dataservice.ConfigService;
+import com.alkaid.trip51.dataservice.InitListener;
 import com.alkaid.trip51.dataservice.OrderService;
-import com.alkaid.trip51.dataservice.account.AccountService;
-import com.alkaid.trip51.dataservice.location.LocationService;
+import com.alkaid.trip51.dataservice.AccountService;
+import com.alkaid.trip51.dataservice.LocationService;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
-import com.alkaid.trip51.dataservice.shop.ShopService;
+import com.alkaid.trip51.dataservice.ShopService;
 
 /**
  * @author Alkaid
@@ -13,22 +15,30 @@ import com.alkaid.trip51.dataservice.shop.ShopService;
 
 public class App extends BApp {
     private static final String TAG="App";
+    public static final String INIT_TAG_APP="INIT_TAG_APP";
 
     private MApiService mApiService;
     private AccountService accountService;
     private LocationService locationService;
     private ShopService shopService;
     private OrderService orderService;
+    private ConfigService configService;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance=this;
+//        init();
+    }
+
+    public void init(InitListener initListener){
         mApiService=MApiService.create(this);
         accountService=AccountService.create(this);
         locationService=LocationService.create(this);
         shopService=ShopService.create(this);
         orderService=OrderService.create(this);
+        configService=ConfigService.create(this);
+        initListener.onComplete(INIT_TAG_APP);
     }
 
     /**
@@ -55,6 +65,6 @@ public class App extends BApp {
     public static OrderService orderService(){
         return instance().orderService;
     }
-
+    public static ConfigService configService(){return instance().configService;}
 
 }

@@ -5,7 +5,6 @@ import android.view.Window;
 
 import com.alkaid.base.view.base.BContextWrap;
 import com.alkaid.base.view.base.BFragmentActivity;
-import com.alkaid.trip51.model.response.ResponseData;
 import com.android.volley.VolleyError;
 
 public class BaseFragmentActivity extends BFragmentActivity {
@@ -43,6 +42,9 @@ public class BaseFragmentActivity extends BFragmentActivity {
 		baseContextWrap.toastShortAsync(msg);
 	}
 	protected boolean checkIsNeedRelogin(VolleyError volleyError){
-		return baseContextWrap.checkIsNeedReloginInActivity(volleyError, this);
+		return app.accountService().checkIsNeedRelogin(volleyError, this);
+	}
+	protected boolean checkLogined(){
+		return app.accountService().checkLogined(this);
 	}
 }

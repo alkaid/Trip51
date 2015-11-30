@@ -65,7 +65,9 @@ public class OrderDetailActivity extends BaseActivity {
 
     private void pay(final int payType){
         //检查登录
-        App.accountService().checkLogined(this);
+        if(!checkLogined()){
+            return;
+        }
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         beSignForm.put("openid", App.accountService().getOpenInfo().getOpenid());
@@ -105,11 +107,16 @@ public class OrderDetailActivity extends BaseActivity {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));
+                checkIsNeedRelogin(error);
             }
         }), tag);
     }
 
     private void checkPay(){
+        //检查登录
+        if(!checkLogined()){
+            return;
+        }
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         beSignForm.put("openid", App.accountService().getOpenInfo().getOpenid());

@@ -1,10 +1,11 @@
-package com.alkaid.trip51.dataservice.account;
+package com.alkaid.trip51.dataservice;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
@@ -100,6 +101,33 @@ public class AccountService {
         }
         return true;
     }
+    /**
+     * 检查是否已登录 若未登录 启动登录页面
+     * @param context
+     * @return
+     */
+    public boolean checkLogined(Fragment context){
+        if(TextUtils.isEmpty(openInfo.getOpenid())){
+            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), 1);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkIsNeedRelogin(VolleyError volleyError,Activity context){
+        if(checkIsNeedRelogin(volleyError)) {
+            context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
+            return true;
+        }
+        return false;
+    }
+    public boolean checkIsNeedRelogin(VolleyError volleyError,Fragment context){
+        if(checkIsNeedRelogin(volleyError)) {
+            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), 1);
+            return true;
+        }
+        return false;
+    }
 
     private boolean checkIsNeedRelogin(ResponseData responseData){
         if(!responseData.isSuccess()&&responseData.getErrcode()== ResponseCode.ERROR_NEED_RELOGIN){
@@ -110,7 +138,7 @@ public class AccountService {
         }
         return false;
     }
-    public boolean checkIsNeedRelogin(VolleyError volleyError){
+    private boolean checkIsNeedRelogin(VolleyError volleyError){
         if(volleyError instanceof MApiError){
             MApiError e=(MApiError)volleyError;
             return checkIsNeedRelogin(e.data);

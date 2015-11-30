@@ -1,4 +1,4 @@
-package com.alkaid.trip51.dataservice.location;
+package com.alkaid.trip51.dataservice;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +32,7 @@ import java.util.Map;
  * Created by alkaid on 2015/11/19.
  */
 public class LocationService {
+    public static final String INIT_TAG_START_LOCATION="INIT_TAG_START_LOCATION";
     public static final String ACTION_RECIVE_LOCATION="action.trip51.receive.location";
     public static final String BUNDLE_KEY_LOCATION="BUNDLE_KEY_LOCATION";
     private static LocationService instance;
@@ -44,6 +45,7 @@ public class LocationService {
     private long cityId=311;
     private List<SimpleCity> cities=new ArrayList<SimpleCity>();
     private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
+    private InitListener initListener;
 
     private LocationService(Context context){
         this.context=context;
@@ -66,7 +68,7 @@ public class LocationService {
         provinceName= sp.getString(SpUtil.key_provincename,provinceName);
         cityName= sp.getString(SpUtil.key_cityname,cityName);
         cityId= sp.getLong(SpUtil.key_cityid, cityId);
-        coordinates=sp.getString(SpUtil.key_coordinates,coordinates);
+        coordinates=sp.getString(SpUtil.key_coordinates, coordinates);
         mLocationClient = new LocationClient(context);
         mLocationClient.setLocOption(getDefaultOption());
         mMyLocationListener = new MyLocationListener();
@@ -81,6 +83,11 @@ public class LocationService {
         //TODO 需要解决首页显示时还没定位成功的问题，可以考虑用欢迎页面定位，coordinates有值了才跳过
         LogUtil.v("coordinate=" + coordinates);
         return coordinates;
+    }
+
+    public void initLocation(InitListener initListener){
+        mLocationClient.start();
+        this.initListener=initListener;
     }
 
     /**
@@ -217,6 +224,10 @@ public class LocationService {
                 saveSp();
             }
 
+            if(null!=initListener){
+                initListener.onComplete(INIT_TAG_START_LOCATION);
+                initListener=null;
+            }
         }
     }
 
@@ -263,7 +274,7 @@ public class LocationService {
 
     private void saveSp(){
         SharedPreferences.Editor ed=SpUtil.getSp().edit();
-        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid,cityId).putString(SpUtil.key_cityname,cityName).putString(SpUtil.key_coordinates,coordinates).commit();
+        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid, cityId).putString(SpUtil.key_cityname, cityName).putString(SpUtil.key_coordinates,coordinates).commit();
     }
 
     /**

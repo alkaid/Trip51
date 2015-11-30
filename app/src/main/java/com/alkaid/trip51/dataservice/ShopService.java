@@ -1,4 +1,4 @@
-package com.alkaid.trip51.dataservice.shop;
+package com.alkaid.trip51.dataservice;
 
 import android.content.Context;
 

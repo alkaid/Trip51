@@ -59,7 +59,9 @@ public class BookingActivity extends BaseActivity {
 
     private void booking(){
         //检查登录
-        App.accountService().checkLogined(this);
+        if(!checkLogined()){
+            return;
+        }
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         //构造订单伪数据
@@ -112,6 +114,7 @@ public class BookingActivity extends BaseActivity {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));
+                checkIsNeedRelogin(error);
             }
         }), tag);
     }

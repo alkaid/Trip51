@@ -1,14 +1,9 @@
 package com.alkaid.trip51.base.widget;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Looper;
-import android.widget.Toast;
 
 import com.alkaid.base.view.base.BContextWrap;
 import com.alkaid.base.view.base.BFragment;
-import com.alkaid.trip51.model.response.ResponseData;
 import com.android.volley.VolleyError;
 
 public class BaseFragment extends BFragment {
@@ -45,6 +40,9 @@ public class BaseFragment extends BFragment {
 		baseContextWrap.toastShortAsync(msg);
 	}
 	protected boolean checkIsNeedRelogin(VolleyError volleyError){
-		return baseContextWrap.checkIsNeedReloginInFragment(volleyError, this);
+		return app.accountService().checkIsNeedRelogin(volleyError, this);
+	}
+	protected boolean checkLogined(){
+		return app.accountService().checkLogined(this);
 	}
 }

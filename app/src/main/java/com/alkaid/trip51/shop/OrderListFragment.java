@@ -14,9 +14,7 @@ import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
-import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.response.ResOrderList;
-import com.alkaid.trip51.model.response.ResPayStatus;
 import com.alkaid.trip51.shop.adapter.OrderListAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -49,6 +47,10 @@ public class OrderListFragment extends BaseFragment {
     }
 
     private void loadData(int orderStatus){
+        //检查登录
+        if(!checkLogined()){
+            return;
+        }
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         beSignForm.put("openid", App.accountService().getOpenInfo().getOpenid());
@@ -67,6 +69,7 @@ public class OrderListFragment extends BaseFragment {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));
+                checkIsNeedRelogin(error);
                 checkIsNeedRelogin(error);
             }
         }), tag);
