@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" style="@style/ListViewItem">
+    android:orientation="horizontal" style="@style/ListViewItem"
+    android:paddingLeft="@dimen/margin_page_small" android:paddingRight="@dimen/margin_page_small">
     <ImageView android:id="@+id/imgShopThumb" android:src="@drawable/temp_shop_thumb" style="@style/ListViewShopImage"/>
     <LinearLayout android:orientation="vertical" style="@style/ListViewArticleLay">
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">

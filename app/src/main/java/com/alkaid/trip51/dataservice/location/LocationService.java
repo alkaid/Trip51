@@ -38,7 +38,7 @@ public class LocationService {
     private Context context;
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
-    private String coordinates="";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
+    private String coordinates="113.917554,22.495232";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
     private String provinceName="陕西";
     private String cityName="西安";
     private long cityId=311;
@@ -66,6 +66,7 @@ public class LocationService {
         provinceName= sp.getString(SpUtil.key_provincename,provinceName);
         cityName= sp.getString(SpUtil.key_cityname,cityName);
         cityId= sp.getLong(SpUtil.key_cityid, cityId);
+        coordinates=sp.getString(SpUtil.key_coordinates,coordinates);
         mLocationClient = new LocationClient(context);
         mLocationClient.setLocOption(getDefaultOption());
         mMyLocationListener = new MyLocationListener();
@@ -77,6 +78,7 @@ public class LocationService {
     }
 
     public String getCoordinates() {
+        //TODO 需要解决首页显示时还没定位成功的问题，可以考虑用欢迎页面定位，coordinates有值了才跳过
         LogUtil.v("coordinate=" + coordinates);
         return coordinates;
     }
@@ -261,7 +263,7 @@ public class LocationService {
 
     private void saveSp(){
         SharedPreferences.Editor ed=SpUtil.getSp().edit();
-        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid,cityId).putString(SpUtil.key_cityname,cityName).commit();
+        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid,cityId).putString(SpUtil.key_cityname,cityName).putString(SpUtil.key_coordinates,coordinates).commit();
     }
 
     /**

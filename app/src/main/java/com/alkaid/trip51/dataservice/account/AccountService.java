@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
+import com.alkaid.trip51.dataservice.mapi.MApiError;
 import com.alkaid.trip51.model.account.Account;
 import com.alkaid.trip51.model.account.OpenInfo;
 import com.alkaid.trip51.model.response.ResLogin;
@@ -15,6 +16,7 @@ import com.alkaid.trip51.model.response.ResponseCode;
 import com.alkaid.trip51.model.response.ResponseData;
 import com.alkaid.trip51.usercenter.UserLoginActivity;
 import com.alkaid.trip51.util.SpUtil;
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
 /**
@@ -99,19 +101,19 @@ public class AccountService {
         return true;
     }
 
-    public boolean checkIsNeedRelogin(ResponseData responseData,Activity context){
-        if(checkIsNeedRelogin(responseData)) {
-            context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
-            return true;
-        }
-        return false;
-    }
-    public boolean checkIsNeedRelogin(ResponseData responseData){
+    private boolean checkIsNeedRelogin(ResponseData responseData){
         if(!responseData.isSuccess()&&responseData.getErrcode()== ResponseCode.ERROR_NEED_RELOGIN){
             this.account=null;
             this.openInfo=null;
             logined=false;
             return true;
+        }
+        return false;
+    }
+    public boolean checkIsNeedRelogin(VolleyError volleyError){
+        if(volleyError instanceof MApiError){
+            MApiError e=(MApiError)volleyError;
+            return checkIsNeedRelogin(e.data);
         }
         return false;
     }

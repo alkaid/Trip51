@@ -24,4 +24,29 @@ public class NetDataConstants {
 
     /**时间格式化用*/
     public static final String DATETIME_FORMAT="yyyy-MM-dd hh:mm";
+
+    /**支付状态：成功*/
+    public static final int PAY_STATUS_SUCCESS=1;
+    /**支付状态：失败*/
+    public static final int PAY_STATUS_FAILED=2;
+    /**支付状态：待确认*/
+    public static final int PAY_STATUS_WAITTING=3;
+
+    /**查询用的订单状态：可使用*/
+    public static final int CONDITION_ORDER_STATUS_NORMAL=1;
+    /**查询用的订单状态：待付款*/
+    public static final int CONDITION_ORDER_STATUS_UNPAY=2;
+    /**查询用的订单状态：退款单*/
+    public static final int CONDITION_ORDER_STATUS_REFUND=3;
+
+    /**订单状态：已提交*/
+    public static final int ORDER_STATUS_COMMITED=1;
+    /**订单状态：已支付*/
+    public static final int ORDER_STATUS_PAYED=2;
+    /**订单状态：已消费*/
+    public static final int ORDER_STATUS_CONSUMED=3;
+    /**订单状态：已过期*/
+    public static final int ORDER_STATUS_EXPIRED=4;
+    /**订单状态：已退款*/
+    public static final int ORDER_STATUS_REFUND=5;
 }

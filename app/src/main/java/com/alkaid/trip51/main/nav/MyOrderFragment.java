@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseTabPageViewFragment;
+import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.shop.OrderListFragment;
 
 /**
@@ -24,12 +25,18 @@ public class MyOrderFragment extends BaseTabPageViewFragment {
 
     @Override
     protected void addTabs(TabHost mTabHost, TabsAdapter mTabsAdapter) {
+        Bundle data=new Bundle();
+        data.putInt(OrderListFragment.BUNDLE_KEY_CONDITION_ORDER_STATUS, NetDataConstants.CONDITION_ORDER_STATUS_NORMAL);
         mTabsAdapter.addTab(mTabHost.newTabSpec("可使用").setIndicator("可使用"),
-                OrderListFragment.class, null);
+                OrderListFragment.class, data);
+        data=new Bundle();
+        data.putInt(OrderListFragment.BUNDLE_KEY_CONDITION_ORDER_STATUS, NetDataConstants.CONDITION_ORDER_STATUS_UNPAY);
         mTabsAdapter.addTab(mTabHost.newTabSpec("待付款").setIndicator("待付款"),
-                OrderListFragment.class, null);
+                OrderListFragment.class, data);
+        data=new Bundle();
+        data.putInt(OrderListFragment.BUNDLE_KEY_CONDITION_ORDER_STATUS, NetDataConstants.CONDITION_ORDER_STATUS_REFUND);
         mTabsAdapter.addTab(mTabHost.newTabSpec("退款单").setIndicator("退款单"),
-                OrderListFragment.class, null);
+                OrderListFragment.class, data);
     }
     private void initTitleBar(View v){
         View layTitleBar=v.findViewById(R.id.title_bar);

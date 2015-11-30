@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.alkaid.base.view.base.BContextWrap;
 import com.alkaid.base.view.base.BFragment;
+import com.alkaid.trip51.model.response.ResponseData;
+import com.android.volley.VolleyError;
 
 public class BaseFragment extends BFragment {
 	private BaseContextWrap baseContextWrap;
@@ -41,5 +43,8 @@ public class BaseFragment extends BFragment {
 	}
 	protected void toastShortAsync(String msg){
 		baseContextWrap.toastShortAsync(msg);
+	}
+	protected boolean checkIsNeedRelogin(VolleyError volleyError){
+		return baseContextWrap.checkIsNeedReloginInFragment(volleyError, this);
 	}
 }

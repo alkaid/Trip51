@@ -6,6 +6,8 @@ import android.view.Window;
 
 import com.alkaid.base.view.base.BActivity;
 import com.alkaid.base.view.base.BContextWrap;
+import com.alkaid.trip51.model.response.ResponseData;
+import com.android.volley.VolleyError;
 
 public class BaseActivity extends BActivity {
 	private BaseContextWrap baseContextWrap;
@@ -44,6 +46,9 @@ public class BaseActivity extends BActivity {
 	}
 	protected void toastShortAsync(String msg){
 		baseContextWrap.toastShortAsync(msg);
+	}
+	protected boolean checkIsNeedRelogin(VolleyError volleyError){
+		return baseContextWrap.checkIsNeedReloginInActivity(volleyError, this);
 	}
 
 }

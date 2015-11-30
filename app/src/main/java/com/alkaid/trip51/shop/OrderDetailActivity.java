@@ -12,7 +12,9 @@ import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.response.ResPayInfo;
+import com.alkaid.trip51.model.response.ResPayStatus;
 import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.PaymentFactory;
@@ -40,6 +42,7 @@ public class OrderDetailActivity extends BaseActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnPay.setEnabled(false);
                 pay(Payment.PAYTYPE_ALI);
             }
         });
@@ -72,12 +75,12 @@ public class OrderDetailActivity extends BaseActivity {
 //        setDefaultPdgCanceListener(tag);
         getProgressDialog().setCancelable(false);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResPayInfo.class, MApiService.URL_PAY, beSignForm, unBeSignform, new Response.Listener<ResPayInfo>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResPayInfo.class, MApiService.URL_PAY, beSignForm, unBeSignform, new Response.Listener<ResPayInfo>() {
             @Override
             public void onResponse(ResPayInfo response) {
                 dismissPdg();
                 //得到支付信息 调用SDK
-                Payment payment= PaymentFactory.instance(payType, context);
+                Payment payment = PaymentFactory.instance(payType, context);
                 payment.pay(orderNo, response.getPayInfo(payType), new PaymentCallback() {
                     @Override
                     public void onComplete(Result result) {
@@ -102,6 +105,41 @@ public class OrderDetailActivity extends BaseActivity {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));
+            }
+        }), tag);
+    }
+
+    private void checkPay(){
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        beSignForm.put("openid", App.accountService().getOpenInfo().getOpenid());
+        unBeSignform.put("outtradeno", orderNo);
+        final String tag="checkPayStatus"+(int)(Math.random()*1000);
+//        setDefaultPdgCanceListener(tag);
+        getProgressDialog().setCancelable(false);
+        showPdg();
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResPayStatus.class, MApiService.URL_PAY_STATUS, beSignForm, unBeSignform, new Response.Listener<ResPayStatus>() {
+            @Override
+            public void onResponse(ResPayStatus response) {
+                dismissPdg();
+                //TODO 更新UI执行相应跳转
+                switch (response.getPaystatus()){
+                    case NetDataConstants.PAY_STATUS_SUCCESS:
+                        break;
+                    case NetDataConstants.PAY_STATUS_FAILED:
+                        break;
+                    case NetDataConstants.PAY_STATUS_WAITTING:
+                        break;
+                }
+                toastShort(response.getMsg());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dismissPdg();
+                //TODO 暂时用handleException 应该换成失败时的正式UI
+                handleException(new TradException(error));
+                checkIsNeedRelogin(error);
             }
         }), tag);
     }

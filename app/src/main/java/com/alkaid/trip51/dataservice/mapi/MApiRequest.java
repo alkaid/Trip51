@@ -172,9 +172,9 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         int i=2;
         Cache cache=App.mApiService().getCache();
         while (true){
-            String key=this.cacheKey.replaceFirst("pageindex=%d","pageindex="+i);
+            String key=this.cacheKey.replaceFirst("pageindex=\\d+&","pageindex="+i+"&");;
             if(cache.get(key)==null){
-                LogUtil.v("共删除至第"+i+"页缓存");
+                LogUtil.v("共删除至第"+(i-1)+"页缓存");
                 break;
             }
             cache.remove(key);
