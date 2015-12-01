@@ -11,9 +11,12 @@
         android:layout_weight="15"
         android:orientation="vertical">
 
-        <com.alkaid.trip51.widget.RelationListView
+        <com.alkaid.trip51.widget.linkedlistview.LinkedListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+<!--        <com.alkaid.trip51.widget.RelationListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>-->
     </LinearLayout>
 
     <LinearLayout

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="actionbar_title_color">#ffffffff</color>
-    <color name="advance_suggest_blue">#ff3388bb</color>
-    <color name="alpha_black">#aa000000</color>
     <color name="alpha_home_listview_black">#08000000</color>
     <color name="alpha_home_listview_white">#aaffffff</color>
     <color name="background_gray">#ffdcdcdc</color>
@@ -92,10 +89,7 @@
     <color name="home_navigator_light_gray">#ffbd733c</color>
     <color name="home_new_user_green">#ff52bd18</color>
     <color name="hospital_rankinfo_blue">#ff42a5f5</color>
-    <color name="hotel_applicabledeal_item_hotel">#fffff4f0</color>
-    <color name="hotel_applicabledeal_item_travel">#ffebfff8</color>
     <color name="hotel_booking_green">#ff08c219</color>
-    <color name="hotel_calender_bg">#fff1f1f1</color>
     <color name="hotel_calender_select">#fffa5630</color>
     <color name="hotel_calender_select_inner_1">#fffcf1ee</color>
     <color name="hotel_calender_select_inner_2">#ffffa385</color>
@@ -339,9 +333,6 @@
     <color name="white">#ffffffff</color>
     <color name="white_background">#00ffffff</color>
     <color name="white_transparent">#80ffffff</color>
-    <color name="wm_banner_bg">#fffff9df</color>
-    <color name="wm_border_gray">#ffd7d7d7</color>
-    <color name="wm_cart_bg">#b2000000</color>
     <color name="wm_center_trans">#f2ffffff</color>
     <color name="wm_common_green">#ff65c07a</color>
     <color name="wm_compensate_color">#ff4a84b8</color>
@@ -364,16 +355,7 @@
     <color name="yellow_1">#ffff6501</color>
     <color name="yellow_2">#ffff9248</color>
     <color name="yellow_3">#ffe6b523</color>
-    <color name="yy_bookingdetail_phone">#ff3388bb</color>
-    <color name="yy_photo_menu_desc_bg">#ffff6633</color>
-    <color name="yy_pressed_bg">#fff9f9f9</color>
-    <color name="yy_tag_color">#ffff9470</color>
-    <color name="yy_ticket_icon">#ffb63a14</color>
-    <color name="yy_ticket_text_color">#ffecc18a</color>
-    <color name="yy_translucent_deep_gray">#ffacacac</color>
-    <color name="yy_translucent_light_gray">#ffd0d0d0</color>
-    <color name="yy_translucent_light_red">#ffffbcad</color>
-    
+
     <color name="divide_gray_default">#ffe9e9e9</color>
     <color name="frame_gray_default">#ffcfcfcf</color>
     <color name="tab_bottom_background_default">#FFF58A42</color>
@@ -382,6 +364,11 @@
     <color name="menu_navigator_background_color">#E0E0E0</color>
     <color name="menu_content_title_color">#5B5B5B</color>
     <color name="menu_content_title_backgournd_color">#E0E0E0</color>
-    <color name="menu_divider">#8E8E8E</color>
+    <color name="menu_divider">#E6E6E6</color>
 
+    <!--LinkedListView相关color-->
+    <color name="linked_listview_left_background">#EDEDEB</color>
+    <color name="linked_listview_right_section_background">#DCDDD8</color>
+    <color name="linked_listview_right_divider_color">#EDEDEB</color>
+    <color name="linked_listview_left_divider_color">#E2E2E0</color>
 </resources>

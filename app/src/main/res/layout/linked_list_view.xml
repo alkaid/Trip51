@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+    <ListView
+        android:id="@+id/left_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="23"
+        android:background="@color/linked_listview_left_background"
+        >
+
+    </ListView>
+    <com.alkaid.trip51.widget.pinnedheaderlistview.PinnedHeaderListView
+        android:id="@+id/pinnedListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:background="@color/white_background"/>
+
+</LinearLayout>
