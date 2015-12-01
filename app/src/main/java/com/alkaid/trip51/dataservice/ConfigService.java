@@ -40,7 +40,7 @@ public class ConfigService {
     private void init(){
 
     }
-    public void initConfig(final InitListener initListener){
+    public void initConfig(final ServiceListener serviceListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         final String tag="getConfig"+(int)(Math.random()*1000);
@@ -48,12 +48,12 @@ public class ConfigService {
             @Override
             public void onResponse(ResConfig response) {
                 config=response;
-                initListener.onComplete(INIT_TAG_GET_CONFIG);
+                serviceListener.onComplete(INIT_TAG_GET_CONFIG);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                initListener.onComplete(INIT_TAG_GET_CONFIG);
+                serviceListener.onComplete(INIT_TAG_GET_CONFIG);
             }
         }), tag);
     }

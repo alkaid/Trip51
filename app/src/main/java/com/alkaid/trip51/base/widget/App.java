@@ -2,7 +2,7 @@ package com.alkaid.trip51.base.widget;
 
 import com.alkaid.base.view.base.BApp;
 import com.alkaid.trip51.dataservice.ConfigService;
-import com.alkaid.trip51.dataservice.InitListener;
+import com.alkaid.trip51.dataservice.ServiceListener;
 import com.alkaid.trip51.dataservice.OrderService;
 import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.LocationService;
@@ -31,14 +31,14 @@ public class App extends BApp {
 //        init();
     }
 
-    public void init(InitListener initListener){
+    public void init(ServiceListener serviceListener){
         mApiService=MApiService.create(this);
         accountService=AccountService.create(this);
         locationService=LocationService.create(this);
         shopService=ShopService.create(this);
         orderService=OrderService.create(this);
         configService=ConfigService.create(this);
-        initListener.onComplete(INIT_TAG_APP);
+        serviceListener.onComplete(INIT_TAG_APP);
     }
 
     /**

@@ -9,13 +9,13 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.ConfigService;
-import com.alkaid.trip51.dataservice.InitListener;
+import com.alkaid.trip51.dataservice.ServiceListener;
 import com.alkaid.trip51.dataservice.LocationService;
 
 /**
  * Created by alkaid on 2015/10/29.
  */
-public class SplashScreenActivity extends BaseActivity implements InitListener{
+public class SplashScreenActivity extends BaseActivity implements ServiceListener {
     private static final long SHOW_TIME=3000;
     private long begintime;
     private int inited=0;
@@ -33,7 +33,7 @@ public class SplashScreenActivity extends BaseActivity implements InitListener{
                     @Override
                     public void run() {
                         App.instance().init(SplashScreenActivity.this);
-                        App.locationService().initLocation(SplashScreenActivity.this);
+                        App.locationService().startLocation(SplashScreenActivity.this);
                         App.configService().initConfig(SplashScreenActivity.this);
                     }
                 });

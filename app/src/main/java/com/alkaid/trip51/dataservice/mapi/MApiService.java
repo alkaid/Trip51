@@ -35,6 +35,7 @@ public class MApiService {
     public static final String URL_CONFIG=weburl+"sys/init/"+PROTOCOL_VERSION;
     public static final String URL_USER_COMMENTS=weburl+"comment/list/"+PROTOCOL_VERSION;
     public static final String URL_USER_COLLECTS=weburl+"shop/collectlist/"+PROTOCOL_VERSION;
+    public static final String URL_SHOP_CONDITION=weburl+"shop/init/"+PROTOCOL_VERSION;
 
     public static final int SMSCODE_FOR_REGISTER=1;
     public static final int SMSCODE_FOR_LOGIN=2;

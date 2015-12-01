@@ -14,6 +14,7 @@ import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.SimpleCity;
 import com.alkaid.trip51.model.response.ResCityId;
 import com.alkaid.trip51.model.response.ResCityList;
+import com.alkaid.trip51.model.response.ResShopCondition;
 import com.alkaid.trip51.util.SpUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,7 +46,10 @@ public class LocationService {
     private long cityId=311;
     private List<SimpleCity> cities=new ArrayList<SimpleCity>();
     private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
-    private InitListener initListener;
+    private ResShopCondition condition;
+    private ServiceListener serviceListener;
+    private int taskStep=0; //已经执行完了哪些异步任务
+    private boolean isLocating=false;
 
     private LocationService(Context context){
         this.context=context;
@@ -85,9 +89,15 @@ public class LocationService {
         return coordinates;
     }
 
-    public void initLocation(InitListener initListener){
+    public void startLocation(ServiceListener serviceListener){
+        //TODO 为避免线程问题 这里先用标识位判断，已在定位时拒绝定位请求。后期必须改进，应用BlockingQueue加Thread或Task解决
+        if(isLocating){
+            LogUtil.w("Location Service is busy now!");
+            return;
+        }
+        isLocating=true;
         mLocationClient.start();
-        this.initListener=initListener;
+        this.serviceListener = serviceListener;
     }
 
     /**
@@ -163,6 +173,7 @@ public class LocationService {
             intent.putExtra(BUNDLE_KEY_LOCATION, location);
             coordinates=location.getLongitude()+","+location.getLatitude();
             context.sendBroadcast(intent);
+            taskStep|=1;
             //保存
             if(!TextUtils.isEmpty(location.getProvince())){
                 provinceName=location.getProvince();
@@ -180,21 +191,30 @@ public class LocationService {
                 public void onResponse(ResCityList resdata) {
                     //保存
                     cities=resdata.getCitylist();
+                    taskStep|=2;
+                    onAnyTaskComplete();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    taskStep|=2;
+                    onAnyTaskComplete();
                 }
             });
+            //获取热门城市
             requestCityList(true,new Response.Listener<ResCityList>() {
                 @Override
                 public void onResponse(ResCityList resdata) {
                     //保存
                     hotCities=resdata.getCitylist();
+                    taskStep|=4;
+                    onAnyTaskComplete();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    taskStep|=4;
+                    onAnyTaskComplete();
                 }
             });
             //匹配当前城市id
@@ -212,21 +232,16 @@ public class LocationService {
                     @Override
                     public void onResponse(ResCityId resdata) {
                         cityId=resdata.getCityid();
-                        saveSp();
+                        onLocationChanged();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        saveSp();
+                        onLocationChanged();
                     }
                 });
             }else{
-                saveSp();
-            }
-
-            if(null!=initListener){
-                initListener.onComplete(INIT_TAG_START_LOCATION);
-                initListener=null;
+                onLocationChanged();
             }
         }
     }
@@ -269,12 +284,20 @@ public class LocationService {
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("cityname", cityName);
         final String tag="getcityid"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,false,ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform,listener,errorListener), tag);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform, listener, errorListener), tag);
     }
 
     private void saveSp(){
         SharedPreferences.Editor ed=SpUtil.getSp().edit();
-        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid, cityId).putString(SpUtil.key_cityname, cityName).putString(SpUtil.key_coordinates,coordinates).commit();
+        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid, cityId).putString(SpUtil.key_cityname, cityName).putString(SpUtil.key_coordinates, coordinates).commit();
+    }
+
+    //任何异步任务结束后都要执行该方法来判断是否所有任务逗已经完成
+    private void onAnyTaskComplete(){
+        if(null!= serviceListener && taskStep==(1|2|4|8)){
+            serviceListener.onComplete(INIT_TAG_START_LOCATION);
+            serviceListener =null;
+        }
     }
 
     /**
@@ -285,7 +308,29 @@ public class LocationService {
     public void changeCity(long cityId,String cityName){
         this.cityId=cityId;
         this.cityName=cityName;
+        onLocationChanged();
+    }
+
+    private void onLocationChanged(){
         saveSp();
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        unBeSignform.put("cityid", cityId+"");
+        final String tag="getConditions"+(int)(Math.random()*1000);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResShopCondition.class, MApiService.URL_SHOP_CONDITION, beSignForm, unBeSignform, new Response.Listener<ResShopCondition>() {
+            @Override
+            public void onResponse(ResShopCondition response) {
+                condition=response;
+                taskStep|=8;
+                onAnyTaskComplete();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                taskStep|=8;
+                onAnyTaskComplete();
+            }
+        }), tag);
     }
 
     public String getProvinceName() {
@@ -330,5 +375,13 @@ public class LocationService {
 
     public void setHotCities(List<SimpleCity> hotCities) {
         this.hotCities = hotCities;
+    }
+
+    public ResShopCondition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(ResShopCondition condition) {
+        this.condition = condition;
     }
 }
