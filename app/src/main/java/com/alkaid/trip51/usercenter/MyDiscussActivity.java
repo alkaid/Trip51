@@ -68,7 +68,7 @@ public class MyDiscussActivity extends BaseActivity {
         final String tag="myComments"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResComments.class, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<ResComments>() {
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResComments.class, MApiService.URL_USER_COMMENTS, beSignForm, unBeSignform, new Response.Listener<ResComments>() {
             @Override
             public void onResponse(ResComments response) {
                 dismissPdg();

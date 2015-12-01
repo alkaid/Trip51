@@ -44,7 +44,8 @@
         android:supportsRtl="true"
         android:name="com.alkaid.trip51.base.widget.App"
         android:theme="@style/AppThemeOrangeTab" >
-        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="com.alkaid.trip51.main.nav.SplashScreenActivity" android:screenOrientation="nosensor" android:theme="@style/Theme.DianpingNoTitle.SplashBackground">
+        <!--android:theme="@style/Theme.DianpingNoTitle.SplashBackground"-->
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="com.alkaid.trip51.main.nav.SplashScreenActivity" android:screenOrientation="nosensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

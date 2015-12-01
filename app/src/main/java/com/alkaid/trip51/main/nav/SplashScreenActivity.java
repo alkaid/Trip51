@@ -3,6 +3,7 @@ package com.alkaid.trip51.main.nav;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.Window;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
@@ -20,6 +21,7 @@ public class SplashScreenActivity extends BaseActivity implements InitListener{
     private int inited=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
 
