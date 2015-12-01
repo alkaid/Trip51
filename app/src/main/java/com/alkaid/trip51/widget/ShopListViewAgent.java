@@ -15,7 +15,7 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.enums.ShopType;
 import com.alkaid.trip51.model.response.ResShopList;
-import com.alkaid.trip51.shop.MenuActivity;
+import com.alkaid.trip51.shop.ShopDetailActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,7 +45,7 @@ public class ShopListViewAgent {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 App.shopService().setCurrShopid(id);    //保存当前shopid
-                Intent intent = new Intent(context, MenuActivity.class);
+                Intent intent = new Intent(context, ShopDetailActivity.class);
                 fragment.startActivity(intent);
             }
         });

@@ -767,15 +767,6 @@
         <item name="android:background">@color/divide_gray_default</item>
     </style>
 
-    <style name="DividerViewVertical.right">
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_gravity">right</item>
-    </style>
-
-    <style name="DividerViewVertical.left">
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_gravity">left</item>
-    </style>
     <!--带左Labele的表单输入框-->
     <style name="SingleItem.FormInputItem">
         <item name="android:background">@drawable/shape_default_edittext</item>
@@ -865,24 +856,6 @@
     <style name="TitleBarShoppingCart" parent="ListViewItem">
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-    </style>
-
-    <!--RadionGroup预定页面样式 -->
-    <style name="RadioGroupBooking">
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@color/white_background</item>
-    </style>
-
-    <!--选择预定页面样式 -->
-    <style name="SelectedBooking">
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@color/white_background</item>
     </style>
 
 </resources>

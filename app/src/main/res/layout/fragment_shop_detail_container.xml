@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/llcontent"
+        android:id="@+id/llcontainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="15"
@@ -14,9 +14,6 @@
         <com.alkaid.trip51.widget.linkedlistview.LinkedListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-<!--        <com.alkaid.trip51.widget.RelationListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -30,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:background="@color/gray"
+            android:background="@color/shop_detail_btn_shopping_cart_background"
             android:gravity="center"
             android:orientation="horizontal">
             <ImageView
@@ -43,12 +40,12 @@
                 android:text="购物车"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_title_1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(满50定金免单)"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_title_3"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <Button
@@ -60,7 +57,7 @@
             android:text="立即预定"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:textSize="@dimen/text_title_2"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -360,15 +360,21 @@
     <color name="frame_gray_default">#ffcfcfcf</color>
     <color name="tab_bottom_background_default">#FFF58A42</color>
     <!--菜单导航相关颜色-->
-    <color name="menu_navigator_text_color">#272727</color>
-    <color name="menu_navigator_background_color">#E0E0E0</color>
-    <color name="menu_content_title_color">#5B5B5B</color>
-    <color name="menu_content_title_backgournd_color">#E0E0E0</color>
-    <color name="menu_divider">#E6E6E6</color>
+    <color name="menu_navigator_text_color">#8D8D8D</color>
+    <color name="menu_navigator_background_color">#EDEDEB</color>
+    <color name="menu_section_background_color">#EDEDEB</color>
+    <color name="menu_section_text_color">#EDEDEB</color>
+    <color name="menu_listview_right_divider_color">#EDEDEB</color>
+    <color name="menu_listview_left_divider_color">#E2E2E0</color>
 
-    <!--LinkedListView相关color-->
+    <!--LinkedListView默认的color-->
     <color name="linked_listview_left_background">#EDEDEB</color>
     <color name="linked_listview_right_section_background">#DCDDD8</color>
     <color name="linked_listview_right_divider_color">#EDEDEB</color>
     <color name="linked_listview_left_divider_color">#E2E2E0</color>
+
+    <!--商店详情相关color-->
+    <color name="shop_detail_tab_background">#DCDDD8</color>
+    <color name="shop_detail_btn_shopping_cart_background">#666666</color>
+    <color name="shop_detail_btn_immediate_buy_background">#FF3300</color>
 </resources>

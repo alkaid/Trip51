@@ -13,7 +13,7 @@ import com.alkaid.trip51.base.widget.BaseTabPageViewFragment;
 /**
  * Created by alkaid on 2015/10/31.
  */
-public class MenuFragment extends BaseTabPageViewFragment {
+public class ShopDetailContainerFragment extends BaseTabPageViewFragment {
     public static final String BUNDLE_KEY_SHOPID="BUNDLE_KEY_SHOPID";
     private long shopid;
     private View slideshowView,layMainMenu,layOrder;

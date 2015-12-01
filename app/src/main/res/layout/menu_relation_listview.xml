@@ -23,8 +23,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/menu_content_title_backgournd_color"
-            android:textColor="@color/menu_content_title_color"
             android:text="凉菜类" />
 
         <ListView

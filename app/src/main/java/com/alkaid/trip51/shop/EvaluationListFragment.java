@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 商户菜单明细列表
+ * 商店评价列表
  */
 
 /**
@@ -32,7 +32,7 @@ public class EvaluationListFragment extends BaseFragment{
     private long shopid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        shopid=getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
+        shopid=getArguments().getLong(ShopDetailContainerFragment.BUNDLE_KEY_SHOPID);
         View v=inflater.inflate(R.layout.fragment_evaluation,container,false);
         ListView lvEvaluation = (ListView) v.findViewById(R.id.lv_evaluation);
         lvEvaluation.setAdapter(new EvaluationAdapter(getContext()));

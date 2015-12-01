@@ -12,10 +12,9 @@ import android.widget.TextView;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
-import com.alkaid.trip51.shop.ShoppingCartActivity;
+import com.alkaid.trip51.shop.ShopDetailActivity;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
 import com.alkaid.trip51.usercenter.MyClientCenterActivity;
-import com.alkaid.trip51.usercenter.MyCouponActivity;
 import com.alkaid.trip51.usercenter.MyDiscussActivity;
 import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
@@ -127,7 +126,8 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
             case R.id.ll_user_coupon:
-                startActivity(new Intent(getActivity(), MyCouponActivity.class));
+//                startActivity(new Intent(getActivity(), MyCouponActivity.class));
+                startActivity(new Intent(getActivity(), ShopDetailActivity.class));
                 break;
             default:
                 break;

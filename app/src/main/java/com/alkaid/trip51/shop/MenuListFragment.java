@@ -37,9 +37,9 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.menu_list_fragment, container, false);
+        View v = inflater.inflate(R.layout.fragment_shop_detail_container, container, false);
         initView(v);
-        shopid = getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
+        shopid = getArguments().getLong(ShopDetailContainerFragment.BUNDLE_KEY_SHOPID);
         if (shopid <= 0) {
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }

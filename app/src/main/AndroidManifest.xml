@@ -87,7 +87,7 @@
         </activity>
         <activity android:name=".shop.ShopListActivity"/>
         <activity android:name=".booking.BookingFilterActivity" />
-        <activity android:name=".shop.MenuActivity"/>
+        <activity android:name=".shop.ShopDetailActivity"/>
         <activity android:name=".shop.OrderDetailActivity"/>
         <activity android:name=".usercenter.MyBalanceActivity"/>
         <activity android:name=".usercenter.MyPointsActivity"/>

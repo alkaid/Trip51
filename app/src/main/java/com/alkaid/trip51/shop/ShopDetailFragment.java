@@ -30,7 +30,7 @@ public class ShopDetailFragment extends BaseFragment{
     private long shopid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        shopid=getArguments().getLong(MenuFragment.BUNDLE_KEY_SHOPID);
+        shopid=getArguments().getLong(ShopDetailContainerFragment.BUNDLE_KEY_SHOPID);
         View v=inflater.inflate(R.layout.fragment_shop_detail,container,false);
         loadData();
         return v;

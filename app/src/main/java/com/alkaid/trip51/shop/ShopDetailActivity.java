@@ -1,10 +1,8 @@
 package com.alkaid.trip51.shop;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
@@ -13,7 +11,7 @@ import com.alkaid.trip51.base.widget.BaseFragmentActivity;
 /**
  * Created by alkaid on 2015/11/7.
  */
-public class MenuActivity extends BaseFragmentActivity {
+public class ShopDetailActivity extends BaseFragmentActivity {
     TextView tvTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class MenuActivity extends BaseFragmentActivity {
 
     private void initView(){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        MenuFragment fragment = new MenuFragment();
+        ShopDetailContainerFragment fragment = new ShopDetailContainerFragment();
         fragmentTransaction.add(R.id.fl_menu_container,fragment).commit();
     }
 

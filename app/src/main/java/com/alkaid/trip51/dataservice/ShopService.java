@@ -2,6 +2,8 @@ package com.alkaid.trip51.dataservice;
 
 import android.content.Context;
 
+import com.alkaid.trip51.test.TestData;
+
 /**
  * Created by df on 2015/11/23.
  * 存放当前
@@ -10,7 +12,7 @@ public class ShopService {
     private static ShopService instance;
     private Context context;
     //当前选中项的商店id
-    private long currShopid;
+    private long currShopid = TestData.currentShopId;
 
     private ShopService(Context context){
         this.context=context;
