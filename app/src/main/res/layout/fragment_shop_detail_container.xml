@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <com.alkaid.trip51.widget.linkedlistview.LinkedListView
+            android:id="@+id/llview_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

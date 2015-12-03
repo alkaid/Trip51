@@ -1,6 +1,7 @@
 package com.alkaid.trip51.shop;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,14 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResFoodList;
+import com.alkaid.trip51.shop.adapter.MenuLeftListAdapter;
+import com.alkaid.trip51.shop.adapter.MenuRightListAdapter;
+import com.alkaid.trip51.shop.model.MenuItemModel;
+import com.alkaid.trip51.widget.linkedlistview.LinkedListView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +40,13 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
     private long shopid;
     private Button btnBooking;
     private LinearLayout llShoppingCart;//购物车进入按钮
+    private LinkedListView llMenu;
+    private MenuLeftListAdapter menuLeftListAdapter;
+    private MenuRightListAdapter menuRightListAdapter;
+
+    private String[] leftNavigationData;
+    private ArrayList<MenuItemModel> menus;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,8 +70,113 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
     private void initView(View v) {
        llShoppingCart = (LinearLayout) v.findViewById(R.id.ll_shoppinp_cart);
         llShoppingCart.setOnClickListener(this);
+        //设置adapter
+        llMenu = (LinkedListView) v.findViewById(R.id.llview_menu);
+        menuLeftListAdapter = new MenuLeftListAdapter(getContext());
+        menuRightListAdapter = new MenuRightListAdapter(getContext());
+        llMenu.setAdapter(menuLeftListAdapter, menuRightListAdapter);
+        //设置假数据
+        setFakeData();
+        setMenuListData(leftNavigationData, menus);
+        llMenu.notifyDataSetChanged();
+
     }
 
+    private void setFakeData(){
+        leftNavigationData = new String[]{"炒菜", "凉菜", "海鲜", "小吃"};
+        menus = new ArrayList<>();
+
+        for(int i = 0;i<5;i++) {
+            MenuItemModel item1 = new MenuItemModel();
+            if(i == 0) {
+                item1.setName("土豆丝");
+            }else if(i == 1){
+                item1.setName("腐竹排骨");
+            }else if(i == 2){
+                item1.setName("蒜蓉菜心");
+            }else if(i == 3){
+                item1.setName("炒胡萝卜");
+            }else if(i == 4){
+                item1.setName("西红柿炒蛋");
+            }
+            item1.setPrice("10.0");
+            item1.setSectionNum(0);
+            item1.setPositionNum(i);
+            item1.setSold_num(200);
+            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
+            menus.add(item1);
+        }
+
+        for(int i = 0;i<5;i++) {
+            MenuItemModel item1 = new MenuItemModel();
+            if(i == 0) {
+                item1.setName("土豆丝");
+            }else if(i == 1){
+                item1.setName("腐竹排骨");
+            }else if(i == 2){
+                item1.setName("蒜蓉菜心");
+            }else if(i == 3){
+                item1.setName("炒胡萝卜");
+            }else if(i == 4){
+                item1.setName("西红柿炒蛋");
+            }
+            item1.setPrice("10.0");
+            item1.setSectionNum(1);
+            item1.setPositionNum(i);
+            item1.setSold_num(200);
+            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
+            menus.add(item1);
+        }
+
+        for(int i = 0;i<5;i++) {
+            MenuItemModel item1 = new MenuItemModel();
+            if(i == 0) {
+                item1.setName("土豆丝");
+            }else if(i == 1){
+                item1.setName("腐竹排骨");
+            }else if(i == 2){
+                item1.setName("蒜蓉菜心");
+            }else if(i == 3){
+                item1.setName("炒胡萝卜");
+            }else if(i == 4){
+                item1.setName("西红柿炒蛋");
+            }
+            item1.setPrice("10.0");
+            item1.setSectionNum(2);
+            item1.setPositionNum(i);
+            item1.setSold_num(200);
+            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
+            menus.add(item1);
+        }
+
+        for(int i = 0;i<5;i++) {
+            MenuItemModel item1 = new MenuItemModel();
+            if(i == 0) {
+                item1.setName("土豆丝");
+            }else if(i == 1){
+                item1.setName("腐竹排骨");
+            }else if(i == 2){
+                item1.setName("蒜蓉菜心");
+            }else if(i == 3){
+                item1.setName("炒胡萝卜");
+            }else if(i == 4){
+                item1.setName("西红柿炒蛋");
+            }
+            item1.setPrice("10.0");
+            item1.setSectionNum(3);
+            item1.setPositionNum(i);
+            item1.setSold_num(200);
+            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
+            menus.add(item1);
+        }
+    }
+
+    private void setMenuListData(String[] leftNavigationData,ArrayList<MenuItemModel> menus){
+        if(menuLeftListAdapter!=null&&llMenu!=null&&menuRightListAdapter!=null){
+            menuLeftListAdapter.setNavigationData(leftNavigationData);
+            menuRightListAdapter.setMenuListData(leftNavigationData,menus);
+        }
+    }
 
     private void loadData() {
         Map<String, String> beSignForm = new HashMap<String, String>();

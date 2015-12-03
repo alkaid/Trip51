@@ -363,14 +363,14 @@
     <color name="menu_navigator_text_color">#8D8D8D</color>
     <color name="menu_navigator_background_color">#EDEDEB</color>
     <color name="menu_section_background_color">#EDEDEB</color>
-    <color name="menu_section_text_color">#EDEDEB</color>
+    <color name="menu_section_text_color">#727270</color>
     <color name="menu_listview_right_divider_color">#EDEDEB</color>
     <color name="menu_listview_left_divider_color">#E2E2E0</color>
 
     <!--LinkedListView默认的color-->
     <color name="linked_listview_left_background">#EDEDEB</color>
     <color name="linked_listview_right_section_background">#DCDDD8</color>
-    <color name="linked_listview_right_divider_color">#EDEDEB</color>
+    <color name="linked_listview_right_divider_color">#EAEAEA</color>
     <color name="linked_listview_left_divider_color">#E2E2E0</color>
 
     <!--商店详情相关color-->

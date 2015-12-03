@@ -40,6 +40,8 @@ public class LinkedListView extends LinearLayout {
     private String TAG = getClass().getName();
 
     private Context mContext;
+    private PinnedHeaderListView rightListView;
+    private ListView leftListView;
 
     private BaseAdapter leftListAdapter;
 
@@ -55,8 +57,8 @@ public class LinkedListView extends LinearLayout {
         super(context, attrs);
         this.mContext = context;
         View view = LayoutInflater.from(context).inflate(R.layout.linked_list_view, this, true);
-        final PinnedHeaderListView rightListView = (PinnedHeaderListView) view.findViewById(R.id.pinnedListView);
-        final ListView leftListView = (ListView) view.findViewById(R.id.left_listview);
+        rightListView = (PinnedHeaderListView) view.findViewById(R.id.pinnedListView);
+        leftListView = (ListView) view.findViewById(R.id.left_listview);
         leftListView.setAdapter(leftListAdapter);
         rightListView.setAdapter(rightListAdapter);
 
@@ -119,6 +121,8 @@ public class LinkedListView extends LinearLayout {
     public void setAdapter(BaseAdapter leftListAdapter, SectionedBaseAdapter rightListAdapter) {
         this.leftListAdapter = leftListAdapter;
         this.rightListAdapter = rightListAdapter;
+        leftListView.setAdapter(leftListAdapter);
+        rightListView.setAdapter(rightListAdapter);
     }
 
     /**

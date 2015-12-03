@@ -5,7 +5,7 @@
         android:id="@+id/left_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="23"
+        android:layout_weight="20"
         android:background="@color/linked_listview_left_background"
         >
 
