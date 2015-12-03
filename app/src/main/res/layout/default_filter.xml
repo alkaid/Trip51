@@ -4,7 +4,7 @@
         android:id="@+id/laySelector" android:layout_below="@+id/layMainMenu"
         android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/gray_background">
         <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn"
+            android:id="@+id/popbtn1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
@@ -16,7 +16,7 @@
             popupbtn:pressIcon="@drawable/arrow_up_shop"
             />
         <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn2"
+            android:id="@+id/popbtn2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
@@ -28,7 +28,7 @@
             popupbtn:pressIcon="@drawable/arrow_up_shop"
             />
         <pw.h57.popupbuttonlibrary.PopupButton
-            android:id="@+id/btn3"
+            android:id="@+id/popbtn3"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"

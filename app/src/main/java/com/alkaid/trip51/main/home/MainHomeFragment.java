@@ -152,7 +152,7 @@ public class MainHomeFragment extends BaseFragment {
         final List cValues = new ArrayList<>();
         cValues.addAll(cList.get(0));
         final PopupAdapter pAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.color.base_start_color_default,R.color.base_start_color_pressed);
-        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,pList,R.color.base_start_color_default,R.color.base_start_color_pressed);
+        final PopupAdapter cAdapter = new PopupAdapter(getActivity(),R.layout.popup_item,cValues,R.color.base_start_color_default,R.color.base_start_color_pressed);
         pAdapter.setPressPostion(0);
         pLv.setAdapter(pAdapter);
         cLv.setAdapter(cAdapter);
@@ -168,9 +168,9 @@ public class MainHomeFragment extends BaseFragment {
                 cLv.setSelection(0);
             }
         });
-        final PopupButton btn1 = (PopupButton) v.findViewById(R.id.btn);
-        final PopupButton btn2 = (PopupButton) v.findViewById(R.id.btn2);
-        final PopupButton btn3 = (PopupButton) v.findViewById(R.id.btn3);
+        final PopupButton btn1 = (PopupButton) v.findViewById(R.id.popbtn1);
+        final PopupButton btn2 = (PopupButton) v.findViewById(R.id.popbtn2);
+        final PopupButton btn3 = (PopupButton) v.findViewById(R.id.popbtn3);
         btn1.setPopupView(view2);
 //        btn2.setPopupView(view2);
 //        btn3.setPopupView(view2);
