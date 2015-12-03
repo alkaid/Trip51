@@ -15,19 +15,19 @@ import pw.h57.popupbuttonlibrary.R;
  * 自定义的弹出框列表适配器,类似于大众点评或美团,如果想要此种效果可以直接使用
  * Created by Chris on 2014/12/8.
  */
-public class PopupAdapter extends ArrayAdapter<String> {
+public abstract class PopupAdapter<T> extends ArrayAdapter<T> {
     private int resource;
     private int normalBg;
     private int pressBg;
     private int selection;
 
-    public PopupAdapter(Context context, int resource, String[] objects, int normalBg, int pressBg) {
+    public PopupAdapter(Context context, int resource, T[] objects, int normalBg, int pressBg) {
         super(context, resource, objects);
         initParams(resource, normalBg, pressBg);
     }
 
 
-    public PopupAdapter(Context context, int resource, List<String> objects, int normalBg, int pressBg) {
+    public PopupAdapter(Context context, int resource, List<T> objects, int normalBg, int pressBg) {
         super(context, resource, objects);
         initParams(resource, normalBg, pressBg);
     }
@@ -39,9 +39,11 @@ public class PopupAdapter extends ArrayAdapter<String> {
         this.selection = -1;
     }
 
+    protected abstract String getItemLabel(int position);
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String s = getItem(position);
+        String s = getItemLabel(position);
         View view;
         ViewHolder holder;
         if(convertView == null) {

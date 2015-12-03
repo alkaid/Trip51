@@ -1,5 +1,7 @@
 package com.alkaid.trip51.model.shop;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,9 @@ public class Circle implements Serializable {
     private long circleid;
     private String circlename;
     private int circleshopnum;
+    /**距离，用于搜索条件，并非服务端接口下发的数据*/
+    @Expose(serialize = false)
+    public int distance;
 
     public long getCircleid() {
         return circleid;
