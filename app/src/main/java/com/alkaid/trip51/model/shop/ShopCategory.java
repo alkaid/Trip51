@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class ShopCategory implements Serializable {
     private int categoryid;
     private String categoryname;
-//    private int categoryshopnum;
+    private int categoryshopnum;
 
     public int getCategoryid() {
         return categoryid;
@@ -26,11 +26,11 @@ public class ShopCategory implements Serializable {
         this.categoryname = categoryname;
     }
 
-//    public int getCategoryshopnum() {
-//        return categoryshopnum;
-//    }
-//
-//    public void setCategoryshopnum(int categoryshopnum) {
-//        this.categoryshopnum = categoryshopnum;
-//    }
+    public int getCategoryshopnum() {
+        return categoryshopnum;
+    }
+
+    public void setCategoryshopnum(int categoryshopnum) {
+        this.categoryshopnum = categoryshopnum;
+    }
 }

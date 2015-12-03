@@ -39,35 +39,35 @@ public abstract class PopupAdapter<T> extends ArrayAdapter<T> {
         this.selection = -1;
     }
 
-    protected abstract String getItemLabel(int position);
+    protected abstract void setView(int position,ViewHolder holder);
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String s = getItemLabel(position);
         View view;
         ViewHolder holder;
         if(convertView == null) {
             view = LayoutInflater.from(getContext()).inflate(resource,null);
             holder = new ViewHolder();
             holder.tv = (TextView) view.findViewById(R.id.tv);
+            holder.tv2= (TextView) view.findViewById(R.id.tv2);
             view.setTag(holder);
         } else {
             view = convertView;
             holder = (ViewHolder) view.getTag();
         }
-        holder.tv.setText(s);
         if(position == selection) {
             holder.tv.setBackgroundResource(pressBg);
         } else {
             holder.tv.setBackgroundResource(normalBg);
         }
+        setView(position,holder);
         return view;
     }
 
     public void setPressPostion(int position) {
         this.selection = position;
     }
-    class ViewHolder{
-        TextView tv;
+    public class ViewHolder{
+        public TextView tv,tv2;
     }
 }

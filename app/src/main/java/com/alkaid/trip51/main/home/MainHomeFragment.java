@@ -19,8 +19,10 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.enums.ShopType;
 import com.alkaid.trip51.model.response.ResMainHome;
+import com.alkaid.trip51.model.shop.Condition;
 import com.alkaid.trip51.shop.ShopDetailActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
+import com.alkaid.trip51.widget.DefaultFilter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -64,7 +66,7 @@ public class MainHomeFragment extends BaseFragment {
         shopListView.getRefreshableView().addHeaderView(header);
         shopListAdapter=new ShopListAdapter(context);
         shopListView.setAdapter(shopListAdapter);
-        loadData(LOAD_ON_ENTER,1);
+        loadData(LOAD_ON_ENTER, 1);
 
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,7 +85,7 @@ public class MainHomeFragment extends BaseFragment {
                 String label = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.CHINESE).format(new Date());
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("上次更新：" + label);
-                loadData(LOAD_ON_PULLDOWN,1);
+                loadData(LOAD_ON_PULLDOWN, 1);
             }
 
             @Override
@@ -94,7 +96,7 @@ public class MainHomeFragment extends BaseFragment {
                 String label = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.CHINESE).format(new Date());
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel("上次加载：" + label);
-                loadData(LOAD_ON_PULLUP,lastPageIndex+1);
+                loadData(LOAD_ON_PULLUP, lastPageIndex + 1);
             }
 
         });
@@ -111,14 +113,15 @@ public class MainHomeFragment extends BaseFragment {
             private int mScreenY = 0;
             //是否向上滚动
             private boolean mIsScrollToUp = false;
+
             @Override
             public void onScrollStateChanged(AbsListView v, int scrollState) {
                 switch (scrollState) {
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        if(v.getFirstVisiblePosition() == 0){
+                        if (v.getFirstVisiblePosition() == 0) {
                             slideshowView.setVisibility(View.VISIBLE);
                             layMainMenu.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
                             slideshowView.setVisibility(View.GONE);
                             layMainMenu.setVisibility(View.GONE);
                         }
@@ -127,6 +130,20 @@ public class MainHomeFragment extends BaseFragment {
 
             @Override
             public void onScroll(AbsListView v, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
+
+        DefaultFilter defaultFilter=new DefaultFilter(inflater, context, v, new DefaultFilter.OnItemClickListener() {
+            @Override
+            public void onClick(Condition.Result result) {
+                switch (result.condType){
+                    case ShopCategory:
+                        break;
+                    case Location:
+                        break;
+                    case Sort:
+                        break;
+                }
             }
         });
 
