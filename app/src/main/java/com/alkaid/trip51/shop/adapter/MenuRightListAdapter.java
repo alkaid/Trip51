@@ -3,21 +3,17 @@ package com.alkaid.trip51.shop.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.shop.model.MenuItemModel;
+import com.alkaid.trip51.shop.model.FoodItemModel;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 public class MenuRightListAdapter extends SectionedBaseAdapter {
 
@@ -25,7 +21,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
 
     private String TAG = getClass().getName();
 
-    private ArrayList<MenuItemModel> menus;
+    private ArrayList<FoodItemModel> menus;
     private String[] leftNavigations;
 
 	public MenuRightListAdapter(Context context){
@@ -38,11 +34,11 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
      * @param position
      * @return
      */
-    private MenuItemModel getMenuItemModelBySectionPosition(int section,int position){
+    private FoodItemModel getMenuItemModelBySectionPosition(int section,int position){
         if(menus == null){
             return null;
         }
-        for(MenuItemModel menuItemModel:menus){
+        for(FoodItemModel menuItemModel:menus){
             if(menuItemModel.getSectionNum() == section&&menuItemModel.getPositionNum() == position){
                 return menuItemModel;
             }
@@ -52,7 +48,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
 
     public int getCountBySection(int section) {
         int count = 0;
-        for(MenuItemModel model:menus){
+        for(FoodItemModel model:menus){
             if(model.getSectionNum() == section){
                 count++;
             }
@@ -60,7 +56,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
         return count;
     }
 
-    public void setMenuListData(String[] leftNavigations,ArrayList<MenuItemModel> menus){
+    public void setMenuListData(String[] leftNavigations,ArrayList<FoodItemModel> menus){
         this.menus = menus;
         this.leftNavigations = leftNavigations;
     }
@@ -91,7 +87,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
     @Override
     public View getItemView(final int section, final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        MenuItemModel item = (MenuItemModel) getItem(section,position);
+        FoodItemModel item = (FoodItemModel) getItem(section,position);
         if (convertView == null) {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflator.inflate(R.layout.menu_list_content_item,null);

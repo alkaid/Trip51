@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 /**菜单右边单个item的数据模型
  * Created by jyz on 2015/12/1.
  */
-public class MenuItemModel {
+public class FoodItemModel {
 
 
     public String getPrice() {

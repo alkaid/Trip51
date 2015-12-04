@@ -13,6 +13,7 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResBaseInfo;
+import com.alkaid.trip51.model.shop.Shop;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -26,19 +27,23 @@ import java.util.Map;
 /**
  * Created by jyz on 2015/11/8.
  */
-public class ShopDetailFragment extends BaseFragment{
-    private long shopid;
+public class ShopDescFragment extends BaseFragment{
+    private String TAG = getClass().getName();
+    private Shop currShop;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        shopid=getArguments().getLong(ShopDetailContainerFragment.BUNDLE_KEY_SHOPID);
+        currShop = (Shop) getArguments().getSerializable(ShopDetailActivity.BUNDLE_KEY_SHOP);
         View v=inflater.inflate(R.layout.fragment_shop_detail,container,false);
         loadData();
         return v;
     }
     private void loadData(){
+        if(currShop == null){
+            return;
+        }
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("shopid", shopid+"");
+        unBeSignform.put("shopid", currShop.getShopid()+"");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
         final String tag="shopdetail"+(int)(Math.random()*1000);

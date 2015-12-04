@@ -18,15 +18,18 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResFoodList;
+import com.alkaid.trip51.model.shop.FoodCategory;
+import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.shop.adapter.MenuLeftListAdapter;
 import com.alkaid.trip51.shop.adapter.MenuRightListAdapter;
-import com.alkaid.trip51.shop.model.MenuItemModel;
+import com.alkaid.trip51.shop.model.FoodItemModel;
 import com.alkaid.trip51.widget.linkedlistview.LinkedListView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,8 +39,8 @@ import java.util.Map;
 /**
  * Created by jyz on 2015/11/8.
  */
-public class MenuListFragment extends BaseFragment implements View.OnClickListener {
-    private long shopid;
+public class FoodListFragment extends BaseFragment implements View.OnClickListener {
+    private Shop currShop;
     private Button btnBooking;
     private LinearLayout llShoppingCart;//购物车进入按钮
     private LinkedListView llMenu;
@@ -45,15 +48,15 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
     private MenuRightListAdapter menuRightListAdapter;
 
     private String[] leftNavigationData;
-    private ArrayList<MenuItemModel> menus;
+    private ArrayList<FoodItemModel> menus;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_shop_detail_container, container, false);
         initView(v);
-        shopid = getArguments().getLong(ShopDetailContainerFragment.BUNDLE_KEY_SHOPID);
-        if (shopid <= 0) {
+        currShop = (Shop) getArguments().getSerializable(ShopDetailActivity.BUNDLE_KEY_SHOP);
+        if (currShop == null) {
             throw new RuntimeException("没有设置currShopid,请检查代码！");
         }
         loadData();
@@ -87,7 +90,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         menus = new ArrayList<>();
 
         for(int i = 0;i<5;i++) {
-            MenuItemModel item1 = new MenuItemModel();
+            FoodItemModel item1 = new FoodItemModel();
             if(i == 0) {
                 item1.setName("土豆丝");
             }else if(i == 1){
@@ -108,7 +111,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         }
 
         for(int i = 0;i<5;i++) {
-            MenuItemModel item1 = new MenuItemModel();
+            FoodItemModel item1 = new FoodItemModel();
             if(i == 0) {
                 item1.setName("土豆丝");
             }else if(i == 1){
@@ -129,7 +132,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         }
 
         for(int i = 0;i<5;i++) {
-            MenuItemModel item1 = new MenuItemModel();
+            FoodItemModel item1 = new FoodItemModel();
             if(i == 0) {
                 item1.setName("土豆丝");
             }else if(i == 1){
@@ -150,7 +153,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         }
 
         for(int i = 0;i<5;i++) {
-            MenuItemModel item1 = new MenuItemModel();
+            FoodItemModel item1 = new FoodItemModel();
             if(i == 0) {
                 item1.setName("土豆丝");
             }else if(i == 1){
@@ -171,7 +174,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private void setMenuListData(String[] leftNavigationData,ArrayList<MenuItemModel> menus){
+    private void setMenuListData(String[] leftNavigationData,ArrayList<FoodItemModel> menus){
         if(menuLeftListAdapter!=null&&llMenu!=null&&menuRightListAdapter!=null){
             menuLeftListAdapter.setNavigationData(leftNavigationData);
             menuRightListAdapter.setMenuListData(leftNavigationData,menus);
@@ -181,7 +184,7 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
     private void loadData() {
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
-        unBeSignform.put("shopid", shopid + "");
+        unBeSignform.put("shopid",currShop.getShopid()+"");
 //        unBeSignform.put("pageindex", "1");
 //        unBeSignform.put("pagesize", "20");
         final String tag = "foodlist" + (int) (Math.random() * 1000);
@@ -190,6 +193,11 @@ public class MenuListFragment extends BaseFragment implements View.OnClickListen
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
             @Override
             public void onResponse(ResFoodList response) {
+                leftNavigationData = new String[]{};
+                List<FoodCategory> foodCategories = response.getFoodcategory();
+                for(int i=0;i<foodCategories.size();){
+                    leftNavigationData[i]= foodCategories.get(i).getCategoryname();
+                }
                 dismissPdg();
             }
         }, new Response.ErrorListener() {

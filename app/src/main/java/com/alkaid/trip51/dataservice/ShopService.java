@@ -12,7 +12,7 @@ public class ShopService {
     private static ShopService instance;
     private Context context;
     //当前选中项的商店id
-    private long currShopid = TestData.currentShopId;
+    private long currShopid;
 
     private ShopService(Context context){
         this.context=context;
