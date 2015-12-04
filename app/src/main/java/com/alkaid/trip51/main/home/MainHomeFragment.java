@@ -18,9 +18,13 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.enums.ShopType;
+import com.alkaid.trip51.model.enums.SortType;
 import com.alkaid.trip51.model.response.ResMainHome;
+import com.alkaid.trip51.model.shop.Area;
+import com.alkaid.trip51.model.shop.Circle;
 import com.alkaid.trip51.model.shop.Shop;
-import com.alkaid.trip51.model.shop.Condition;
+import com.alkaid.trip51.model.shop.SearchCondition;
+import com.alkaid.trip51.model.shop.ShopCategory;
 import com.alkaid.trip51.shop.ShopDetailActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.alkaid.trip51.widget.DefaultFilter;
@@ -44,6 +48,7 @@ public class MainHomeFragment extends BaseFragment {
     private PullToRefreshListView shopListView;
     private ShopListAdapter shopListAdapter;
     private int lastPageIndex=1;
+    private SearchCondition searchCondition;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.main_home_fragment,container,false);
@@ -139,15 +144,43 @@ public class MainHomeFragment extends BaseFragment {
 
         DefaultFilter defaultFilter=new DefaultFilter(inflater, context, v, new DefaultFilter.OnItemClickListener() {
             @Override
-            public void onClick(Condition.Result result) {
+            public void onClick(SearchCondition.Result result) {
+                if(null==searchCondition){
+                    searchCondition=new SearchCondition();
+                    searchCondition.base=new SearchCondition.Base();
+                }
+                //解析点击后传过来的类型
                 switch (result.condType){
                     case ShopCategory:
+                        if(null!=result.parentData){
+                            searchCondition.base.shopType= (ShopType) result.parentData;
+                            if(searchCondition.base.shopType==ShopType.ALL){
+                                searchCondition.base.shopCategory=null;
+                            }
+                        }
+                        if(null!=result.subData){
+                            searchCondition.base.shopCategory=(ShopCategory)result.subData;
+                        }
                         break;
                     case Location:
+                        if(null!=result.parentData){
+                            searchCondition.base.area= (Area) result.parentData;
+                        }
+                        if(null!=result.subData){
+                            if(result.subData instanceof Circle){
+                                searchCondition.base.circle= (Circle) result.subData;
+                            }else if(result.subData instanceof SearchCondition.NearBy){
+                                searchCondition.base.nearBy= (SearchCondition.NearBy) result.subData;
+                                searchCondition.base.area=null;
+                            }
+                        }
                         break;
                     case Sort:
+                        searchCondition.base.sortType= (SortType) result.parentData;
                         break;
                 }
+                //搜索
+                loadData(LOAD_ON_SEARCH,1);
             }
         });
 
@@ -212,9 +245,10 @@ public class MainHomeFragment extends BaseFragment {
     private static final int LOAD_ON_ENTER=0;
     private static final int LOAD_ON_PULLDOWN=1;
     private static final int LOAD_ON_PULLUP=2;
+    private static final int LOAD_ON_SEARCH=4;
 
     private void loadData(final int loadOnType,int pageindex){
-        if(loadOnType==LOAD_ON_ENTER){
+        if(loadOnType==LOAD_ON_ENTER || loadOnType==LOAD_ON_SEARCH){
             showPdg();
         }
         final String tag="mainhome"+(int)(Math.random()*1000);
@@ -226,8 +260,9 @@ public class MainHomeFragment extends BaseFragment {
         unBeSignform.put("location", "2000");
         unBeSignform.put("pageindex", (loadOnType==LOAD_ON_ENTER||loadOnType==LOAD_ON_PULLDOWN)?"1":pageindex+"");
         unBeSignform.put("pagesize", "20");
-        unBeSignform.put("sortid", "default");
+        unBeSignform.put("sortid", SortType.DEFAULT.code);
         unBeSignform.put("coordinates", App.locationService().getCoordinates());
+        SearchCondition.putUpHttpSearchRequestParams(unBeSignform,searchCondition);
 
         boolean mShouldRefreshCache=false;
         switch (loadOnType){
@@ -240,6 +275,9 @@ public class MainHomeFragment extends BaseFragment {
             case LOAD_ON_PULLUP:
                 mShouldRefreshCache=false;
                 break;
+            case LOAD_ON_SEARCH:
+                mShouldRefreshCache=true;
+                break;
         }
         //请求首页
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL,mShouldRefreshCache,ResMainHome.class, MApiService.URL_MAIN_HOME, beSignForm, unBeSignform, new Response.Listener<ResMainHome>() {
@@ -248,6 +286,7 @@ public class MainHomeFragment extends BaseFragment {
                 //TODO 更新视图
                 switch (loadOnType){
                     case LOAD_ON_ENTER:
+                    case LOAD_ON_SEARCH:
                         lastPageIndex=1;
                         shopListAdapter.setData(response.getData());
                         shopListAdapter.notifyDataSetChanged();
@@ -272,6 +311,7 @@ public class MainHomeFragment extends BaseFragment {
             public void onErrorResponse(VolleyError error) {
                 switch (loadOnType){
                     case LOAD_ON_ENTER:
+                    case LOAD_ON_SEARCH:
                         lastPageIndex=0;
                         shopListAdapter.getData().clear();
                         shopListAdapter.notifyDataSetChanged();

@@ -13,7 +13,7 @@ import com.alkaid.trip51.model.enums.SortType;
 import com.alkaid.trip51.model.response.ResShopCondition;
 import com.alkaid.trip51.model.shop.Area;
 import com.alkaid.trip51.model.shop.Circle;
-import com.alkaid.trip51.model.shop.Condition;
+import com.alkaid.trip51.model.shop.SearchCondition;
 import com.alkaid.trip51.model.shop.ShopCategory;
 
 import java.util.ArrayList;
@@ -26,28 +26,28 @@ import pw.h57.popupbuttonlibrary.adapter.PopupAdapter;
  * Created by df on 2015/12/3.
  */
 public class DefaultFilter {
-    private PopupButton btn1,btn2,btn3;
+    private PopupButton btnType, btnSort, btnLocation;
     private OnItemClickListener onItemClickListener;
     public DefaultFilter(LayoutInflater inflater,Context context,View v,OnItemClickListener onItemClickListener){
         this.onItemClickListener=onItemClickListener;
         init(inflater, context, v);
     }
     public void init(LayoutInflater inflater,Context context,View v){
-        btn1 = (PopupButton) v.findViewById(R.id.popbtn1);
-        btn2 = (PopupButton) v.findViewById(R.id.popbtn2);
-        btn3 = (PopupButton) v.findViewById(R.id.popbtn3);
-        btn1.setText("商家分类");
-        btn2.setText("排序");
-        btn3.setText("附近(位置)");
-        initBtn1(inflater, context);
-        initBtn2(inflater, context);
-        initBtn3(inflater,context);
+        btnType = (PopupButton) v.findViewById(R.id.popbtn1);
+        btnSort = (PopupButton) v.findViewById(R.id.popbtn2);
+        btnLocation = (PopupButton) v.findViewById(R.id.popbtn3);
+        btnType.setText("商家分类");
+        btnSort.setText("排序");
+        btnLocation.setText("附近(位置)");
+        initBtnType(inflater, context);
+        initBtnSort(inflater, context);
+        initBtnLocation(inflater, context);
     }
 
-    private void initBtn1(LayoutInflater inflater,Context context){
+    private void initBtnType(LayoutInflater inflater, Context context){
         ResShopCondition condition = App.instance().locationService().getCondition();
         View popup = inflater.inflate(R.layout.popup2, null);
-        ListView pLv = (ListView) popup.findViewById(R.id.parent_lv);
+        final ListView pLv = (ListView) popup.findViewById(R.id.parent_lv);
         final ListView cLv = (ListView) popup.findViewById(R.id.child_lv);
 
         final ShopType[] shopTypes=ShopType.values();
@@ -92,27 +92,27 @@ public class DefaultFilter {
                 cAdapter.setPressPostion(-1);
                 cLv.setSelection(0);
                 if(shopTypes[position]==ShopType.ALL){
-                    btn1.setText(shopTypes[position].desc);
-                    btn1.hidePopup();
-                    onItemClickListener.onClick(new Condition.Result(Condition.CondType.ShopCategory, ShopType.ALL));
+                    btnType.setText(shopTypes[position].desc);
+                    btnType.hidePopup();
+                    onItemClickListener.onClick(new SearchCondition.Result(SearchCondition.CondType.ShopCategory, ShopType.ALL,null));
                 }
             }
         });
 
-        btn1.setPopupView(popup);
+        btnType.setPopupView(popup);
         cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 cAdapter.setPressPostion(position);
                 cAdapter.notifyDataSetChanged();
-                btn1.setText(cValues.get(position).getCategoryname());
-                btn1.hidePopup();
-                onItemClickListener.onClick(new Condition.Result(Condition.CondType.ShopCategory, cValues.get(position)));
+                btnType.setText(cValues.get(position).getCategoryname());
+                btnType.hidePopup();
+                onItemClickListener.onClick(new SearchCondition.Result(SearchCondition.CondType.ShopCategory, pLv.getSelectedItem(), cValues.get(position)));
             }
         });
     }
 
-    private void initBtn2(LayoutInflater inflater,Context context){
+    private void initBtnSort(LayoutInflater inflater, Context context){
         View popup = inflater.inflate(R.layout.popup1, null);
         ListView pLv = (ListView) popup.findViewById(R.id.parent_lv);
 
@@ -131,19 +131,19 @@ public class DefaultFilter {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 pAdapter.setPressPostion(position);
                 pAdapter.notifyDataSetChanged();
-                btn2.setText(sortTypes[position].desc);
-                btn2.hidePopup();
-                onItemClickListener.onClick(new Condition.Result(Condition.CondType.Sort, sortTypes[position]));
+                btnSort.setText(sortTypes[position].desc);
+                btnSort.hidePopup();
+                onItemClickListener.onClick(new SearchCondition.Result(SearchCondition.CondType.Sort, sortTypes[position],null));
             }
         });
 
-        btn2.setPopupView(popup);
+        btnSort.setPopupView(popup);
     }
 
-    private void initBtn3(LayoutInflater inflater,Context context){
+    private void initBtnLocation(LayoutInflater inflater, Context context){
         ResShopCondition condition = App.instance().locationService().getCondition();
         View popup = inflater.inflate(R.layout.popup2, null);
-        ListView pLv = (ListView) popup.findViewById(R.id.parent_lv);
+        final ListView pLv = (ListView) popup.findViewById(R.id.parent_lv);
         final ListView cLv = (ListView) popup.findViewById(R.id.child_lv);
 
         Area area=new Area();
@@ -214,21 +214,29 @@ public class DefaultFilter {
             }
         });
 
-        btn3.setPopupView(popup);
+        btnLocation.setPopupView(popup);
         cLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 cAdapter.setPressPostion(position);
                 cAdapter.notifyDataSetChanged();
-                btn1.setText(cValues.get(position).getCirclename());
-                btn1.hidePopup();
-                onItemClickListener.onClick(new Condition.Result(Condition.CondType.Location, cValues.get(position)));
+                btnLocation.setText(cValues.get(position).getCirclename());
+                btnLocation.hidePopup();
+                Circle c=cValues.get(position);
+                if(c.getCircleid()<=0){
+                    SearchCondition.NearBy nearBy=new SearchCondition.NearBy();
+                    nearBy.id=position;
+                    nearBy.distance=c.distance;
+                    onItemClickListener.onClick(new SearchCondition.Result(SearchCondition.CondType.Location, null,nearBy));
+                }else {
+                    onItemClickListener.onClick(new SearchCondition.Result(SearchCondition.CondType.Location,pLv.getSelectedItem(), cValues.get(position)));
+                }
             }
         });
 
     }
 
     public static interface OnItemClickListener{
-        public void onClick(Condition.Result result);
+        public void onClick(SearchCondition.Result result);
     }
 }
