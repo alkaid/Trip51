@@ -1,6 +1,7 @@
 package com.alkaid.trip51.shop.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,60 +11,41 @@ import android.widget.TextView;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.shop.model.FoodItemModel;
+import com.alkaid.trip51.model.shop.Food;
+import com.alkaid.trip51.model.shop.FoodCategory;
+import com.alkaid.trip51.util.BitmapUtil;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MenuRightListAdapter extends SectionedBaseAdapter {
 
-	private Context mContext;
+    private Context mContext;
 
     private String TAG = getClass().getName();
 
-    private ArrayList<FoodItemModel> menus;
-    private String[] leftNavigations;
+    private List<FoodCategory> foodCategories;
 
-	public MenuRightListAdapter(Context context){
-		this.mContext = context;
-	}
+    public MenuRightListAdapter(Context context) {
+        this.mContext = context;
+    }
 
     /**
-     * 根据section和position获得菜单项
-     * @param section
-     * @param position
-     * @return
+     * 赋数据
+     *
+     * @param foodCategories 设置的数据
      */
-    private FoodItemModel getMenuItemModelBySectionPosition(int section,int position){
-        if(menus == null){
-            return null;
-        }
-        for(FoodItemModel menuItemModel:menus){
-            if(menuItemModel.getSectionNum() == section&&menuItemModel.getPositionNum() == position){
-                return menuItemModel;
-            }
-        }
-        return null;
-    }
-
-    public int getCountBySection(int section) {
-        int count = 0;
-        for(FoodItemModel model:menus){
-            if(model.getSectionNum() == section){
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public void setMenuListData(String[] leftNavigations,ArrayList<FoodItemModel> menus){
-        this.menus = menus;
-        this.leftNavigations = leftNavigations;
+    public void setMenuListData(List<FoodCategory> foodCategories) {
+        this.foodCategories = foodCategories;
     }
 
     @Override
     public Object getItem(int section, int position) {
-        return getMenuItemModelBySectionPosition(section,position);
+        if (foodCategories != null) {
+            return foodCategories.get(section).getFoods().get(position);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -73,24 +55,28 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
 
     @Override
     public int getSectionCount() {
-        if(leftNavigations == null){
+        if (foodCategories == null) {
             return 0;
         }
-        return leftNavigations.length;
+        return foodCategories.size();
     }
 
     @Override
     public int getCountForSection(int section) {
-        return getCountBySection(section);
+        if (foodCategories != null) {
+            return foodCategories.get(section).getFoods().size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public View getItemView(final int section, final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        FoodItemModel item = (FoodItemModel) getItem(section,position);
+        Food food = (Food) getItem(section, position);
         if (convertView == null) {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflator.inflate(R.layout.menu_list_content_item,null);
+            convertView = inflator.inflate(R.layout.menu_list_content_item, null);
             holder = new ViewHolder();
             holder.ivFood = (ImageView) convertView.findViewById(R.id.iv_menu_food);
             holder.tvNameFood = (TextView) convertView.findViewById(R.id.tv_menu_food_name);
@@ -100,11 +86,17 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.ivFood.setImageBitmap(item.getIcon());
-        holder.tvNameFood.setText(item.getName());
-        holder.tvCountFood.setText("已售:"+item.getSold_num()+"份");
-        holder.tvPriceFood.setText(item.getPrice()+"元");
-        LogUtil.d(TAG, "Section " + section + " Item " + position);
+        if (food != null) {
+            if (food.getFoodimg() != null) {
+                holder.ivFood.setImageBitmap(BitmapUtil.getHttpBitmap(food.getFoodimg()));
+            } else {
+                holder.ivFood.setImageBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.temp_shop_thumb));
+            }
+            holder.tvNameFood.setText(food.getFoodname());
+            holder.tvCountFood.setText("已售:" + food.getSales() + "份");
+            holder.tvPriceFood.setText(food.getPrice() + "元");
+            LogUtil.d(TAG, "Section " + section + " Item " + position);
+        }
         return convertView;
     }
 
@@ -118,12 +110,12 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
             layout = (LinearLayout) convertView;
         }
         TextView tv = (TextView) layout.findViewById(R.id.textItem);
-        if(leftNavigations!=null) {
-            tv.setText(leftNavigations[section]);
+        if (foodCategories != null && foodCategories.get(section) != null) {
+            tv.setText(foodCategories.get(section).getCategoryname());
         }
         layout.setClickable(false);
 //        ((TextView) layout.findViewById(R.id.textItem)).setText(leftStr[section]);
-        LogUtil.d(TAG,"Header for section " + section);
+        LogUtil.d(TAG, "Header for section " + section);
         return layout;
     }
 

@@ -75,7 +75,7 @@ public class MainHomeFragment extends BaseFragment {
                 App.shopService().setCurrShopid(id);    //保存当前shopid
 
                 Intent intent = new Intent(context, ShopDetailActivity.class);
-                 Shop shop = (Shop) shopListAdapter.getItem(position);
+                 Shop shop = (Shop) shopListAdapter.getItem(position-1);
                  intent.putExtra("currShop",shop);
                 startActivity(intent);
             }

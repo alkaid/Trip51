@@ -22,7 +22,6 @@ import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.shop.adapter.MenuLeftListAdapter;
 import com.alkaid.trip51.shop.adapter.MenuRightListAdapter;
-import com.alkaid.trip51.shop.model.FoodItemModel;
 import com.alkaid.trip51.widget.linkedlistview.LinkedListView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -47,8 +46,8 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     private MenuLeftListAdapter menuLeftListAdapter;
     private MenuRightListAdapter menuRightListAdapter;
 
-    private String[] leftNavigationData;
-    private ArrayList<FoodItemModel> menus;
+    private List<FoodCategory> foodCategories;
+
 
 
     @Override
@@ -78,106 +77,19 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         menuLeftListAdapter = new MenuLeftListAdapter(getContext());
         menuRightListAdapter = new MenuRightListAdapter(getContext());
         llMenu.setAdapter(menuLeftListAdapter, menuRightListAdapter);
-        //设置假数据
-        setFakeData();
-        setMenuListData(leftNavigationData, menus);
-        llMenu.notifyDataSetChanged();
+
 
     }
 
-    private void setFakeData(){
-        leftNavigationData = new String[]{"炒菜", "凉菜", "海鲜", "小吃"};
-        menus = new ArrayList<>();
-
-        for(int i = 0;i<5;i++) {
-            FoodItemModel item1 = new FoodItemModel();
-            if(i == 0) {
-                item1.setName("土豆丝");
-            }else if(i == 1){
-                item1.setName("腐竹排骨");
-            }else if(i == 2){
-                item1.setName("蒜蓉菜心");
-            }else if(i == 3){
-                item1.setName("炒胡萝卜");
-            }else if(i == 4){
-                item1.setName("西红柿炒蛋");
+    private void setMenuListData(List<FoodCategory> foodCategories){
+        if(menuLeftListAdapter!=null&&menuRightListAdapter!=null&&llMenu!=null&&foodCategories!=null){
+            String[] cateforyNames = new String[foodCategories.size()];
+            for(int i=0;i<foodCategories.size();i++){
+                cateforyNames[i] = foodCategories.get(i).getCategoryname();
             }
-            item1.setPrice("10.0");
-            item1.setSectionNum(0);
-            item1.setPositionNum(i);
-            item1.setSold_num(200);
-            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
-            menus.add(item1);
-        }
-
-        for(int i = 0;i<5;i++) {
-            FoodItemModel item1 = new FoodItemModel();
-            if(i == 0) {
-                item1.setName("土豆丝");
-            }else if(i == 1){
-                item1.setName("腐竹排骨");
-            }else if(i == 2){
-                item1.setName("蒜蓉菜心");
-            }else if(i == 3){
-                item1.setName("炒胡萝卜");
-            }else if(i == 4){
-                item1.setName("西红柿炒蛋");
-            }
-            item1.setPrice("10.0");
-            item1.setSectionNum(1);
-            item1.setPositionNum(i);
-            item1.setSold_num(200);
-            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
-            menus.add(item1);
-        }
-
-        for(int i = 0;i<5;i++) {
-            FoodItemModel item1 = new FoodItemModel();
-            if(i == 0) {
-                item1.setName("土豆丝");
-            }else if(i == 1){
-                item1.setName("腐竹排骨");
-            }else if(i == 2){
-                item1.setName("蒜蓉菜心");
-            }else if(i == 3){
-                item1.setName("炒胡萝卜");
-            }else if(i == 4){
-                item1.setName("西红柿炒蛋");
-            }
-            item1.setPrice("10.0");
-            item1.setSectionNum(2);
-            item1.setPositionNum(i);
-            item1.setSold_num(200);
-            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
-            menus.add(item1);
-        }
-
-        for(int i = 0;i<5;i++) {
-            FoodItemModel item1 = new FoodItemModel();
-            if(i == 0) {
-                item1.setName("土豆丝");
-            }else if(i == 1){
-                item1.setName("腐竹排骨");
-            }else if(i == 2){
-                item1.setName("蒜蓉菜心");
-            }else if(i == 3){
-                item1.setName("炒胡萝卜");
-            }else if(i == 4){
-                item1.setName("西红柿炒蛋");
-            }
-            item1.setPrice("10.0");
-            item1.setSectionNum(3);
-            item1.setPositionNum(i);
-            item1.setSold_num(200);
-            item1.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.temp_shop_thumb));
-            menus.add(item1);
-        }
-    }
-
-    private void setMenuListData(String[] leftNavigationData,ArrayList<FoodItemModel> menus){
-        if(menuLeftListAdapter!=null&&llMenu!=null&&menuRightListAdapter!=null){
-            menuLeftListAdapter.setNavigationData(leftNavigationData);
-            menuRightListAdapter.setMenuListData(leftNavigationData,menus);
+            menuLeftListAdapter.setNavigationData(cateforyNames);
+            menuRightListAdapter.setMenuListData(foodCategories);
+            llMenu.notifyDataSetChanged();
         }
     }
 
@@ -193,11 +105,9 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
             @Override
             public void onResponse(ResFoodList response) {
-                leftNavigationData = new String[]{};
-                List<FoodCategory> foodCategories = response.getFoodcategory();
-                for(int i=0;i<foodCategories.size();){
-                    leftNavigationData[i]= foodCategories.get(i).getCategoryname();
-                }
+                //设置假数据
+                foodCategories = response.getFoodcategory();
+                setMenuListData(foodCategories);
                 dismissPdg();
             }
         }, new Response.ErrorListener() {
