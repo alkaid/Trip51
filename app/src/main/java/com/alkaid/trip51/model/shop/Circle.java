@@ -8,6 +8,8 @@ import java.io.Serializable;
  * Created by alkaid on 2015/11/29.
  */
 public class Circle implements Serializable {
+//    @Expose(serialize = false)
+//    public long areaid;
     private long circleid;
     private String circlename;
     private int circleshopnum;

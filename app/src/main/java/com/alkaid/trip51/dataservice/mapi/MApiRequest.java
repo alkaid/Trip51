@@ -102,9 +102,9 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         cacheKeyParams.remove("sign");
 //        cacheKeyParams.remove("openid");
         //排除特别字段
-        cacheKeyParams.remove("location");
+//        cacheKeyParams.remove("location");
         cacheKeyParams.remove("coordinates");
-        cacheKeyParams.remove("sortid");
+//        cacheKeyParams.remove("sortid");
         StringBuilder sb=new StringBuilder(getUrl());
         sb.append("?");
         for (String key:cacheKeyParams.keySet()){

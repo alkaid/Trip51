@@ -321,6 +321,11 @@ public class LocationService {
             @Override
             public void onResponse(ResShopCondition response) {
                 condition=response;
+//                for(Area a: response.getArealist()){
+//                    for(Circle c:a.getCirclelist()){
+//                        c.areaid=a.getAreaid();
+//                    }
+//                }
                 taskStep|=8;
                 onAnyTaskComplete();
             }
