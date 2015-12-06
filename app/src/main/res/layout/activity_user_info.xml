@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+    android:background="@color/background_gray">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/default_title_bar" />
@@ -16,11 +19,14 @@
         android:paddingRight="@dimen/margin_page_small">
 
         <RelativeLayout android:id="@+id/rl_head_setting" style="@style/SingleItem">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/temp_user_info_ipc" />
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/nivFace"
+                android:layout_width="42dp"
+                android:layout_height="42dp" />
+            <!--<ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/temp_user_info_ipc" />-->
 
             <ImageView
                 android:id="@+id/ivArrow0"
@@ -35,14 +41,14 @@
 
         <View style="@style/DividerViewHorizon" />
 
-        <RelativeLayout style="@style/SingleItem">
+        <RelativeLayout style="@style/SingleItem" android:id="@+id/layNickname">
 
             <TextView
                 android:id="@+id/tv_user_name"
                 style="@style/TextViewTitle2.centerVertical"
                 android:text="昵称" />
 
-            <TextView
+            <TextView android:id="@+id/tvNickname"
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/tv_user_name"
@@ -246,3 +252,8 @@
 
     </LinearLayout>
 </LinearLayout>
+    <LinearLayout android:id="@+id/layPhotoPick"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+</RelativeLayout>

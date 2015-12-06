@@ -82,6 +82,10 @@ public class AccountService {
         this.account=resLogin.getAccount();
         this.openInfo=resLogin.getOpeninfo();
         logined=true;
+       save();
+    }
+
+    public void save(){
         Gson gson=new Gson();
         String accountJson = gson.toJson(account);
         String openInfoJson=gson.toJson(openInfo);
@@ -95,7 +99,7 @@ public class AccountService {
      * @return
      */
     public boolean checkLogined(Activity context){
-        if(TextUtils.isEmpty(openInfo.getOpenid())){
+        if(openInfo==null || account==null || TextUtils.isEmpty(openInfo.getOpenid())||TextUtils.isEmpty(account.getMemberid())){
             context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
             return false;
         }
@@ -146,30 +150,16 @@ public class AccountService {
         return false;
     }
 
-
     public boolean isLogined() {
         return logined;
     }
-
-    public void setLogined(boolean logined) {
-        this.logined = logined;
-    }
-
     public OpenInfo getOpenInfo() {
         return openInfo;
     }
-
-    public void setOpenInfo(OpenInfo openInfo) {
-        this.openInfo = openInfo;
-    }
-
     public Account getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
 
 

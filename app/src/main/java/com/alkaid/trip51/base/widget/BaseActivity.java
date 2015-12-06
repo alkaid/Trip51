@@ -43,6 +43,9 @@ public class BaseActivity extends BActivity {
 	protected void toastShort(String msg){
 		baseContextWrap.toastShort(msg);
 	}
+	protected void toastLong(String msg){
+		baseContextWrap.toastLong(msg);
+	}
 	protected void toastShortAsync(String msg){
 		baseContextWrap.toastShortAsync(msg);
 	}

@@ -1,6 +1,7 @@
 package com.alkaid.trip51.shop;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -87,17 +88,21 @@ public class OrderDetailActivity extends BaseActivity {
                     @Override
                     public void onComplete(Result result) {
                         switch (result.getCode()) {
-                            case RESULT_CANCELED:
+                            case Result.RQF_PAY_USER_CANCEL:
                                 toastShort("您已取消支付");
+                                btnPay.setEnabled(true);
                                 break;
-                            case RESULT_OK:
+                            case Result.RQF_ORDER_SUCCESS:
                                 //TODO 验证支付结果
+                                checkPay();
                                 break;
                             default:
                                 //TODO　支付失败，暂时toast 需换UI
                                 toastShort("支付失败:" + result.getError());
+                                btnPay.setEnabled(true);
                                 break;
                         }
+
                     }
                 });
             }
@@ -108,6 +113,7 @@ public class OrderDetailActivity extends BaseActivity {
                 //TODO 暂时用handleException 应该换成失败时的正式UI
                 handleException(new TradException(error));
                 checkIsNeedRelogin(error);
+                btnPay.setEnabled(true);
             }
         }), tag);
     }
@@ -132,13 +138,19 @@ public class OrderDetailActivity extends BaseActivity {
                 //TODO 更新UI执行相应跳转
                 switch (response.getPaystatus()){
                     case NetDataConstants.PAY_STATUS_SUCCESS:
+                        toastLong("支付成功！");
+                        finish();
                         break;
                     case NetDataConstants.PAY_STATUS_FAILED:
+                        toastLong("抱歉，支付失败！请稍后重试");
                         break;
                     case NetDataConstants.PAY_STATUS_WAITTING:
+                        toastLong("订单支付状态还在确认中，请稍后再查看该订单状态.");
                         break;
                 }
-                toastShort(response.getMsg());
+                if(!TextUtils.isEmpty(response.getMsg()))
+                    toastLong(response.getMsg());
+                finish();
             }
         }, new Response.ErrorListener() {
             @Override

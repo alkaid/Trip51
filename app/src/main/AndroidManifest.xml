@@ -23,9 +23,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.READ_SETTINGS"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
@@ -102,7 +100,7 @@
         <activity android:name=".usercenter.SettingActivity"/>
         <activity android:name=".usercenter.SmsValcodeActivity"/>
         <activity android:name=".usercenter.ModifyTelBindActivity"/>
-        <activity android:name=".usercenter.TakePhotoActivity" android:theme="@style/BottomDialogStyle"/>
+        <activity android:name=".usercenter.SimpleEditorActivity"/>
         <activity android:name=".shop.ShoppingCartActivity" android:theme="@style/BottomDialogStyle2"/>
         <activity android:name=".booking.BookingActivity"/>
 

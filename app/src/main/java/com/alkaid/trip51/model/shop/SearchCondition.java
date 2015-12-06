@@ -1,9 +1,14 @@
 package com.alkaid.trip51.model.shop;
 
+import com.alkaid.trip51.model.NetDataConstants;
+import com.alkaid.trip51.model.config.TimeSet;
+import com.alkaid.trip51.model.enums.PersonNumType;
+import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.enums.ShopType;
 import com.alkaid.trip51.model.enums.SortType;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -38,7 +43,22 @@ public class SearchCondition implements Serializable{
                 }
             }
             if(null!=searchCondition.advance){
-
+                if(searchCondition.advance.date>0){
+                    SimpleDateFormat format = new SimpleDateFormat(NetDataConstants.DATE_FORMAT);
+                    params.put("sortid",format.format(searchCondition.advance.date));
+                }
+                if(null!=searchCondition.advance.timeSet){
+                    params.put("timepartid",searchCondition.advance.timeSet.timeid+"");
+                }
+                if(null!=searchCondition.advance.personNumType){
+                    params.put("seatnum",searchCondition.advance.personNumType.code+"");
+                }
+                if(null!=searchCondition.advance.cuisine){
+                    params.put("cuisineid",searchCondition.advance.cuisine.getCuisineid()+"");
+                }
+                if(searchCondition.advance.seatType!=null){
+                    params.put("desktype",searchCondition.advance.seatType.code+"");
+                }
             }
         }
     }
@@ -64,11 +84,17 @@ public class SearchCondition implements Serializable{
      */
     public static class Advance implements Serializable{
         public String keyword;
-        public String orderdate;
-        public int timepartid=-1;
-        public int seatnum;
-        public int cuisineid;
-        public int desktype;
+//        public String orderdate;
+//        public int timepartid=-1;
+//        public int seatnum;
+//        public int cuisineid;
+//        public int desktype;
+
+        public long date;
+        public TimeSet timeSet;
+        public PersonNumType personNumType;
+        public Cuisine cuisine;
+        public SeatType seatType;
     }
 
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/gray_background">
+    <include android:id="@+id/layTitleBar" layout="@layout/default_title_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="@dimen/margin_page_medium" android:paddingRight="@dimen/margin_page_medium"
+        android:orientation="vertical" android:background="@color/white">
+        <LinearLayout style="@style/SingleItem" android:paddingTop="0dp" android:paddingBottom="0dp" android:layout_height="40dp" android:gravity="center_vertical">
+            <TextView android:id="@+id/tvName" android:text="昵称" style="@style/TextViewArticle" />
+            <EditText android:id="@+id/etValue" style="@style/TextViewArticle.Gray.centerVertical.FormEditText" android:hint="" android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
