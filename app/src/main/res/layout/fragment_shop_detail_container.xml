@@ -1,64 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_shop_detail"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/llcontainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="15"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.alkaid.trip51.widget.linkedlistview.LinkedListView
-            android:id="@+id/llview_menu"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="15">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
+            <com.alkaid.trip51.widget.linkedlistview.LinkedListView
+                android:id="@+id/llview_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include layout="@layout/list_shopping_cart" />
+        </RelativeLayout>
+
         <LinearLayout
-            android:id="@+id/ll_shoppinp_cart"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:background="@color/shop_detail_btn_shopping_cart_background"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="2"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/gouwuche"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="购物车"
-                android:textStyle="bold"
+
+            <LinearLayout
+                android:id="@+id/ll_shoppinp_cart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="@color/shop_detail_btn_shopping_cart_background"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gouwuche" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="购物车"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(满50定金免单)"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_title_3" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_booking"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@color/red"
+                android:text="立即预定"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_title_1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(满50定金免单)"
-                android:textSize="@dimen/text_title_3"
-                android:textColor="@color/white"/>
+                android:textSize="@dimen/text_title_2"
+                android:textStyle="bold" />
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_booking"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@color/red"
-            android:text="立即预定"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_title_2"/>
+
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

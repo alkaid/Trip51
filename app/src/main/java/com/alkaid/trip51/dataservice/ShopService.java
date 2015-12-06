@@ -2,7 +2,10 @@ package com.alkaid.trip51.dataservice;
 
 import android.content.Context;
 
+import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.test.TestData;
+
+import java.util.List;
 
 /**
  * Created by df on 2015/11/23.

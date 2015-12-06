@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_shoppinp_cart_detail"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/transparent_bg"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_gouwuche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/gouwuche" />
+
+        <TextView
+            style="@style/OvalNumTagTextView"
+            android:layout_alignRight="@id/iv_gouwuche"
+            android:gravity="center"
+            android:text="1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/up_arrow_gray" />
+
+        <RelativeLayout
+            style="@style/TitleBarShoppingCart"
+            android:background="@color/background_gray">
+
+            <TextView
+                style="@style/TextViewTitle3.Gray"
+                android:layout_marginLeft="10dp"
+                android:text="购物车" />
+
+            <TextView
+                android:id="@+id/tvClearAll"
+                style="@style/TextViewTitle3.Gray"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="清空全部" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/tvClearAll"
+                android:src="@drawable/shopping_cart_garbage" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_shopping_cart_list"
+            style="@style/CustomListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="@color/gray"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="共￥32.8"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_booking"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@color/red"
+                android:text="立即预定"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>-->
+
+    </LinearLayout>
+
+</LinearLayout>
