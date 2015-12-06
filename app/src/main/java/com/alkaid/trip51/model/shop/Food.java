@@ -1,5 +1,7 @@
 package com.alkaid.trip51.model.shop;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,7 @@ public class Food implements Serializable{
     private float price;
     private long sales;
     private float promotionprice;
+    @Expose(serialize = false)
     private int foodNum;
 
     public long getFoodid() {
