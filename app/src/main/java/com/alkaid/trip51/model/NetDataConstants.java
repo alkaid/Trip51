@@ -15,13 +15,6 @@ public class NetDataConstants {
     /**女性*/
     public static final int SEX_FEMALE=2;
 
-    /**座位类型:大厅*/
-    public static final int SEAT_TYPE_HALL=1;
-    /**座位类型:雅座*/
-    public static final int SEAT_TYPE_LOUNGE=2;
-    /**座位类型:包间*/
-    public static final int SEAT_TYPE_PRIVATE_ROOM=3;
-
     /**时间格式化用*/
     public static final String DATETIME_FORMAT="yyyy-MM-dd hh:mm";
     /**日期格式化用*/
@@ -40,15 +33,4 @@ public class NetDataConstants {
     public static final int CONDITION_ORDER_STATUS_UNPAY=2;
     /**查询用的订单状态：退款单*/
     public static final int CONDITION_ORDER_STATUS_REFUND=3;
-
-    /**订单状态：已提交*/
-    public static final int ORDER_STATUS_COMMITED=1;
-    /**订单状态：已支付*/
-    public static final int ORDER_STATUS_PAYED=2;
-    /**订单状态：已消费*/
-    public static final int ORDER_STATUS_CONSUMED=3;
-    /**订单状态：已过期*/
-    public static final int ORDER_STATUS_EXPIRED=4;
-    /**订单状态：已退款*/
-    public static final int ORDER_STATUS_REFUND=5;
 }

@@ -41,14 +41,14 @@
 
         <View style="@style/DividerViewHorizon" />
 
-        <RelativeLayout style="@style/SingleItem">
+        <RelativeLayout style="@style/SingleItem" android:id="@+id/layNickname">
 
             <TextView
                 android:id="@+id/tv_user_name"
                 style="@style/TextViewTitle2.centerVertical"
                 android:text="昵称" />
 
-            <TextView
+            <TextView android:id="@+id/tvNickname"
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/tv_user_name"

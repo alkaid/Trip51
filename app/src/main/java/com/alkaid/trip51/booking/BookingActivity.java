@@ -18,6 +18,7 @@ import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
+import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.request.ReqOrderInfo;
 import com.alkaid.trip51.model.response.ResOrder;
 import com.alkaid.trip51.model.shop.Food;
@@ -75,7 +76,7 @@ public class BookingActivity extends BaseActivity {
         order.setOtherusername(null);
         order.setPersonnum(4);
         order.setRoomnum(1);
-        order.setRoomtype(NetDataConstants.SEAT_TYPE_HALL);
+        order.setRoomtype(SeatType.HALL.code);
         order.setSex(NetDataConstants.SEX_FEMALE);
         order.setShopid(37);
         order.setFoodamount(23.00f);

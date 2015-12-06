@@ -38,6 +38,8 @@ public class MApiService {
     public static final String URL_USER_COLLECTS=weburl+"shop/collectlist/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_CONDITION=weburl+"shop/init/"+PROTOCOL_VERSION;
     public static final String URL_USER_MODIFY_FACE=weburl+"member/modifyheadpic/"+PROTOCOL_VERSION;
+    public static final String URL_USER_MODIFY_NICKNAME=weburl+"member/modifynickname/"+PROTOCOL_VERSION;
+
 
     public static final int SMSCODE_FOR_REGISTER=1;
     public static final int SMSCODE_FOR_LOGIN=2;

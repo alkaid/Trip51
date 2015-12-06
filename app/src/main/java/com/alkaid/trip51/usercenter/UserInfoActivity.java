@@ -17,7 +17,6 @@ import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
-import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiMultipartRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -39,13 +38,15 @@ import java.util.Map;
  */
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener,CropInterface
 {
+    private static final int REQUEST_CODE_NICKNAME=1001;
     private RelativeLayout relTelphone;//电话绑定
     private RelativeLayout relHeadSetting;//头像设置
     private NetworkImageView nivFace;
     private Account account;
 
-    private ViewGroup layPhotoPick;
+    private ViewGroup layPhotoPick,layNickname;
     private Button btn_take_photo, btn_pick_photo, btn_cancel;
+    private TextView tvNickname;
 
     CropConfig mCropParams = new CropConfig();
 
@@ -57,7 +58,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         if(!checkLogined()){
             finish();
         }
-        account= AccountService.create(context).getAccount();
+        account= App.accountService().getAccount();
         mCropParams.outputX=64;
         mCropParams.outputY=64;
         initView();
@@ -78,6 +79,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         relTelphone.setOnClickListener(this);
         relHeadSetting = (RelativeLayout) findViewById(R.id.rl_head_setting);
         relHeadSetting.setOnClickListener(this);
+        layNickname= (ViewGroup) findViewById(R.id.layNickname);
+        tvNickname=(TextView) findViewById(R.id.tvNickname);
+        layNickname.setOnClickListener(this);
 
         nivFace= (NetworkImageView) findViewById(R.id.nivFace);
         nivFace.setDefaultImageResId(R.mipmap.ic_launcher);
@@ -126,6 +130,11 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_cancel:
                 layPhotoPick.setVisibility(View.GONE);
                 break;
+            case R.id.layNickname:
+                Intent intent1=new Intent(context,SimpleEditorActivity.class);
+                intent1.putExtra(SimpleEditorActivity.BUNDLE_KEY_FIELD,SimpleEditorActivity.FIELD_NICKNAME);
+                startActivityForResult(intent1,REQUEST_CODE_NICKNAME);
+                break;
         }
     }
 
@@ -133,6 +142,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         CropUtils.handleResult(this, requestCode, resultCode, data);
+        if(resultCode==Activity.RESULT_OK){
+            switch (requestCode){
+                case REQUEST_CODE_NICKNAME:
+                    tvNickname.setText(account.getNickname());
+                    break;
+            }
+        }
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.config.TimeSet;
 import com.alkaid.trip51.model.enums.PersonNumType;
+import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.shop.Cuisine;
 import com.alkaid.trip51.model.shop.SearchCondition;
 import com.alkaid.trip51.model.shop.ShopCategory;
@@ -152,13 +153,13 @@ public class  BookingFilterActivity extends BaseActivity implements View.OnClick
             public void onClick(View v) {
                 switch (rgSeatType.getCheckedRadioButtonId()){
                     case R.id.rbHall:
-                        searchCondition.advance.desktype=NetDataConstants.SEAT_TYPE_HALL;
+                        searchCondition.advance.seatType= SeatType.HALL;
                         break;
                     case R.id.rbLounge:
-                        searchCondition.advance.desktype=NetDataConstants.SEAT_TYPE_LOUNGE;
+                        searchCondition.advance.seatType=SeatType.LOUNGE;
                         break;
                     case R.id.rbPrivateRoom:
-                        searchCondition.advance.desktype=NetDataConstants.SEAT_TYPE_PRIVATE_ROOM;
+                        searchCondition.advance.seatType=SeatType.PRIVATE_ROOM;
                         break;
                 }
                 String keywords=etKeywords.getText().toString().trim();
