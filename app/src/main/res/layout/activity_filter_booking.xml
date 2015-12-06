@@ -59,7 +59,9 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:background="@color/white">
 
             <RelativeLayout
                 android:id="@+id/rl_complete"
@@ -86,6 +88,14 @@
                     android:layout_height="wrap_content"
                     android:visibility="visible"/>
             </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/dpPicker"
+                android:calendarViewShown="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_complete"
+                android:visibility="gone"/>
         </RelativeLayout>
     </RelativeLayout>
 

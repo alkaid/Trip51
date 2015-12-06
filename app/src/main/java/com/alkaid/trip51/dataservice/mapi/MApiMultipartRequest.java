@@ -85,6 +85,7 @@ public class MApiMultipartRequest<T extends ResponseData> extends MApiRequest<T>
             buildPart(key,params.get(key));
         }
         byte[] multipartBody = bos.toByteArray();
+        LogUtil.v(new String(multipartBody));
         return multipartBody;
     }
 
@@ -100,7 +101,7 @@ public class MApiMultipartRequest<T extends ResponseData> extends MApiRequest<T>
         try {
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\""+name+"\""
-                    + null==fileName?"" : "; filename=\"" + fileName + "\""
+                    + (null==fileName?"" : ("; filename=\"" + fileName + "\""))
                     + lineEnd);
             dos.writeBytes(lineEnd);
 

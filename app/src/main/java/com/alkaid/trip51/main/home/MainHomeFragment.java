@@ -68,6 +68,8 @@ public class MainHomeFragment extends BaseFragment {
             }
         });
 
+        searchCondition=new SearchCondition();
+        searchCondition.base=new SearchCondition.Base();
         shopListView = (PullToRefreshListView) v.findViewById(R.id.ptrList);
         shopListView.getRefreshableView().addHeaderView(header);
         shopListAdapter=new ShopListAdapter(context);
@@ -145,10 +147,6 @@ public class MainHomeFragment extends BaseFragment {
         DefaultFilter defaultFilter=new DefaultFilter(inflater, context, v, new DefaultFilter.OnItemClickListener() {
             @Override
             public void onClick(SearchCondition.Result result) {
-                if(null==searchCondition){
-                    searchCondition=new SearchCondition();
-                    searchCondition.base=new SearchCondition.Base();
-                }
                 //解析点击后传过来的类型
                 switch (result.condType){
                     case ShopCategory:

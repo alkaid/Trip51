@@ -20,6 +20,7 @@ public class ShopListActivity extends BaseFragmentActivity {
         FragmentManager fragmentManager =getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         ShopListFragment sf=new ShopListFragment();
+        sf.setArguments(getIntent().getExtras());
         transaction.replace(R.id.content,sf).commit();
 
         ivBack=findViewById(R.id.btn_back_wx);

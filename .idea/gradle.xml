@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/imageCropper" />
             <option value="$PROJECT_DIR$/popupbuttonlibrary" />
             <option value="$PROJECT_DIR$/pullToRefreshLib" />
             <option value="$PROJECT_DIR$/volley" />

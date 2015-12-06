@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
@@ -36,6 +37,7 @@ public class MApiService {
     public static final String URL_USER_COMMENTS=weburl+"comment/list/"+PROTOCOL_VERSION;
     public static final String URL_USER_COLLECTS=weburl+"shop/collectlist/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_CONDITION=weburl+"shop/init/"+PROTOCOL_VERSION;
+    public static final String URL_USER_MODIFY_FACE=weburl+"member/modifyheadpic/"+PROTOCOL_VERSION;
 
     public static final int SMSCODE_FOR_REGISTER=1;
     public static final int SMSCODE_FOR_LOGIN=2;
@@ -44,7 +46,7 @@ public class MApiService {
     private static MApiService instance;
     private Context context;
     private RequestQueue reqQueue;
-    private Cache cache;
+    private ImageLoader imageLoader;
     private MApiService(Context context){
         this.context=context;
     }
@@ -78,4 +80,14 @@ public class MApiService {
         return reqQueue.getCache();
     }
 
+    public RequestQueue getRequestQueue(){
+        return this.reqQueue;
+    }
+
+    public ImageLoader getImageLoader() {
+        if(null==imageLoader){
+            imageLoader = new ImageLoader(reqQueue, LruImageCache.instance());
+        }
+        return imageLoader;
+    }
 }

@@ -24,6 +24,8 @@ public class NetDataConstants {
 
     /**时间格式化用*/
     public static final String DATETIME_FORMAT="yyyy-MM-dd hh:mm";
+    /**日期格式化用*/
+    public static final String DATE_FORMAT="yyyy-MM-dd";
 
     /**支付状态：成功*/
     public static final int PAY_STATUS_SUCCESS=1;
