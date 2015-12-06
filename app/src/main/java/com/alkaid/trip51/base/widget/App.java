@@ -40,6 +40,7 @@ public class App extends BApp {
         shopService=ShopService.create(this);
         orderService=OrderService.create(this);
         configService=ConfigService.create(this);
+        shoppingCartService=ShoppingCartService.create(this);
         serviceListener.onComplete(INIT_TAG_APP);
     }
 
