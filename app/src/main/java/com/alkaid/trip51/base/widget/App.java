@@ -6,6 +6,7 @@ import com.alkaid.trip51.dataservice.ServiceListener;
 import com.alkaid.trip51.dataservice.OrderService;
 import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.LocationService;
+import com.alkaid.trip51.dataservice.ShoppingCartService;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.dataservice.ShopService;
 
@@ -23,6 +24,7 @@ public class App extends BApp {
     private ShopService shopService;
     private OrderService orderService;
     private ConfigService configService;
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public void onCreate() {
@@ -66,5 +68,6 @@ public class App extends BApp {
         return instance().orderService;
     }
     public static ConfigService configService(){return instance().configService;}
+    public static ShoppingCartService shoppingCartService(){return instance().shoppingCartService;}
 
 }

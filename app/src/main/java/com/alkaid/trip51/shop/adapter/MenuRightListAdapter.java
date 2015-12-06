@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.dataservice.ShoppingCartService;
+import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
@@ -19,7 +19,6 @@ import com.alkaid.trip51.util.BitmapUtil;
 import com.alkaid.trip51.widget.Operator;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuRightListAdapter extends SectionedBaseAdapter {
@@ -162,7 +161,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
                 }
             }
         }
-        ShoppingCartService.create(mContext).updateFoodToCart(currShop.getShopid(),food);
+        App.shoppingCartService().updateFoodToCart(currShop.getShopid(),food);
 }
 
 

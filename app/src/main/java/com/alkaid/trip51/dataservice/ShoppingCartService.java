@@ -18,7 +18,7 @@ public class ShoppingCartService {
     /**
      * 购物车显示的食物
      */
-    private Map<Long,ArrayList<Food>> cartFoods;
+    private Map<Long,List<Food>> cartFoods;
 
     private ShoppingCartService(Context context) {
         this.context = context;
@@ -31,10 +31,10 @@ public class ShoppingCartService {
     }
 
     private void init() {
-        cartFoods =new HashMap<Long,ArrayList<Food>>();
+        cartFoods =new HashMap<Long,List<Food>>();
     }
 
-    public  Map<Long,ArrayList<Food>> getCart() {
+    public  Map<Long,List<Food>> getCart() {
         return cartFoods;
     }
 
@@ -44,17 +44,22 @@ public class ShoppingCartService {
      * @param food
      */
     public void updateFoodToCart(long shopId,Food food){
+        List<Food> foods=cartFoods.get(shopId);
         if(cartFoods!=null){
-            if(cartFoods.get(shopId)==null){
-                List<Food> foods = new ArrayList<Food>();
+            if(foods==null){
+                foods = new ArrayList<Food>();
                 foods.add(food);
-                cartFoods.put(shopId, (ArrayList<Food>) foods);
+                cartFoods.put(shopId, foods);
             }else{
-                for(Food f:cartFoods.get(shopId)){
+                boolean isContainFood=false;
+                for(Food f:foods){
                     if(f.getFoodid() == food.getFoodid()){
                         f = food;
+                        isContainFood=true;
+                        break;
                     }
                 }
+                foods.add(food);
             }
         }
     }

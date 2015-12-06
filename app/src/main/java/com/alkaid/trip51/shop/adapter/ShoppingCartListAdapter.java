@@ -8,13 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.dataservice.ShoppingCartService;
+import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.widget.Operator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartListAdapter extends BaseAdapter {
@@ -39,7 +38,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
      */
     public void setCartData(List<FoodCategory> foodCategories) {
         this.foodCategories = foodCategories;
-        foods = ShoppingCartService.create(context).getCart().get(currShop.getShopid());
+        foods = App.shoppingCartService().getCart().get(currShop.getShopid());
     }
 
     @Override
@@ -119,7 +118,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
                     }
                 }
             }
-            ShoppingCartService.create(context).updateFoodToCart(currShop.getShopid(), food);
+            App.shoppingCartService().updateFoodToCart(currShop.getShopid(), food);
         }
     }
 
