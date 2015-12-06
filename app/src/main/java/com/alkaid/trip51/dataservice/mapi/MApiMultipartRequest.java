@@ -84,6 +84,12 @@ public class MApiMultipartRequest<T extends ResponseData> extends MApiRequest<T>
         for(String key:params.keySet()){
             buildPart(key,params.get(key));
         }
+        //这里要注意添加最后一条form-data的boundary
+        try {
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+        } catch (IOException e) {
+            LogUtil.e(e);
+        }
         byte[] multipartBody = bos.toByteArray();
         LogUtil.v(new String(multipartBody));
         return multipartBody;
@@ -98,11 +104,14 @@ public class MApiMultipartRequest<T extends ResponseData> extends MApiRequest<T>
     }
 
     public void buildPart(String name, byte[] data, String fileName)  {
+        String contentType="application/octet-stream";
         try {
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\""+name+"\""
                     + (null==fileName?"" : ("; filename=\"" + fileName + "\""))
-                    + lineEnd);
+                    + lineEnd
+                    + (null==fileName?"":("Content-Type:"+contentType+";charset=utf-8"+lineEnd))
+                    );
             dos.writeBytes(lineEnd);
 
             ByteArrayInputStream fileInputStream = new ByteArrayInputStream(data);
