@@ -50,7 +50,7 @@
         android:layout_weight="2"
         android:layout_gravity="bottom">
         <com.alkaid.trip51.widget.Operator
-            android:id="@+id/opNums"
+            android:id="@+id/op_food_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             coodOper:opMaxCount="100"

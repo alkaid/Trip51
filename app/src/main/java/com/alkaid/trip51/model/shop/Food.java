@@ -12,6 +12,7 @@ public class Food implements Serializable{
     private float price;
     private long sales;
     private float promotionprice;
+    private int foodNum;
 
     public long getFoodid() {
         return foodid;
@@ -59,5 +60,13 @@ public class Food implements Serializable{
 
     public void setPromotionprice(float promotionprice) {
         this.promotionprice = promotionprice;
+    }
+
+    public int getFoodNum() {
+        return foodNum;
+    }
+
+    public void setFoodNum(int foodNum) {
+        this.foodNum = foodNum;
     }
 }
