@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_select_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rl_complete"
+                style="@style/SingleItem.mediumPaddingHorizon.Gray">
+
+                <TextView
+                    style="@style/TextViewTitle3.Gray"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="完成" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_select_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:paddingBottom="50dp"
+                android:background="@drawable/white_bg"
+                android:layout_below="@id/rl_complete">
+                <com.alkaid.trip51.widget.WheelView
+                    android:id="@+id/wv_select_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/dpPicker"
+                android:calendarViewShown="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_complete"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

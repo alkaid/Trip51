@@ -14,7 +14,7 @@ public class ResOrderDetail extends ResponseData {
     public String shopname;
     public String shopimgurl;
     public int personnum;
-    public int desktype;
+    public int roomtype;
     public String ordertime;
     public String dinnerdate;
     public float orderamount;
@@ -26,4 +26,5 @@ public class ResOrderDetail extends ResponseData {
     public String otherusername;
     public String othermobile;
     public List<Food> foods=new ArrayList<>();
+    public int orderstatus;
 }

@@ -1,7 +1,9 @@
 package com.alkaid.trip51.shop;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,10 +17,13 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
+import com.alkaid.trip51.model.enums.OrderStatus;
+import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.response.ResOrderDetail;
 import com.alkaid.trip51.model.response.ResOrderList;
 import com.alkaid.trip51.model.response.ResPayInfo;
 import com.alkaid.trip51.model.response.ResPayStatus;
+import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.PaymentFactory;
@@ -90,7 +95,8 @@ public class OrderDetailActivity extends BaseActivity {
             @Override
             public void onResponse(ResOrderDetail response) {
                 dismissPdg();
-                orderDetail=response;
+                orderDetail = response;
+                updateView();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -106,6 +112,42 @@ public class OrderDetailActivity extends BaseActivity {
 
     private void updateView(){
         tvShopName.setText(orderDetail.shopname);
+//        预订时间：2015-08-11（周二）18：00\n预订信息：包房/4人\n用户信息：高先生  18976765423\n支付方式：货到付款
+        StringBuilder sb=new StringBuilder();
+        sb.append("预订时间：").append(orderDetail.dinnerdate)
+                .append("\n预订信息：").append(orderDetail.roomtype>0? SeatType.getByCode(orderDetail.roomtype).desc:"").append("/").append(orderDetail.personnum)
+                .append("人\n用户信息：");
+        if(orderDetail.isinstead==NetDataConstants.TRUE){
+            sb.append(orderDetail.otherusername).append("  ").append(orderDetail.othermobile);
+        }else{
+            sb.append(App.accountService().getAccount().getRealname()).append("  ").append(App.accountService().getAccount().getMobile());
+        }
+//        sb.append("\n支付方式:").append(orderDetail.)
+        tvInfo.setText(sb.toString());
+        tvOrderNo.setText(orderDetail.orderno);
+        tvTotal.setText(orderDetail.orderamount+"");
+        //菜单
+        LayoutInflater inflater=LayoutInflater.from(context);
+        for(Food f:orderDetail.foods) {
+            View p= inflater.inflate(R.layout.order_detail_food_item, layFoodList, false);
+            TextView tvFoodName,tvPrice,tvCount,tvAmount;
+            tvFoodName= (TextView) p.findViewById(R.id.tvFoodName);
+            tvPrice= (TextView) p.findViewById(R.id.tvPrice);
+            tvCount= (TextView) p.findViewById(R.id.tvCount);
+            tvAmount= (TextView) p.findViewById(R.id.tvAmount);
+            tvFoodName.setText(f.getFoodname());
+            tvPrice.setText(f.getPrice()+"");
+            tvCount.setText(f.getFoodNum()+"");
+            tvAmount.setText(f.getPrice()*f.getFoodNum()+"");
+            layFoodList.addView(p);
+        }
+        //判断订单状态 更新按钮
+        if(orderDetail.orderstatus== OrderStatus.COMMITED.code){
+            btnPay.setEnabled(true);
+        }else{
+            btnPay.setEnabled(false);
+            btnPay.setText(OrderStatus.getByCode(orderDetail.orderstatus).desc);
+        }
     }
 
     private void initTitleBar(){

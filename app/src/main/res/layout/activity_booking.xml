@@ -40,7 +40,7 @@
                         android:text="人数" />
 
                     <TextView
-                        android:id="@+id/tvItemValue"
+                        android:id="@+id/tvPersonNum"
                         style="@style/TextViewArticle.Gray.centerVertical"
                         android:layout_marginRight="8dp"
                         android:layout_toLeftOf="@+id/ivArrow"
@@ -79,23 +79,13 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
-
-                        <CheckBox
-                            style="@style/CustomCheckBoxDefault"
-                            android:layout_alignParentRight="true"
-                            android:text="大厅" />
-
-                        <CheckBox
-                            style="@style/CustomCheckBoxDefault"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="10dp"
-                            android:text="雅座" />
-
-                        <CheckBox
-                            style="@style/CustomCheckBoxDefault"
-                            android:layout_marginLeft="10dp"
-                            android:checked="true"
-                            android:text="包房" />
+                        <RadioGroup android:id="@+id/rgSeatType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:orientation="horizontal">
+                            <RadioButton android:id="@+id/rbHall" style="@style/CustomRadioButtonDefault" android:text="大厅" android:checked="true" />
+                            <RadioButton android:id="@+id/rbLounge" style="@style/CustomRadioButtonDefault" android:text="雅座" android:layout_marginLeft="10dp" />
+                            <RadioButton android:id="@+id/rbPrivateRoom" style="@style/CustomRadioButtonDefault" android:text="包房" android:layout_marginLeft="10dp"/>
+                        </RadioGroup>
                     </LinearLayout>
 
                     <TextView
@@ -162,18 +152,18 @@
 
                 <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
 
-                    <RadioGroup
+                    <RadioGroup android:id="@+id/rgSex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
-                        <RadioButton
-                            style="@style/CustomRadioButtonDefault1.Gray"
+                        <RadioButton android:id="@+id/rbFemale"
+                            style="@style/CustomRadioButtonDefault.textGray"
                             android:text="女士" />
 
-                        <RadioButton
-                            style="@style/CustomRadioButtonDefault1.Gray"
+                        <RadioButton android:id="@+id/rbMale"
+                            style="@style/CustomRadioButtonDefault.textGray"
                             android:layout_marginLeft="10dp"
                             android:checked="true"
                             android:text="先生" />
@@ -244,12 +234,12 @@
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal">
 
-                        <RadioButton
-                            style="@style/CustomRadioButtonDefault1.Gray"
+                        <RadioButton android:id="@+id/rbOtherFemale"
+                            style="@style/CustomRadioButtonDefault.textGray"
                             android:text="女士" />
 
-                        <RadioButton
-                            style="@style/CustomRadioButtonDefault1.Gray"
+                        <RadioButton android:id="@+id/rbOtherMale"
+                            style="@style/CustomRadioButtonDefault.textGray"
                             android:layout_marginLeft="10dp"
                             android:checked="true"
                             android:text="先生" />

@@ -66,9 +66,11 @@
                     <!--<View style="@style/DividerViewHorizon" />-->
                 </LinearLayout>
                 <RelativeLayout style="@style/SingleItem" >
-                    <TextView android:id="@+id/tvTotal" style="@style/TextViewTitle2.centerVertical" android:textColor="@color/red" android:gravity="center" android:layout_alignParentRight="true"
-                        android:text="￥168" />
-                    <TextView android:layout_toLeftOf="@+id/tvTotal" style="@style/TextViewArticle.centerVertical"
+                    <TextView android:id="@+id/tvTotal" style="@style/TextViewTitle2.centerVertical" android:textColor="@color/red" android:layout_alignParentRight="true"
+                        android:text="168" />
+                    <TextView android:id="@+id/labelTotal" style="@style/TextViewTitle2.centerVertical" android:textColor="@color/red" android:layout_toLeftOf="@+id/tvTotal"
+                        android:text="￥" />
+                    <TextView android:layout_toLeftOf="@+id/labelTotal" style="@style/TextViewArticle.centerVertical"
                         android:text="订单总计："  />
                 </RelativeLayout>
             </LinearLayout>.

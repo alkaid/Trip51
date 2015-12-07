@@ -38,9 +38,6 @@ import java.util.Map;
  * Created by alkaid on 2015/11/7.
  */
 public class BookingActivity extends BaseActivity {
-    private ViewGroup layContent,laySeat;
-    private Operator opNums;
-    private LayoutInflater inflater;
     private View btnSure;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
