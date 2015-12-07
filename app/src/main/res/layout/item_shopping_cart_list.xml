@@ -18,7 +18,9 @@
         android:layout_marginRight="10dp"
         coodOper:colorStyle="orange"
         coodOper:opMaxCount="100"
-        coodOper:opMinCount="0" />
+        coodOper:opMinCount="0"
+        coodOper:iconHeight="30dp"
+        coodOper:iconWidth="30dp"/>
 
     <TextView
         android:id="@+id/tv_food_price"
