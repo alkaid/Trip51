@@ -2,6 +2,7 @@ package com.alkaid.trip51.shop.adapter;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
+import com.alkaid.trip51.shop.FoodListFragment;
 import com.alkaid.trip51.util.BitmapUtil;
 import com.alkaid.trip51.widget.Operator;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
@@ -29,10 +31,12 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
 
     private List<FoodCategory> foodCategories;
     private Shop currShop;
+    private Handler mHandler;
 
-    public MenuRightListAdapter(Context context, Shop currShop) {
+    public MenuRightListAdapter(Context context, Shop currShop,Handler handler) {
         this.mContext = context;
         this.currShop = currShop;
+        this.mHandler=handler;
     }
 
     /**
@@ -163,6 +167,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
             }
         }
         App.shoppingCartService().updateFoodToCart(currShop.getShopid(),food);
+        mHandler.sendEmptyMessage(FoodListFragment.UPDATE_SHOPPING_CART);
 }
 
 

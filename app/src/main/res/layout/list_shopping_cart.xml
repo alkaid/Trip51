@@ -21,7 +21,6 @@
             android:id="@+id/tv_shopping_cart_food_num"
             style="@style/OvalNumTagTextView"
             android:layout_alignRight="@id/iv_gouwuche"
-            android:gravity="center"
             android:text="1" />
     </RelativeLayout>
 

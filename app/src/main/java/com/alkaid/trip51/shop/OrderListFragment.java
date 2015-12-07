@@ -15,6 +15,7 @@ import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.response.ResOrderList;
 import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.shop.adapter.OrderListAdapter;
@@ -52,7 +53,10 @@ public class OrderListFragment extends BaseFragment {
             }
         });
         conditionOrderStatus=getArguments().getInt(BUNDLE_KEY_CONDITION_ORDER_STATUS);
-        loadData(conditionOrderStatus, LOAD_ON_ENTER, 1);
+        //如果是PageView中的第一个页面 则在这里加载数据 否则到onLazyLoad里加载
+        if(conditionOrderStatus== NetDataConstants.CONDITION_ORDER_STATUS_NORMAL) {
+            loadData(conditionOrderStatus, LOAD_ON_ENTER, 1);
+        }
 
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,6 +101,15 @@ public class OrderListFragment extends BaseFragment {
         return v;
     }
 
+    @Override
+    protected void onLazyLoad() {
+        super.onLazyLoad();
+        conditionOrderStatus=getArguments().getInt(BUNDLE_KEY_CONDITION_ORDER_STATUS);
+        //如果不是PageView中的第一个页面 则在这里加载数据
+        if(conditionOrderStatus!= NetDataConstants.CONDITION_ORDER_STATUS_NORMAL) {
+            loadData(conditionOrderStatus, LOAD_ON_ENTER, 1);
+        }
+    }
 
     private static final int LOAD_ON_ENTER=0;
     private static final int LOAD_ON_PULLDOWN=1;

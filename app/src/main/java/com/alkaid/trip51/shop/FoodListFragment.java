@@ -7,6 +7,9 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -58,7 +61,8 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     private ListView cartList;
 
     private TextView tvTotalPrice;
-    private TextView tvShoppingCartFoodNum;
+    private TextView tvShoppingCartFoodNum,tvBottomCartSize;
+    private Animation animCartMarkScale;
     private TextView tvClearCartAll;
 
     private List<FoodCategory> foodCategories;//菜单列表数据
@@ -94,17 +98,20 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         cartList = (ListView) v.findViewById(R.id.lv_shopping_cart_list);
         tvTotalPrice = (TextView) v.findViewById(R.id.tv_total_price);
         tvShoppingCartFoodNum = (TextView) v.findViewById(R.id.tv_shopping_cart_food_num);
+        tvBottomCartSize= (TextView) v.findViewById(R.id.tvBottomCartSize);
         cartListAdapter = new ShoppingCartListAdapter(getContext(), currShop, mHandler);
         cartList.setAdapter(cartListAdapter);
         llCartDetail.setOnClickListener(this);
+        tvShoppingCartFoodNum.setVisibility(View.GONE);
+        tvBottomCartSize.setVisibility(View.GONE);
         // llCartDetail.setOnClickListener(this);
         //设置adapter
         llMenu = (LinkedListView) v.findViewById(R.id.llview_menu);
         menuLeftListAdapter = new MenuLeftListAdapter(getContext());
-        menuRightListAdapter = new MenuRightListAdapter(getContext(), currShop);
+        menuRightListAdapter = new MenuRightListAdapter(getContext(), currShop,mHandler);
         llMenu.setAdapter(menuLeftListAdapter, menuRightListAdapter);
-
-
+        animCartMarkScale = AnimationUtils.loadAnimation(context,R.anim.cart_mark_scale);
+//        animCartMarkScale.setFillAfter(false);
     }
 
     /**
@@ -225,11 +232,13 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
                     if (menuLeftListAdapter != null && menuRightListAdapter != null && llMenu != null) {
                         llMenu.notifyDataSetChanged();
                     }
+                    updateViewOnCartSizeChange();
                     break;
                 case UPDATE_SHOPPING_CART:
                     if (cartListAdapter != null) {
                         cartListAdapter.notifyDataSetChanged();
                     }
+                    updateViewOnCartSizeChange();
                     break;
                 case OPEN_SHOPPING_CART_BUTOON:
                     llCartDetail.setVisibility(View.VISIBLE);
@@ -239,7 +248,7 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
                         tvTotalPrice.setVisibility(View.VISIBLE);
                         if (currShop != null) {
                             tvTotalPrice.setText("共￥" + App.shoppingCartService().getCartTotalPrice(currShop.getShopid()) + "");
-                            tvShoppingCartFoodNum.setText(App.shoppingCartService().getCartFoodNum(currShop.getShopid())+"");
+//                            updateViewOnCartSizeChange();
                         }
                         llCloseShoppingCart.setVisibility(View.GONE);
                     }
@@ -255,12 +264,33 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
                         cartListAdapter.clearCartAll();
                     }
                     resetFoodNum();
-                    sendEmptyMessage(UPDATE_MENU_LIST);
-                    sendEmptyMessage(UPDATE_SHOPPING_CART);
+                    tvTotalPrice.setText("共￥" + App.shoppingCartService().getCartTotalPrice(currShop.getShopid()) + "");
+//                    sendEmptyMessage(UPDATE_MENU_LIST);
+//                    sendEmptyMessage(UPDATE_SHOPPING_CART);
+                    if (menuLeftListAdapter != null && menuRightListAdapter != null && llMenu != null) {
+                        llMenu.notifyDataSetChanged();
+                    }
+                    if (cartListAdapter != null) {
+                        cartListAdapter.notifyDataSetChanged();
+                    }
+                    updateViewOnCartSizeChange();
                 default:
                     break;
             }
         }
     };
 
+    private void updateViewOnCartSizeChange(){
+        int cartSize=App.shoppingCartService().getCartFoodNum(currShop.getShopid());
+        tvShoppingCartFoodNum.setText(cartSize + "");
+        tvBottomCartSize.setText(tvShoppingCartFoodNum.getText());
+        if(cartSize>0) {
+            tvShoppingCartFoodNum.setVisibility(View.VISIBLE);
+            tvBottomCartSize.setVisibility(View.VISIBLE);
+            tvBottomCartSize.startAnimation(animCartMarkScale);
+        }else {
+            tvShoppingCartFoodNum.setVisibility(View.GONE);
+            tvBottomCartSize.setVisibility(View.GONE);
+        }
+    }
 }

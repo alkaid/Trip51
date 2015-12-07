@@ -68,6 +68,7 @@ public class ShoppingCartService {
         }
     }
 
+    //TODO 金额和总数需要改成update时就计算好缓存起来
     /**
      * 获取单个店铺购物车总价
      * @param shopId 店铺id
@@ -76,8 +77,10 @@ public class ShoppingCartService {
     public float getCartTotalPrice(long shopId){
         float total = 0;
         List<Food> foods = cartFoods.get(shopId);
+        if(null==foods)
+            return total;
         for(Food f:foods){
-            total = +f.getPrice();
+            total+=(f.getPrice()*f.getFoodNum());
         }
         return total;
     }
@@ -88,13 +91,16 @@ public class ShoppingCartService {
      * @return
      */
     public int getCartFoodNum(long shopId){
+        int total=0;
         if(cartFoods!=null){
             List<Food> foods = cartFoods.get(shopId);
             if(foods!=null){
-                return foods.size();
+                for(Food f:foods){
+                    total+=f.getFoodNum();
+                }
             }
         }
-        return 0;
+        return total;
     }
 
     /**

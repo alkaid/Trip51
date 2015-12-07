@@ -34,9 +34,16 @@ public class ShopDescFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         currShop = (Shop) getArguments().getSerializable(ShopDetailActivity.BUNDLE_KEY_SHOP);
         View v=inflater.inflate(R.layout.fragment_shop_detail,container,false);
-        loadData();
+//        loadData();
         return v;
     }
+
+    @Override
+    protected void onLazyLoad() {
+        super.onLazyLoad();
+        loadData();
+    }
+
     private void loadData(){
         if(currShop == null){
             return;

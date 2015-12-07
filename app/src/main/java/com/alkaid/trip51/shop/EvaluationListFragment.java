@@ -37,9 +37,16 @@ public class EvaluationListFragment extends BaseFragment{
         View v=inflater.inflate(R.layout.fragment_evaluation,container,false);
         ListView lvEvaluation = (ListView) v.findViewById(R.id.lv_evaluation);
         lvEvaluation.setAdapter(new EvaluationAdapter(getContext()));
-        loadData();
+//        loadData();
         return v;
     }
+
+    @Override
+    protected void onLazyLoad() {
+        super.onLazyLoad();
+        loadData();
+    }
+
     private void loadData(){
         if(currShop == null){
             return;

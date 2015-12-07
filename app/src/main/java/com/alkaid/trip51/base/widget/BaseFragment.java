@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 public class BaseFragment extends BFragment {
 	private BaseContextWrap baseContextWrap;
 	protected App app;
+	private boolean isFirstShow=true;
 	@Override
 	protected BContextWrap createContextWrap() {
 		baseContextWrap=BaseContextWrap.wrap(context);
@@ -44,5 +45,20 @@ public class BaseFragment extends BFragment {
 	}
 	protected boolean checkLogined(){
 		return app.accountService().checkLogined(this);
+	}
+
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if(isVisibleToUser&&isFirstShow){
+			isFirstShow=false;
+			onLazyLoad();
+		}else{
+
+		}
+	}
+
+	protected void onLazyLoad(){
+
 	}
 }

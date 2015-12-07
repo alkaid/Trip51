@@ -38,7 +38,7 @@
             android:layout_weight="2"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <LinearLayout android:orientation="horizontal"
                 android:id="@+id/ll_shoppinp_cart"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -48,15 +48,22 @@
 
                 <LinearLayout
                     android:id="@+id/ll_close_shopping_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/gouwuche" />
+                        android:layout_height="match_parent" android:paddingLeft="10dp">
+                        <ImageView android:id="@+id/ivBottomCart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/gouwuche" android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"/>
+                        <TextView android:id="@+id/tvBottomCartSize" style="@style/OvalNumTagTextView"
+                            android:text="1" android:layout_alignLeft="@+id/ivBottomCart" android:layout_alignTop="@+id/ivBottomCart" android:layout_marginLeft="-5dp" android:layout_marginTop="-5dp" />
+                    </RelativeLayout>
 
                     <TextView
                         style="@style/TextViewTitle1.White"
@@ -74,6 +81,7 @@
                     style="@style/TextViewTitle3.White"
                     android:text="共￥32.8"
                     android:visibility="gone" />
+
             </LinearLayout>
 
             <Button
