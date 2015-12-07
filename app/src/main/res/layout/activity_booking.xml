@@ -50,7 +50,7 @@
                             style="@style/TextViewArticle.Gray.centerVertical"
                             android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@+id/ivArrow"
-                            android:text="4人" />
+                            android:text="请选取预定人数" />
                     </RelativeLayout>
 
                     <View style="@style/DividerViewHorizon.Margin" />
@@ -75,7 +75,7 @@
                             style="@style/TextViewArticle.Gray.centerVertical"
                             android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@+id/ivArrow1"
-                            android:text="08月26日  今天  18：00" />
+                            android:text="请选取预定时间" />
                     </RelativeLayout>
 
                     <View style="@style/DividerViewHorizon.Margin" />
@@ -170,6 +170,7 @@
                             android:text="订单总额" />
 
                         <TextView
+                            android:id="@+id/tv_total_price"
                             style="@style/TextViewArticle.Gray.centerVertical"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="8dp"
@@ -221,6 +222,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@+id/ivArrow3"
+                            android:singleLine="true"
                             android:hint="请输入手机号" />
                     </RelativeLayout>
 
@@ -270,6 +272,11 @@
                             android:layout_alignParentRight="true"
                             android:orientation="vertical">
 
+                            <EditText
+                                style="@style/TextViewArticle.Gray.centerVertical"
+                                android:singleLine="true"
+                                android:hint="请输入姓名" />
+
                             <RadioGroup
                                 android:id="@+id/rg_other_sex"
                                 android:layout_width="wrap_content"
@@ -289,9 +296,7 @@
                                     android:text="先生" />
                             </RadioGroup>
 
-                            <TextView
-                                style="@style/TextViewTitle3"
-                                android:text="周" />
+
                         </LinearLayout>
                     </RelativeLayout>
 
@@ -313,6 +318,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@+id/ivArrow3"
+                            android:singleLine="true"
                             android:hint="请输入手机号" />
                     </RelativeLayout>
                 </LinearLayout>

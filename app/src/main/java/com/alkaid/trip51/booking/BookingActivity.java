@@ -1,15 +1,9 @@
 package com.alkaid.trip51.booking;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,8 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -73,18 +66,22 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
     private float price;
     private int sex;
     private String mobile;
-    private boolean isReplaceother;
+    private int isReplaceother;
     private String otherMobile;
     private String otherUserName;
+    private int isContainFood;
 
     /**
      * 点击的view
      */
     private RelativeLayout rlPersonNum;
+    private TextView tvPersonNum;
     private RelativeLayout rlDinnerTime;
+    private TextView tvBookingTime;
     private RadioGroup seatRadioGroup;
     private Operator opSeatNum;
     private RelativeLayout rlTotalPrice;
+    private TextView tvTotalPrice;
     private RadioGroup sexRadioGroup;
     private EditText etMobile;
     private RadioGroup otherSexRadioGroup;
@@ -94,6 +91,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
     private WheelView mWheelView;//选择弹出的选择空间
     private RelativeLayout rlSelectContent;//选择的内容
     private LinearLayout rlSelectItem;//用于选择的父layout
+    private RelativeLayout rlComplete;//
 
     private DatePicker dpPicker;
 
@@ -101,17 +99,18 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
      * ui显示需要的数据
      */
     private String[] personNums = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    private String[] timeSetLables = new String[]{"8:00AM - 9:00AM", "9:00AM - 10:00AM", "10:00AM - 11:00AM", "11:00AM - 12:00AM", "12:00AM - 1:00PM", "1:00PM - 2:00PM", "2:00PM - 3:00PM", "3:00PM - 4:00PM", "4:00PM - 5:00PM", "5:00PM - 6:00PM", "6:00PM - 7:00PM", "7:00PM - 8:00PM", "8:00PM - 9:00PM", "9:00PM - 10:00PM"};
+    private String[] timeSetLables = new String[]{"8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"};
 
     private static final String WHEEL_VIEW_DATA = "9001";
     private static final String WHEEL_VIEW_OFFSET = "9002";
     private static final String WHEEL_VIEW_SELECTED = "9003";
 
+
     /**
      * 常量标记Handler
      */
     private int currentWheelView = -1;//当前wheelView是属于哪个
-    private static final int BOOKING_PERSON_LAYOUT_TAG = 8001;
+    private static final int BOOKING_PERSON_NUM_LAYOUT_TAG = 8001;
     private static final int BOOKING_TIME_LAYOUT_TAG = 8002;
 
     @Override
@@ -119,10 +118,9 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         currShop = (Shop) getIntent().getSerializableExtra(ShopDetailActivity.BUNDLE_KEY_SHOP);
         setContentView(R.layout.activity_booking);
-        initData();
         initTitleBar();
         initView();
-
+        initData();
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,10 +151,13 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
 
     private void initView() {
         rlPersonNum = (RelativeLayout) findViewById(R.id.rl_person_num);
+        tvPersonNum = (TextView) findViewById(R.id.tvPersonNum);
         rlDinnerTime = (RelativeLayout) findViewById(R.id.rl_time);
+        tvBookingTime = (TextView) findViewById(R.id.tvBookingTimeValue);
         seatRadioGroup = (RadioGroup) findViewById(R.id.rgSeatType);
         opSeatNum = (Operator) findViewById(R.id.op_room_num);
         rlTotalPrice = (RelativeLayout) findViewById(R.id.rl_total_price);
+        tvTotalPrice = (TextView) findViewById(R.id.tv_total_price);
         sexRadioGroup = (RadioGroup) findViewById(R.id.rgSex);
         etMobile = (EditText) findViewById(R.id.et_mobile);
         tbHelpBooking = (ToggleButton) findViewById(R.id.tb_help_booking);
@@ -167,50 +168,106 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         dpPicker = (DatePicker) findViewById(R.id.dpPicker);
         rlSelectContent = (RelativeLayout) findViewById(R.id.rl_select_content);
         rlSelectItem = (LinearLayout) findViewById(R.id.rl_select_item);
+        rlComplete = (RelativeLayout) findViewById(R.id.rl_complete);
         /*监听部分*/
         rlPersonNum.setOnClickListener(this);
         rlDinnerTime.setOnClickListener(this);
-        seatRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rlComplete.setOnClickListener(this);
+        opSeatNum.setOperationCallback(new Operator.OperationListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void onAddClick(int i) {
+
+            }
+
+            @Override
+            public void onSubClick(int i) {
+
+            }
+
+            @Override
+            public void onTextChange(int i) {
 
             }
         });
 
-
     }
 
     private void initData() {
-        order = new ReqOrderInfo();
-        if(currShop == null){
-            LogUtil.e(TAG,"无店铺信息");
-            return;
+        tvPersonNum.setText("请选择参与人数");
+        tvBookingTime.setText("请选择预定日期");
+        if(currShop!=null) {
+            float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
+            tvTotalPrice.setText(totalPrice+"");
         }
-       // App.shoppingCartService()
-        order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
-        order.setIscontainfood(NetDataConstants.TRUE);
-        order.setIsreplaceother(NetDataConstants.FALSE);
-        order.setMobile("18575534171");
-        order.setOthermobile(null);
-        order.setOthersex(NetDataConstants.SEX_FEMALE);
-        order.setOtherusername(null);
-        order.setPersonnum(4);
-        order.setRoomnum(1);
-        order.setRoomtype(SeatType.HALL.code);
-        order.setSex(NetDataConstants.SEX_FEMALE);
-        order.setShopid(39);
-        order.setFoodamount(0.01f);
-        order.setOrderamount(0.01f);
-        List<ReqOrderInfo.ReqFood> foods = new ArrayList<ReqOrderInfo.ReqFood>();
-        Food orginFood = new Food();
-        orginFood.setFoodid(34);
-        orginFood.setFoodname("test");
-        orginFood.setPrice(0.01f);
-        ReqOrderInfo.ReqFood food = new ReqOrderInfo.ReqFood(orginFood, 1);
-        foods.add(food);
-        order.setFoods(foods);
     }
 
+    private void setOrder() {
+        if (currShop == null) {
+            LogUtil.e(TAG, "无店铺信息");
+            return;
+        }
+        order = new ReqOrderInfo();
+        switch (seatRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbHall:
+                seatType = SeatType.HALL;
+                break;
+            case R.id.rbLounge:
+                seatType = SeatType.LOUNGE;
+                break;
+            case R.id.rbPrivateRoom:
+                seatType = SeatType.PRIVATE_ROOM;
+                break;
+        }
+        switch (sexRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbFemale:
+                sex = NetDataConstants.SEX_FEMALE;
+                break;
+            case R.id.rbMale:
+                sex = NetDataConstants.SEX_MALE;
+                break;
+        }
+        switch (otherSexRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.rbOtherFemale:
+                sex = NetDataConstants.SEX_FEMALE;
+                break;
+            case R.id.rbOtherMale:
+                sex = NetDataConstants.SEX_MALE;
+                break;
+        }
+        if(opSeatNum!=null){
+            roomNum = opSeatNum.selectedCount;
+        }
+        if (tbHelpBooking.isChecked()) {
+            isReplaceother = NetDataConstants.TRUE;
+        } else {
+            isReplaceother = NetDataConstants.FALSE;
+        }
+        mobile = etMobile.getText().toString();
+        otherMobile = etMobile.getText().toString();
+        /**组装order*/
+        List<Food> foods = App.shoppingCartService().getCart().get(currShop.getShopid());
+        if (foods != null && foods.size() > 0) {
+            isContainFood = NetDataConstants.TRUE;
+        } else {
+            isContainFood = NetDataConstants.FALSE;
+        }
+        float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
+        order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
+        order.setIscontainfood(isContainFood);
+        order.setIsreplaceother(isReplaceother);
+        order.setMobile(mobile);
+        order.setOthermobile(otherMobile);
+        order.setOthersex(NetDataConstants.SEX_FEMALE);
+        order.setOtherusername(otherUserName);
+        order.setPersonnum(personNum);
+        order.setRoomnum(roomNum);
+        order.setRoomtype(seatType.code);
+        order.setSex(sex);
+        order.setShopid(currShop.getShopid());
+        order.setFoodamount(totalPrice);
+        order.setOrderamount(totalPrice);
+        order.setFoods(foods);
+    }
 
     private void booking() {
         //检查登录
@@ -219,6 +276,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         }
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
+        setOrder();
         //构造订单伪数据
         String orderJson = new Gson().toJson(order);
         LogUtil.v("orderJson:" + orderJson);
@@ -271,18 +329,18 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.rl_person_num:
                 if (rlSelectItem != null) {
-                    mWheelView.setItems((ArrayList<String>) Arrays.asList(personNums));
+                    mWheelView.setItems( Arrays.asList(personNums));
                     mWheelView.setOffset(1);
                     mWheelView.setSeletion(2);
                     mWheelView.setVisibility(View.VISIBLE);
                     rlSelectContent.setVisibility(View.VISIBLE);
-                    currentWheelView = BOOKING_PERSON_LAYOUT_TAG;
+                    currentWheelView = BOOKING_PERSON_NUM_LAYOUT_TAG;
                     dpPicker.setVisibility(View.GONE);
                 }
                 break;
             case R.id.rl_time:
                 if (rlSelectItem != null) {
-                    mWheelView.setItems((ArrayList<String>) Arrays.asList(timeSetLables));
+                    mWheelView.setItems( Arrays.asList(timeSetLables));
                     mWheelView.setOffset(1);
                     mWheelView.setSeletion(3);
                     mWheelView.setVisibility(View.GONE);
@@ -292,14 +350,46 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.btnSure:
+                booking();
                 break;
             case R.id.rl_complete:
-                if (currentWheelView == R.id.rl_time && dpPicker.getVisibility() == View.VISIBLE) {
+                if (currentWheelView == BOOKING_TIME_LAYOUT_TAG && dpPicker.getVisibility() == View.VISIBLE) {
                     dpPicker.setVisibility(View.GONE);
                     mWheelView.setVisibility(View.VISIBLE);
-                    break;
-
+                    return;
                 }
+                rlSelectContent.setVisibility(View.GONE);
+                setCurrentWheelView();
+                updateItem();
+                break;
+        }
+    }
+
+    private void setCurrentWheelView() {
+        switch (currentWheelView) {
+            case BOOKING_TIME_LAYOUT_TAG:
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(dpPicker.getYear(), dpPicker.getMonth(), dpPicker.getDayOfMonth());
+                dinnerTime = new SimpleDateFormat(NetDataConstants.DATE_FORMAT).format(calendar.getTimeInMillis()) + " " + mWheelView.getSeletedItem();
+                break;
+            case BOOKING_PERSON_NUM_LAYOUT_TAG:
+                personNum = Integer.parseInt(mWheelView.getSeletedItem());
+                break;
+        }
+    }
+
+    private void updateItem() {
+        switch (currentWheelView) {
+            case BOOKING_TIME_LAYOUT_TAG:
+                if(tvBookingTime!=null){
+                    tvBookingTime.setText(dinnerTime);
+                }
+                break;
+            case BOOKING_PERSON_NUM_LAYOUT_TAG:
+                if (tvPersonNum != null) {
+                    tvPersonNum.setText(personNum+"");
+                }
+                break;
         }
     }
 
