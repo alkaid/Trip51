@@ -43,7 +43,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
      */
     public void setCartData(List<FoodCategory> foodCategories) {
         this.foodCategories = foodCategories;
-        foods = App.shoppingCartService().getCart().get(new Long(currShop.getShopid()));
+        foods = App.shoppingCartService().getCart().get(currShop.getShopid());
     }
 
     @Override

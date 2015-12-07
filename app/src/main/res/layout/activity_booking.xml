@@ -107,7 +107,9 @@
                         android:layout_alignParentRight="true"
                         coodOper:opMaxCount="100"
                         coodOper:opMinCount="1"
-                        coodOper:colorStyle="green"/>
+                        coodOper:colorStyle="green"
+                        coodOper:iconHeight="30dp"
+                        coodOper:iconWidth="30dp"/>
 
                     <TextView
                         android:id="@+id/tvBookingSeatNum"

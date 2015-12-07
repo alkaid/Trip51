@@ -1,6 +1,7 @@
 package com.alkaid.trip51.dataservice;
 
 import android.content.Context;
+import android.support.v4.util.LongSparseArray;
 
 import com.alkaid.trip51.model.shop.Food;
 
@@ -18,7 +19,7 @@ public class ShoppingCartService {
     /**
      * 购物车显示的食物
      */
-    private Map<Long, List<Food>> cartFoods;
+    private LongSparseArray<List<Food>> cartFoods;
 
     private ShoppingCartService(Context context) {
         this.context = context;
@@ -31,10 +32,10 @@ public class ShoppingCartService {
     }
 
     private void init() {
-        cartFoods = new HashMap<Long, List<Food>>();
+        cartFoods = new LongSparseArray<>();
     }
 
-    public Map<Long, List<Food>> getCart() {
+    public LongSparseArray<List<Food>> getCart() {
         return cartFoods;
     }
 

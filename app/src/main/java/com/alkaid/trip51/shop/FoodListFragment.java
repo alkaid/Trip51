@@ -128,6 +128,22 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         }
     }
 
+    private void mathFoodNumOnEnter(){
+        List<Food> cartFoods=App.shoppingCartService().getCart().get(currShop.getShopid());
+        if(null==cartFoods)
+            return;
+        for(FoodCategory fc:foodCategories){
+            for(Food f:fc.getFoods()){
+                for(Food cartFood:cartFoods){
+                    if(f.getFoodid()==cartFood.getFoodid()){
+                        f.setFoodNum(cartFood.getFoodNum());
+                        cartFood=f;
+                    }
+                }
+            }
+        }
+    }
+
     private void loadData() {
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
@@ -137,12 +153,14 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         final String tag = "foodlist" + (int) (Math.random() * 1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, true, ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
+        //TODO 菜单缓存策略需要制定，另外菜单数据有更新则必须清空购物车
+        App.mApiService().exec(new MApiRequest(CacheType.HOURLY, false, ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
             @Override
             public void onResponse(ResFoodList response) {
                 //设置假数据
                 foodCategories = response.getFoodcategory();
                 setListData(foodCategories);
+                mathFoodNumOnEnter();
                 dismissPdg();
             }
         }, new Response.ErrorListener() {

@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -50,6 +51,8 @@ public class Operator extends LinearLayout {
     private int numMinWidth;
     private static final int COLOR_STYLE_ORANGE=0;
     private static final int COLOR_STYLE_GREEN=1;
+    private int iconWidth;
+    private int iconHeight;
 
     public Operator(Context context) {
         this(context, null);
@@ -69,6 +72,8 @@ public class Operator extends LinearLayout {
             minCount = typedArray.getInteger(R.styleable.coodOper_opMinCount, 0);
             colorStyle=typedArray.getInteger(R.styleable.coodOper_colorStyle, -1);
 //            numMinWidth=typedArray.getDimensionPixelSize()
+            iconHeight=typedArray.getDimensionPixelOffset(R.styleable.coodOper_iconHeight, ViewGroup.LayoutParams.WRAP_CONTENT);
+            iconWidth=typedArray.getDimensionPixelOffset(R.styleable.coodOper_iconWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
             switch (colorStyle){
                 case COLOR_STYLE_GREEN:
                     resMinusIconId=R.drawable.purchase_amount_minus;
@@ -103,10 +108,15 @@ public class Operator extends LinearLayout {
         mSubBtn = (ImageButton) findViewById(R.id.sub_btn);
         mAddBtn = (ImageButton) findViewById(R.id.add_btn);
         mEditNum = (EditText) findViewById(R.id.edit_num);
+        mEditNum.setEnabled(false);
         if(resMinusIconId>0)
             mSubBtn.setImageResource(resMinusIconId);
         if(resAddIconId>0)
             mAddBtn.setImageResource(resAddIconId);
+        mSubBtn.getLayoutParams().width=iconWidth;
+        mSubBtn.getLayoutParams().height=iconHeight;
+        mAddBtn.getLayoutParams().width=iconWidth;
+        mAddBtn.getLayoutParams().height=iconHeight;
         mEditNum.addTextChangedListener(new TextWatcher() {
                                             public void afterTextChanged(Editable editable) {
                                                 isFromInput = true;
