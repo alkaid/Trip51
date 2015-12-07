@@ -77,7 +77,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
 
     @Override
     public View getItemView(final int section, final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         final Food food = (Food) getItem(section, position);
         if (convertView == null) {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -104,19 +104,20 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
             holder.opNum.setOperationCallback(new Operator.OperationListener() {
                 @Override
                 public void onAddClick(int i) {
-                    updateFoodCategories(food, i);
+                    updateFoodCategories(food, holder.opNum.selectedCount);
                 }
 
                 @Override
                 public void onSubClick(int i) {
-                    updateFoodCategories(food, i);
+                    updateFoodCategories(food, holder.opNum.selectedCount);
                 }
 
                 @Override
                 public void onTextChange(int i) {
-
+                    //updateFoodCategories(food, holder.opNum.selectedCount);
                 }
             });
+            holder.opNum.setValue(food.getFoodNum());
             LogUtil.d(TAG, "Section " + section + " Item " + position);
         }
         return convertView;

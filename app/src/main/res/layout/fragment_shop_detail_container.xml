@@ -19,7 +19,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <include layout="@layout/list_shopping_cart" />
+            <RelativeLayout
+                android:id="@+id/rl_shopping_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/half_transparent_black_background"
+                android:clickable="true"
+                android:visibility="gone">
+
+                <include layout="@layout/list_shopping_cart" />
+            </RelativeLayout>
         </RelativeLayout>
 
         <LinearLayout
@@ -35,28 +44,36 @@
                 android:layout_height="match_parent"
                 android:layout_weight="6"
                 android:background="@color/shop_detail_btn_shopping_cart_background"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:gravity="center">
 
-                <ImageView
+                <LinearLayout
+                    android:id="@+id/ll_close_shopping_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/gouwuche" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/gouwuche" />
+
+                    <TextView
+                        style="@style/TextViewTitle1.White"
+                        android:text="购物车"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/TextViewTitle3.White"
+                        android:text="(满50定金免单)" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="购物车"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_1"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(满50定金免单)"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_3" />
+                    android:id="@+id/tv_total_price"
+                    style="@style/TextViewTitle3.White"
+                    android:text="共￥32.8"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <Button

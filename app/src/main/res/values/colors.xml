@@ -76,7 +76,6 @@
     <color name="guidance_blue">#ff6cc2de</color>
     <color name="guidance_orange">#ffff9639</color>
     <color name="guidance_yellow">#ffffd544</color>
-    <color name="half_transparent">#a0ffffff</color>
     <color name="hobbit_banner_bg">#fffff9df</color>
     <color name="hobbit_deep_gray">#ff666666</color>
     <color name="hobbit_light_gray">#ffcccccc</color>
@@ -355,6 +354,9 @@
     <color name="yellow_1">#ffff6501</color>
     <color name="yellow_2">#ffff9248</color>
     <color name="yellow_3">#ffe6b523</color>
+
+    <!--以下为自己添加的 非大众点评的-->
+    <color name="half_transparent_black_background">#89000000</color>
 
     <color name="divide_gray_default">#ffe9e9e9</color>
     <color name="frame_gray_default">#ffcfcfcf</color>

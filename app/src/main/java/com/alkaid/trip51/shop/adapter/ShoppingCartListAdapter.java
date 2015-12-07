@@ -1,6 +1,7 @@
 package com.alkaid.trip51.shop.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
+import com.alkaid.trip51.shop.FoodListFragment;
 import com.alkaid.trip51.widget.Operator;
 
 import java.util.List;
@@ -24,11 +26,14 @@ public class ShoppingCartListAdapter extends BaseAdapter {
     private List<FoodCategory> foodCategories;//当前店铺的菜单列表
     private Shop currShop;
 
+    private Handler mHandler;
 
-    public ShoppingCartListAdapter(Context context, Shop currShop) {
+
+    public ShoppingCartListAdapter(Context context, Shop currShop,Handler mHandler) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.currShop = currShop;
+        this.mHandler = mHandler;
     }
 
     /**
@@ -38,7 +43,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
      */
     public void setCartData(List<FoodCategory> foodCategories) {
         this.foodCategories = foodCategories;
-        foods = App.shoppingCartService().getCart().get(currShop.getShopid());
+        foods = App.shoppingCartService().getCart().get(new Long(currShop.getShopid()));
     }
 
     @Override
@@ -67,7 +72,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_shopping_cart_list, null);
             holder = new ViewHolder();
@@ -80,30 +85,32 @@ public class ShoppingCartListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();//取出ViewHolder对象
         }
         if (foods != null) {
-            holder.tvFoodName.setText(foods.get(position).getFoodname());
-            holder.tvFoodPrice.setText("￥" + foods.get(position).getPrice());
+            Food f = foods.get(position);
+            holder.tvFoodName.setText(f.getFoodname());
+            holder.tvFoodPrice.setText("￥" + f.getPrice());
             holder.opFoodNum.setOperationCallback(new Operator.OperationListener() {
                 @Override
                 public void onAddClick(int i) {
-                    updateFoodCategories(foods.get(position), i);
+                    updateFoodCategories(foods.get(position), holder.opFoodNum.selectedCount);
                 }
 
                 @Override
                 public void onSubClick(int i) {
-                    updateFoodCategories(foods.get(position), i);
+                    updateFoodCategories(foods.get(position), holder.opFoodNum.selectedCount);
                 }
 
                 @Override
                 public void onTextChange(int i) {
-
+                    //updateFoodCategories(foods.get(position), holder.opFoodNum.selectedCount);
                 }
             });
+            holder.opFoodNum.setValue(f.getFoodNum());
         }
         return convertView;
     }
 
     /**
-     * 更新菜单的数据和购物车的数据，根据食物id
+     * 更新菜单的数据和购物车的数据，根据食物id,并刷新ui
      *
      * @param food    需要改变的食物的id
      * @param foodNum 需要改变的食物的数量
@@ -119,6 +126,18 @@ public class ShoppingCartListAdapter extends BaseAdapter {
                 }
             }
             App.shoppingCartService().updateFoodToCart(currShop.getShopid(), food);
+            if(mHandler!=null){
+                mHandler.sendEmptyMessage(FoodListFragment.UPDATE_MENU_LIST);
+            }
+        }
+    }
+
+    /**
+     * 清除购物车信息
+     */
+    public void clearCartAll(){
+        if(foods!=null){
+            foods.clear();
         }
     }
 

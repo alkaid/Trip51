@@ -214,7 +214,6 @@ public class Operator extends LinearLayout {
     }
 
 
-
 /*
     static boolean access$202(Operator operator, boolean flag)
     {

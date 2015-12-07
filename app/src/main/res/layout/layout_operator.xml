@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/count_layer" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_alignParentRight="true"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageButton android:id="@id/sub_btn" android:src="@drawable/purchase_amount_minus_orange" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_marginRight="0dip" android:background="@android:color/transparent" android:scaleType="centerInside"/>
-    <EditText android:textSize="@dimen/text_size_list" android:textColor="@color/deal_dark_black" android:gravity="center" android:id="@id/edit_num" android:background="@android:color/transparent" android:focusable="true" android:layout_width="wrap_content" android:layout_height="match_parent" android:minWidth="30.0dip" android:text="0" android:inputType="number" />
-    <ImageButton android:id="@id/add_btn" android:src="@drawable/purchase_amount_add_orange" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_marginLeft="0dip"  android:background="@android:color/transparent" android:scaleType="centerInside"/>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/count_layer"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@id/sub_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="0dip"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/purchase_amount_minus_orange" />
+
+    <EditText
+        android:id="@id/edit_num"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:gravity="center"
+        android:inputType="number"
+        android:minWidth="30.0dip"
+        android:editable="false"
+        android:text="0"
+        android:textColor="@color/deal_dark_black"
+        android:textSize="@dimen/text_size_list" />
+
+    <ImageButton
+        android:id="@id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dip"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/purchase_amount_add_orange" />
 </LinearLayout>

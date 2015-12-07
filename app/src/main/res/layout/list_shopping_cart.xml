@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_shoppinp_cart_detail"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/transparent_bg"
-    android:visibility="gone"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -21,6 +18,7 @@
             android:src="@drawable/gouwuche" />
 
         <TextView
+            android:id="@+id/tv_shopping_cart_food_num"
             style="@style/OvalNumTagTextView"
             android:layout_alignRight="@id/iv_gouwuche"
             android:gravity="center"
@@ -48,7 +46,7 @@
                 android:text="购物车" />
 
             <TextView
-                android:id="@+id/tvClearAll"
+                android:id="@+id/tv_clear_all"
                 style="@style/TextViewTitle3.Gray"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
@@ -57,7 +55,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/tvClearAll"
+                android:layout_toLeftOf="@id/tv_clear_all"
                 android:src="@drawable/shopping_cart_garbage" />
         </RelativeLayout>
 
@@ -67,35 +65,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
 
-<!--        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
+        <!--        <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:background="@color/gray"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="共￥32.8"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:background="@color/gray"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="共￥32.8"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_booking"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@color/red"
-                android:text="立即预定"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>-->
+                    <Button
+                        android:id="@+id/btn_booking"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@color/red"
+                        android:text="立即预定"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>-->
 
     </LinearLayout>
 

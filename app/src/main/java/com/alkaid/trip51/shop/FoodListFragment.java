@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
@@ -20,6 +22,7 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResFoodList;
+import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.shop.adapter.MenuLeftListAdapter;
@@ -50,13 +53,21 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
 
     private ShoppingCartListAdapter cartListAdapter;
 
-    private LinearLayout llCartDetail;
+    private RelativeLayout llCartDetail;
+    private LinearLayout llCloseShoppingCart;
     private ListView cartList;
+
+    private TextView tvTotalPrice;
+    private TextView tvShoppingCartFoodNum;
+    private TextView tvClearCartAll;
 
     private List<FoodCategory> foodCategories;//菜单列表数据
 
-    private static final int UPDATE_MENU_LIST = 1001;
-    private static final int UPDATE_SHOPPING_CART = 1002;
+    public static final int UPDATE_MENU_LIST = 1001;
+    public static final int UPDATE_SHOPPING_CART = 1002;
+    public static final int OPEN_SHOPPING_CART_BUTOON = 1003;
+    public static final int CLOSE_SHOPPING_CART_BUTTON = 1004;
+    public static final int CLEAR_SHOPPING_CART_ALL = 1005;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,10 +87,16 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     private void initView(View v) {
         llCart = (LinearLayout) v.findViewById(R.id.ll_shoppinp_cart);
         llCart.setOnClickListener(this);
-        llCartDetail = (LinearLayout) v.findViewById(R.id.ll_shoppinp_cart_detail);
+        llCartDetail = (RelativeLayout) v.findViewById(R.id.rl_shopping_cart);
+        llCloseShoppingCart = (LinearLayout) v.findViewById(R.id.ll_close_shopping_cart);
+        tvClearCartAll = (TextView) v.findViewById(R.id.tv_clear_all);
+        tvClearCartAll.setOnClickListener(this);
         cartList = (ListView) v.findViewById(R.id.lv_shopping_cart_list);
-        cartListAdapter = new ShoppingCartListAdapter(getContext(), currShop);
+        tvTotalPrice = (TextView) v.findViewById(R.id.tv_total_price);
+        tvShoppingCartFoodNum = (TextView) v.findViewById(R.id.tv_shopping_cart_food_num);
+        cartListAdapter = new ShoppingCartListAdapter(getContext(), currShop, mHandler);
         cartList.setAdapter(cartListAdapter);
+        llCartDetail.setOnClickListener(this);
         // llCartDetail.setOnClickListener(this);
         //设置adapter
         llMenu = (LinkedListView) v.findViewById(R.id.llview_menu);
@@ -144,18 +161,19 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
             case R.id.btn_booking:
                 startActivity(new Intent(context, BookingActivity.class));
                 break;
-            case R.id.ll_shoppinp_cart:
+            case R.id.tv_clear_all:
+                mHandler.sendEmptyMessage(CLEAR_SHOPPING_CART_ALL);
+                break;
+            case R.id.ll_shoppinp_cart://点击购物车按钮操作
                 if (llCartDetail.getVisibility() == View.GONE) {
-                    llCartDetail.setVisibility(View.VISIBLE);
-                    cartListAdapter.setCartData(foodCategories);
-                    cartListAdapter.notifyDataSetChanged();
+                    mHandler.sendEmptyMessage(OPEN_SHOPPING_CART_BUTOON);
                 } else if (llCartDetail.getVisibility() == View.VISIBLE) {
-                    llCartDetail.setVisibility(View.GONE);
+                    mHandler.sendEmptyMessage(CLOSE_SHOPPING_CART_BUTTON);
                 }
                 break;
-            case R.id.container_shop_detail:
+            case R.id.rl_shopping_cart://点击购物车布局要关闭
                 if (llCartDetail.getVisibility() == View.VISIBLE) {
-                    llCartDetail.setVisibility(View.GONE);
+                    mHandler.sendEmptyMessage(CLOSE_SHOPPING_CART_BUTTON);
                 }
                 break;
         }
@@ -165,20 +183,63 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         return foodCategories;
     }
 
+    /**
+     * 重置食物的数量
+     */
+    private void resetFoodNum(){
+        if(foodCategories!=null){
+            for(FoodCategory foodCategory:foodCategories){
+                for(Food f:foodCategory.getFoods()){
+                    f.setFoodNum(0);
+                }
+            }
+        }
+
+    }
+
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case UPDATE_MENU_LIST:
-                    if (menuLeftListAdapter != null && menuRightListAdapter != null&&llMenu!=null){
+                    if (menuLeftListAdapter != null && menuRightListAdapter != null && llMenu != null) {
                         llMenu.notifyDataSetChanged();
                     }
                     break;
                 case UPDATE_SHOPPING_CART:
-                    if(cartListAdapter!=null){
+                    if (cartListAdapter != null) {
                         cartListAdapter.notifyDataSetChanged();
                     }
+                    break;
+                case OPEN_SHOPPING_CART_BUTOON:
+                    llCartDetail.setVisibility(View.VISIBLE);
+                    cartListAdapter.setCartData(foodCategories);
+                    cartListAdapter.notifyDataSetChanged();
+                    if (tvTotalPrice != null) {
+                        tvTotalPrice.setVisibility(View.VISIBLE);
+                        if (currShop != null) {
+                            tvTotalPrice.setText("共￥" + App.shoppingCartService().getCartTotalPrice(currShop.getShopid()) + "");
+                            tvShoppingCartFoodNum.setText(App.shoppingCartService().getCartFoodNum(currShop.getShopid())+"");
+                        }
+                        llCloseShoppingCart.setVisibility(View.GONE);
+                    }
+                    break;
+                case CLOSE_SHOPPING_CART_BUTTON:
+                    llCartDetail.setVisibility(View.GONE);
+                    llCloseShoppingCart.setVisibility(View.VISIBLE);
+                    tvTotalPrice.setVisibility(View.GONE);
+                    break;
+                case CLEAR_SHOPPING_CART_ALL:
+                    App.shoppingCartService().clearCartFood(currShop.getShopid());
+                    if(cartListAdapter!=null){
+                        cartListAdapter.clearCartAll();
+                    }
+                    resetFoodNum();
+                    sendEmptyMessage(UPDATE_MENU_LIST);
+                    sendEmptyMessage(UPDATE_SHOPPING_CART);
+                default:
                     break;
             }
         }
