@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <LinearLayout style="@style/SingleItem" >
+        <TextView android:id="@+id/tvFoodName"  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
+            android:text="鱼香茄子"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" />
+        <TextView android:id="@+id/tvPrice"  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
+            android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <TextView android:id="@+id/tvCount"  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
+            android:text="1"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <TextView android:id="@+id/tvAmount"  style="@style/TextViewArticle.Gray.centerVertical" android:gravity="center"
+            android:text="18"  android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+    </LinearLayout>
+    <View style="@style/DividerViewHorizon" />
+</LinearLayout>

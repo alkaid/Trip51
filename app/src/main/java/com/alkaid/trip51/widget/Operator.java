@@ -209,7 +209,9 @@ public class Operator extends LinearLayout {
         );
     }
 
-
+    public void setValue(int num){
+        mEditNum.setText(num + "");
+    }
 
 
 

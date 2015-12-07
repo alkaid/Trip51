@@ -3,6 +3,7 @@ package com.alkaid.trip51.shop;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
+import com.alkaid.trip51.model.response.ResOrderDetail;
+import com.alkaid.trip51.model.response.ResOrderList;
 import com.alkaid.trip51.model.response.ResPayInfo;
 import com.alkaid.trip51.model.response.ResPayStatus;
 import com.alkaid.trip51.pay.Payment;
@@ -32,6 +35,9 @@ import java.util.Map;
 public class OrderDetailActivity extends BaseActivity {
     public static final String BUNDLE_KEY_ORDERNO="BUNDLE_KEY_ORDERNO";
     private String orderNo;
+    private ResOrderDetail orderDetail;
+    private TextView tvShopName,tvInfo,tvOrderNo,tvTotal;
+    private ViewGroup layFoodList;
     private Button btnPay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,16 @@ public class OrderDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_order_detail);
         orderNo=getIntent().getStringExtra(BUNDLE_KEY_ORDERNO);
         initTitleBar();
+        findView();
+        resetView();
+        loadData();
+    }
+
+    private void findView(){
+        tvShopName= (TextView) findViewById(R.id.tvShopName);
+        tvInfo= (TextView) findViewById(R.id.tvInfo);
+        tvOrderNo= (TextView) findViewById(R.id.tvOrderNo);
+        tvTotal= (TextView) findViewById(R.id.tvTotal);
         btnPay= (Button) findViewById(R.id.btnPay);
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +63,49 @@ public class OrderDetailActivity extends BaseActivity {
                 pay(Payment.PAYTYPE_ALI);
             }
         });
+        layFoodList= (ViewGroup) findViewById(R.id.layFoodList);
+    }
+    private void resetView(){
+        tvShopName.setText("");
+        tvInfo.setText("");
+        tvOrderNo.setText("");
+        tvTotal.setText("");
+        layFoodList.removeAllViews();
+        btnPay.setEnabled(false);
+    }
+    private void loadData(){
+        //检查登录
+        if(!checkLogined()){
+            return;
+        }
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        beSignForm.put("openid", App.accountService().getOpenInfo().getOpenid());
+        unBeSignform.put("orderno", orderNo);
+        final String tag="orderDetail"+(int)(Math.random()*1000);
+//        setDefaultPdgCanceListener(tag);
+        getProgressDialog().setCancelable(false);
+        showPdg();
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResOrderDetail.class, MApiService.URL_ORDER_DETAIL, beSignForm, unBeSignform, new Response.Listener<ResOrderDetail>() {
+            @Override
+            public void onResponse(ResOrderDetail response) {
+                dismissPdg();
+                orderDetail=response;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dismissPdg();
+                //TODO 暂时用handleException 应该换成失败时的正式UI
+                handleException(new TradException(error));
+                checkIsNeedRelogin(error);
+                btnPay.setEnabled(false);
+            }
+        }), tag);
+    }
+
+    private void updateView(){
+        tvShopName.setText(orderDetail.shopname);
     }
 
     private void initTitleBar(){

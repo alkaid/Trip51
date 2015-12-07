@@ -59,8 +59,8 @@ public class LinkedListView extends LinearLayout {
         View view = LayoutInflater.from(context).inflate(R.layout.linked_list_view, this, true);
         rightListView = (PinnedHeaderListView) view.findViewById(R.id.pinnedListView);
         leftListView = (ListView) view.findViewById(R.id.left_listview);
-        leftListView.setAdapter(leftListAdapter);
-        rightListView.setAdapter(rightListAdapter);
+//        leftListView.setAdapter(leftListAdapter);
+//        rightListView.setAdapter(rightListAdapter);
 
         leftListView.setOnItemClickListener(new OnItemClickListener() {
             @Override

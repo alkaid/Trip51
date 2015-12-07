@@ -57,11 +57,9 @@ public class OrderListFragment extends BaseFragment {
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                App.shopService().setCurrShopid(id);    //保存当前shopid
-
-                Intent intent = new Intent(context, ShopDetailActivity.class);
-                Shop shop = (Shop) orderListAdapter.getItem(position - 1);
-                intent.putExtra("currShop", shop);
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                ResOrderList.Order order = (ResOrderList.Order) orderListAdapter.getItem(position);
+                intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO, order.getOrderno());
                 startActivity(intent);
             }
         });

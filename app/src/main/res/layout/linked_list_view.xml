@@ -4,7 +4,7 @@
     <ListView
         android:id="@+id/left_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="20"
         android:background="@color/linked_listview_left_background"
         >
@@ -13,7 +13,7 @@
     <com.alkaid.trip51.widget.pinnedheaderlistview.PinnedHeaderListView
         android:id="@+id/pinnedListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="9"
         android:background="@color/white_background"/>
 
