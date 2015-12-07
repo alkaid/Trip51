@@ -23,60 +23,7 @@ public class ReqOrderInfo implements Serializable {
     private String otherusername="";
     private String othermobile="";
     private int iscontainfood;
-    private List<ReqFood> foods;
-
-    public static class ReqFood implements Serializable{
-        private long foodid;
-        private String foodname="";
-        private float foodprice;
-        private int foodnum;
-        public ReqFood(Food food,int foodnum){
-            this.foodid=food.getFoodid();
-            this.foodname=food.getFoodname();
-            this.foodprice=food.getPrice();
-            this.foodnum=foodnum;
-        }
-
-        public long getFoodid() {
-            return foodid;
-        }
-
-        public void setFoodid(long foodid) {
-            this.foodid = foodid;
-        }
-
-        public String getFoodname() {
-            return foodname;
-        }
-
-        public void setFoodname(String foodname) {
-            this.foodname = foodname;
-        }
-
-        public float getFoodprice() {
-            return foodprice;
-        }
-
-        public void setFoodprice(float foodprice) {
-            this.foodprice = foodprice;
-        }
-
-        public int getFoodnum() {
-            return foodnum;
-        }
-
-        public void setFoodnum(int foodnum) {
-            this.foodnum = foodnum;
-        }
-    }
-
-//    public String getOrderno() {
-//        return orderno;
-//    }
-//
-//    public void setOrderno(String orderno) {
-//        this.orderno = orderno;
-//    }
+    private List<Food> foods;
 
     public long getShopid() {
         return shopid;
@@ -190,11 +137,11 @@ public class ReqOrderInfo implements Serializable {
         this.foodamount = foodamount;
     }
 
-    public List<ReqFood> getFoods() {
+    public List<Food> getFoods() {
         return foods;
     }
 
-    public void setFoods(List<ReqFood> foods) {
+    public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
 }

@@ -44,4 +44,5 @@ dependencies {
     compile project(':pullToRefreshLib')
     compile project(':volley')
     compile project(':imageCropper')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

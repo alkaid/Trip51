@@ -1,275 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:coodOper="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/default_title_bar" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include layout="@layout/default_title_bar" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivArrow"
-                        style="@style/ImageViewRightArrow" />
+                    <RelativeLayout
+                        android:id="@+id/rl_person_num"
+                        style="@style/SingleItem.mediumPaddingHorizon">
 
-                    <TextView
-                        android:id="@+id/tvItemName"
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="人数" />
+                        <ImageView
+                            android:id="@+id/ivArrow"
+                            style="@style/ImageViewRightArrow" />
 
-                    <TextView
-                        android:id="@+id/tvPersonNum"
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/ivArrow"
-                        android:text="4人" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvItemName"
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="人数" />
 
-                <View style="@style/DividerViewHorizon.Margin" />
+                        <TextView
+                            android:id="@+id/tvPersonNum"
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/ivArrow"
+                            android:text="请选取预定人数" />
+                    </RelativeLayout>
 
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                    <View style="@style/DividerViewHorizon.Margin" />
 
-                    <ImageView
-                        android:id="@+id/ivArrow1"
-                        style="@style/ImageViewRightArrow" />
+                    <RelativeLayout
+                        android:id="@+id/rl_time"
+                        style="@style/SingleItem.mediumPaddingHorizon">
 
-                    <TextView
-                        android:id="@+id/tvBookingTime"
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="时间" />
+                        <ImageView
+                            android:id="@+id/ivArrow1"
+                            style="@style/ImageViewRightArrow" />
 
-                    <TextView
-                        android:id="@+id/tvBookingTimeValue"
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/ivArrow1"
-                        android:text="08月26日  今天  18：00" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvBookingTime"
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="时间" />
 
-                <View style="@style/DividerViewHorizon.Margin" />
+                        <TextView
+                            android:id="@+id/tvBookingTimeValue"
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/ivArrow1"
+                            android:text="请选取预定时间" />
+                    </RelativeLayout>
 
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                    <View style="@style/DividerViewHorizon.Margin" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
-                        <RadioGroup android:id="@+id/rgSeatType"
+                    <RelativeLayout
+                        style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:orientation="horizontal">
-                            <RadioButton android:id="@+id/rbHall" style="@style/CustomRadioButtonDefault" android:text="大厅" android:checked="true" />
-                            <RadioButton android:id="@+id/rbLounge" style="@style/CustomRadioButtonDefault" android:text="雅座" android:layout_marginLeft="10dp" />
-                            <RadioButton android:id="@+id/rbPrivateRoom" style="@style/CustomRadioButtonDefault" android:text="包房" android:layout_marginLeft="10dp"/>
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/rgSeatType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbHall"
+                                    style="@style/CustomRadioButtonDefault"
+                                    android:checked="true"
+                                    android:text="大厅" />
+
+                                <RadioButton
+                                    android:id="@+id/rbLounge"
+                                    style="@style/CustomRadioButtonDefault"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="雅座" />
+
+                                <RadioButton
+                                    android:id="@+id/rbPrivateRoom"
+                                    style="@style/CustomRadioButtonDefault"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="包房" />
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvBookingSeat"
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:text="座位" />
+
+                    </RelativeLayout>
+
+                    <View style="@style/DividerViewHorizon.Margin" />
+
+                    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <com.alkaid.trip51.widget.Operator
+                            android:id="@+id/op_room_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            coodOper:colorStyle="green"
+                            coodOper:opMaxCount="100"
+                            coodOper:opMinCount="1" />
+
+                        <TextView
+                            android:id="@+id/tvBookingSeatNum"
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:text="餐桌数" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
+
+                        <ImageView
+                            android:id="@+id/iv_tip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/trip51_info" />
+
+                        <TextView
+                            style="@style/TextViewTitle3.Red"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/iv_tip"
+                            android:text="小包最低消费288，大包最低消费388" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_total_price"
+                        style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <TextView
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="订单总额" />
+
+                        <TextView
+                            android:id="@+id/tv_total_price"
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/ivArrow3"
+                            android:text="￥256" />
+                    </RelativeLayout>
+
+                    <View style="@style/DividerViewHorizon.Margin" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_sex"
+                        style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <RadioGroup
+                            android:id="@+id/rgSex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbFemale"
+                                style="@style/CustomRadioButtonDefault.textGray"
+                                android:text="女士" />
+
+                            <RadioButton
+                                android:id="@+id/rbMale"
+                                style="@style/CustomRadioButtonDefault.textGray"
+                                android:layout_marginLeft="10dp"
+                                android:checked="true"
+                                android:text="先生" />
                         </RadioGroup>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tvBookingSeat"
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:text="座位" />
+                    <View style="@style/DividerViewHorizon.Margin" />
 
-                </RelativeLayout>
+                    <RelativeLayout
+                        style="@style/SingleItem.mediumPaddingHorizon">
 
-                <View style="@style/DividerViewHorizon.Margin" />
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-
-                    <com.alkaid.trip51.widget.Operator
-                        android:id="@+id/opNums"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        coodOper:opMaxCount="100"
-                        coodOper:opMinCount="1"
-                        coodOper:colorStyle="green"
-                        coodOper:iconHeight="30dp"
-                        coodOper:iconWidth="30dp"/>
-
-                    <TextView
-                        android:id="@+id/tvBookingSeatNum"
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:text="餐桌数" />
-
-                </RelativeLayout>
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
-
-                    <ImageView
-                        android:id="@+id/iv_tip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/trip51_info" />
-
-                    <TextView
-                        style="@style/TextViewTitle3.Red"
-                        android:layout_marginLeft="5dp"
-                        android:layout_toRightOf="@id/iv_tip"
-                        android:text="小包最低消费288，大包最低消费388" />
-                </RelativeLayout>
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-
-                    <TextView
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="订单总额" />
-
-                    <TextView
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/ivArrow3"
-                        android:text="￥256" />
-                </RelativeLayout>
-
-                <View style="@style/DividerViewHorizon.Margin" />
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-
-                    <RadioGroup android:id="@+id/rgSex"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
-
-                        <RadioButton android:id="@+id/rbFemale"
-                            style="@style/CustomRadioButtonDefault.textGray"
-                            android:text="女士" />
-
-                        <RadioButton android:id="@+id/rbMale"
-                            style="@style/CustomRadioButtonDefault.textGray"
+                        <TextView
+                            style="@style/TextViewTitle2.centerVertical"
                             android:layout_marginLeft="10dp"
-                            android:checked="true"
-                            android:text="先生" />
-                    </RadioGroup>
-                </RelativeLayout>
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="86" />
 
-                <View style="@style/DividerViewHorizon.Margin" />
+                        <EditText
+                            android:id="@+id/et_mobile"
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/ivArrow3"
+                            android:singleLine="true"
+                            android:hint="请输入手机号" />
+                    </RelativeLayout>
 
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
 
-                    <TextView
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="86" />
+                        <TextView
+                            style="@style/TextViewTitle3.Gray"
+                            android:layout_marginLeft="5dp"
+                            android:text="如有附加需求，可填写，我们会尽量安排" />
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/ivArrow3"
-                        android:text="18929322253" />
-                </RelativeLayout>
+                    <View style="@style/DividerViewHorizon.Margin" />
 
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon.Gray">
+                    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
 
-                    <TextView
-                        style="@style/TextViewTitle3.Gray"
-                        android:layout_marginLeft="5dp"
-                        android:text="如有附加需求，可填写，我们会尽量安排" />
-                </RelativeLayout>
+                        <ToggleButton
+                            android:id="@+id/tb_help_booking"
+                            style="@style/CustomToggleButtonDefault"
+                            android:layout_alignParentRight="true" />
 
-                <View style="@style/DividerViewHorizon.Margin" />
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-
-                    <ToggleButton
-                        android:id="@+id/tb_help_booking"
-                        style="@style/CustomToggleButtonDefault"
-                        android:layout_alignParentRight="true" />
-
-                    <TextView
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="帮他人定" />
-
-                    <TextView
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/tb_help_booking"
-                        android:text="是否帮他人订" />
-                </RelativeLayout>
-
-                <View style="@style/DividerViewHorizon.Margin" />
-
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
-
-                    <TextView
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="用他人姓名" />
-
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
-
-                        <RadioButton android:id="@+id/rbOtherFemale"
-                            style="@style/CustomRadioButtonDefault.textGray"
-                            android:text="女士" />
-
-                        <RadioButton android:id="@+id/rbOtherMale"
-                            style="@style/CustomRadioButtonDefault.textGray"
+                        <TextView
+                            style="@style/TextViewTitle2.centerVertical"
                             android:layout_marginLeft="10dp"
-                            android:checked="true"
-                            android:text="先生" />
-                    </RadioGroup>
-                </RelativeLayout>
-                <View style="@style/DividerViewHorizon.Margin" />
-                <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="帮他人定" />
 
-                    <TextView
-                        style="@style/TextViewTitle2.centerVertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/ivItemIcon"
-                        android:text="86" />
+                        <TextView
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/tb_help_booking"
+                            android:text="是否帮他人订" />
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/TextViewArticle.Gray.centerVertical"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="8dp"
-                        android:layout_toLeftOf="@+id/ivArrow3"
-                        android:text="18929322253" />
-                </RelativeLayout>
+                    <View style="@style/DividerViewHorizon.Margin" />
+
+                    <RelativeLayout style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <TextView
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="用他人姓名" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical">
+
+                            <EditText
+                                style="@style/TextViewArticle.Gray.centerVertical"
+                                android:singleLine="true"
+                                android:hint="请输入姓名" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_other_sex"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rbOtherFemale"
+                                    style="@style/CustomRadioButtonDefault.textGray"
+                                    android:text="女士" />
+
+                                <RadioButton
+                                    android:id="@+id/rbOtherMale"
+                                    style="@style/CustomRadioButtonDefault.textGray"
+                                    android:layout_marginLeft="10dp"
+                                    android:checked="true"
+                                    android:text="先生" />
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View style="@style/DividerViewHorizon.Margin" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_other_mobile"
+                        style="@style/SingleItem.mediumPaddingHorizon">
+
+                        <TextView
+                            style="@style/TextViewTitle2.centerVertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/ivItemIcon"
+                            android:text="+86" />
+
+                        <EditText
+                            android:id="@+id/et_other_mobile"
+                            style="@style/TextViewArticle.Gray.centerVertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/ivArrow3"
+                            android:singleLine="true"
+                            android:hint="请输入手机号" />
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
 
-    <Button
-        android:id="@+id/btnSure"
-        style="@style/ButtonLarger.Red"
-        android:layout_marginBottom="14dp"
-        android:text="确认订单" />
-</LinearLayout>
+        <Button
+            android:id="@+id/btnSure"
+            style="@style/ButtonLarger.Red"
+            android:layout_marginBottom="14dp"
+            android:text="确认订单" />
+    </LinearLayout>
+
+    <include layout="@layout/select_view_bottom" />
+</RelativeLayout>

@@ -48,7 +48,6 @@ import java.util.Map;
  */
 public class FoodListFragment extends BaseFragment implements View.OnClickListener {
     private Shop currShop;
-    private Button btnBooking;
     private LinearLayout llCart;//购物车进入按钮
     private LinkedListView llMenu;
     private MenuLeftListAdapter menuLeftListAdapter;
@@ -64,6 +63,8 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     private TextView tvShoppingCartFoodNum,tvBottomCartSize;
     private Animation animCartMarkScale;
     private TextView tvClearCartAll;
+
+    private Button btnBooking;
 
     private List<FoodCategory> foodCategories;//菜单列表数据
 
@@ -98,6 +99,8 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         cartList = (ListView) v.findViewById(R.id.lv_shopping_cart_list);
         tvTotalPrice = (TextView) v.findViewById(R.id.tv_total_price);
         tvShoppingCartFoodNum = (TextView) v.findViewById(R.id.tv_shopping_cart_food_num);
+        btnBooking = (Button) v.findViewById(R.id.btn_booking);
+        btnBooking.setOnClickListener(this);
         tvBottomCartSize= (TextView) v.findViewById(R.id.tvBottomCartSize);
         cartListAdapter = new ShoppingCartListAdapter(getContext(), currShop, mHandler);
         cartList.setAdapter(cartListAdapter);
@@ -110,6 +113,7 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         menuLeftListAdapter = new MenuLeftListAdapter(getContext());
         menuRightListAdapter = new MenuRightListAdapter(getContext(), currShop,mHandler);
         llMenu.setAdapter(menuLeftListAdapter, menuRightListAdapter);
+
         animCartMarkScale = AnimationUtils.loadAnimation(context,R.anim.cart_mark_scale);
 //        animCartMarkScale.setFillAfter(false);
     }
@@ -184,7 +188,11 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_booking:
-                startActivity(new Intent(context, BookingActivity.class));
+                Intent mIntent = new Intent(context, BookingActivity.class);
+                if(currShop!=null) {
+                    mIntent.putExtra(ShopDetailActivity.BUNDLE_KEY_SHOP, currShop);
+                }
+                startActivity(mIntent);
                 break;
             case R.id.tv_clear_all:
                 mHandler.sendEmptyMessage(CLEAR_SHOPPING_CART_ALL);
@@ -201,6 +209,8 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
                     mHandler.sendEmptyMessage(CLOSE_SHOPPING_CART_BUTTON);
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -211,10 +221,10 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
     /**
      * 重置食物的数量
      */
-    private void resetFoodNum(){
-        if(foodCategories!=null){
-            for(FoodCategory foodCategory:foodCategories){
-                for(Food f:foodCategory.getFoods()){
+    private void resetFoodNum() {
+        if (foodCategories != null) {
+            for (FoodCategory foodCategory : foodCategories) {
+                for (Food f : foodCategory.getFoods()) {
                     f.setFoodNum(0);
                 }
             }
@@ -260,7 +270,7 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
                     break;
                 case CLEAR_SHOPPING_CART_ALL:
                     App.shoppingCartService().clearCartFood(currShop.getShopid());
-                    if(cartListAdapter!=null){
+                    if (cartListAdapter != null) {
                         cartListAdapter.clearCartAll();
                     }
                     resetFoodNum();
