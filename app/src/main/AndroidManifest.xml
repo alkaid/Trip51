@@ -1,119 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alkaid.trip51" >
+    package="com.alkaid.trip51">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
-    <uses-permission android:name="android.permission.CAMERA" android:required="false"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT" android:required="false"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.bluetooth_le"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <user-permission android:name = "android.permission.WRITE_APN_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.FLASHLIGHT"
+        android:required="false" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.bluetooth_le" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <user-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
     <application
+        android:name="com.alkaid.trip51.base.widget.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.alkaid.trip51.base.widget.App"
-        android:theme="@style/AppThemeOrangeTab" >
+        android:theme="@style/AppThemeOrangeTab">
         <!--android:theme="@style/Theme.DianpingNoTitle.SplashBackground"-->
-        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/app_name" android:name="com.alkaid.trip51.main.nav.SplashScreenActivity" android:screenOrientation="nosensor" >
+        <activity
+            android:name="com.alkaid.trip51.main.nav.SplashScreenActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <!--android:theme="@style/Theme.DianpingMainActivity"-->
-        <activity android:configChanges="keyboardHidden|orientation" android:enabled="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.alkaid.trip51.main.nav.MainActivity" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustNothing">
+        <activity
+            android:name="com.alkaid.trip51.main.nav.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:enabled="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="home" android:scheme="trip51"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="home"
+                    android:scheme="trip51" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="find" android:scheme="trip51"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="find"
+                    android:scheme="trip51" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="me" android:scheme="trip51"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="me"
+                    android:scheme="trip51" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="tuanmain" android:scheme="trip51"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="tuanmain"
+                    android:scheme="trip51" />
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable" android:value="com.alkaid.trip51.shop.ShopListActivity"/>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="com.alkaid.trip51.shop.ShopListActivity" />
         </activity>
-        <activity android:name=".shop.ShopListActivity"/>
-        <activity android:name=".booking.BookingFilterActivity" />
-        <activity android:name=".shop.ShopDetailActivity"/>
-        <activity android:name=".shop.OrderDetailActivity"/>
-        <activity android:name=".usercenter.MyBalanceActivity"/>
-        <activity android:name=".usercenter.MyPointsActivity"/>
-        <activity android:name=".usercenter.UserInfoActivity"/>
-        <activity android:name=".usercenter.MyFavoriteActivity"/>
-        <activity android:name=".usercenter.MyDiscussActivity"/>
-        <activity android:name=".usercenter.MyCouponActivity"/>
-        <activity android:name=".usercenter.UserLoginActivity"/>
-        <activity android:name=".usercenter.UserRegisterActivity"/>
-        <activity android:name=".usercenter.MyShareActivity"/>
-        <activity android:name=".usercenter.MyClientCenterActivity"/>
-        <activity android:name=".usercenter.SettingActivity"/>
-        <activity android:name=".usercenter.SmsValcodeActivity"/>
-        <activity android:name=".usercenter.ModifyTelBindActivity"/>
-        <activity android:name=".usercenter.SimpleEditorActivity"/>
-        <activity android:name=".shop.ShoppingCartActivity" android:theme="@style/BottomDialogStyle2"/>
-        <activity android:name=".booking.BookingActivity"/>
+        <activity
+            android:name=".shop.ShopListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".booking.BookingFilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".shop.ShopDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".shop.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyBalanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyPointsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyFavoriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyDiscussActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyCouponActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.UserLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.UserRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.MyClientCenterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.SmsValcodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.ModifyTelBindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".usercenter.SimpleEditorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".booking.BookingActivity"
+            android:screenOrientation="portrait" />
 
         <!--==================第三方SDK配置区域  begin================-->
         <!--百度SDK begin-->
-        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="syobp6kfDCgmVcNNpdloSpHp" />
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="syobp6kfDCgmVcNNpdloSpHp" />
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
+            android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" >
-                </action>
+                <action android:name="com.baidu.location.service_v2.2"></action>
             </intent-filter>
         </service>
         <!--百度SDK end-->
@@ -123,8 +203,7 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
