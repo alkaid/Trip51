@@ -1,7 +1,6 @@
 package com.alkaid.trip51.shop;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.enums.OrderStatus;
 import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.response.ResOrderDetail;
-import com.alkaid.trip51.model.response.ResOrderList;
 import com.alkaid.trip51.model.response.ResPayInfo;
 import com.alkaid.trip51.model.response.ResPayStatus;
 import com.alkaid.trip51.model.shop.Food;
@@ -103,7 +101,7 @@ public class OrderDetailActivity extends BaseActivity {
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
                 btnPay.setEnabled(false);
             }
@@ -212,7 +210,7 @@ public class OrderDetailActivity extends BaseActivity {
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
                 btnPay.setEnabled(true);
             }
@@ -258,7 +256,7 @@ public class OrderDetailActivity extends BaseActivity {
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
             }
         }), tag);

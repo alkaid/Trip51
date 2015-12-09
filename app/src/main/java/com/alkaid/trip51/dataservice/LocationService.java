@@ -40,7 +40,8 @@ public class LocationService {
     private Context context;
     private LocationClient mLocationClient;
     private MyLocationListener mMyLocationListener;
-    private String coordinates="113.917554,22.495232";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
+//    private String coordinates="113.917554,22.495232";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
+    private String coordinates="0,0";
     private String provinceName="陕西";
     private String cityName="西安";
     private long cityId=311;
@@ -107,6 +108,7 @@ public class LocationService {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
+            boolean isSuccess=false;
             //Receive Location
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");
@@ -134,7 +136,7 @@ public class LocationService {
                 sb.append(location.getAddrStr());
                 sb.append("\ndescribe : ");
                 sb.append("gps定位成功");
-
+                isSuccess=true;
             } else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
                 sb.append("\naddr : ");
                 sb.append(location.getAddrStr());
@@ -143,9 +145,11 @@ public class LocationService {
                 sb.append(location.getOperators());
                 sb.append("\ndescribe : ");
                 sb.append("网络定位成功");
+                isSuccess=true;
             } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
                 sb.append("\ndescribe : ");
                 sb.append("离线定位成功，离线定位结果也是有效的");
+                isSuccess=true;
             } else if (location.getLocType() == BDLocation.TypeServerError) {
                 sb.append("\ndescribe : ");
                 sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
@@ -167,11 +171,26 @@ public class LocationService {
                     sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
                 }
             }
-            Log.i("BaiduLocationApiDem", sb.toString());
+            Log.i("BaiduLocationApi", sb.toString());
+            if(!isSuccess) {
+                LogUtil.w("定位失败，使用上次的定位结果");
+                location = mLocationClient.getLastKnownLocation();
+                switch (location.getLocType()) {
+                    case BDLocation.TypeGpsLocation:
+                    case BDLocation.TypeNetWorkLocation:
+                    case BDLocation.TypeOffLineLocation:
+                        isSuccess = true;
+                        break;
+                }
+                LogUtil.w("上次的定位结果也是错误的，使用初始默认数据");
+            }
+            if(isSuccess) {
+                coordinates = location.getLongitude() + "," + location.getLatitude();
+            }
+            LogUtil.v("coordinates="+coordinates);
             //广播
             Intent intent=new Intent(ACTION_RECIVE_LOCATION);
             intent.putExtra(BUNDLE_KEY_LOCATION, location);
-            coordinates=location.getLongitude()+","+location.getLatitude();
             context.sendBroadcast(intent);
             taskStep|=1;
             //保存

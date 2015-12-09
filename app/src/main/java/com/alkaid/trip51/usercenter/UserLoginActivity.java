@@ -1,19 +1,13 @@
 package com.alkaid.trip51.usercenter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.base.widget.BaseFragmentActivity;
-import com.alkaid.trip51.base.widget.BaseTabPageViewFragment;
 import com.alkaid.trip51.base.widget.view.BaseTabPageViewActivity;
 
 /**
@@ -29,6 +23,11 @@ public class UserLoginActivity extends BaseTabPageViewActivity {
 //        FragmentTransaction transaction = fragmentManager.beginTransaction();
 //        Fragment f=new UserLoginTabFragment();
 //        transaction.replace(R.id.content,f).commit();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -66,6 +65,14 @@ public class UserLoginActivity extends BaseTabPageViewActivity {
                 startActivityForResult(new Intent(context,UserRegisterActivity.class),1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode== Activity.RESULT_OK){
+            finish();
+        }
     }
 
     /*public static class UserLoginTabFragment extends BaseTabPageViewFragment {

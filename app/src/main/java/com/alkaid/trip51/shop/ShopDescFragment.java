@@ -66,7 +66,7 @@ public class ShopDescFragment extends BaseFragment{
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
             }
         }), tag);
     }

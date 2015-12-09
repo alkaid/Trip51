@@ -17,9 +17,9 @@ import com.alkaid.base.common.DateUtil;
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
-import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
+import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
@@ -37,7 +37,6 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -303,7 +302,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
             }
         }), tag);

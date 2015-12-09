@@ -2,8 +2,6 @@ package com.alkaid.trip51.usercenter;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,7 +12,6 @@ import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
-import com.alkaid.trip51.model.response.ResComments;
 import com.alkaid.trip51.model.response.ResShopList;
 import com.alkaid.trip51.shop.adapter.MyFavoriteAdapter;
 import com.android.volley.Response;
@@ -81,7 +78,7 @@ public class MyFavoriteActivity extends BaseActivity {
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
             }
         }), tag);

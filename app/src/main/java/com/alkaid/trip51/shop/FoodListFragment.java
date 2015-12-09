@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -179,7 +178,7 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
             public void onErrorResponse(VolleyError error) {
                 dismissPdg();
                 //TODO 暂时用handleException 应该换成失败时的正式UI
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
             }
         }), tag);
     }

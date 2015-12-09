@@ -17,7 +17,6 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.response.ResOrderList;
-import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.shop.adapter.OrderListAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -192,7 +191,7 @@ public class OrderListFragment extends BaseFragment {
                         ptrlv.onRefreshComplete();
                         break;
                 }
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
                 checkIsNeedRelogin(error);
             }
         }), tag);
