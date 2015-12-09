@@ -333,6 +333,7 @@ public class LocationService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 taskStep|=8;
+                condition=new ResShopCondition();
                 onAnyTaskComplete();
             }
         }), tag);

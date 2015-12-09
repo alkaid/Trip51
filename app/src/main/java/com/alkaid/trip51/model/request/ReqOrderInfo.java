@@ -3,6 +3,7 @@ package com.alkaid.trip51.model.request;
 import com.alkaid.trip51.model.shop.Food;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class ReqOrderInfo implements Serializable {
     private String otherusername="";
     private String othermobile="";
     private int iscontainfood;
-    private List<Food> foods;
+    private List<Food> foods=new ArrayList<>();
 
     public long getShopid() {
         return shopid;

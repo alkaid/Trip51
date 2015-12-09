@@ -3,6 +3,7 @@ package com.alkaid.trip51.model.response;
 import com.alkaid.trip51.model.shop.Baseinfo;
 import com.alkaid.trip51.model.shop.Comment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class ResBaseInfo extends ResponseData {
     private Baseinfo baseinfo;
-    private List<Comment> comments;
+    private List<Comment> comments=new ArrayList<>();
 
     public Baseinfo getBaseinfo() {
         return baseinfo;

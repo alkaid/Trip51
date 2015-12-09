@@ -1,12 +1,13 @@
 package com.alkaid.trip51.model.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by df on 2015/11/30.
  */
 public class ResOrderList extends ResponseData {
-    private List<Order> data;
+    private List<Order> data=new ArrayList<>();
 
     public static class Order{
         private String orderno;

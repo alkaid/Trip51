@@ -12,10 +12,10 @@ import java.util.List;
  * Created by alkaid on 2015/12/1.
  */
 public class ResShopCondition extends ResponseData{
-    private List<TimeSet> timesets;
+    private List<TimeSet> timesets=new ArrayList<>();
     private List<ShopCategory> shopcategorylist=new ArrayList<>();
-    private List<Area> arealist;
-    private List<Cuisine> shopcuisinelist;
+    private List<Area> arealist=new ArrayList<>();
+    private List<Cuisine> shopcuisinelist=new ArrayList<>();
 
     public List<TimeSet> getTimesets() {
         return timesets;
