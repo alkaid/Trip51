@@ -24,6 +24,8 @@ import com.google.gson.Gson;
  * Created by alkaid on 2015/11/19.
  */
 public class AccountService {
+    public static final int REQUEST_CODE_LOGIN=5001;
+    public static final int REQUEST_CODE_REGISTER=5002;
     private static AccountService instance;
     private Context context;
     private OpenInfo openInfo;
@@ -100,7 +102,7 @@ public class AccountService {
      */
     public boolean checkLogined(Activity context){
         if(openInfo==null || account==null || TextUtils.isEmpty(openInfo.getOpenid())||TextUtils.isEmpty(account.getMemberid())){
-            context.startActivityForResult(new Intent(context, UserLoginActivity.class), 1);
+            context.startActivityForResult(new Intent(context, UserLoginActivity.class), REQUEST_CODE_LOGIN);
             return false;
         }
         return true;
@@ -111,8 +113,8 @@ public class AccountService {
      * @return
      */
     public boolean checkLogined(Fragment context){
-        if(TextUtils.isEmpty(openInfo.getOpenid())){
-            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), 1);
+        if(openInfo==null || account==null || TextUtils.isEmpty(openInfo.getOpenid())||TextUtils.isEmpty(account.getMemberid())){
+            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), REQUEST_CODE_LOGIN);
             return false;
         }
         return true;
@@ -127,7 +129,7 @@ public class AccountService {
     }
     public boolean checkIsNeedRelogin(VolleyError volleyError,Fragment context){
         if(checkIsNeedRelogin(volleyError)) {
-            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), 1);
+            context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), REQUEST_CODE_LOGIN);
             return true;
         }
         return false;

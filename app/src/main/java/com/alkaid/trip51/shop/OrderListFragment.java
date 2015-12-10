@@ -1,5 +1,6 @@
 package com.alkaid.trip51.shop;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -39,6 +41,13 @@ public class OrderListFragment extends BaseFragment {
     private int conditionOrderStatus;
     private OrderListAdapter orderListAdapter;
     private int lastPageIndex=1;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isUseUmengData=false;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.default_pull_list_view, container, false);
@@ -110,12 +119,25 @@ public class OrderListFragment extends BaseFragment {
         }
     }
 
+    //TODO 三级Fragment收不到OnActivityResult,需在父Fragment中实现
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode== Activity.RESULT_OK && requestCode== AccountService.REQUEST_CODE_LOGIN) {
+//            loadData(conditionOrderStatus, LOAD_ON_ENTER, 1);
+//        }
+//    }
+
     private static final int LOAD_ON_ENTER=0;
     private static final int LOAD_ON_PULLDOWN=1;
     private static final int LOAD_ON_PULLUP=2;
     private static final int LOAD_ON_SEARCH=4;
 
     private void loadData(int orderStatus,final int loadOnType,int pageindex){
+        if(!checkLogined()){
+            toastShort("请登录后再查看个人订单");
+            return;
+        }
         if(loadOnType==LOAD_ON_ENTER || loadOnType==LOAD_ON_SEARCH){
             showPdg();
         }

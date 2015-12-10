@@ -5,11 +5,13 @@ import android.os.Bundle;
 import com.alkaid.base.view.base.BContextWrap;
 import com.alkaid.base.view.base.BFragment;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragment extends BFragment {
 	private BaseContextWrap baseContextWrap;
 	protected App app;
 	private boolean isFirstShow=true;
+	protected boolean isUseUmengData=true;
 	@Override
 	protected BContextWrap createContextWrap() {
 		baseContextWrap=BaseContextWrap.wrap(context);
@@ -60,5 +62,18 @@ public class BaseFragment extends BFragment {
 
 	protected void onLazyLoad(){
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(isUseUmengData)
+			MobclickAgent.onPageStart(getClass().getSimpleName()); //统计页面
+	}
+	@Override
+	public void onPause() {
+		super.onPause();
+		if(isUseUmengData)
+			MobclickAgent.onPageEnd(getClass().getSimpleName());
 	}
 }

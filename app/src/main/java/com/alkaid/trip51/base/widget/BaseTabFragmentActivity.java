@@ -69,17 +69,6 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         super.onSaveInstanceState(paramBundle);
         paramBundle.putString("tab", this.mTabHost.getCurrentTabTag());
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(context);
-    }
-
-    @Override
-    protected void onPause() {
-        MobclickAgent.onPause(context);
-        super.onPause();
-    }
 
     public void onTabChanged(String paramString) {}
 

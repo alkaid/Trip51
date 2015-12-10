@@ -31,8 +31,8 @@ public class BaseFragmentActivity extends BFragmentActivity {
 
 	@Override
 	protected void onPause() {
-		MobclickAgent.onPause(context);
 		super.onPause();
+		MobclickAgent.onPause(context);
 	}
 	protected void setDefaultPdgCanceListener(final String tag){
 		baseContextWrap.setDefaultPdgCanceListener(tag);

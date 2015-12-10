@@ -13,6 +13,7 @@ import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
+import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -67,7 +68,7 @@ public class UserRegisterActivity extends BaseActivity{
                             smsid=response.getSmsid();
                             Intent intent = new Intent(context, SmsValcodeActivity.class);
                             intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
-                            startActivityForResult(intent, 1);
+                            startActivityForResult(intent, AccountService.REQUEST_CODE_REGISTER);
                         }
                     }, new Response.ErrorListener() {
                         @Override

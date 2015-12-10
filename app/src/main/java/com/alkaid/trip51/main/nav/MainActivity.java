@@ -40,5 +40,8 @@ public class MainActivity extends BaseTabFragmentActivity{
             super.addTab(TAB_TAG_MINE, R.layout.tab_indicator_my, UserCenterFragment.class, null);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.exit();
+    }
 }

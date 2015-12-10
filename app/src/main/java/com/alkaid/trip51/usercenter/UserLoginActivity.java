@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.view.BaseTabPageViewActivity;
+import com.alkaid.trip51.dataservice.AccountService;
 
 /**
  * Created by alkaid on 2015/11/19.
@@ -59,10 +60,10 @@ public class UserLoginActivity extends BaseTabPageViewActivity {
                 finish();
             }
         });
-        tvBarRight.setOnClickListener(new View.OnClickListener(){
+        tvBarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(context,UserRegisterActivity.class),1);
+                startActivityForResult(new Intent(context, UserRegisterActivity.class), AccountService.REQUEST_CODE_REGISTER);
             }
         });
     }
@@ -70,7 +71,8 @@ public class UserLoginActivity extends BaseTabPageViewActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1&&resultCode== Activity.RESULT_OK){
+        if(requestCode== AccountService.REQUEST_CODE_REGISTER&&resultCode== Activity.RESULT_OK){
+            setResult(Activity.RESULT_OK);
             finish();
         }
     }

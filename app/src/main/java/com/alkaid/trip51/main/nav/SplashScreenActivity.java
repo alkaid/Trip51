@@ -27,7 +27,8 @@ public class SplashScreenActivity extends BaseActivity implements ServiceListene
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
         // 开启友盟测试模式  上线要删除
-        MobclickAgent.setDebugMode( true );
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.openActivityDurationTrack(false);
         /** 设置是否对日志信息进行加密, 默认false(不加密). */
         AnalyticsConfig.enableEncrypt(true);
         MobclickAgent.updateOnlineConfig(context);
