@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -44,6 +45,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         });
     }
 
+    @Override
     public void onCreate(Bundle bundle)
     {
         super.onCreate(bundle);
@@ -54,16 +56,29 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
         setTabWidgetBackground(0);
     }
 
+    @Override
     protected void onRestoreInstanceState(Bundle paramBundle)
     {
         super.onRestoreInstanceState(paramBundle);
         this.mTabHost.setCurrentTabByTag(paramBundle.getString("tab"));
     }
 
+    @Override
     protected void onSaveInstanceState(Bundle paramBundle)
     {
         super.onSaveInstanceState(paramBundle);
         paramBundle.putString("tab", this.mTabHost.getCurrentTabTag());
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(context);
+    }
+
+    @Override
+    protected void onPause() {
+        MobclickAgent.onPause(context);
+        super.onPause();
     }
 
     public void onTabChanged(String paramString) {}
@@ -211,7 +226,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
 //            if (this.mIndicatorView == 0) {
 //                this.mIndicatorView = R.layout.tab_indicator_holo;
 //            }
-            View localView = ((LayoutInflater)this.mContext.getSystemService("layout_inflater")).inflate(this.mIndicatorView, tabHost.getTabWidget(), false);
+            View localView = LayoutInflater.from(mContext).inflate(this.mIndicatorView, tabHost.getTabWidget(), false);
             ((TextView)localView.findViewById(android.R.id.title)).setText(this.mLabel);
             return localView;
         }

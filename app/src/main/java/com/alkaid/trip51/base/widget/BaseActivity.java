@@ -7,6 +7,7 @@ import android.view.Window;
 import com.alkaid.base.view.base.BActivity;
 import com.alkaid.base.view.base.BContextWrap;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends BActivity {
 	private BaseContextWrap baseContextWrap;
@@ -22,6 +23,18 @@ public class BaseActivity extends BActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		app=baseContextWrap.app;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(context);
+	}
+
+	@Override
+	protected void onPause() {
+		MobclickAgent.onPause(context);
+		super.onPause();
 	}
 
 	protected void setDefaultPdgCanceListener(final String tag){

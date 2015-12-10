@@ -101,7 +101,6 @@
         <activity android:name=".usercenter.SmsValcodeActivity"/>
         <activity android:name=".usercenter.ModifyTelBindActivity"/>
         <activity android:name=".usercenter.SimpleEditorActivity"/>
-        <activity android:name=".shop.ShoppingCartActivity" android:theme="@style/BottomDialogStyle2"/>
         <activity android:name=".booking.BookingActivity"/>
 
         <!--==================第三方SDK配置区域  begin================-->
@@ -131,7 +130,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <!-- alipay sdk end -->
-
+        <!--友盟 sdk begin-->
+        <meta-data android:value="YOUR_APP_KEY" android:name="5668f01d67e58ef63b0070f4"/>
+        <meta-data android:value="Channel ID" android:name="MAIN"/>
+        <!--友盟 sdk end-->
         <!--==================第三方SDK配置区域  end================-->
     </application>
 

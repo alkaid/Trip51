@@ -6,6 +6,7 @@ import android.view.Window;
 import com.alkaid.base.view.base.BContextWrap;
 import com.alkaid.base.view.base.BFragmentActivity;
 import com.android.volley.VolleyError;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragmentActivity extends BFragmentActivity {
 	private BaseContextWrap baseContextWrap;
@@ -22,7 +23,17 @@ public class BaseFragmentActivity extends BFragmentActivity {
 		super.onCreate(savedInstanceState);
 		app=baseContextWrap.app;
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(context);
+	}
 
+	@Override
+	protected void onPause() {
+		MobclickAgent.onPause(context);
+		super.onPause();
+	}
 	protected void setDefaultPdgCanceListener(final String tag){
 		baseContextWrap.setDefaultPdgCanceListener(tag);
 	}
