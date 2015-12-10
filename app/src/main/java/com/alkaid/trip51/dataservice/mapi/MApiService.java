@@ -15,7 +15,8 @@ import com.android.volley.toolbox.Volley;
 public class MApiService {
     private static final String TAG="MApiService";
     public static final String PROTOCOL_VERSION="v1";
-    private static final String weburl="http://admeng-huasheng.xicp.net:8005/api/";
+//    private static final String weburl="http://admeng-huasheng.xicp.net:8005/api/";
+    private static final String weburl="http://api.zsysuan.com/api/";
     public static final String URL_SMSCODE=weburl+"register/getsmscode/"+PROTOCOL_VERSION;
     //    public static final String URL_SMSCODE="http://192.168.1.188/test/a.php";
     public static final String URL_MAIN_HOME =weburl+"shop/list/"+PROTOCOL_VERSION;

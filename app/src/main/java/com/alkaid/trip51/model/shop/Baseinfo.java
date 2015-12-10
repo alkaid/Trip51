@@ -1,6 +1,7 @@
 package com.alkaid.trip51.model.shop;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Baseinfo implements Serializable {
     private int loungestatus;
     private int hallstatus;
     private int distance;
-    private List<ShopImg> shopimgs;
+    private List<ShopImg> shopimgs=new ArrayList<>();
 
     public static class ShopImg{
         public String shopimgurl;

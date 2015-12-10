@@ -2,6 +2,7 @@ package com.alkaid.trip51.model.response;
 
 import com.alkaid.trip51.model.shop.Shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class ResShopList extends  ResponseData {
     protected int total;
-    protected List<Shop> data;
+    protected List<Shop> data=new ArrayList<>();
 
     public int getTotal() {
         return total;

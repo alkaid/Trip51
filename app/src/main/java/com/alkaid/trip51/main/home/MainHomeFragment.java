@@ -324,7 +324,7 @@ public class MainHomeFragment extends BaseFragment {
                         shopListView.onRefreshComplete();
                         break;
                 }
-                handleException(new TradException(error));
+                handleException(new TradException(error.getMessage(),error));
             }
         }), tag);
     }

@@ -1,6 +1,7 @@
 package com.alkaid.trip51.model.shop;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
 public class FoodCategory implements Serializable {
     private long categoryid;
     private String categoryname;
-    private List<Food> foods;
+    private List<Food> foods=new ArrayList<>();
 
     public long getCategoryid() {
         return categoryid;

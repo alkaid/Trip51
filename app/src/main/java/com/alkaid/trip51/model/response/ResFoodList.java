@@ -4,14 +4,15 @@ import com.alkaid.trip51.model.shop.Baseinfo;
 import com.alkaid.trip51.model.shop.Comment;
 import com.alkaid.trip51.model.shop.FoodCategory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alkaid on 2015/11/24.
  */
 public class ResFoodList extends ResponseData {
-    private List<FoodCategory> foodcategory;
-    private List<Comment> comments;
+    private List<FoodCategory> foodcategory=new ArrayList<>();
+    private List<Comment> comments=new ArrayList<>();
     private Baseinfo baseinfo;
 
     public List<FoodCategory> getFoodcategory() {

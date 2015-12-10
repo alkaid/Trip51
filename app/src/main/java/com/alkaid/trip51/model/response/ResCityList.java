@@ -2,13 +2,14 @@ package com.alkaid.trip51.model.response;
 
 import com.alkaid.trip51.model.SimpleCity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by df on 2015/11/24.
  */
 public class ResCityList extends ResponseData {
-    List<SimpleCity> citylist;
+    List<SimpleCity> citylist=new ArrayList<>();
 
     public List<SimpleCity> getCitylist() {
         return citylist;

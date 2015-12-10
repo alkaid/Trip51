@@ -55,6 +55,7 @@ public class UserRegisterActivity extends BaseActivity{
                     Map<String,String> beSignForm=new HashMap<String, String>();
                     Map<String,String> unBeSignform=new HashMap<String, String>();
                     beSignForm.put("mobile", mobile);
+                    unBeSignform.put("flag",MApiService.SMSCODE_FOR_REGISTER+"");
                     final String tag="smscode"+(int)(Math.random()*1000);
                     setDefaultPdgCanceListener(tag);
                     showPdg();
@@ -72,7 +73,7 @@ public class UserRegisterActivity extends BaseActivity{
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             dismissPdg();
-                            handleException(new TradException(error));
+                            handleException(new TradException(error.getMessage(),error));
                         }
                     }), tag);
                 }
@@ -108,7 +109,6 @@ public class UserRegisterActivity extends BaseActivity{
             unBeSignform.put("userpwd", SecurityUtil.getSHA1WithSalt(pwd));
             unBeSignform.put("valcode",valcode);
             unBeSignform.put("smsid",smsid==null?"1111":smsid); //TODO 测试用 正式版本要验证smsid
-            unBeSignform.put("flag",MApiService.SMSCODE_FOR_REGISTER+"");
             final String tag="userregister"+(int)(Math.random()*1000);
             setDefaultPdgCanceListener(tag);
             showPdg();
@@ -127,7 +127,7 @@ public class UserRegisterActivity extends BaseActivity{
                 public void onErrorResponse(VolleyError error) {
                     dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(new TradException(error));
+                    handleException(new TradException(error.getMessage(),error));
                 }
             }), tag);
         }else{
