@@ -1,1 +1,1 @@
-include ':base', ':app', ':popupbuttonlibrary', ':pullToRefreshLib', ':volley', ':imageCropper'
+include ':base', ':app', ':popupbuttonlibrary', ':pullToRefreshLib', ':volley', ':imageCropper', ':umengupdate'

@@ -9,6 +9,7 @@ import com.alkaid.trip51.dataservice.LocationService;
 import com.alkaid.trip51.dataservice.ShoppingCartService;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.dataservice.ShopService;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author Alkaid
@@ -71,4 +72,8 @@ public class App extends BApp {
     public static ConfigService configService(){return instance().configService;}
     public static ShoppingCartService shoppingCartService(){return instance().shoppingCartService;}
 
+    public void exit() {
+        MobclickAgent.onKillProcess(this);
+        System.exit(0);
+    }
 }

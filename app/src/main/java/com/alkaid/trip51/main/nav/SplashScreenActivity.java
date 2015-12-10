@@ -11,8 +11,10 @@ import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.ConfigService;
 import com.alkaid.trip51.dataservice.ServiceListener;
 import com.alkaid.trip51.dataservice.LocationService;
+import com.alkaid.trip51.util.UpdateUtil;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.onlineconfig.OnlineConfigAgent;
 
 /**
  * Created by alkaid on 2015/10/29.
@@ -29,9 +31,10 @@ public class SplashScreenActivity extends BaseActivity implements ServiceListene
         // 开启友盟测试模式  上线要删除
         MobclickAgent.setDebugMode(true);
         MobclickAgent.openActivityDurationTrack(false);
+        OnlineConfigAgent.getInstance().updateOnlineConfig(App.instance());
         /** 设置是否对日志信息进行加密, 默认false(不加密). */
         AnalyticsConfig.enableEncrypt(true);
-        MobclickAgent.updateOnlineConfig(context);
+        UpdateUtil.update();
         new Thread(){
             @Override
             public void run() {
