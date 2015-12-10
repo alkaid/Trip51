@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseTabFragmentActivity;
 import com.alkaid.trip51.main.home.MainHomeFragment;
+import com.alkaid.trip51.util.UpdateUtil;
 
 public class MainActivity extends BaseTabFragmentActivity{
     private static final String TAB_TAG_HOME = "首页";
@@ -26,6 +27,7 @@ public class MainActivity extends BaseTabFragmentActivity{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        UpdateUtil.update(context);
         if (this.activityFinished) {return;}
             this.mPreferences = getSharedPreferences(getPackageName(), 0);
             if (savedInstanceState != null)
@@ -38,6 +40,11 @@ public class MainActivity extends BaseTabFragmentActivity{
             super.addTab(TAB_TAG_HOME, R.layout.tab_indicator_home, MainHomeFragment.class, null);
             super.addTab(TAB_TAG_ORDER, R.layout.tab_indicator_order, MyOrderFragment.class, null);
             super.addTab(TAB_TAG_MINE, R.layout.tab_indicator_my, UserCenterFragment.class, null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

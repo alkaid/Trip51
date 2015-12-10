@@ -57,6 +57,16 @@ public class SystemUtil {
 		}
 		return null;
 	}
+	/** 获得软件版本*/
+	public static int getVersionCode(Context context){
+		try {
+			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+		} catch (NameNotFoundException e) {
+			LogUtil.e(e);
+			//do nothing
+		}
+		return 0;
+	}
 	/**
 	 * Reports the type of network (currently mobile or Wi-Fi) to which the info in this object pertains.
 	 * @param context

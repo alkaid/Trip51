@@ -9,9 +9,8 @@ import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
 import com.alkaid.trip51.dataservice.ConfigService;
-import com.alkaid.trip51.dataservice.ServiceListener;
 import com.alkaid.trip51.dataservice.LocationService;
-import com.alkaid.trip51.util.UpdateUtil;
+import com.alkaid.trip51.dataservice.ServiceListener;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.onlineconfig.OnlineConfigAgent;
@@ -34,7 +33,6 @@ public class SplashScreenActivity extends BaseActivity implements ServiceListene
         OnlineConfigAgent.getInstance().updateOnlineConfig(App.instance());
         /** 设置是否对日志信息进行加密, 默认false(不加密). */
         AnalyticsConfig.enableEncrypt(true);
-        UpdateUtil.update();
         new Thread(){
             @Override
             public void run() {
