@@ -1,5 +1,7 @@
 package com.alkaid.trip51.model.shop;
 
+import android.text.TextUtils;
+
 import com.alkaid.trip51.model.NetDataConstants;
 import com.alkaid.trip51.model.config.TimeSet;
 import com.alkaid.trip51.model.enums.PersonNumType;
@@ -16,8 +18,8 @@ import java.util.Map;
  */
 public class SearchCondition implements Serializable{
 
-    public Base base;
-    public Advance advance;
+    public Base base=new Base();
+    public Advance advance=new Advance();
 
     public static void putUpHttpSearchRequestParams(Map<String,String> params,SearchCondition searchCondition){
         if(null==searchCondition){
@@ -58,6 +60,9 @@ public class SearchCondition implements Serializable{
                 }
                 if(searchCondition.advance.seatType!=null){
                     params.put("desktype",searchCondition.advance.seatType.code+"");
+                }
+                if(!TextUtils.isEmpty(searchCondition.advance.keyword)){
+                    params.put("keyword",searchCondition.advance.keyword);
                 }
             }
         }

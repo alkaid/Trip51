@@ -49,6 +49,19 @@ public class MainActivity extends BaseTabFragmentActivity{
 
     @Override
     public void onBackPressed() {
-        super.exit();
+        if(mLastFragment.onBackPressed()) {
+        }else{
+            super.exit();
+        }
+    }
+
+    public void registerSearchFragment()
+    {
+        isSearchFragmentExist = true;
+    }
+
+    public void unregisterSearchFragment()
+    {
+        isSearchFragmentExist = false;
     }
 }

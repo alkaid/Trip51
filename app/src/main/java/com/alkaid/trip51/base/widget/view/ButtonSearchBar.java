@@ -1,4 +1,4 @@
-package com.alkaid.trip51.base.widget;
+package com.alkaid.trip51.base.widget.view;
 
 import android.content.Context;
 import android.content.Intent;

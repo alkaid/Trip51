@@ -13,6 +13,8 @@ import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
+import com.alkaid.trip51.base.widget.view.AbstractSearchFragment;
+import com.alkaid.trip51.base.widget.view.ButtonSearchBar;
 import com.alkaid.trip51.booking.BookingFilterActivity;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
@@ -22,12 +24,14 @@ import com.alkaid.trip51.model.enums.SortType;
 import com.alkaid.trip51.model.response.ResMainHome;
 import com.alkaid.trip51.model.shop.Area;
 import com.alkaid.trip51.model.shop.Circle;
-import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.model.shop.SearchCondition;
+import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.model.shop.ShopCategory;
 import com.alkaid.trip51.shop.ShopDetailActivity;
+import com.alkaid.trip51.shop.ShopListActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.alkaid.trip51.widget.DefaultFilter;
+import com.alkaid.trip51.widget.MainSearchFragment;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -49,6 +53,8 @@ public class MainHomeFragment extends BaseFragment {
     private ShopListAdapter shopListAdapter;
     private int lastPageIndex=1;
     private SearchCondition searchCondition;
+    private ButtonSearchBar searchBar;
+    private MainSearchFragment searchFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.main_home_fragment,container,false);
@@ -182,6 +188,36 @@ public class MainHomeFragment extends BaseFragment {
             }
         });
 
+        //搜索条
+        searchBar = (ButtonSearchBar)titleBar.findViewById(R.id.button_search_bar);
+//        searchBar.setHint(SearchUtils.getHintId(parcelable));
+//        searchBar.setBackgroundResource(R.drawable.home_topbar_search);
+//        searchBar.getSearchTextView().setHintTextColor(0x99ffffff);
+//        searchBar.getSearchIconView().setImageResource(R.drawable.ic_home_search);
+        searchBar.setButtonSearchBarListener(new ButtonSearchBar.ButtonSearchBarListener() {
+            @Override
+            public void onSearchRequested()
+            {
+                searchFragment = MainSearchFragment.newInstance((getActivity()));
+//                    ((MainActivity)getContext()).registerSearchFragment();
+                searchFragment.setOnSearchFragmentListener(new AbstractSearchFragment.OnSearchFragmentListener() {
+                    @Override
+                    public void onSearchFragmentDetach() {
+
+                    }
+
+                    @Override
+                    public void startSearch(String keyword) {
+                        searchCondition=new SearchCondition();
+                        searchCondition.advance.keyword=keyword;
+                        Intent intent=new Intent(context, ShopListActivity.class);
+                        intent.putExtra(BookingFilterActivity.BUNDLE_KEY_SEARCH_CONDITION,searchCondition);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+
 //        //TODO 以下是测试用的筛选 要删除
 //        View view2 = inflater.inflate(R.layout.popup2,null);
 //        ListView pLv = (ListView) view2.findViewById(R.id.parent_lv);
@@ -238,6 +274,15 @@ public class MainHomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if(null!=searchFragment && searchFragment.isVisible()){
+            searchFragment.onBackPressed();
+            return true;
+        }
+        return false;
     }
 
     private static final int LOAD_ON_ENTER=0;

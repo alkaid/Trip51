@@ -76,4 +76,6 @@ public class BaseFragment extends BFragment {
 		if(isUseUmengData)
 			MobclickAgent.onPageEnd(getClass().getSimpleName());
 	}
+
+	public boolean onBackPressed() {return false;}
 }

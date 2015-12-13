@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,10 +12,8 @@ import android.widget.TextView;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Created by alkaid on 2015/10/29.
@@ -24,6 +21,7 @@ import java.util.UUID;
 public class BaseTabFragmentActivity extends BaseFragmentActivity{
     protected TabHost mTabHost;
     protected TabManager mTabManager;
+    protected BaseFragment mLastFragment;
 
     public void addTab(final String label, int tabLayId, Class<?> paramClass, Bundle bundle)
     {
@@ -71,6 +69,9 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
     }
 
     public void onTabChanged(String paramString) {}
+    public void onTabChanged(Fragment fragment) {
+        mLastFragment= (BaseFragment) fragment;
+    }
 
     protected void setGaPageNameByTitle(String paramString) {}
 
@@ -153,6 +154,7 @@ public class BaseTabFragmentActivity extends BaseFragmentActivity{
 //                this.mLastTab = newTab;
 //                transaction.commitAllowingStateLoss();
 //                this.mActivity.getSupportFragmentManager().executePendingTransactions();
+                this.mActivity.onTabChanged(newTab.fragment);
                 this.mActivity.onTabChanged(tag);
             }
         }
