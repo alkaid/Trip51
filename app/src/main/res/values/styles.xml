@@ -854,4 +854,15 @@
         <item name="android:paddingBottom">15dp</item>
     </style>
 
+    <!--重新获取验证码按钮样式 :禁用状态-->
+    <style name="ButtonGetSmsValCode">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/btn_default_white_gray_corner</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textSize">@dimen/text_article_normal</item>
+        <item name="android:textColor">@color/text_btn_get_sms_valcode</item>
+    </style>
+
 </resources>

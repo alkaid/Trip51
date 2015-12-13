@@ -18,7 +18,6 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResLogin;
-import com.alkaid.trip51.model.response.ResSmsValCode;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -32,7 +31,6 @@ public class MobileLoginFragment extends BaseFragment {
     private EditText etAccountId;
     private Button btnGetSms;
     private String mobile;
-    private String smsid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_mobile_login,container,false);
@@ -47,31 +45,39 @@ public class MobileLoginFragment extends BaseFragment {
                     //TODO 验证失败时的UI 暂时toast要替换
                     toastShort("输入有误");
                 }else{
-                    Map<String,String> beSignForm=new HashMap<String, String>();
-                    Map<String,String> unBeSignform=new HashMap<String, String>();
-                    beSignForm.put("mobile", mobile);
-                    unBeSignform.put("flag",MApiService.SMSCODE_FOR_LOGIN+"");
-                    final String tag="smscode"+(int)(Math.random()*1000);
-                    setDefaultPdgCanceListener(tag);
-                    showPdg();
-                    //请求短信
-                    App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResSmsValCode.class, MApiService.URL_SMSCODE, beSignForm, unBeSignform, new Response.Listener<ResSmsValCode>() {
-                        @Override
-                        public void onResponse(ResSmsValCode response) {
-                            dismissPdg();
-                            smsid=response.getSmsid();
-                            Intent intent = new Intent(context, SmsValcodeActivity.class);
-                            intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
-                            startActivityForResult(intent, 1);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            dismissPdg();
-                            //TODO 暂时用handleException 应该换成失败时的正式UI
-                            handleException(new TradException(error.getMessage(),error));
-                        }
-                    }), tag);
+                    Intent intent = new Intent(context, SmsValcodeActivity.class);
+                    intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
+                    intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_SMSVALCODE_FLAG,MApiService.SMSCODE_FOR_LOGIN);
+                    intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_SMSID,"");
+                    startActivityForResult(intent, 1);
+
+//                    Map<String,String> beSignForm=new HashMap<String, String>();
+//                    Map<String,String> unBeSignform=new HashMap<String, String>();
+//                    beSignForm.put("mobile", mobile);
+//                    unBeSignform.put("flag",MApiService.SMSCODE_FOR_LOGIN+"");
+//                    final String tag="smscode"+(int)(Math.random()*1000);
+//                    setDefaultPdgCanceListener(tag);
+//                    showPdg();
+//                    //请求短信
+//                    App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResSmsValCode.class, MApiService.URL_SMSCODE, beSignForm, unBeSignform, new Response.Listener<ResSmsValCode>() {
+//                        @Override
+//                        public void onResponse(ResSmsValCode response) {
+//                            dismissPdg();
+//                            String smsid=response.getSmsid();
+//                            Intent intent = new Intent(context, SmsValcodeActivity.class);
+//                            intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_PHONE,etAccountId.getText().toString().trim());
+//                            intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_SMSVALCODE_FLAG,MApiService.SMSCODE_FOR_LOGIN);
+//                            intent.putExtra(SmsValcodeActivity.BUNDLE_KEY_SMSID,smsid);
+//                            startActivityForResult(intent, 1);
+//                        }
+//                    }, new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//                            dismissPdg();
+//                            //TODO 暂时用handleException 应该换成失败时的正式UI
+//                            handleException(new TradException(error.getMessage(),error));
+//                        }
+//                    }), tag);
                 }
             }
         });
@@ -82,6 +88,7 @@ public class MobileLoginFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode== Activity.RESULT_OK) {
             String valcode = data.getStringExtra(SmsValcodeActivity.BUNDLE_KEY_SMSVALCODE);
+            String smsid = data.getStringExtra(SmsValcodeActivity.BUNDLE_KEY_SMSID);
             showPdg();
             Map<String,String> beSignForm=new HashMap<String, String>();
             Map<String,String> unBeSignform=new HashMap<String, String>();

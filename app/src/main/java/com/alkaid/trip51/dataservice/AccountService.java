@@ -30,6 +30,9 @@ public class AccountService {
     private Context context;
     private OpenInfo openInfo;
     private Account account;
+    //距离下次重新获取短信验证码的时间
+    private static final long defaultMillisNextSmscodeInterval=60000;
+    private long millisUntilNextSmscode=0;
 
     private boolean logined=false;
 
@@ -161,8 +164,13 @@ public class AccountService {
     public Account getAccount() {
         return account;
     }
-
-
-
-
+    public long getMillisUntilNextSmscode() {
+        return millisUntilNextSmscode;
+    }
+    public void setMillisUntilNextSmscode(long millisUntilNextSmscode) {
+        this.millisUntilNextSmscode = millisUntilNextSmscode;
+    }
+    public void resetMillisUntilNextSmscode(){
+        this.millisUntilNextSmscode=defaultMillisNextSmscodeInterval;
+    }
 }
