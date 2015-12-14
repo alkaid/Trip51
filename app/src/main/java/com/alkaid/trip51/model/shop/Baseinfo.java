@@ -25,6 +25,7 @@ public class Baseinfo implements Serializable {
     private String servicescore;
     private String tips;
     private int totallevel;
+    private String shopphone;
     private List<ShopImg> shopimgs=new ArrayList<>();
 
     public static class ShopImg{
@@ -176,5 +177,13 @@ public class Baseinfo implements Serializable {
 
     public void setTotallevel(int totallevel) {
         this.totallevel = totallevel;
+    }
+
+    public String getShopphone() {
+        return shopphone;
+    }
+
+    public void setShopphone(String shopphone) {
+        this.shopphone = shopphone;
     }
 }

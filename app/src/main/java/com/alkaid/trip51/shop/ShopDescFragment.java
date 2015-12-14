@@ -178,8 +178,10 @@ public class ShopDescFragment extends BaseFragment{
             adress = baseInfo.getAddress();
             otherInfo = baseInfo.getTips();
             commmentList = response.getComments();
+            //TODO 要split分号
+            phone=baseInfo.getShopphone();
             //评价的假数据
-            for(int i=0;i<5;i++){
+            for(int i=0;i<2;i++){
                 Comment comment = new Comment();
                 comment.setNickname("黑咖啡－676");
                 comment.setAvgFee(35);
