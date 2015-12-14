@@ -19,6 +19,11 @@ public class Baseinfo implements Serializable {
     private int loungestatus;
     private int hallstatus;
     private int distance;
+    private String address;
+    private String envscore;
+    private String tastescore;
+    private String servicescore;
+    private String tips;
     private List<ShopImg> shopimgs=new ArrayList<>();
 
     public static class ShopImg{
@@ -120,5 +125,46 @@ public class Baseinfo implements Serializable {
 
     public void setDiningtypename(String diningtypename) {
         this.diningtypename = diningtypename;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEnvscore() {
+        return envscore;
+    }
+
+    public void setEnvscore(String envscore) {
+        this.envscore = envscore;
+    }
+
+    public String getTastescore() {
+        return tastescore;
+    }
+
+    public void setTastescore(String tastescore) {
+        this.tastescore = tastescore;
+    }
+
+    public String getServicescore() {
+        return servicescore;
+    }
+
+    public void setServicescore(String servicescore) {
+        this.servicescore = servicescore;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 }

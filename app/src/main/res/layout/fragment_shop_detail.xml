@@ -23,8 +23,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    style="@style/TextViewTitle2.centerVertical"
-                    android:text="和太郎寿司" />
+                    android:id="@+id/tvShopName"
+                    style="@style/TextViewTitle2.centerVertical" />
 
             </RelativeLayout>
 
@@ -34,38 +34,9 @@
                 android:layout_marginTop="3dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_star_fav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="0dp"
-                        android:src="@drawable/star_thumb_fav" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="0dp"
-                        android:src="@drawable/star_thumb_fav" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="0dp"
-                        android:src="@drawable/star_thumb_fav" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="0dp"
-                        android:src="@drawable/star_thumb_fav" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="0dp"
-                        android:src="@drawable/star_thumb_unfav" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -75,18 +46,18 @@
                 android:layout_marginTop="3dp">
 
                 <TextView
-                    style="@style/TextViewArticle"
-                    android:text="口味4分" />
+                    android:id="@+id/tvTaste"
+                    style="@style/TextViewArticle" />
 
                 <TextView
+                    android:id="@+id/tvEnvironment"
                     style="@style/TextViewArticle"
-                    android:layout_marginLeft="5dp"
-                    android:text="环境4分" />
+                    android:layout_marginLeft="5dp" />
 
                 <TextView
+                    android:id="@+id/tvService"
                     style="@style/TextViewArticle"
-                    android:layout_marginLeft="5dp"
-                    android:text="服务4分" />
+                    android:layout_marginLeft="5dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -112,10 +83,10 @@
                 style="@style/ImageViewRightArrow" />
 
             <TextView
+                android:id="@+id/tvAdress"
                 style="@style/TextViewArticle"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/iv_dingwei"
-                android:text="鲁班路心宇江东路三之路建行路口进来150米" />
+                android:layout_toRightOf="@+id/iv_dingwei" />
         </RelativeLayout>
 
         <RelativeLayout style="@style/SingleItem">
@@ -130,10 +101,10 @@
             <ImageView style="@style/ImageViewRightArrow" />
 
             <TextView
+                android:id="@+id/tvTel"
                 style="@style/TextViewArticle"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/iv_dianhua"
-                android:text="3225678  17856873882" />
+                android:layout_toRightOf="@+id/iv_dianhua" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -147,6 +118,7 @@
         <RelativeLayout style="@style/SingleItem">
 
             <TextView
+                android:id="@+id/tvEvaluationNum"
                 style="@style/TextViewArticle"
                 android:layout_marginLeft="10dp"
                 android:text="网友点评（5）" />
@@ -184,9 +156,9 @@
         <RelativeLayout style="@style/SingleItem">
 
             <TextView
+                android:id="@+id/tvShopOtherInfo"
                 style="@style/TextViewArticle"
-                android:layout_marginLeft="10dp"
-                android:text="距离位置：距离较近，步行约30分钟" />
+                android:layout_marginLeft="10dp" />
 
         </RelativeLayout>
 

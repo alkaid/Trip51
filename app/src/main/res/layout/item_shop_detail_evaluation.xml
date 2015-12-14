@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ListViewItem"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ivUserThumb"
+        style="@style/ListViewShopImage"
+        android:src="@drawable/temp_user_info_ipc" />
+
+    <LinearLayout
+        style="@style/ListViewArticleLay"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:text="138****881" />
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_alignParentRight="true"
+                android:text="2015-10-31 12:17" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/star_thumb_fav" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/star_thumb_fav" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/star_thumb_fav" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/star_thumb_fav" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/star_thumb_unfav" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:text="咖啡蛮好喝，店里布置也够温馨，我续杯18次，撑了，服务周到，下次还来" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
