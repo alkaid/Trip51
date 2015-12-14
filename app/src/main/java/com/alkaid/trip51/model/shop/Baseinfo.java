@@ -24,6 +24,7 @@ public class Baseinfo implements Serializable {
     private String tastescore;
     private String servicescore;
     private String tips;
+    private int totallevel;
     private List<ShopImg> shopimgs=new ArrayList<>();
 
     public static class ShopImg{
@@ -166,5 +167,14 @@ public class Baseinfo implements Serializable {
 
     public void setTips(String tips) {
         this.tips = tips;
+    }
+
+
+    public int getTotallevel() {
+        return totallevel;
+    }
+
+    public void setTotallevel(int totallevel) {
+        this.totallevel = totallevel;
     }
 }

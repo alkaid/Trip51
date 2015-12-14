@@ -6,73 +6,50 @@
     <ImageView
         android:id="@+id/ivUserThumb"
         style="@style/ListViewShopImage"
+        android:paddingTop="0dp"
         android:src="@drawable/temp_user_info_ipc" />
 
     <LinearLayout
         style="@style/ListViewArticleLay"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp">
-
-            <TextView
-                style="@style/TextViewArticle"
-                android:text="138****881" />
-
-            <TextView
-                style="@style/TextViewArticle"
-                android:layout_alignParentRight="true"
-                android:text="2015-10-31 12:17" />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_nick_name"
+            style="@style/TextViewTitle3"
+            android:layout_marginRight="10dp"
+            android:text="黑咖啡－676" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <LinearLayout
+                android:id="@+id/ll_star_fav"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/star_thumb_fav" />
+                android:layout_height="wrap_content"></LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/star_thumb_fav" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/star_thumb_fav" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/star_thumb_fav" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/star_thumb_unfav" />
-
+            <TextView
+                android:id="@+id/tv_evaluation_avg_price"
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="35元/人" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_evaluation_content"
                 style="@style/TextViewArticle"
                 android:text="咖啡蛮好喝，店里布置也够温馨，我续杯18次，撑了，服务周到，下次还来" />
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_evaluation_imgs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></LinearLayout>
 
     </LinearLayout>
 

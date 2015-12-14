@@ -15,6 +15,7 @@ public class Comment implements Serializable {
     private float tastelevel;   //口味
     private float envlevel;     //环境
     private float servicelevel; //服务
+    private float avgFee;//人均消费
 
     //以下字段是”我的评价“的字段
     private long commentid;
@@ -115,5 +116,13 @@ public class Comment implements Serializable {
 
     public void setShopname(String shopname) {
         this.shopname = shopname;
+    }
+
+    public float getAvgFee() {
+        return avgFee;
+    }
+
+    public void setAvgFee(float avgFee) {
+        this.avgFee = avgFee;
     }
 }

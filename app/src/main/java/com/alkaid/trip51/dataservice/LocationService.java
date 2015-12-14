@@ -185,7 +185,8 @@ public class LocationService {
                 LogUtil.w("上次的定位结果也是错误的，使用初始默认数据");
             }
             if(isSuccess) {
-                coordinates = location.getLongitude() + "," + location.getLatitude();
+                coordinates = "113.917554,22.495232";
+//                coordinates = location.getLongitude() + "," + location.getLatitude();
             }
             LogUtil.v("coordinates="+coordinates);
             //广播
@@ -245,6 +246,7 @@ public class LocationService {
                     break;
                 }
             }
+            cityId = 77; isMatch = true;
             //匹配不到则接口获取cityid
             if(!isMatch){
                 requestCityId(new Response.Listener<ResCityId>() {
