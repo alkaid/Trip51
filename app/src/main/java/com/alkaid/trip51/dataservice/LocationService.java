@@ -186,8 +186,8 @@ public class LocationService {
                 LogUtil.w("上次的定位结果也是错误的，使用初始默认数据");
             }
             if(isSuccess) {
-                coordinates = "113.917554,22.495232";
-//                coordinates = location.getLongitude() + "," + location.getLatitude();
+//                coordinates = "113.917554,22.495232";     //Test
+                coordinates = location.getLongitude() + "," + location.getLatitude();
             }
             LogUtil.v("coordinates="+coordinates);
             //广播
@@ -248,7 +248,7 @@ public class LocationService {
                     break;
                 }
             }
-            cityId = 77; isMatch = true;
+//            cityId = 77; isMatch = true;  //Test
             //匹配不到则接口获取cityid
             if(!isMatch){
                 requestCityId(new Response.Listener<ResCityId>() {
@@ -299,7 +299,7 @@ public class LocationService {
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
 //        unBeSignform.put("provincename", provinceName);
-        unBeSignform.put("versionnum", "0");
+        unBeSignform.put("versionnum", "1");
         final String tag="citylist"+(int)(Math.random()*1000);
         App.mApiService().exec(new MApiRequest(CacheType.DISABLED,false,ResCityList.class, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
     }
