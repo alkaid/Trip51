@@ -46,7 +46,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     private ViewGroup layPhotoPick,layNickname;
     private Button btn_take_photo, btn_pick_photo, btn_cancel;
-    private TextView tvNickname;
+    private TextView tvNickname,tvSex,tvRealName,tvMobile;
 
     CropConfig mCropParams = new CropConfig();
 
@@ -81,11 +81,24 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         relHeadSetting.setOnClickListener(this);
         layNickname= (ViewGroup) findViewById(R.id.layNickname);
         tvNickname=(TextView) findViewById(R.id.tvNickname);
+        tvSex= (TextView) findViewById(R.id.tvSex);
+        tvRealName= (TextView) findViewById(R.id.tvRealName);
+        tvMobile = (TextView) findViewById(R.id.tvMobile);
         layNickname.setOnClickListener(this);
 
+        tvNickname.setText(App.accountService().getAccount().getNickname());
+        //TODO 服务端没有返回sex
+//        tvSex.setText(App.accountService().getAccount().get);
+        tvRealName.setText(App.accountService().getAccount().getRealname());
+        String mobile=App.accountService().getAccount().getMobile();
+        if(null!=mobile&&mobile.length()>=11){
+            mobile=mobile.substring(0,3)+"****"+mobile.substring(7);
+        }
+        tvMobile.setText(mobile);
+
         nivFace= (NetworkImageView) findViewById(R.id.nivFace);
-        nivFace.setDefaultImageResId(R.mipmap.ic_launcher);
-        nivFace.setErrorImageResId(R.mipmap.ic_launcher);
+        nivFace.setDefaultImageResId(R.drawable.default_user_face);
+        nivFace.setErrorImageResId(R.drawable.default_user_face);
         nivFace.setImageUrl(account.getAvater(), App.mApiService().getImageLoader());
 
     }

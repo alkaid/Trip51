@@ -52,7 +52,7 @@
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/tv_user_name"
-                android:text="小泡泡785" />
+                android:text="泡泡" />
 
             <ImageView
                 android:id="@+id/ivArrow1"
@@ -77,7 +77,7 @@
                 android:id="@+id/ivArrow2"
                 style="@style/ImageViewRightArrow" />
 
-            <TextView
+            <TextView android:id="@+id/tvSex"
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/ivArrow2"
@@ -96,7 +96,7 @@
                 android:id="@+id/ivArrow3"
                 style="@style/ImageViewRightArrow" />
 
-            <TextView
+            <TextView android:id="@+id/tvRealName"
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/ivArrow3"
@@ -162,7 +162,7 @@
                 android:id="@+id/ivArrow5"
                 style="@style/ImageViewRightArrow" />
 
-            <TextView
+            <TextView android:id="@+id/tvMobile"
                 style="@style/TextViewArticle.Gray.centerVertical"
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/ivArrow5"

@@ -45,6 +45,7 @@ public class LocationService {
     private String provinceName="陕西";
     private String cityName="西安";
     private long cityId=311;
+    private long gpsCityId=0;
     private List<SimpleCity> cities=new ArrayList<SimpleCity>();
     private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
     private ResShopCondition condition;
@@ -241,6 +242,7 @@ public class LocationService {
             for (SimpleCity c:cities){
                 if(c.getCityname().equals(cityName)){
                     cityId=c.getCityid();
+                    gpsCityId=c.getCityid();
                     isMatch=true;
                     break;
                 }
@@ -409,5 +411,13 @@ public class LocationService {
 
     public void setCondition(ResShopCondition condition) {
         this.condition = condition;
+    }
+
+    public long getGpsCityId() {
+        return gpsCityId;
+    }
+
+    public void setGpsCityId(long gpsCityId) {
+        this.gpsCityId = gpsCityId;
     }
 }

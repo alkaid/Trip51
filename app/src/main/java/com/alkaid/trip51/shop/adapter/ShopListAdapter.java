@@ -87,7 +87,7 @@ public class ShopListAdapter extends BaseAdapter {
         }
         holder.tvStatus.setText(Html.fromHtml(status));
         holder.tvAreaAndType.setText((shop.getAreaname() == null ? "" : shop.getAreaname() + " ") + (shop.getDiningtypename() == null ? "" : shop.getDiningtypename()));
-        holder.tvDistance.setText(shop.getDistance()+"m");
+        holder.tvDistance.setText(shop.getDistance()>0?shop.getDistance()+"m":"");
         return convertView;
     }
 

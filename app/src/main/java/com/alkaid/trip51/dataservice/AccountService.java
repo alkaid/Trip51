@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.dataservice.mapi.MApiError;
@@ -104,11 +103,10 @@ public class AccountService {
      * @return
      */
     public boolean checkLogined(Activity context){
-        if(openInfo==null || account==null || TextUtils.isEmpty(openInfo.getOpenid())||TextUtils.isEmpty(account.getMemberid())){
+        if(!logined){
             context.startActivityForResult(new Intent(context, UserLoginActivity.class), REQUEST_CODE_LOGIN);
-            return false;
         }
-        return true;
+        return logined;
     }
     /**
      * 检查是否已登录 若未登录 启动登录页面
@@ -116,11 +114,10 @@ public class AccountService {
      * @return
      */
     public boolean checkLogined(Fragment context){
-        if(openInfo==null || account==null || TextUtils.isEmpty(openInfo.getOpenid())||TextUtils.isEmpty(account.getMemberid())){
+        if(!logined){
             context.startActivityForResult(new Intent(context.getContext(), UserLoginActivity.class), REQUEST_CODE_LOGIN);
-            return false;
         }
-        return true;
+        return logined;
     }
 
     public boolean checkIsNeedRelogin(VolleyError volleyError,Activity context){

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by alkaid on 2015/11/29.
  */
 public class Shop implements Serializable {
-    private int shopid;
+    private long shopid;
     private String shopname;
     private String avgpay;
     private String imageurl;
@@ -18,11 +18,11 @@ public class Shop implements Serializable {
     private int hallstatus;
     private int distance;
 
-    public int getShopid() {
+    public long getShopid() {
         return shopid;
     }
 
-    public void setShopid(int shopid) {
+    public void setShopid(long shopid) {
         this.shopid = shopid;
     }
 

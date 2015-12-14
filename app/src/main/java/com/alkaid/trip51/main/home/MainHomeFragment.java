@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -124,31 +123,31 @@ public class MainHomeFragment extends BaseFragment {
             public void onLastItemVisible() {
             }
         });
-        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            private int mListViewFirstItem = 0;
-            //listView中第一项的在屏幕中的位置
-            private int mScreenY = 0;
-            //是否向上滚动
-            private boolean mIsScrollToUp = false;
-
-            @Override
-            public void onScrollStateChanged(AbsListView v, int scrollState) {
-                switch (scrollState) {
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        if (v.getFirstVisiblePosition() == 0) {
-                            slideshowView.setVisibility(View.VISIBLE);
-                            layMainMenu.setVisibility(View.VISIBLE);
-                        } else {
-                            slideshowView.setVisibility(View.GONE);
-                            layMainMenu.setVisibility(View.GONE);
-                        }
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView v, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        });
+//        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            private int mListViewFirstItem = 0;
+//            //listView中第一项的在屏幕中的位置
+//            private int mScreenY = 0;
+//            //是否向上滚动
+//            private boolean mIsScrollToUp = false;
+//
+//            @Override
+//            public void onScrollStateChanged(AbsListView v, int scrollState) {
+//                switch (scrollState) {
+//                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+//                        if (v.getFirstVisiblePosition() == 0) {
+//                            slideshowView.setVisibility(View.VISIBLE);
+//                            layMainMenu.setVisibility(View.VISIBLE);
+//                        } else {
+//                            slideshowView.setVisibility(View.GONE);
+//                            layMainMenu.setVisibility(View.GONE);
+//                        }
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView v, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//            }
+//        });
 
         DefaultFilter defaultFilter=new DefaultFilter(inflater, context, v, new DefaultFilter.OnItemClickListener() {
             @Override
@@ -299,6 +298,7 @@ public class MainHomeFragment extends BaseFragment {
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
         unBeSignform.put("cityid", App.locationService().getCityId()+"");
+        unBeSignform.put("gpscityid", App.locationService().getGpsCityId()+"");
         unBeSignform.put("shoptype", ShopType.RESTAURANT.code + "");
         unBeSignform.put("location", "2000");
         unBeSignform.put("pageindex", (loadOnType==LOAD_ON_ENTER||loadOnType==LOAD_ON_PULLDOWN)?"1":pageindex+"");

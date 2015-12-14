@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
     <include layout="@layout/default_title_bar"/>
     <RelativeLayout android:id="@+id/ll_user_info" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="10dp" android:background="@color/light_line_red">
-        <ImageView android:id="@+id/ivUserFace" android:src="@drawable/default_user_face" android:layout_width="64dp" android:layout_height="64dp" />
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_toRightOf="@+id/ivUserFace" android:orientation="vertical" android:layout_centerVertical="true">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="小泡泡785" android:textColor="@color/white" android:textSize="@dimen/text_other_2" android:layout_marginBottom="2dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="账号：huangzz88" android:textColor="@color/white" android:textSize="@dimen/text_titlebar_normal" android:layout_marginTop="2dp"/>
+        <com.android.volley.toolbox.NetworkImageView android:id="@+id/nivFace" android:src="@drawable/default_user_face" android:layout_width="64dp" android:layout_height="64dp" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_toRightOf="@+id/nivFace" android:orientation="vertical" android:layout_centerVertical="true">
+            <TextView android:id="@+id/tvNickname" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="点击登录" android:textColor="@color/white" android:textSize="@dimen/text_other_2" android:layout_marginBottom="2dp"/>
+            <TextView android:id="@+id/tvAccount" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="账号：-------" android:textColor="@color/white" android:textSize="@dimen/text_titlebar_normal" android:layout_marginTop="2dp"/>
         </LinearLayout>
         <ImageView android:src="@drawable/arrow_white_right_large" style="@style/ImageViewRightArrow" />
     </RelativeLayout>

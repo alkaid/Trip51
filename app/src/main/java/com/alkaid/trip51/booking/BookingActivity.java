@@ -47,6 +47,7 @@ import java.util.Map;
 
 /**
  * Created by alkaid on 2015/11/7.
+ * 订单提交界面
  */
 public class BookingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -294,6 +295,8 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                 String orderNo = response.getOuttradeno();
                 Intent intent = new Intent(context, OrderDetailActivity.class);
                 intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO, orderNo);
+                //下单成功 清除该店的购物车
+                App.shoppingCartService().getCart().remove(currShop.getShopid());
                 startActivity(intent);
                 finish();
             }
