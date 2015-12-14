@@ -21,12 +21,15 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResBaseInfo;
 import com.alkaid.trip51.model.shop.Baseinfo;
+import com.alkaid.trip51.model.shop.Comment;
 import com.alkaid.trip51.model.shop.Shop;
+import com.alkaid.trip51.shop.adapter.ShopDetailEvaluationAdapter;
 import com.alkaid.trip51.util.BitmapUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,9 +65,14 @@ public class ShopDescFragment extends BaseFragment{
     private String adress="";
     private String phone="";
     private String otherInfo="";
+    private List<Comment> commmentList;
+
+    private ShopDetailEvaluationAdapter shopDetailEvaluationAdapter;//评价列表的adapter
 
     private static final int REQUEST_DATA_SUCCESS = 1001;
     private static final int TOTAL_LEVEL = 5;
+
+    private static final int TOTAL_SCORE = 5;
 
 
     @Override
@@ -78,6 +86,7 @@ public class ShopDescFragment extends BaseFragment{
 
     private void initView(View v){
         imgShop = (ImageView) v.findViewById(R.id.imgShopThumb);
+        tvShopName = (TextView) v.findViewById(R.id.tvShopName);
         llStarFav  = (LinearLayout) v.findViewById(R.id.ll_star_fav);
         tvTaste = (TextView) v.findViewById(R.id.tvTaste);
         tvEnvironment = (TextView) v.findViewById(R.id.tvEnvironment);
@@ -87,6 +96,10 @@ public class ShopDescFragment extends BaseFragment{
         tvEvaluationNum = (TextView) v.findViewById(R.id.tvEvaluationNum);
         lvEvaluationDetail = (ListView) v.findViewById(R.id.lv_evaluation );
         tvShopOtherInfo = (TextView) v.findViewById(R.id.tvShopOtherInfo);
+
+        shopDetailEvaluationAdapter = new ShopDetailEvaluationAdapter(getContext());
+        lvEvaluationDetail.setAdapter(shopDetailEvaluationAdapter);
+
     }
 
     private void updateUI(){
@@ -98,6 +111,7 @@ public class ShopDescFragment extends BaseFragment{
             }
         }
         if(llStarFav!=null){
+            llStarFav.removeAllViews();
             for(int i=0;i<starlevel;i++){
                 ImageView ivStar = new ImageView(getContext());
                 ivStar.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.star_thumb_fav));
@@ -116,19 +130,39 @@ public class ShopDescFragment extends BaseFragment{
             tvAdress.setText(adress);
         }
         if(tvTaste!=null){
-            tvTaste.setText("口味"+ tasteScore +"分");
+            if(tasteScore!=null) {
+                tvTaste.setText("口味" + tasteScore + "分");
+            }else{
+                tvTaste.setText("口味"+TOTAL_SCORE+"分");
+            }
         }
         if(tvService!=null){
-            tvService.setText("服务"+ serviceScore +"分");
+            if(serviceScore!=null){
+                tvService.setText("服务"+ serviceScore +"分");
+            }else{
+                tvService.setText("服务" + TOTAL_SCORE + "分");
+            }
         }
         if(tvEnvironment!=null){
-            tvEnvironment.setText("环境"+ environmentScore +"分");
+            if(environmentScore!=null) {
+                tvEnvironment.setText("环境" + environmentScore + "分");
+            }else{
+                tvEnvironment.setText("环境"+TOTAL_SCORE+"分");
+            }
         }
         if(tvPhone!=null){
             tvPhone.setText(phone);
         }
         if(tvShopOtherInfo!=null){
             tvShopOtherInfo.setText(otherInfo);
+        }
+        if(shopDetailEvaluationAdapter!=null){
+            shopDetailEvaluationAdapter.notifyDataSetChanged();
+        }
+        if(tvEvaluationNum!=null){
+            if(commmentList!=null) {
+                tvEvaluationNum.setText("网友点评（"+commmentList.size()+"）人");
+            }
         }
     }
 
@@ -137,12 +171,23 @@ public class ShopDescFragment extends BaseFragment{
             Baseinfo baseInfo = response.getBaseinfo();
             imgUrl = baseInfo.getImgurl();
             shopName = baseInfo.getShopname();
-            starlevel = baseInfo.getStarlevel();
+            starlevel = baseInfo.getTotallevel();
             tasteScore = baseInfo.getTastescore();
             environmentScore = baseInfo.getEnvscore();
             serviceScore = baseInfo.getServicescore();
             adress = baseInfo.getAddress();
             otherInfo = baseInfo.getTips();
+            commmentList = response.getComments();
+            //评价的假数据
+            for(int i=0;i<5;i++){
+                Comment comment = new Comment();
+                comment.setNickname("黑咖啡－676");
+                comment.setAvgFee(35);
+                comment.setCommentlevel(4);
+                comment.setContent("咖啡蛮好喝，店里布置也够温馨，我续杯18次，撑了，服务周到，下次还来");
+                commmentList.add(comment);
+            }
+            shopDetailEvaluationAdapter.setData(commmentList);
         }
     }
 
@@ -159,7 +204,7 @@ public class ShopDescFragment extends BaseFragment{
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("shopid", currShop.getShopid()+"");
-//        unBeSignform.put("pageindex", "1");
+//        unBeSignform.put("pageinodex", "1");
 //        unBeSignform.put("pagesize", "20");
         final String tag="shopdetail"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
