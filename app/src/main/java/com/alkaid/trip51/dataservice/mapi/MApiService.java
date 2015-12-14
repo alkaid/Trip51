@@ -23,7 +23,7 @@ public class MApiService {
     public static final String URL_REGISTER=weburl+"register/"+PROTOCOL_VERSION;
     public static final String URL_LOGIN_MOBILE=weburl+"login/mobile/"+PROTOCOL_VERSION;
     public static final String URL_LOGIN_NORMAL=weburl+"login/common/"+PROTOCOL_VERSION;
-    public static final String URL_CITY_LIST=weburl+"city/list/"+PROTOCOL_VERSION;
+    public static final String URL_CITY_LIST=weburl+"city/alllist/"+PROTOCOL_VERSION;
     public static final String URL_CITY_HOTLIST=weburl+"city/hotlist/"+PROTOCOL_VERSION;
     public static final String URL_CITY_GETID=weburl+"city/getcityid/"+PROTOCOL_VERSION;
     public static final String URL_SHOP_FOODS=weburl+"shop/foodlist/"+PROTOCOL_VERSION;

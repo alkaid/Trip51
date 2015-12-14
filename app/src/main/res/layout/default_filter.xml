@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:popupbtn="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/laySelector" android:layout_below="@+id/layMainMenu"
+        android:id="@+id/laySelector"
         android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/gray_background">
         <pw.h57.popupbuttonlibrary.PopupButton
             android:id="@+id/popbtn1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:text="商家分类"
             android:textSize="@dimen/text_article_normal"
             popupbtn:normalBg="@drawable/tab_bkg_line"
             popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressBg="@drawable/tab_bkg_line"
             popupbtn:pressIcon="@drawable/arrow_up_shop"
+            android:textColor="@color/text_gray_to_light_red"
             />
+        <View style="@style/DividerViewVertical"/>
         <pw.h57.popupbuttonlibrary.PopupButton
             android:id="@+id/popbtn2"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:text="排序"
             android:textSize="@dimen/text_article_normal"
             popupbtn:normalBg="@drawable/tab_bkg_line"
             popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressBg="@drawable/tab_bkg_line"
             popupbtn:pressIcon="@drawable/arrow_up_shop"
+            android:textColor="@color/text_gray_to_light_red"
             />
+        <View style="@style/DividerViewVertical"/>
         <pw.h57.popupbuttonlibrary.PopupButton
             android:id="@+id/popbtn3"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:text="附近(位置)"
             android:textSize="@dimen/text_article_normal"
             popupbtn:normalBg="@drawable/tab_bkg_line"
             popupbtn:normalIcon="@drawable/arrow_down_shop"
-            popupbtn:pressBg="@drawable/tab_bkg_selected"
+            popupbtn:pressBg="@drawable/tab_bkg_line"
             popupbtn:pressIcon="@drawable/arrow_up_shop"
+            android:textColor="@color/text_gray_to_light_red"
             />
     </LinearLayout>

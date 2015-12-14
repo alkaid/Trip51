@@ -44,5 +44,8 @@
             <TextView style="@style/TextViewArticle" android:text="KTV预订"/>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/default_filter"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layMainMenu" android:orientation="vertical">
+        <View style="@style/DividerViewHorizon.DeepGray"/>
+        <include layout="@layout/default_filter" />
+    </LinearLayout>
 </RelativeLayout>
