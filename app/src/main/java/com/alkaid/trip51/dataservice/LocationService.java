@@ -298,7 +298,7 @@ public class LocationService {
     public void requestCityList(boolean ishotlist,Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
-//        unBeSignform.put("provincename", provinceName);
+        unBeSignform.put("provincename", provinceName);
         unBeSignform.put("versionnum", "1");
         final String tag="citylist"+(int)(Math.random()*1000);
         App.mApiService().exec(new MApiRequest(CacheType.DISABLED,false,ResCityList.class, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
