@@ -129,9 +129,13 @@ public class NetworkDispatcher extends Thread {
 //--------------------------modified by alkaid 20151129 begin------------------------------------------------
 //                if (request.shouldCache() && response.cacheEntry != null) {       //orgin
                 if (request.shouldCache() && response.cacheEntry != null &&  response.isSuccess()) {    //modified  只缓存成功的
+                    //此处修改是为了添加按数据版本修改缓存的功能
+                    //1.如果网络版本==0则表示上层没有设定版本号，不使用版本更新功能 2.如果网络数据版本大于本地缓存版本 则更新
+                    if(response.netDataVersion==0 || (response.netDataVersion>0&&response.netDataVersion!=response.cacheDataVersion)) {
 //--------------------------modified by alkaid 20151129 end------------------------------------------------
-                    mCache.put(request.getCacheKey(), response.cacheEntry);
-                    request.addMarker("network-cache-written");
+                        mCache.put(request.getCacheKey(), response.cacheEntry);
+                        request.addMarker("network-cache-written");
+                    }
                 }
 
                 // Post the response back.

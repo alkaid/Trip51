@@ -35,7 +35,7 @@ public class SearchCondition implements Serializable{
                     params.put("circleid",searchCondition.base.circle.getCircleid()+"");
                 }
                 if(null!=searchCondition.base.nearBy){
-                    params.put("location",searchCondition.base.nearBy.distance+"");
+                    params.put("location",searchCondition.base.nearBy.distance/1000+"");    //单位km
                 }
                 if(null!=searchCondition.base.shopType&&searchCondition.base.shopType!=ShopType.ALL){
                     params.put("shoptype",searchCondition.base.shopType.code+"");

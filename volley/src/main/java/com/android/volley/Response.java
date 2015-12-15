@@ -82,4 +82,9 @@ public class Response<T> {
         this.cacheEntry = null;
         this.error = error;
     }
+
+    //---------------addded by alkaid 20151216 begin------------
+    public int cacheDataVersion=0;
+    public int netDataVersion=0;
+    //---------------addded by alkaid 20151216 end------------
 }

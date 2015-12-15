@@ -12,6 +12,7 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.SimpleCity;
+import com.alkaid.trip51.model.response.ResAllCityList;
 import com.alkaid.trip51.model.response.ResCityId;
 import com.alkaid.trip51.model.response.ResCityList;
 import com.alkaid.trip51.model.response.ResShopCondition;
@@ -207,36 +208,37 @@ public class LocationService {
                     cityName = cityName.substring(0,cityName.length()-1);
             }
             //获取城市列表
-            requestCityList(false,new Response.Listener<ResCityList>() {
+            requestCityList(new Response.Listener<ResAllCityList>() {
                 @Override
-                public void onResponse(ResCityList resdata) {
+                public void onResponse(ResAllCityList resdata) {
                     //保存
-                    cities=resdata.getCitylist();
-                    taskStep|=2;
+                    for(ResAllCityList.Province p:resdata.provincelist)
+                    cities.addAll(p.citylist);
+                    taskStep |= 2;
                     obtainCityid();
                     onAnyTaskComplete();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    taskStep|=2;
+                    taskStep |= 2;
                     obtainCityid();
                     onAnyTaskComplete();
                 }
             });
             //获取热门城市
-            requestCityList(true,new Response.Listener<ResCityList>() {
+            requestHotCityList(new Response.Listener<ResCityList>() {
                 @Override
                 public void onResponse(ResCityList resdata) {
                     //保存
-                    hotCities=resdata.getCitylist();
-                    taskStep|=4;
+                    hotCities = resdata.getCitylist();
+                    taskStep |= 4;
                     onAnyTaskComplete();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    taskStep|=4;
+                    taskStep |= 4;
                     onAnyTaskComplete();
                 }
             });
@@ -297,17 +299,49 @@ public class LocationService {
 
     /**
      * 获取城市列表
-     * @param ishotlist 是否是热门城市
      * @param listener
      * @param errorListener
      */
-    public void requestCityList(boolean ishotlist,Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
+    public void requestHotCityList(Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("provincename", provinceName);
-        unBeSignform.put("versionnum", "1");
         final String tag="citylist"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,false,ResCityList.class, ishotlist?MApiService.URL_CITY_HOTLIST : MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener), tag);
+        App.mApiService().exec(new MApiRequest(CacheType.DAILY,false,ResCityList.class, MApiService.URL_CITY_HOTLIST, beSignForm, unBeSignform,listener,errorListener), tag);
+    }
+    public void requestProvinceCityList(Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
+        Map<String,String> beSignForm=new HashMap<String, String>();
+        Map<String,String> unBeSignform=new HashMap<String, String>();
+        unBeSignform.put("provincename", provinceName);
+        final String tag="citylist"+(int)(Math.random()*1000);
+        App.mApiService().exec(new MApiRequest(CacheType.DAILY,false,ResCityList.class, MApiService.URL_CITY_LIST_BY_PROVINCE, beSignForm, unBeSignform,listener,errorListener), tag);
+    }
+    public void requestCityList(final Response.Listener<ResAllCityList> listener, final Response.ErrorListener errorListener){
+        final Map<String,String> beSignForm=new HashMap<String, String>();
+        final Map<String,String> unBeSignform=new HashMap<String, String>();
+        unBeSignform.put("provincename", provinceName);
+        final int cacheDataVersion=Integer.parseInt( SpUtil.getString(SpUtil.key_data_version_citylist,"0"));
+        unBeSignform.put("versionnum", cacheDataVersion+"");
+        final String tag="citylist"+(int)(Math.random()*1000);
+        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, true, ResAllCityList.class, MApiService.URL_CITY_LIST, beSignForm, unBeSignform, new Response.Listener<ResAllCityList>() {
+            @Override
+            public void onResponse(ResAllCityList response) {
+                //若版本相同 重新取缓存后再回调
+                if(response.versionnum==cacheDataVersion){
+                    App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResAllCityList.class, MApiService.URL_CITY_LIST, beSignForm, unBeSignform,listener,errorListener),tag);
+                }else{
+                    //版本不同 用网络数据直接回调
+                    SpUtil.putString(SpUtil.key_data_version_citylist,response.versionnum+"");
+                    listener.onResponse(response);
+                }
+            }
+        }, errorListener, new MApiRequest.OnParsedResponseListener<ResAllCityList>() {
+            @Override
+            public void onParsedResponseWithNetwork(Response<ResAllCityList> r) {
+                r.cacheDataVersion=cacheDataVersion;
+                r.netDataVersion=r.result.versionnum;
+            }
+        }), tag);
     }
     private void requestCityId(Response.Listener<ResCityId> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();

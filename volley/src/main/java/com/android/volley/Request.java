@@ -83,30 +83,6 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /** Whether or not responses to this request should be cached. */
     private boolean mShouldCache = true;
 
-//---------------addded by alkaid 20151129 begin------------
-    //添加参数：是否强制刷新缓存
-    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
-    private boolean mShouldRefreshCache = false;
-    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
-    public boolean shouldRefreshCache() {
-        return mShouldRefreshCache;
-    }
-    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
-    public void setShouldRefreshCache(boolean shouldRefreshCache) {
-        this.mShouldRefreshCache = shouldRefreshCache;
-    }
-    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
-    private long mCacheTime;
-    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
-    public long getCacheTime() {
-        return mCacheTime;
-    }
-    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
-    public void setCacheTime(long cacheTime) {
-        this.mCacheTime = cacheTime;
-    }
-//---------------addded by alkaid 20151129 end------------
-
     /** Whether or not this request has been canceled. */
     private boolean mCanceled = false;
 
@@ -610,4 +586,30 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         return (mCanceled ? "[X] " : "[ ] ") + getUrl() + " " + trafficStatsTag + " "
                 + getPriority() + " " + mSequence;
     }
+
+
+    //---------------addded by alkaid 20151129 begin------------
+    //添加参数：是否强制刷新缓存
+    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
+    private boolean mShouldForceNetwork = false;
+    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
+    public boolean shouldForceNetwork() {
+        return mShouldForceNetwork;
+    }
+    /**是否刷新缓存，若为true该次请求不会使用缓存数据，会直接请求网络，但请求完的数据仍然写入缓存 */
+    public void setShouldForceNetwork(boolean shouldForceNetwork) {
+        this.mShouldForceNetwork = shouldForceNetwork;
+    }
+//    private boolean mShould
+    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
+    private long mCacheTime;
+    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
+    public long getCacheTime() {
+        return mCacheTime;
+    }
+    /** 缓存时间 仅{@link #shouldCache()}为true时有效 为0时代表由服务端Response Header "Cache-Control""max-age="控制缓存时长*/
+    public void setCacheTime(long cacheTime) {
+        this.mCacheTime = cacheTime;
+    }
+//---------------addded by alkaid 20151129 end------------
 }

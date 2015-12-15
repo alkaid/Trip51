@@ -29,6 +29,7 @@ import java.util.Map;
  */
 public class MApiRequest<T extends ResponseData> extends Request<T> {
     private Response.Listener<T> mListener=null;
+    private OnParsedResponseListener<T> mOnParsedResponseListener;
     protected Map<String,String> beSignForm;
     protected Map<String,String> unBeSignform;
     private String id;
@@ -37,11 +38,15 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
     protected String cacheKey;
     private Class mResponseClss;
     public MApiRequest(CacheType cacheType,boolean shouldRefreshCache,Class<T> responseClss,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        this(cacheType,shouldRefreshCache,responseClss,url,beSignForm,unBeSignform,listener,errorListener,null);
+    }
+    public MApiRequest(CacheType cacheType,boolean shouldRefreshCache,Class<T> responseClss,String url, Map<String,String> beSignForm, Map<String,String> unBeSignform,Response.Listener<T> listener, Response.ErrorListener errorListener,OnParsedResponseListener<T> onParsedResponseListener) {
 //        super(Method.POST,url,listener,errorListener);
         super(Method.POST, url, errorListener);
         mResponseClss=responseClss;
         mListener = listener;
-        setShouldRefreshCache(shouldRefreshCache);
+        mOnParsedResponseListener=onParsedResponseListener;
+        setShouldForceNetwork(shouldRefreshCache);
         this.cacheType=cacheType;
         switch (cacheType){
             case DISABLED:
@@ -100,6 +105,7 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         cacheKeyParams.remove("imei");
         cacheKeyParams.remove("appversion");
         cacheKeyParams.remove("sign");
+        cacheKeyParams.remove("versionnum");
 //        cacheKeyParams.remove("openid");
         //排除特别字段
 //        cacheKeyParams.remove("location");
@@ -147,7 +153,14 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         T resData= (T) gson.fromJson(parsed,mResponseClss);
         if(resData.isSuccess()){
             removeAllPageCachesExcludeFirstPage(response);
-            return Response.success(resData, HttpHeaderParser.parseCacheHeaders(response));
+            Response r = Response.success(resData, HttpHeaderParser.parseCacheHeaders(response));
+            //设置缓存版本号和网络版本号
+            if(!response.isFromCache){
+                if(null!=mOnParsedResponseListener){
+                    mOnParsedResponseListener.onParsedResponseWithNetwork(r);
+                }
+            }
+            return r;
         } else {
             MApiError e=new MApiError(resData);
             LogUtil.e(e);
@@ -201,5 +214,9 @@ public class MApiRequest<T extends ResponseData> extends Request<T> {
         signature = SecurityUtil.getMD5WithSalt(signBefore);
 //        LogUtil.v("signAfter==" + signature);
         return signature;
+    }
+
+    public static interface OnParsedResponseListener<T>{
+        public void onParsedResponseWithNetwork(Response<T> r);
     }
 }

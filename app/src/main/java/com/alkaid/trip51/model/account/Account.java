@@ -6,12 +6,12 @@ import java.io.Serializable;
  * Created by df on 2015/11/23.
  */
 public class Account implements Serializable {
-    private String memberid;
-    private String mobile;
-    private String nickname;
-    private String email;
-    private String realname;
-    private String avater;
+    private String memberid="";
+    private String mobile="";
+    private String nickname="";
+    private String email="";
+    private String realname="";
+    private String avater="";
     private long credits;
     private int cardnum;
     private float balance;
