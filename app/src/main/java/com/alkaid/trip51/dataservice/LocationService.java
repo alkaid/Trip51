@@ -213,12 +213,14 @@ public class LocationService {
                     //保存
                     cities=resdata.getCitylist();
                     taskStep|=2;
+                    obtainCityid();
                     onAnyTaskComplete();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     taskStep|=2;
+                    obtainCityid();
                     onAnyTaskComplete();
                 }
             });
@@ -238,34 +240,38 @@ public class LocationService {
                     onAnyTaskComplete();
                 }
             });
-            //匹配当前城市id
-            boolean isMatch=false;
-            for (SimpleCity c:cities){
-                if(c.getCityname().equals(cityName)){
-                    cityId=c.getCityid();
-                    gpsCityId=c.getCityid();
-                    isMatch=true;
-                    break;
-                }
+        }
+    }
+
+    private void obtainCityid(){
+        //匹配当前城市id
+        boolean isMatch=false;
+        for (SimpleCity c:cities){
+            if(c.getCityname().equals(cityName)){
+                cityId=c.getCityid();
+                gpsCityId=c.getCityid();
+                isMatch=true;
+                break;
             }
+        }
 //            cityId = 77; isMatch = true;  //Test
-            //匹配不到则接口获取cityid
-            if(!isMatch){
-                requestCityId(new Response.Listener<ResCityId>() {
-                    @Override
-                    public void onResponse(ResCityId resdata) {
-                        cityId=resdata.getCityid();
-                        onLocationChanged();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        onLocationChanged();
-                    }
-                });
-            }else{
-                onLocationChanged();
-            }
+        //匹配不到则接口获取cityid
+        if(!isMatch){
+            requestCityId(new Response.Listener<ResCityId>() {
+                @Override
+                public void onResponse(ResCityId resdata) {
+                    cityId=resdata.getCityid();
+                    gpsCityId=resdata.getCityid();
+                    onLocationChanged();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    onLocationChanged();
+                }
+            });
+        }else{
+            onLocationChanged();
         }
     }
 
