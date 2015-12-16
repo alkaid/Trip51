@@ -1,14 +1,19 @@
 package com.alkaid.trip51.location.adapter;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.model.SimpleCity;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -55,9 +60,8 @@ public class CityGridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Button btn = new Button(mContext);
-        btn.setBackgroundResource(R.color.white);
-        btn.setText(cities.get(position).getCityname());
-        return btn;
+        TextView tv = (TextView) mInflater.inflate(R.layout.tv_city_grid_item, null);
+        tv.setText(cities.get(position).getCityname());
+        return tv;
     }
 }
