@@ -130,7 +130,7 @@ public class MainHomeFragment extends BaseFragment {
         tvCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(getActivity(), CityListActivity.class));
+                startActivity(new Intent(getActivity(), CityListActivity.class));
             }
         });
 //        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -382,5 +382,13 @@ public class MainHomeFragment extends BaseFragment {
                 handleException(new TradException(error.getMessage(),error));
             }
         }), tag);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CityListActivity.CITY_ACTIVITY_BACK){
+            loadData(LOAD_ON_ENTER, 1);
+        }
     }
 }

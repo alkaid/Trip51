@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <include layout="@layout/default_title_bar" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/city_search_btn_background">
+
+        <com.alkaid.trip51.location.widget.CitySearchEditText
+            android:id="@+id/filter_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/search_bar_button_background"
+            android:drawableLeft="@drawable/navibar_search_icon_search"
+            android:hint="城市/拼音"
+            android:singleLine="true"
+            android:textSize="@dimen/text_title_3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="20"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/city_search_btn_background">
-
-                <com.alkaid.trip51.base.widget.view.ButtonSearchBar
-                    android:id="@+id/bsb_city"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" />
-            </FrameLayout>
-
             <TextView
-                style="@style/TextViewTitle1"
+                style="@style/TextViewTitle3"
                 android:layout_width="match_parent"
                 android:background="@color/city_title_2_background"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:textStyle="bold"
-                android:text="定位城市" />
+                android:text="定位城市"
+                android:textStyle="bold" />
 
             <GridView
                 android:id="@+id/gv_location_citys"
@@ -51,22 +53,22 @@
                 android:layout_height="wrap_content"
                 android:background="@color/city_gridview_background"
                 android:horizontalSpacing="20dp"
-                android:verticalSpacing="20dp"
+                android:numColumns="3"
+                android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:numColumns="3" />
+                android:paddingTop="15dp"
+                android:verticalSpacing="20dp" />
 
             <TextView
-                style="@style/TextViewTitle1"
+                style="@style/TextViewTitle3"
                 android:layout_width="match_parent"
                 android:background="@color/city_title_2_background"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:textStyle="bold"
-                android:text="最近访问城市" />
+                android:text="最近访问城市"
+                android:textStyle="bold" />
 
             <GridView
                 android:id="@+id/gv_last_interview_citys"
@@ -74,22 +76,22 @@
                 android:layout_height="wrap_content"
                 android:background="@color/city_gridview_background"
                 android:horizontalSpacing="20dp"
-                android:verticalSpacing="20dp"
+                android:numColumns="3"
+                android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:numColumns="3" />
+                android:paddingTop="15dp"
+                android:verticalSpacing="20dp" />
 
             <TextView
-                style="@style/TextViewTitle1"
+                style="@style/TextViewTitle3"
                 android:layout_width="match_parent"
                 android:background="@color/city_title_2_background"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:textStyle="bold"
-                android:text="热门城市" />
+                android:text="热门城市"
+                android:textStyle="bold" />
 
             <GridView
                 android:id="@+id/gv_hot_citys"
@@ -97,27 +99,38 @@
                 android:layout_height="wrap_content"
                 android:background="@color/city_gridview_background"
                 android:horizontalSpacing="20dp"
-                android:verticalSpacing="20dp"
+                android:numColumns="3"
+                android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:numColumns="3" />
+                android:paddingTop="15dp"
+                android:verticalSpacing="20dp" />
 
-            <com.alkaid.trip51.widget.pinnedheaderlistview.PinnedHeaderListView
-                android:id="@+id/pinned_header_lv_citys"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ListView
+                android:id="@+id/lv_citys"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:divider="@null" />
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/lv_character_list"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@color/city_character_list_background"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/dialog"
+            android:layout_width="80.0dip"
+            android:layout_height="80.0dip"
+            android:layout_gravity="center"
+            android:background="@drawable/show_head_toast_bg"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="30.0dip"
+            android:visibility="invisible" />
+
+        <com.alkaid.trip51.location.widget.CityRightBar
+            android:id="@+id/sidrbar"
+            android:layout_width="30.0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center" />
+    </FrameLayout>
 
 </LinearLayout>

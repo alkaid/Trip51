@@ -1,10 +1,12 @@
 package com.alkaid.trip51.main.nav;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.BaseTabFragmentActivity;
+import com.alkaid.trip51.location.CityListActivity;
 import com.alkaid.trip51.main.home.MainHomeFragment;
 import com.alkaid.trip51.util.UpdateUtil;
 
