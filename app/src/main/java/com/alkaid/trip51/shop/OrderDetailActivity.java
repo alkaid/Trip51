@@ -1,5 +1,6 @@
 package com.alkaid.trip51.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.alkaid.trip51.model.response.ResOrderDetail;
 import com.alkaid.trip51.model.response.ResPayInfo;
 import com.alkaid.trip51.model.response.ResPayStatus;
 import com.alkaid.trip51.model.shop.Food;
+import com.alkaid.trip51.model.shop.Shop;
 import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.PaymentFactory;
@@ -40,7 +42,7 @@ public class OrderDetailActivity extends BaseActivity {
     private String orderNo;
     private ResOrderDetail orderDetail;
     private TextView tvShopName,tvInfo,tvOrderNo,tvTotal;
-    private ViewGroup layFoodList;
+    private ViewGroup layFoodList,layShop,layOrderDetail;
     private Button btnPay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,8 @@ public class OrderDetailActivity extends BaseActivity {
             }
         });
         layFoodList= (ViewGroup) findViewById(R.id.layFoodList);
+        layShop= (ViewGroup) findViewById(R.id.layShop);
+        layOrderDetail= (ViewGroup) findViewById(R.id.layOrderDetail);
     }
     private void resetView(){
         tvShopName.setText("");
@@ -146,6 +150,17 @@ public class OrderDetailActivity extends BaseActivity {
             btnPay.setEnabled(false);
             btnPay.setText(OrderStatus.getByCode(orderDetail.orderstatus).desc);
         }
+        //跳转
+        layShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,ShopDescActivity.class);
+                Shop shop=new Shop();
+                shop.setShopid(orderDetail.shopid);
+                intent.putExtra(ShopDetailActivity.BUNDLE_KEY_SHOP,shop);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initTitleBar(){

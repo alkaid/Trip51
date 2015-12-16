@@ -20,7 +20,9 @@ public class MyOrderFragment extends BaseTabPageViewFragment {
 
     @Override
     protected ViewGroup creatContetView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (ViewGroup) inflater.inflate(R.layout.main_myorder_fragment,container,false);
+        ViewGroup v = (ViewGroup) inflater.inflate(R.layout.main_myorder_fragment,container,false);
+        initTitleBar(v);
+        return v;
     }
 
     @Override
@@ -43,8 +45,9 @@ public class MyOrderFragment extends BaseTabPageViewFragment {
         TextView tvTitle= (TextView) v.findViewById(R.id.tvTitle);
         View btnLeft=v.findViewById(R.id.btn_back_wx);
         View btnRight=v.findViewById(R.id.notify);
-        tvTitle.setText("我的订单");
+        tvTitle.setText("订单");
         btnRight.setVisibility(View.GONE);
+        btnLeft.setVisibility(View.INVISIBLE);
         btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

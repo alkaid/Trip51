@@ -72,7 +72,7 @@ public class OrderListAdapter extends BaseAdapter {
         holder.tvShopName.setText(obj.getShopname());
         holder.tvPersonNum.setText(obj.getPersonnum()+"人");
         holder.tvSeatType.setText(SeatType.getByCode(obj.getRoomtype()).desc);
-        holder.tvTime.setText(obj.getDinnerdate());
+        holder.tvTime.setText(obj.getOrdertime());
         holder.tvOrderNo.setText(obj.getOrderno());
         if(!TextUtils.isEmpty(obj.getOrderamount())) {
             holder.tvAmount.setText("￥" + obj.getOrderamount());

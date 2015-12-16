@@ -62,7 +62,7 @@ public class ShopListFragment extends BaseFragment {
                 App.shopService().setCurrShopid(id);    //保存当前shopid
 
                 Intent intent = new Intent(context, ShopDetailActivity.class);
-                Shop shop = (Shop) shopListAdapter.getItem(position - 1);
+                Shop shop = (Shop) shopListAdapter.getItem(position);
                 intent.putExtra("currShop", shop);
                 startActivity(intent);
             }
@@ -227,4 +227,5 @@ public class ShopListFragment extends BaseFragment {
             }
         }), tag);
     }
+
 }

@@ -6,7 +6,7 @@
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
             <LinearLayout android:background="@color/white" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small">
-                <RelativeLayout style="@style/SingleItem">
+                <RelativeLayout android:id="@+id/layShop" style="@style/SingleItem">
                     <TextView android:id="@+id/tvShopName" android:text="和太郎寿司" style="@style/TextViewTitle2.centerVertical"/>
                     <ImageView android:id="@+id/ivArrow" style="@style/ImageViewRightArrow" />
                     <TextView android:text="点击此处查看店铺详情" style="@style/TextViewArticle.Gray.centerVertical" android:layout_toLeftOf="@+id/ivArrow" android:layout_marginRight="10dp"/>
@@ -20,11 +20,11 @@
                 <RelativeLayout style="@style/SingleItem">
                     <TextView android:id="@+id/labelOrderNo" android:text="订单编号：" style="@style/TextViewArticle.centerVertical"/>
                     <TextView android:id="@+id/tvOrderNo" android:text="CN20150811001" android:layout_toRightOf="@+id/labelOrderNo" style="@style/TextViewArticle.centerVertical"/>
-                    <ImageView  style="@style/ImageViewRightArrow"/>
+                    <!--<ImageView  style="@style/ImageViewRightArrow"/>-->
                 </RelativeLayout>
                 <View style="@style/DividerViewHorizon" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small"
+            <LinearLayout android:id="@+id/layOrderDetail" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingRight="@dimen/margin_page_small" android:paddingLeft="@dimen/margin_page_small"
                 android:paddingTop="12dp" android:paddingBottom="12dp">
                 <TextView android:text="订单详情：" style="@style/TextViewArticle.centerVertical"/>
                 <!--<View style="@style/DividerViewHorizon" />-->

@@ -144,6 +144,9 @@
         <activity
             android:name=".location.CityListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".shop.ShopDescActivity"
+            android:screenOrientation="portrait" />
 
         <!--==================第三方SDK配置区域  begin================-->
         <!--百度SDK begin-->

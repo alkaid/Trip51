@@ -20,6 +20,7 @@ public class ResOrderList extends ResponseData {
         private String dinnerdate;
         private String orderamount;
         private int orderstatus;
+        private String ordertime;
 
         public String getOrderno() {
             return orderno;
@@ -99,6 +100,14 @@ public class ResOrderList extends ResponseData {
 
         public void setOrderstatus(int orderstatus) {
             this.orderstatus = orderstatus;
+        }
+
+        public String getOrdertime() {
+            return ordertime;
+        }
+
+        public void setOrdertime(String ordertime) {
+            this.ordertime = ordertime;
         }
     }
 

@@ -2,6 +2,7 @@ package com.alkaid.trip51.booking;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -252,7 +253,11 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             isContainFood = NetDataConstants.FALSE;
         }
         float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
-        order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
+        if(TextUtils.isEmpty(dinnerTime)) {
+            order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
+        }else{
+            order.setDinnertime(dinnerTime);
+        }
         order.setIscontainfood(isContainFood);
         order.setIsreplaceother(isReplaceother);
         order.setMobile(mobile);

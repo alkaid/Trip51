@@ -15,8 +15,6 @@ import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.usercenter.MyBalanceActivity;
 import com.alkaid.trip51.usercenter.MyClientCenterActivity;
 import com.alkaid.trip51.usercenter.MyCouponActivity;
-import com.alkaid.trip51.usercenter.MyDiscussActivity;
-import com.alkaid.trip51.usercenter.MyFavoriteActivity;
 import com.alkaid.trip51.usercenter.MyPointsActivity;
 import com.alkaid.trip51.usercenter.MyShareActivity;
 import com.alkaid.trip51.usercenter.SettingActivity;
@@ -155,9 +153,9 @@ public class UserCenterFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             if(v==layFav){
-                startActivity(new Intent(getActivity(), MyFavoriteActivity.class));
+//                startActivity(new Intent(getActivity(), MyFavoriteActivity.class));
             }else if(v==layComment){
-                startActivity(new Intent(getActivity(), MyDiscussActivity.class));
+//                startActivity(new Intent(getActivity(), MyDiscussActivity.class));
             }else if(v==layShare){
                 startActivity(new Intent(getActivity(), MyShareActivity.class));
             }else if(v==layMall){

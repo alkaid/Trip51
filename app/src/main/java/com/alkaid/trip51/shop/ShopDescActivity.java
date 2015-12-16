@@ -13,22 +13,19 @@ import com.alkaid.trip51.base.widget.BaseFragmentActivity;
 /**
  * Created by alkaid on 2015/11/7.
  */
-public class ShopListActivity extends BaseFragmentActivity {
+public class ShopDescActivity extends BaseFragmentActivity {
     View ivBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_list_activity);
-        initTitleBar();
         FragmentManager fragmentManager =getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        ShopListFragment sf=new ShopListFragment();
+        ShopDescFragment sf=new ShopDescFragment();
         sf.setArguments(getIntent().getExtras());
         transaction.replace(R.id.content,sf).commit();
 
-
     }
-
     private void initTitleBar(){
         ivBack=findViewById(R.id.btn_back_wx);
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +35,7 @@ public class ShopListActivity extends BaseFragmentActivity {
             }
         });
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvTitle.setText("餐厅");
+        tvTitle.setText("店铺详情");
         ImageButton btnRight = (ImageButton) findViewById(R.id.notify);
         btnRight.setVisibility(View.GONE);
 //        btnRight.setOnClickListener(new View.OnClickListener() {
