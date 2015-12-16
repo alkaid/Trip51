@@ -49,6 +49,7 @@ public class LocationService {
     private long gpsCityId=0;
     private List<SimpleCity> cities=new ArrayList<SimpleCity>();
     private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
+    private List<SimpleCity> lastInterviewCities = new ArrayList<>();
     private ResShopCondition condition;
     private ServiceListener serviceListener;
     private int taskStep=0; //已经执行完了哪些异步任务
@@ -384,20 +385,20 @@ public class LocationService {
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResShopCondition.class, MApiService.URL_SHOP_CONDITION, beSignForm, unBeSignform, new Response.Listener<ResShopCondition>() {
             @Override
             public void onResponse(ResShopCondition response) {
-                condition=response;
+                condition = response;
 //                for(Area a: response.getArealist()){
 //                    for(Circle c:a.getCirclelist()){
 //                        c.areaid=a.getAreaid();
 //                    }
 //                }
-                taskStep|=8;
+                taskStep |= 8;
                 onAnyTaskComplete();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                taskStep|=8;
-                condition=new ResShopCondition();
+                taskStep |= 8;
+                condition = new ResShopCondition();
                 onAnyTaskComplete();
             }
         }), tag);
@@ -462,4 +463,33 @@ public class LocationService {
     public void setGpsCityId(long gpsCityId) {
         this.gpsCityId = gpsCityId;
     }
+
+    /**
+     * 获得城市 根据id
+     * @param cityId 城市id
+     * @return
+     */
+    public SimpleCity getCity(long cityId){
+        if(cityId == 0){
+            return null;
+        }
+        if(cities!=null){
+            for(int i=0;i<cities.size();i++){
+                SimpleCity city = cities.get(i);
+                if(city.getCityid() == cityId){
+                    return city;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 最近查看的城市列表
+     * @return
+     */
+    public List<SimpleCity> getLastInterviewCities(){
+        return lastInterviewCities;
+    }
+
 }

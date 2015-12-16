@@ -14,10 +14,12 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.base.widget.view.AbstractSearchFragment;
 import com.alkaid.trip51.base.widget.view.ButtonSearchBar;
+import com.alkaid.trip51.base.widget.view.NovaTextView;
 import com.alkaid.trip51.booking.BookingFilterActivity;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
+import com.alkaid.trip51.location.CityListActivity;
 import com.alkaid.trip51.model.enums.ShopType;
 import com.alkaid.trip51.model.enums.SortType;
 import com.alkaid.trip51.model.response.ResMainHome;
@@ -121,6 +123,14 @@ public class MainHomeFragment extends BaseFragment {
 
             @Override
             public void onLastItemVisible() {
+            }
+        });
+        NovaTextView tvCity = (NovaTextView) v.findViewById(R.id.city);
+        tvCity.setText(App.locationService().getCityName());
+        tvCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), CityListActivity.class));
             }
         });
 //        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {

@@ -379,4 +379,10 @@
     <color name="shop_detail_tab_background">#DCDDD8</color>
     <color name="shop_detail_btn_shopping_cart_background">#666666</color>
     <color name="shop_detail_btn_immediate_buy_background">#FF3300</color>
+
+    <!--城市列表相关color-->
+    <color name="city_search_btn_background">#CBCCCD</color>
+    <color name="city_title_2_background">#DBDDD9</color>
+    <color name="city_gridview_background">#ECEEEC</color>
+    <color name="city_character_list_background">#ECEEEC</color>
 </resources>

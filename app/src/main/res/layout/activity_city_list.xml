@@ -2,129 +2,122 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
     android:orientation="vertical">
 
     <include layout="@layout/default_title_bar" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/user_blance_background_height"
-        android:background="@color/light_red">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dip"
-            android:background="@drawable/search_bar_button_background_normal">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="10dp"
-                        android:textColor="@color/text_color_gray_to_orange"
-                        android:text="当前余额:50元"/>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            android:textColor="@color/text_color_orange"
-                            android:text="余额说明"/>
-                    </LinearLayout>
-                </RelativeLayout>
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="35sp"
-                    android:layout_marginLeft="10dp"
-                    android:text="0.00元"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_color_orange"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="40dp"
-                        android:textColor="@color/text_color_white"
-                        android:background="@drawable/btn_default_green"
-                        android:text="提现"/>
-                    <Button
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="40dp"
-                        android:paddingRight="40dp"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_color_white"
-                        android:background="@drawable/btn_default_red"
-                        android:text="充值"/>
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-    </RelativeLayout>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:text="最近30天收支明细"
-        android:textColor="@color/text_gray"
-        android:background="@color/carame_gray"/>
+        android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="20"
             android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/no_blance_detail_icon"/>
+                android:background="@color/city_search_btn_background">
+
+                <com.alkaid.trip51.base.widget.view.ButtonSearchBar
+                    android:id="@+id/bsb_city"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" />
+            </FrameLayout>
+
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/TextViewTitle1"
+                android:layout_width="match_parent"
+                android:background="@color/city_title_2_background"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:text="定位城市" />
+
+            <GridView
+                android:id="@+id/gv_location_citys"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textColor="@color/text_color_gray"
-                android:text="无收支明细"
-                android:textStyle="bold"/>
+                android:background="@color/city_gridview_background"
+                android:horizontalSpacing="20dp"
+                android:verticalSpacing="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:numColumns="3" />
+
+            <TextView
+                style="@style/TextViewTitle1"
+                android:layout_width="match_parent"
+                android:background="@color/city_title_2_background"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:text="最近访问城市" />
+
+            <GridView
+                android:id="@+id/gv_last_interview_citys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/city_gridview_background"
+                android:horizontalSpacing="20dp"
+                android:verticalSpacing="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:numColumns="3" />
+
+            <TextView
+                style="@style/TextViewTitle1"
+                android:layout_width="match_parent"
+                android:background="@color/city_title_2_background"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:text="热门城市" />
+
+            <GridView
+                android:id="@+id/gv_hot_citys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/city_gridview_background"
+                android:horizontalSpacing="20dp"
+                android:verticalSpacing="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:numColumns="3" />
+
+            <com.alkaid.trip51.widget.pinnedheaderlistview.PinnedHeaderListView
+                android:id="@+id/pinned_header_lv_citys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"></ListView>
-    </RelativeLayout>
+            android:id="@+id/lv_character_list"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/city_character_list_background"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
 </LinearLayout>
