@@ -1,9 +1,5 @@
 package com.alkaid.trip51.location;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,13 +14,17 @@ import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
-import com.alkaid.trip51.location.adapter.CityGridViewAdapter;
-import com.alkaid.trip51.location.widget.CitySearchEditText;
-import com.alkaid.trip51.location.widget.CityRightBar;
-import com.alkaid.trip51.util.CharacterParser;
 import com.alkaid.trip51.location.adapter.CityComparator;
+import com.alkaid.trip51.location.adapter.CityGridViewAdapter;
 import com.alkaid.trip51.location.adapter.CitySortAdapter;
+import com.alkaid.trip51.location.widget.CityRightBar;
+import com.alkaid.trip51.location.widget.CitySearchEditText;
 import com.alkaid.trip51.model.SimpleCity;
+import com.alkaid.trip51.util.CharacterParser;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CityListActivity extends Activity {
     //城市列表相关ui
@@ -53,8 +53,6 @@ public class CityListActivity extends Activity {
     private CityGridViewAdapter hotCitiesAdapter;
 
     private OnItemClickListener onItemClickListener;
-
-    public static final int CITY_ACTIVITY_BACK = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +119,9 @@ public class CityListActivity extends Activity {
                 } else if (parent.getId() == citySortListView.getId()) {
                     selectedCity = (SimpleCity)sortAdapter.getItem(position);
                 }
-                finishActivity(CITY_ACTIVITY_BACK);
+                App.locationService().changeCity(selectedCity.getCityid(),selectedCity.getCityname());
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         };
         // 根据a-z进行排序源数据

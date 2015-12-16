@@ -1,5 +1,6 @@
 package com.alkaid.trip51.main.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
@@ -14,7 +16,6 @@ import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
 import com.alkaid.trip51.base.widget.view.AbstractSearchFragment;
 import com.alkaid.trip51.base.widget.view.ButtonSearchBar;
-import com.alkaid.trip51.base.widget.view.NovaTextView;
 import com.alkaid.trip51.booking.BookingFilterActivity;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
@@ -50,12 +51,14 @@ import java.util.Map;
  */
 public class MainHomeFragment extends BaseFragment {
     private View slideshowView,layMainMenu,layOrder;
+    private TextView tvCity;
     private PullToRefreshListView shopListView;
     private ShopListAdapter shopListAdapter;
     private int lastPageIndex=1;
     private SearchCondition searchCondition;
     private ButtonSearchBar searchBar;
     private MainSearchFragment searchFragment;
+    private static final int REQUEST_CODE_CHANGECITY=201;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.main_home_fragment,container,false);
@@ -125,12 +128,12 @@ public class MainHomeFragment extends BaseFragment {
             public void onLastItemVisible() {
             }
         });
-        NovaTextView tvCity = (NovaTextView) v.findViewById(R.id.city);
+        tvCity = (TextView) v.findViewById(R.id.city);
         tvCity.setText(App.locationService().getCityName());
         tvCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CityListActivity.class));
+            startActivityForResult(new Intent(getActivity(), CityListActivity.class), REQUEST_CODE_CHANGECITY);
             }
         });
 //        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -387,7 +390,8 @@ public class MainHomeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CityListActivity.CITY_ACTIVITY_BACK){
+        if(requestCode == REQUEST_CODE_CHANGECITY && resultCode== Activity.RESULT_OK){
+            tvCity.setText(App.locationService().getCityName());
             loadData(LOAD_ON_ENTER, 1);
         }
     }
