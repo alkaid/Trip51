@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.model.shop.Shop;
+import com.alkaid.trip51.util.UnitUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class ShopListAdapter extends BaseAdapter {
         }
         holder.tvStatus.setText(Html.fromHtml(status));
         holder.tvAreaAndType.setText((shop.getAreaname() == null ? "" : shop.getAreaname() + " ") + (shop.getDiningtypename() == null ? "" : shop.getDiningtypename()));
-        holder.tvDistance.setText(shop.getDistance()>0?shop.getDistance()+"km":"");
+        holder.tvDistance.setText(shop.getDistance()>0? UnitUtil.formatDistance(shop.getDistance()):"");
         return convertView;
     }
 
