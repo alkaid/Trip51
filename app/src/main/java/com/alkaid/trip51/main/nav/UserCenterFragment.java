@@ -62,6 +62,7 @@ public class UserCenterFragment extends BaseFragment {
             layCupon.setOnClickListener(onClickWhenLogined);
             tvNickname.setText(App.accountService().getAccount().getNickname());
             tvAccount.setText("账号："+App.accountService().getAccount().getMobile());
+            nivFace.setImageUrl(App.accountService().getAccount().getAvater(), App.mApiService().getImageLoader());
         }else{
             layFav.setOnClickListener(onClickWhenUnLogined);
             layComment.setOnClickListener(onClickWhenUnLogined);
@@ -75,8 +76,9 @@ public class UserCenterFragment extends BaseFragment {
             layCupon.setOnClickListener(onClickWhenUnLogined);
             tvNickname.setText("点击登录");
             tvAccount.setText("账号：------");
+            //TODO 登出改变头像
         }
-        nivFace.setImageUrl(App.accountService().getAccount().getAvater(), App.mApiService().getImageLoader());
+
     }
 
     private void initTitleBar(View v) {
