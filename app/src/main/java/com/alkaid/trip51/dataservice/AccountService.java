@@ -54,6 +54,7 @@ public class AccountService {
     private void init(){
         logined=false;
         boolean accountValidate=false;
+        resetMillisUntilNextSmscode();
         //读取并验证登录信息和用户信息
         do{
             SharedPreferences sp=SpUtil.getSp();
