@@ -349,7 +349,7 @@ public class LocationService {
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("cityname", cityName);
         final String tag="getcityid"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform, listener, errorListener), tag);
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform, listener, errorListener), tag);
     }
 
     private void saveSp(){
@@ -382,7 +382,7 @@ public class LocationService {
         Map<String,String> unBeSignform=new HashMap<String, String>();
         unBeSignform.put("cityid", cityId+"");
         final String tag="getConditions"+(int)(Math.random()*1000);
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL, false, ResShopCondition.class, MApiService.URL_SHOP_CONDITION, beSignForm, unBeSignform, new Response.Listener<ResShopCondition>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResShopCondition.class, MApiService.URL_SHOP_CONDITION, beSignForm, unBeSignform, new Response.Listener<ResShopCondition>() {
             @Override
             public void onResponse(ResShopCondition response) {
                 condition = response;

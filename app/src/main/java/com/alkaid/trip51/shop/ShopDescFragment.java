@@ -211,7 +211,7 @@ public class ShopDescFragment extends BaseFragment{
         final String tag="shopdetail"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResBaseInfo.class, MApiService.URL_SHOP_SHOP_DETAIL, beSignForm, unBeSignform, new Response.Listener<ResBaseInfo>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResBaseInfo.class, MApiService.URL_SHOP_SHOP_DETAIL, beSignForm, unBeSignform, new Response.Listener<ResBaseInfo>() {
             @Override
             public void onResponse(ResBaseInfo response) {
                 setData(response);

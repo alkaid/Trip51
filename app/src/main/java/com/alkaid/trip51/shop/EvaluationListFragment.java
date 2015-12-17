@@ -59,7 +59,7 @@ public class EvaluationListFragment extends BaseFragment{
         final String tag="comments"+(int)(Math.random()*1000);
         setDefaultPdgCanceListener(tag);
         showPdg();
-        App.mApiService().exec(new MApiRequest(CacheType.NORMAL,true,ResComments.class, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<ResComments>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED,true,ResComments.class, MApiService.URL_SHOP_COMMENTS, beSignForm, unBeSignform, new Response.Listener<ResComments>() {
             @Override
             public void onResponse(ResComments response) {
                 dismissPdg();

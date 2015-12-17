@@ -80,7 +80,7 @@ public class SimpleEditorActivity extends BaseActivity{
                 final String tag="modifyuserinfo"+(int)(Math.random()*1000);
                 setDefaultPdgCanceListener(tag);
                 showPdg();
-                App.mApiService().exec(new MApiRequest(CacheType.NORMAL, true, ResponseData.class, MApiService.URL_USER_MODIFY_NICKNAME, beSignForm, unBeSignform, new Response.Listener<ResponseData>() {
+                App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResponseData.class, MApiService.URL_USER_MODIFY_NICKNAME, beSignForm, unBeSignform, new Response.Listener<ResponseData>() {
                     @Override
                     public void onResponse(ResponseData response) {
                         App.accountService().getAccount().setNickname(value);

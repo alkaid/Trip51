@@ -164,7 +164,7 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         setDefaultPdgCanceListener(tag);
         showPdg();
         //TODO 菜单缓存策略需要制定，另外菜单数据有更新则必须清空购物车
-        App.mApiService().exec(new MApiRequest(CacheType.HOURLY, false, ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
+        App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResFoodList.class, MApiService.URL_SHOP_FOODS, beSignForm, unBeSignform, new Response.Listener<ResFoodList>() {
             @Override
             public void onResponse(ResFoodList response) {
                 //设置假数据
