@@ -119,7 +119,9 @@ public class UserCenterFragment extends BaseFragment {
         nivFace= (NetworkImageView) v.findViewById(R.id.nivFace);
         nivFace.setDefaultImageResId(R.drawable.default_user_face);
         nivFace.setErrorImageResId(R.drawable.default_user_face);
-        nivFace.setImageUrl(App.accountService().getAccount().getAvater(), App.mApiService().getImageLoader());
+        if(null!=App.accountService().getAccount()) {
+            nivFace.setImageUrl(App.accountService().getAccount().getAvater(), App.mApiService().getImageLoader());
+        }
     }
 
     private View initItem(int resIconId, final String name) {
