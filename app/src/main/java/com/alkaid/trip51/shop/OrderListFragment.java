@@ -211,7 +211,7 @@ public class OrderListFragment extends BaseFragment {
                         ptrlv.onRefreshComplete();
                         break;
                 }
-                handleException(new TradException(error.getMessage(),error));
+                handleException(MApiService.parseError(error));
                 checkIsNeedRelogin(error);
             }
         }), tag);

@@ -113,7 +113,7 @@ public class MobileLoginFragment extends BaseFragment {
                 public void onErrorResponse(VolleyError error) {
                     dismissPdg();
                     //TODO 暂时用handleException 应该换成失败时的正式UI
-                    handleException(new TradException(error.getMessage(),error));
+                    handleException(MApiService.parseError(error));
                 }
             }), tag);
         }else{

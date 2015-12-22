@@ -382,7 +382,7 @@ public class MainHomeFragment extends BaseFragment {
                         shopListView.onRefreshComplete();
                         break;
                 }
-                handleException(new TradException(error.getMessage(),error));
+                handleException(MApiService.parseError(error));
             }
         }), tag);
     }

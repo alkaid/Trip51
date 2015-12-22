@@ -18,8 +18,10 @@ public class Result implements Serializable{
 	public static final int RQF_PAYINIT_SUCCESS=5;
 	/** 行为日志记录成功*/
 	public static final int RQF_RECORD_ACTION_SUCCESS=6;
-	/** 礼包内容获取成功*/
-	public static final int RQF_GET_GIFT_CONTENT_SUCCESS=51;
+	/** 数据行为接口成功*/
+	public static final int RQF_ACTION_SUCCESS=7;
+	/** 未知错误*/
+	public static final int RQF_EXCEPTION=51;
 	//以下是登录代码
 	/** 无需第三方登录*/
 	public static final int RQF_LOGGEDIN_NO_THIRDLOGIN=100;
@@ -33,7 +35,9 @@ public class Result implements Serializable{
 	public static final int RQF_LOGOUT_SUCCESS=104;
 	/** 登出失败*/
 	public static final int RQF_LOGOUT_FAIL=105;
-	
+	/** 登录失败：当前版本过低，需要下载新的APK*/
+	public static final int RQF_LOGGEDIN_VERSION_TO_LOWER=106;
+
 	//以下是支付代码
 	/** 用户未登录*/
 	public static final int RQF_NOT_LOGGEDIN=1001;
@@ -43,8 +47,6 @@ public class Result implements Serializable{
 	public static final int RQF_DEVICE_INFO_ERROR=1003;
 	/** 服务端返回错误信息*/
 	public static final int RQF_SERVER_NOTICE_ERROR=1004;
-	/** 用户取消支付*/
-//	public static final int RQF_USER_CANCEL=1005;
 	/** 短信发送失败*/
 	public static final int RQF_SMS_SEND_ERROR=1005;
 	/** 服务端返回数据有误*/
@@ -57,20 +59,22 @@ public class Result implements Serializable{
 	public static final int RQF_ILLEGAL_ARGUMENT=1009;
 	/** 用户取消支付*/
 	public static final int RQF_PAY_USER_CANCEL=1010;
+	/** 用户点击“去低级场玩”按钮取消支付 (如单支付对话框SinglePayDialog)*/
+	public static final int RQF_PAY_USER_CANCEL_GOBACK_GAME=1011;
 	/** 调用SDK支付失败*/
 	public static final int RQF_ORDER_SDK_FAIL=1012;
 	/** 订单超时*/
 	public static final int RQF_ORDER_OVER_TIME=1013;
-	
-	
+
+
 	private int code;
 	private String error;
-//	private boolean confirm=true;//是否可显示默认弹框
+	//	private boolean confirm=true;//是否可显示默认弹框
 	private String orderno;
 //	private String paymentInfo;
 	/**附加数据 多用于SDK返回的信息*/
 	private String external;
-	
+
 	public Result(){}
 	public Result(int code){
 		this.setCode(code);
@@ -79,6 +83,10 @@ public class Result implements Serializable{
 		this.external=external;
 		this.setCode(code);
 	}
+	/**
+	 * 订单号,此参数在支付接口{@link Mfsdk#order(int, int, String)}和订单查询接口{@link Mfsdk#query(String)}中返回。
+	 * @return
+	 */
 	public String getOrderno() {
 		return orderno;
 	}
@@ -86,7 +94,7 @@ public class Result implements Serializable{
 	public void setOrderno(String orderno) {
 		this.orderno = orderno;
 	}
-	
+
 //	/** 获取标识:是否显示弹框 (注意此参数仅在登录接口{@link Mfsdk#login()}中返回)*/
 //	public boolean isConfirm() {
 //		return confirm;
@@ -94,7 +102,7 @@ public class Result implements Serializable{
 //	void setConfirm(boolean confirm) {
 //		this.confirm = confirm;
 //	}
-	
+
 	/** 获取结果状态码*/
 	public int getCode() {
 		return code;
@@ -103,78 +111,90 @@ public class Result implements Serializable{
 	public void setCode(int code) {
 		this.code = code;
 		switch (code) {
-		case RQF_LOGGEDIN_SUCCESS:
-			error="登录成功";
-			break;
-		case RQF_ORDER_SUCCESS:
-			error="订单提交成功";
-			break;
-		case RQF_PAYMENT_SUCCESS:
-			error="订单支付成功";
-			break;
-		case RQF_GET_PAYMENT_INFO_SUCCESS:
-			error="获取支付信息成功";
-			break;
-		case RQF_RECORD_ACTION_SUCCESS:
-			error="行为日志记录成功";
-			break;
-		case RQF_NOT_LOGGEDIN:
-			error="用户未登录";
-			break;
-		case RQF_NET_ERROR:
-			error="网络异常";
-			break;
-		case RQF_DEVICE_INFO_ERROR:
-			error="获取设备信息异常,请检查sim卡";
-			break;
-		case RQF_SERVER_NOTICE_ERROR:
-			error="服务端返回错误信息";
-			break;
+			case RQF_LOGGEDIN_SUCCESS:
+				error="登录成功";
+				break;
+			case RQF_ORDER_SUCCESS:
+				error="订单提交成功";
+				break;
+			case RQF_PAYMENT_SUCCESS:
+				error="订单支付成功";
+				break;
+			case RQF_GET_PAYMENT_INFO_SUCCESS:
+				error="获取支付信息成功";
+				break;
+			case RQF_RECORD_ACTION_SUCCESS:
+				error="行为日志记录成功";
+				break;
+			case RQF_NOT_LOGGEDIN:
+				error="用户未登录";
+				break;
+			case RQF_NET_ERROR:
+				error="网络异常,请稍候重试";
+				break;
+			case RQF_DEVICE_INFO_ERROR:
+				error="获取设备信息异常,请检查sim卡";
+				break;
+			case RQF_SERVER_NOTICE_ERROR:
+				error="服务端返回错误信息";
+				break;
 //		case RQF_USER_CANCEL:
 //			error="用户取消支付";
 //			break;
-		case RQF_SMS_SEND_ERROR:
-			error="短信发送失败";//检查是否被拦截
-			break;
-		case RQF_SERVER_RESPONSE_ERROR:
-			error="服务端返回的数据有误";
-			break;
-		case RQF_PAY_FAIL_PAYINITING:
-			error="支付失败：支付初始化未完成，需稍后重试";
-			break;
-		case RQF_PAY_FAIL_REPAYINIT:
-			error="支付失败：支付列表数据为空，正在重新进行初始化，需稍后重试";
-			break;
-		case RQF_ILLEGAL_ARGUMENT:
-			error="参数格式错误";
-			break;
-		case RQF_PAY_USER_CANCEL:
-			error="用户取消支付";
-			break;
-		case RQF_ORDER_SDK_FAIL:
-			error="调用SDK支付失败";
-			break;
-		case RQF_LOGGEDIN_THIRDLOGIN_SUCCESS:
-			error="第三方登录成功且已绑定token";
-			break;
-		case RQF_LOGGEDIN_NO_THIRDLOGIN:
-			error="无需第三方登录";
-			break;
-		case RQF_LOGGEDIN_THIRDLOGIN_FAIL:
-			error="第三方登录失败";
-			break;
-		case RQF_LOGGEDIN_BIND_TOKEN_FAIL:
-			error="token绑定失败";
-			break;
-		case RQF_LOGOUT_SUCCESS:
-			error="登出成功";
-			break;
-		case RQF_LOGOUT_FAIL:
-			error="登出失败";
-			break;
-		default:
-			error="";
-			break;
+			case RQF_SMS_SEND_ERROR:
+				error="短信发送失败";//检查是否被拦截
+				break;
+			case RQF_SERVER_RESPONSE_ERROR:
+				error="服务端返回的数据有误,详情见external";
+				break;
+			case RQF_PAY_FAIL_PAYINITING:
+				error="支付失败：支付初始化未完成，需稍后重试";
+				break;
+			case RQF_PAY_FAIL_REPAYINIT:
+				error="支付失败：支付列表数据为空，正在重新进行初始化，需稍后重试";
+				break;
+			case RQF_ILLEGAL_ARGUMENT:
+				error="参数格式错误";
+				break;
+			case RQF_PAY_USER_CANCEL:
+				error="用户取消支付";
+				break;
+			case RQF_PAY_USER_CANCEL_GOBACK_GAME:
+				error="用户点击“去低级场玩”按钮取消支付";
+				break;
+			case RQF_ORDER_SDK_FAIL:
+				error="调用SDK支付失败";
+				break;
+			case RQF_LOGGEDIN_THIRDLOGIN_SUCCESS:
+				error="第三方登录成功且已绑定token";
+				break;
+			case RQF_LOGGEDIN_NO_THIRDLOGIN:
+				error="无需第三方登录";
+				break;
+			case RQF_LOGGEDIN_THIRDLOGIN_FAIL:
+				error="第三方登录失败";
+				break;
+			case RQF_LOGGEDIN_BIND_TOKEN_FAIL:
+				error="token绑定失败";
+				break;
+			case RQF_LOGOUT_SUCCESS:
+				error="登出成功";
+				break;
+			case RQF_LOGOUT_FAIL:
+				error="登出失败";
+				break;
+			case RQF_EXCEPTION:
+				error="未知错误";
+				break;
+			case RQF_LOGGEDIN_VERSION_TO_LOWER:
+				error="登录失败：当前版本过低，需要下载新的APK.详细信息参照Reslut.external";
+				break;
+			case RQF_ACTION_SUCCESS:
+				error="数据行为接口成功";
+				break;
+			default:
+				error="";
+				break;
 		}
 	}
 	public void setError(String error) {
@@ -193,6 +213,11 @@ public class Result implements Serializable{
 		this.external = external;
 	}
 
+	@Override
+	public String toString() {
+		return "code="+code+",error="+error+",external="+external+",orderno="+orderno;
+	}
+
 //	public String getPaymentInfo() {
 //		return paymentInfo;
 //	}
@@ -200,5 +225,5 @@ public class Result implements Serializable{
 //	void setPaymentInfo(String paymentInfo) {
 //		this.paymentInfo = paymentInfo;
 //	}
-	
+
 }

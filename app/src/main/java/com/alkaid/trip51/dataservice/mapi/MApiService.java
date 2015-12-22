@@ -3,9 +3,16 @@ package com.alkaid.trip51.dataservice.mapi;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.alkaid.base.common.LogUtil;
+import com.alkaid.base.exception.TradException;
+import com.alkaid.trip51.pay.Result;
 import com.android.volley.Cache;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
@@ -94,5 +101,25 @@ public class MApiService {
             imageLoader = new ImageLoader(reqQueue, LruImageCache.instance());
         }
         return imageLoader;
+    }
+
+    public static TradException parseError(VolleyError e){
+        LogUtil.w(e);
+        Result r=new Result(Result.RQF_EXCEPTION);
+        TradException tradException=new TradException(r.getError(),e);
+        if(e instanceof MApiError){
+            MApiError me=(MApiError)e;
+            r=new Result(Result.RQF_SERVER_NOTICE_ERROR);
+            r.setExternal("status:" + me.data.getErrcode() + " msg:" + me.data.getMsg());
+            tradException = new TradException(me.data.getMsg(),me);
+        }else if((e instanceof NetworkError) || (e instanceof ServerError) || (e instanceof TimeoutError)){
+            r=new Result(Result.RQF_NET_ERROR);
+            if(null!=e.networkResponse){
+                r.setExternal(r.getError()+" httpStatus:"+e.networkResponse.statusCode+",response="+new String(e.networkResponse.data));
+            }
+            tradException=new TradException(r.getError(),e);
+        }
+        LogUtil.v(r.toString());
+        return tradException;
     }
 }

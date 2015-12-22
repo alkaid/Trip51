@@ -68,7 +68,7 @@ public class NormalLoginFragment extends BaseFragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             dismissPdg();
-                            handleException(new TradException(error.getMessage(),error));
+                            handleException(MApiService.parseError(error));
                         }
                     }), tag);
                 }
