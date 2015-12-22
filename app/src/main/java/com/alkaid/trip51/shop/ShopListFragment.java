@@ -151,8 +151,8 @@ public class ShopListFragment extends BaseFragment {
         // Do work to refresh the list here.
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
-        unBeSignform.put("cityid", App.locationService().getCityId()+"");
-        unBeSignform.put("gpscityid", App.locationService().getGpsCityId()+"");
+        unBeSignform.put("cityid", App.locationService().getSelectCity().getCityid()+"");
+        unBeSignform.put("gpscityid", App.locationService().getGpsCity().getCityid()+"");
         unBeSignform.put("shoptype", ShopType.RESTAURANT.code + "");
         unBeSignform.put("location", "2000");
         unBeSignform.put("pageindex", (loadOnType == LOAD_ON_ENTER || loadOnType == LOAD_ON_PULLDOWN) ? "1" : pageindex + "");

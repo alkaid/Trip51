@@ -44,9 +44,9 @@ public class LocationService {
 //    private String coordinates="113.917554,22.495232";  //TODO 写入SP 为空时使用SP SP为空时定一个默认值
     private String coordinates="0,0";
     private String provinceName="陕西";
-    private String cityName="西安";
-    private long cityId=311;
-    private long gpsCityId=0;
+    private SimpleCity selectCity=new SimpleCity(311,"西安");
+    private SimpleCity gpsCity=new SimpleCity(0,null);
+    private String tmpCityName;
     private List<SimpleCity> cities=new ArrayList<SimpleCity>();
     private List<SimpleCity> hotCities=new ArrayList<SimpleCity>();
     private List<SimpleCity> lastInterviewCities = new ArrayList<>();
@@ -74,8 +74,8 @@ public class LocationService {
     private void init(){
         SharedPreferences sp=SpUtil.getSp();
         provinceName= sp.getString(SpUtil.key_provincename,provinceName);
-        cityName= sp.getString(SpUtil.key_cityname,cityName);
-        cityId= sp.getLong(SpUtil.key_cityid, cityId);
+        selectCity.setCityname(sp.getString(SpUtil.key_cityname, selectCity.getCityname()));
+        selectCity.setCityid(sp.getLong(SpUtil.key_cityid, selectCity.getCityid()));
         coordinates=sp.getString(SpUtil.key_coordinates, coordinates);
         mLocationClient = new LocationClient(context);
         mLocationClient.setLocOption(getDefaultOption());
@@ -204,9 +204,9 @@ public class LocationService {
                     provinceName = provinceName.substring(0,provinceName.length()-1);
             }
             if(!TextUtils.isEmpty(location.getCity())){
-                cityName=location.getCity();
-                if(cityName.endsWith("市"))
-                    cityName = cityName.substring(0,cityName.length()-1);
+                tmpCityName=location.getCity();
+                if(tmpCityName.endsWith("市"))
+                    tmpCityName = tmpCityName.substring(0,tmpCityName.length()-1);
             }
             //获取城市列表
             requestCityList(new Response.Listener<ResAllCityList>() {
@@ -222,6 +222,7 @@ public class LocationService {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    LogUtil.w(error);
                     taskStep |= 2;
                     obtainCityid();
                     onAnyTaskComplete();
@@ -239,6 +240,7 @@ public class LocationService {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    LogUtil.w(error);
                     taskStep |= 4;
                     onAnyTaskComplete();
                 }
@@ -250,26 +252,27 @@ public class LocationService {
         //匹配当前城市id
         boolean isMatch=false;
         for (SimpleCity c:cities){
-            if(c.getCityname().equals(cityName)){
-                cityId=c.getCityid();
-                gpsCityId=c.getCityid();
+            if(c.getCityname().equals(tmpCityName)){
+                selectCity=c;
+                gpsCity=new SimpleCity(c.getCityid(),c.getCityname());
                 isMatch=true;
                 break;
             }
         }
 //            cityId = 77; isMatch = true;  //Test
         //匹配不到则接口获取cityid
-        if(!isMatch){
+        if(!isMatch && null!=tmpCityName){
             requestCityId(new Response.Listener<ResCityId>() {
                 @Override
                 public void onResponse(ResCityId resdata) {
-                    cityId=resdata.getCityid();
-                    gpsCityId=resdata.getCityid();
+                    selectCity=new SimpleCity(resdata.getCityid(),tmpCityName);
+                    gpsCity=new SimpleCity(resdata.getCityid(),tmpCityName);
                     onLocationChanged();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    LogUtil.w(error);
                     onLocationChanged();
                 }
             });
@@ -347,14 +350,14 @@ public class LocationService {
     private void requestCityId(Response.Listener<ResCityId> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("cityname", cityName);
+        unBeSignform.put("cityname", tmpCityName);
         final String tag="getcityid"+(int)(Math.random()*1000);
         App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResCityId.class, MApiService.URL_CITY_GETID, beSignForm, unBeSignform, listener, errorListener), tag);
     }
 
     private void saveSp(){
         SharedPreferences.Editor ed=SpUtil.getSp().edit();
-        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid, cityId).putString(SpUtil.key_cityname, cityName).putString(SpUtil.key_coordinates, coordinates).commit();
+        ed.putString(SpUtil.key_provincename,provinceName).putLong(SpUtil.key_cityid, selectCity.getCityid()).putString(SpUtil.key_cityname, selectCity.getCityname()).putString(SpUtil.key_coordinates, coordinates).commit();
     }
 
     //任何异步任务结束后都要执行该方法来判断是否所有任务逗已经完成
@@ -367,12 +370,9 @@ public class LocationService {
 
     /**
      * 切换城市
-     * @param cityId
-     * @param cityName
      */
-    public void changeCity(long cityId,String cityName){
-        this.cityId=cityId;
-        this.cityName=cityName;
+    public void changeCity(SimpleCity selectCity){
+        this.selectCity=selectCity;
         onLocationChanged();
     }
 
@@ -380,7 +380,7 @@ public class LocationService {
         saveSp();
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("cityid", cityId+"");
+        unBeSignform.put("cityid", selectCity.getCityid()+"");
         final String tag="getConditions"+(int)(Math.random()*1000);
         App.mApiService().exec(new MApiRequest(CacheType.DISABLED, true, ResShopCondition.class, MApiService.URL_SHOP_CONDITION, beSignForm, unBeSignform, new Response.Listener<ResShopCondition>() {
             @Override
@@ -397,6 +397,7 @@ public class LocationService {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                LogUtil.w(error);
                 taskStep |= 8;
                 condition = new ResShopCondition();
                 onAnyTaskComplete();
@@ -414,22 +415,6 @@ public class LocationService {
 
     public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(long cityId) {
-        this.cityId = cityId;
     }
 
     public List<SimpleCity> getCities() {
@@ -456,32 +441,11 @@ public class LocationService {
         this.condition = condition;
     }
 
-    public long getGpsCityId() {
-        return gpsCityId;
+    public SimpleCity getGpsCity() {
+        return gpsCity;
     }
-
-    public void setGpsCityId(long gpsCityId) {
-        this.gpsCityId = gpsCityId;
-    }
-
-    /**
-     * 获得城市 根据id
-     * @param cityId 城市id
-     * @return
-     */
-    public SimpleCity getCity(long cityId){
-        if(cityId == 0){
-            return null;
-        }
-        if(cities!=null){
-            for(int i=0;i<cities.size();i++){
-                SimpleCity city = cities.get(i);
-                if(city.getCityid() == cityId){
-                    return city;
-                }
-            }
-        }
-        return null;
+    public SimpleCity getSelectCity() {
+        return selectCity;
     }
 
     /**

@@ -119,7 +119,7 @@ public class CityListActivity extends Activity {
                 } else if (parent.getId() == citySortListView.getId()) {
                     selectedCity = (SimpleCity)sortAdapter.getItem(position);
                 }
-                App.locationService().changeCity(selectedCity.getCityid(),selectedCity.getCityname());
+                App.locationService().changeCity(selectedCity);
                 setResult(Activity.RESULT_OK);
                 finish();
             }
@@ -170,7 +170,7 @@ public class CityListActivity extends Activity {
         cityComparator = new CityComparator();
         locationCitys = new ArrayList<>();
         //当前定位城市
-        SimpleCity locationCity = App.locationService().getCity(App.locationService().getGpsCityId());
+        SimpleCity locationCity = App.locationService().getGpsCity();
         locationCitys.add(locationCity);
         //热门城市
         hotCities = App.locationService().getHotCities();

@@ -129,7 +129,7 @@ public class MainHomeFragment extends BaseFragment {
             }
         });
         tvCity = (TextView) v.findViewById(R.id.city);
-        tvCity.setText(App.locationService().getCityName());
+        tvCity.setText(App.locationService().getSelectCity().getCityname());
         tvCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -310,8 +310,8 @@ public class MainHomeFragment extends BaseFragment {
         // Do work to refresh the list here.
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
-        unBeSignform.put("cityid", App.locationService().getCityId()+"");
-        unBeSignform.put("gpscityid", App.locationService().getGpsCityId()+"");
+        unBeSignform.put("cityid", App.locationService().getSelectCity().getCityid()+"");
+        unBeSignform.put("gpscityid", App.locationService().getGpsCity().getCityid()+"");
         unBeSignform.put("shoptype", ShopType.RESTAURANT.code + "");
         unBeSignform.put("location", "2000");
         unBeSignform.put("pageindex", (loadOnType==LOAD_ON_ENTER||loadOnType==LOAD_ON_PULLDOWN)?"1":pageindex+"");
@@ -391,7 +391,7 @@ public class MainHomeFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_CHANGECITY && resultCode== Activity.RESULT_OK){
-            tvCity.setText(App.locationService().getCityName());
+            tvCity.setText(App.locationService().getSelectCity().getCityname());
             loadData(LOAD_ON_ENTER, 1);
         }
     }

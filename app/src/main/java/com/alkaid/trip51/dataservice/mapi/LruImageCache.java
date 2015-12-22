@@ -34,14 +34,14 @@ public class LruImageCache implements ImageLoader.ImageCache {
     }
 
     @Override
-    public Bitmap getBitmap(String arg0) {
-        return mMemoryCache.get(arg0);
+    public Bitmap getBitmap(String cacheKey) {
+        return mMemoryCache.get(cacheKey);
     }
 
     @Override
-    public void putBitmap(String arg0, Bitmap arg1) {
-        if(getBitmap(arg0) == null){
-            mMemoryCache.put(arg0, arg1);
+    public void putBitmap(String cacheKey, Bitmap bmp) {
+        if(getBitmap(cacheKey) == null){
+            mMemoryCache.put(cacheKey, bmp);
         }
     }
 

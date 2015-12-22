@@ -9,6 +9,11 @@ public class SimpleCity implements Serializable{
     private long cityid;//城市id
     private String cityname;//城市名字
     private String firstLetter;//首字母
+    public SimpleCity(){}
+    public SimpleCity(long cityid,String cityname){
+        this.cityid=cityid;
+        this.cityname=cityname;
+    }
 
     public long getCityid() {
         return cityid;

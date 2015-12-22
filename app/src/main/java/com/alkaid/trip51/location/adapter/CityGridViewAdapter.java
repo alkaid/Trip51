@@ -61,7 +61,9 @@ public class CityGridViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView tv = (TextView) mInflater.inflate(R.layout.tv_city_grid_item, null);
-        tv.setText(cities.get(position).getCityname());
+        SimpleCity city= (SimpleCity) getItem(position);
+        if(null!=city)
+            tv.setText(city.getCityname());
         return tv;
     }
 }
