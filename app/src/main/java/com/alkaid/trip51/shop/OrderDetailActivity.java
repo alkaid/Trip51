@@ -13,6 +13,7 @@ import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
+import com.alkaid.trip51.dataservice.ShoppingCartService;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -39,6 +40,8 @@ import java.util.Map;
  */
 public class OrderDetailActivity extends BaseActivity {
     public static final String BUNDLE_KEY_ORDERNO="BUNDLE_KEY_ORDERNO";
+    public static final String BUNDLE_KEY_SHOPID = "BUNDLE_KEY_SHOPID";
+    private long currShopID;
     private String orderNo;
     private ResOrderDetail orderDetail;
     private TextView tvShopName,tvInfo,tvOrderNo,tvTotal;
@@ -49,6 +52,7 @@ public class OrderDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         orderNo=getIntent().getStringExtra(BUNDLE_KEY_ORDERNO);
+        currShopID = getIntent().getLongExtra(BUNDLE_KEY_SHOPID,0);
         initTitleBar();
         findView();
         resetView();
@@ -127,7 +131,7 @@ public class OrderDetailActivity extends BaseActivity {
 //        sb.append("\n支付方式:").append(orderDetail.)
         tvInfo.setText(sb.toString());
         tvOrderNo.setText(orderDetail.orderno);
-        tvTotal.setText(orderDetail.orderamount+"");
+        tvTotal.setText(orderDetail.orderamount + "");
         //菜单
         LayoutInflater inflater=LayoutInflater.from(context);
         for(Food f:orderDetail.foods) {
@@ -154,10 +158,10 @@ public class OrderDetailActivity extends BaseActivity {
         layShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,ShopDescActivity.class);
-                Shop shop=new Shop();
+                Intent intent = new Intent(context, ShopDescActivity.class);
+                Shop shop = new Shop();
                 shop.setShopid(orderDetail.shopid);
-                intent.putExtra(ShopDetailActivity.BUNDLE_KEY_SHOP,shop);
+                intent.putExtra(ShopDetailActivity.BUNDLE_KEY_SHOP, shop);
                 startActivity(intent);
             }
         });
@@ -208,6 +212,8 @@ public class OrderDetailActivity extends BaseActivity {
                                 break;
                             case Result.RQF_ORDER_SUCCESS:
                                 //TODO 验证支付结果
+                                //用于清空购物车，订单成功
+                                App.shoppingCartService().clearCartFood(currShopID);
                                 checkPay();
                                 break;
                             default:

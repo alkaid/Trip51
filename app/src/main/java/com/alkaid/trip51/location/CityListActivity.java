@@ -88,6 +88,9 @@ public class CityListActivity extends Activity {
         gvLocationCities = (GridView) findViewById(R.id.gv_location_citys);
         gvLastInterviewCities = (GridView) findViewById(R.id.gv_last_interview_citys);
         gvHotCities = (GridView) findViewById(R.id.gv_hot_citys);
+        TextView tvLocationTitle = (TextView) findViewById(R.id.tv_location_citys_title);
+        TextView tvLastInterviewTitle = (TextView) findViewById(R.id.tv_last_interview_citys_title);
+        TextView tvHotTitle = (TextView) findViewById(R.id.tv_hot_citys_title);
 
         //设置adapter
         locationCitiesAdapter = new CityGridViewAdapter(this);
@@ -99,9 +102,30 @@ public class CityListActivity extends Activity {
         gvLastInterviewCities.setAdapter(lastInterviewCitiesAdapter);
         gvHotCities.setAdapter(hotCitiesAdapter);
 
-        locationCitiesAdapter.setData(locationCitys);
-        lastInterviewCitiesAdapter.setData(lastInterviewCities);
-        hotCitiesAdapter.setData(hotCities);
+        if(locationCitys!=null&&locationCitys.size()>0) {
+            locationCitiesAdapter.setData(locationCitys);
+            tvLocationTitle.setVisibility(View.VISIBLE);
+            gvLocationCities.setVisibility(View.VISIBLE);
+        }else{
+            tvLocationTitle.setVisibility(View.GONE);
+            gvLocationCities.setVisibility(View.GONE);
+        }
+        if(lastInterviewCities!=null&lastInterviewCities.size()>0) {
+            lastInterviewCitiesAdapter.setData(lastInterviewCities);
+            tvLastInterviewTitle.setVisibility(View.VISIBLE);
+            gvLastInterviewCities.setVisibility(View.VISIBLE);
+        }else{
+            tvLastInterviewTitle.setVisibility(View.GONE);
+            gvLastInterviewCities.setVisibility(View.GONE);
+        }
+        if(hotCities!=null&&hotCities.size()>0) {
+            hotCitiesAdapter.setData(hotCities);
+            tvHotTitle.setVisibility(View.VISIBLE);
+            gvHotCities.setVisibility(View.VISIBLE);
+        }else{
+            tvHotTitle.setVisibility(View.GONE);
+            gvHotCities.setVisibility(View.GONE);
+        }
         locationCitiesAdapter.notifyDataSetChanged();
         lastInterviewCitiesAdapter.notifyDataSetChanged();
         hotCitiesAdapter.notifyDataSetChanged();
@@ -171,7 +195,9 @@ public class CityListActivity extends Activity {
         locationCitys = new ArrayList<>();
         //当前定位城市
         SimpleCity locationCity = App.locationService().getGpsCity();
-        locationCitys.add(locationCity);
+        if(locationCity.getCityname()!=null&&!locationCity.getCityname().equals("")) {
+            locationCitys.add(locationCity);
+        }
         //热门城市
         hotCities = App.locationService().getHotCities();
         //最近观看的城市
