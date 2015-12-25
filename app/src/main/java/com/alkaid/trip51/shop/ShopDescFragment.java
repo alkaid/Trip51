@@ -195,7 +195,7 @@ public class ShopDescFragment extends BaseFragment{
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
-        loadData();
+//        loadData();
     }
 
     private void loadData(){

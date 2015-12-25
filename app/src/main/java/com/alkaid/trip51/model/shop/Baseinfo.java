@@ -12,7 +12,7 @@ public class Baseinfo implements Serializable {
     private String shopname;
     private String avgpay;
     private String diningtypename;
-    private String imgurl;
+    private String imageurl;
     private float starlevel;
     private String areanamel;
     private int privaterroomstatus;
@@ -58,11 +58,11 @@ public class Baseinfo implements Serializable {
     }
 
     public String getImgurl() {
-        return imgurl;
+        return imageurl;
     }
 
     public void setImgurl(String imgurl) {
-        this.imgurl = imgurl;
+        this.imageurl = imgurl;
     }
 
     public float getStarlevel() {
