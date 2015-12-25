@@ -289,6 +289,11 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
         }
     };
 
+    private void updateUI(){
+        mHandler.sendEmptyMessage(UPDATE_MENU_LIST);
+        mHandler.sendEmptyMessage(UPDATE_SHOPPING_CART);
+    }
+
     private void updateViewOnCartSizeChange(){
         int cartSize=App.shoppingCartService().getCartFoodNum(currShop.getShopid());
         tvShoppingCartFoodNum.setText(cartSize + "");
@@ -301,5 +306,11 @@ public class FoodListFragment extends BaseFragment implements View.OnClickListen
             tvShoppingCartFoodNum.setVisibility(View.GONE);
             tvBottomCartSize.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 }

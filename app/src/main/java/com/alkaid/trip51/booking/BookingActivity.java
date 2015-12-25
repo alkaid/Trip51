@@ -300,6 +300,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                 String orderNo = response.getOuttradeno();
                 Intent intent = new Intent(context, OrderDetailActivity.class);
                 intent.putExtra(OrderDetailActivity.BUNDLE_KEY_ORDERNO, orderNo);
+                intent.putExtra(OrderDetailActivity.BUNDLE_KEY_SHOPID,currShop.getShopid());
                 //下单成功 清除该店的购物车
                 App.shoppingCartService().getCart().remove(currShop.getShopid());
                 startActivity(intent);
