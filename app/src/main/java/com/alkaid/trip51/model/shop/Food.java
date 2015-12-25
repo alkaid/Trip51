@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Food implements Serializable{
     private long foodid;
     private String foodname;
-    private String foodimg;
+    private String foodimgurl;
     private float price;
     private long sales;
     private float promotionprice;
@@ -31,11 +31,11 @@ public class Food implements Serializable{
     }
 
     public String getFoodimg() {
-        return foodimg;
+        return foodimgurl;
     }
 
     public void setFoodimg(String foodimg) {
-        this.foodimg = foodimg;
+        this.foodimgurl = foodimg;
     }
 
     public float getPrice() {

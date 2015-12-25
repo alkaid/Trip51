@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -56,6 +57,19 @@ public class ShopListFragment extends BaseFragment {
         shopListView.setAdapter(shopListAdapter);
         loadData(LOAD_ON_ENTER, 1);
 
+        shopListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+                    shopListAdapter.pauseImageLoad();
+                } else {
+                    shopListAdapter.resumeImageLoad();
+                }
+            }
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+            }
+        });
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -154,7 +168,6 @@ public class ShopListFragment extends BaseFragment {
         unBeSignform.put("cityid", App.locationService().getSelectCity().getCityid()+"");
         unBeSignform.put("gpscityid", App.locationService().getGpsCity().getCityid()+"");
         unBeSignform.put("shoptype", ShopType.RESTAURANT.code + "");
-        unBeSignform.put("location", "2000");
         unBeSignform.put("pageindex", (loadOnType == LOAD_ON_ENTER || loadOnType == LOAD_ON_PULLDOWN) ? "1" : pageindex + "");
         unBeSignform.put("pagesize", "20");
         unBeSignform.put("sortid", SortType.DEFAULT.code);

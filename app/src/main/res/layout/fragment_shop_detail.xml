@@ -18,7 +18,7 @@
             android:paddingRight="@dimen/margin_page_medium"
             android:paddingTop="15dp" android:paddingBottom="15dp">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/imgShopThumb"
                 style="@style/ListViewShopImage"
                 android:src="@drawable/temp_shop_thumb" />

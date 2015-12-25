@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.dataservice.mapi.ImageLoaderManager;
+import com.alkaid.trip51.dataservice.mapi.SimpleImageLoaderManager;
 import com.alkaid.trip51.model.shop.Food;
 import com.alkaid.trip51.model.shop.FoodCategory;
 import com.alkaid.trip51.model.shop.Shop;
@@ -20,23 +22,24 @@ import com.alkaid.trip51.shop.FoodListFragment;
 import com.alkaid.trip51.util.BitmapUtil;
 import com.alkaid.trip51.widget.Operator;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
-public class MenuRightListAdapter extends SectionedBaseAdapter {
+public class MenuRightListAdapter extends SectionedBaseAdapter implements ImageLoaderManager{
 
     private Context mContext;
-
     private String TAG = getClass().getName();
-
     private List<FoodCategory> foodCategories;
     private Shop currShop;
     private Handler mHandler;
+    private SimpleImageLoaderManager imageLoaderManager;
 
     public MenuRightListAdapter(Context context, Shop currShop,Handler handler) {
         this.mContext = context;
         this.currShop = currShop;
         this.mHandler=handler;
+        this.imageLoaderManager=new SimpleImageLoaderManager(context);
     }
 
     /**
@@ -87,7 +90,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflator.inflate(R.layout.menu_list_content_item, null);
             holder = new ViewHolder();
-            holder.ivFood = (ImageView) convertView.findViewById(R.id.iv_menu_food);
+            holder.ivFood = (NetworkImageView) convertView.findViewById(R.id.iv_menu_food);
             holder.tvNameFood = (TextView) convertView.findViewById(R.id.tv_menu_food_name);
             holder.tvCountFood = (TextView) convertView.findViewById(R.id.tv_menu_food_count);
             holder.tvPriceFood = (TextView) convertView.findViewById(R.id.tv_menu_food_price);
@@ -96,12 +99,10 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.ivFood.setDefaultImageResId(R.drawable.temp_shop_thumb);
+        holder.ivFood.setErrorImageResId(R.drawable.temp_shop_thumb);
         if (food != null) {
-            if (food.getFoodimg() != null) {
-                holder.ivFood.setImageBitmap(BitmapUtil.getHttpBitmap(food.getFoodimg()));
-            } else {
-                holder.ivFood.setImageBitmap(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.temp_shop_thumb));
-            }
+            holder.ivFood.setImageUrl(food.getFoodimg(),imageLoaderManager.getImgloader());
             holder.tvNameFood.setText(food.getFoodname());
             holder.tvCountFood.setText("已售:" + food.getSales() + "份");
             holder.tvPriceFood.setText(food.getPrice() + "元");
@@ -170,9 +171,19 @@ public class MenuRightListAdapter extends SectionedBaseAdapter {
         mHandler.sendEmptyMessage(FoodListFragment.UPDATE_SHOPPING_CART);
 }
 
+    @Override
+    public void pauseImageLoad() {
+        imageLoaderManager.pauseImageLoad();
+    }
 
-private class ViewHolder {
-    ImageView ivFood;
+    @Override
+    public void resumeImageLoad() {
+        imageLoaderManager.resumeImageLoad();
+    }
+
+
+    private class ViewHolder {
+    NetworkImageView ivFood;
     TextView tvNameFood;
     TextView tvCountFood;
     TextView tvPriceFood;

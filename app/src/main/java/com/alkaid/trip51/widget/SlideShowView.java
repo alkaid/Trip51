@@ -38,6 +38,7 @@ public class SlideShowView extends FrameLayout {
     private final static int TIME_INTERVAL = 5;
     //自动轮播启用开关
     private final static boolean isAutoPlay = true;
+    private List<String> imgUrls=new ArrayList<>();
 
     //自定义轮播图的资源ID
     private int[] imagesResIds;

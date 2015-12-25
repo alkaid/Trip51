@@ -9,9 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.dataservice.mapi.ImageLoaderManager;
+import com.alkaid.trip51.dataservice.mapi.SimpleImageLoaderManager;
 import com.alkaid.trip51.model.enums.OrderStatus;
 import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.response.ResOrderList;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +22,14 @@ import java.util.List;
 /**
  * Created by alkaid on 2015/11/7.
  */
-public class OrderListAdapter extends BaseAdapter {
+public class OrderListAdapter extends BaseAdapter implements ImageLoaderManager{
     private LayoutInflater mInflater;
     private List<ResOrderList.Order> data=new ArrayList<>();
+    private SimpleImageLoaderManager imgloaderManager;
 
     public OrderListAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
+        this.imgloaderManager=new SimpleImageLoaderManager(context);
     }
 
     public List<ResOrderList.Order> getData() {
@@ -64,6 +69,7 @@ public class OrderListAdapter extends BaseAdapter {
             holder.tvOrderNo = (TextView) convertView.findViewById(R.id.tvOrderNo);
             holder.tvAmount= (TextView) convertView.findViewById(R.id.tvAmount);
             holder.tvOrderStatus= (TextView) convertView.findViewById(R.id.tvOrderStatus);
+            holder.imgShopThumb= (NetworkImageView) convertView.findViewById(R.id.imgShopThumb);
             convertView.setTag(holder);//绑定ViewHolder对象
         } else {
             holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
@@ -82,10 +88,24 @@ public class OrderListAdapter extends BaseAdapter {
         }else{
             holder.tvOrderStatus.setVisibility(View.GONE);
         }
+        holder.imgShopThumb.setDefaultImageResId(R.drawable.temp_shop_thumb);
+        holder.imgShopThumb.setErrorImageResId(R.drawable.temp_shop_thumb);
+        holder.imgShopThumb.setImageUrl(obj.getShopimgurl(),imgloaderManager.getImgloader());
         return convertView;
+    }
+
+    @Override
+    public void pauseImageLoad() {
+        imgloaderManager.pauseImageLoad();
+    }
+
+    @Override
+    public void resumeImageLoad() {
+        imgloaderManager.resumeImageLoad();
     }
 
     private class ViewHolder{
         public TextView tvShopName,tvPersonNum,tvSeatType,tvTime,tvOrderNo,tvAmount,tvOrderStatus;
+        private NetworkImageView imgShopThumb;
     }
 }

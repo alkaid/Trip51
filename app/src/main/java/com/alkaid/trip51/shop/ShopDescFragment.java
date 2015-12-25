@@ -27,6 +27,7 @@ import com.alkaid.trip51.shop.adapter.ShopDetailEvaluationAdapter;
 import com.alkaid.trip51.util.BitmapUtil;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ShopDescFragment extends BaseFragment{
     private Shop currShop;
 
     /*界面相关*/
-    private ImageView imgShop;//商店缩略图
+    private NetworkImageView imgShop;//商店缩略图
     private TextView tvShopName;//商店名字
     private LinearLayout llStarFav;//评价的星星数
     private TextView tvTaste;//口味的评分
@@ -85,7 +86,7 @@ public class ShopDescFragment extends BaseFragment{
     }
 
     private void initView(View v){
-        imgShop = (ImageView) v.findViewById(R.id.imgShopThumb);
+        imgShop = (NetworkImageView) v.findViewById(R.id.imgShopThumb);
         tvShopName = (TextView) v.findViewById(R.id.tvShopName);
         llStarFav  = (LinearLayout) v.findViewById(R.id.ll_star_fav);
         tvTaste = (TextView) v.findViewById(R.id.tvTaste);
@@ -104,11 +105,9 @@ public class ShopDescFragment extends BaseFragment{
 
     private void updateUI(){
         if(imgShop!=null){
-            if(imgUrl!=null) {
-                imgShop.setImageBitmap(BitmapUtil.getHttpBitmap(imgUrl));
-            }else{
-                imgShop.setImageBitmap((BitmapFactory.decodeResource(getContext().getResources(), R.drawable.temp_shop_thumb)));
-            }
+            imgShop.setDefaultImageResId(R.drawable.temp_shop_thumb);
+            imgShop.setErrorImageResId(R.drawable.temp_shop_thumb);
+            imgShop.setImageUrl(imgUrl,App.mApiService().getImageLoader());
         }
         if(llStarFav!=null){
             llStarFav.removeAllViews();

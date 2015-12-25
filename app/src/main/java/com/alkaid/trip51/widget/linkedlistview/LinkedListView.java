@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.alipay.sdk.app.m;
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.dataservice.mapi.ImageLoaderManager;
 import com.alkaid.trip51.widget.pinnedheaderlistview.PinnedHeaderListView;
 import com.alkaid.trip51.widget.pinnedheaderlistview.SectionedBaseAdapter;
 
@@ -87,8 +88,15 @@ public class LinkedListView extends LinearLayout {
         rightListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             //设置左边点击背景色已经右边section对应
             @Override
-            public void onScrollStateChanged(AbsListView arg0, int arg1) {
-
+            public void onScrollStateChanged(AbsListView arg0, int scrollState) {
+                if(rightListAdapter instanceof ImageLoaderManager){
+                    ImageLoaderManager imageLoaderManager= (ImageLoaderManager) rightListAdapter;
+                    if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+                        imageLoaderManager.pauseImageLoad();
+                    } else {
+                        imageLoaderManager.resumeImageLoad();
+                    }
+                }
             }
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem,
