@@ -212,8 +212,6 @@ public class OrderDetailActivity extends BaseActivity {
                                 break;
                             case Result.RQF_ORDER_SUCCESS:
                                 //TODO 验证支付结果
-                                //用于清空购物车，订单成功
-                                App.shoppingCartService().clearCartFood(currShopID);
                                 checkPay();
                                 break;
                             default:

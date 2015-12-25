@@ -9,6 +9,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
@@ -23,7 +25,23 @@ public class CityRightBar extends View {
 	private int choose = -1;// 选中
 	private Paint paint = new Paint();
 
+	private int screenHeight = 0;
+	private int screenWidth = 0;
+	private int rootViewHeight = 0;//用于计算右边框滑动确认滚过第几屏幕
+
+	private int scrollScreenNum = 0;
+
 	private TextView mTextDialog;
+
+	private void init(){
+		WindowManager wm = (WindowManager) getContext()
+				.getSystemService(Context.WINDOW_SERVICE);
+
+		screenWidth = wm.getDefaultDisplay().getWidth();
+		screenHeight = wm.getDefaultDisplay().getHeight();
+
+		rootViewHeight = this.getRootView().getHeight();
+	}
 
 	public void setTextView(TextView mTextDialog) {
 		this.mTextDialog = mTextDialog;
@@ -32,14 +50,17 @@ public class CityRightBar extends View {
 
 	public CityRightBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		init();
 	}
 
 	public CityRightBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init();
 	}
 
 	public CityRightBar(Context context) {
 		super(context);
+		init();
 	}
 
 	/**
@@ -48,8 +69,8 @@ public class CityRightBar extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		// 获取焦点改变背景颜色.
-		int height = getHeight();// 获取对应高度
-		int width = getWidth(); // 获取对应宽度
+		int height = screenHeight;// 获取对应高度
+		int width = screenWidth/10; // 获取对应宽度
 		int singleHeight = height / b.length;// 获取每一个字母的高度
 
 		for (int i = 0; i < b.length; i++) {
