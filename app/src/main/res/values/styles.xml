@@ -562,6 +562,16 @@
         <item name="android:text">""</item>
     </style>
 
+    <!-- 自定义loading dialog -->
+    <style name="LoadingDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
     <!--自定义大按钮-->
     <style name="ButtonLarger">
         <item name="android:textSize">@dimen/text_button_normal</item>

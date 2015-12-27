@@ -2,6 +2,8 @@ package com.alkaid.trip51.base.widget;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 
 import com.alkaid.base.common.LogUtil;
 import com.alkaid.base.view.base.BContextWrap;
+import com.alkaid.trip51.R;
+import com.alkaid.trip51.base.widget.view.LoadingDialog;
 import com.alkaid.trip51.main.nav.SplashScreenActivity;
 
 public class BaseContextWrap extends BContextWrap {
@@ -44,7 +48,8 @@ public class BaseContextWrap extends BContextWrap {
 		pdg=new ProgressDialog(context);
 	}
 
-	protected ProgressDialog pdg;
+//	protected ProgressDialog pdg;
+	protected AlertDialog pdg;
 	protected void setDefaultPdgCanceListener(final String tag){
 		getProgressDialog();
 		pdg.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -81,9 +86,9 @@ public class BaseContextWrap extends BContextWrap {
 	protected void toastLong(String msg){
 		Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 	}
-	public ProgressDialog getProgressDialog(){
+	public Dialog getProgressDialog(){
 		if(null==pdg){
-			pdg=new ProgressDialog(context);
+			pdg=new LoadingDialog(context, R.style.LoadingDialog);
 		}
 		return pdg;
 	}
