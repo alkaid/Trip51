@@ -1,6 +1,6 @@
 package com.alkaid.trip51.base.widget;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Window;
 
@@ -49,7 +49,7 @@ public class BaseActivity extends BActivity {
 	protected void showPdg(String msg){
 		baseContextWrap.showPdg(msg);
 	}
-	protected ProgressDialog getProgressDialog(){
+	protected AlertDialog getProgressDialog(){
 		return baseContextWrap.getProgressDialog();
 	}
 
