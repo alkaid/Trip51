@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseFragment;
@@ -35,6 +34,7 @@ import com.alkaid.trip51.shop.ShopListActivity;
 import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.alkaid.trip51.widget.DefaultFilter;
 import com.alkaid.trip51.widget.MainSearchFragment;
+import com.alkaid.trip51.widget.SlideShowView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -51,7 +51,8 @@ import java.util.Map;
  * Created by alkaid on 2015/10/31.
  */
 public class MainHomeFragment extends BaseFragment {
-    private View slideshowView,layMainMenu,layOrder;
+    private View layMainMenu,layOrder;
+    private SlideShowView slideshowView;
     private TextView tvCity;
     private PullToRefreshListView shopListView;
     private ShopListAdapter shopListAdapter;
@@ -68,7 +69,7 @@ public class MainHomeFragment extends BaseFragment {
 
         View header=inflater.inflate(R.layout.main_home_header,null,false);
 
-        slideshowView=header.findViewById(R.id.slideshowView);
+        slideshowView= (SlideShowView) header.findViewById(R.id.slideshowView);
         layMainMenu=header.findViewById(R.id.layMainMenu);
         layOrder=header.findViewById(R.id.layOrder);
 
@@ -359,12 +360,14 @@ public class MainHomeFragment extends BaseFragment {
                         lastPageIndex=1;
                         shopListAdapter.setData(response.getData());
                         shopListAdapter.notifyDataSetChanged();
+                        slideshowView.load(response.advlist);
                         dismissPdg();
                         break;
                     case LOAD_ON_PULLDOWN:
                         lastPageIndex=1;
                         shopListAdapter.setData(response.getData());
                         shopListAdapter.notifyDataSetChanged();
+                        slideshowView.load(response.advlist);
                         shopListView.onRefreshComplete();
                         break;
                     case LOAD_ON_PULLUP:

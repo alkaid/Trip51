@@ -1,21 +1,28 @@
 package com.alkaid.trip51.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.base.widget.App;
+import com.alkaid.trip51.model.AdvBanner;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,23 +38,21 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SlideShowView extends FrameLayout {
-
-    //轮播图图片数量
-    private final static int IMAGE_COUNT = 5;
+    private Context context;
     //自动轮播的时间间隔
     private final static int TIME_INTERVAL = 5;
     //自动轮播启用开关
     private final static boolean isAutoPlay = true;
-    private List<String> imgUrls=new ArrayList<>();
+    private List<AdvBanner> advs;
 
-    //自定义轮播图的资源ID
-    private int[] imagesResIds;
     //放轮播图片的ImageView 的list
-    private List<ImageView> imageViewsList;
+    private List<NetworkImageView> imageViewsList=new ArrayList<>();
     //放圆点的View的list
-    private List<View> dotViewsList;
+    private List<View> dotViewsList=new ArrayList<>();
 
+    private ViewGroup layDots;
     private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
     //当前轮播页
     private int currentItem  = 0;
     //定时任务
@@ -74,13 +79,58 @@ public class SlideShowView extends FrameLayout {
     }
     public SlideShowView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        // TODO Auto-generated constructor stub
-        initData();
+        this.context=context;
         initUI(context);
+    }
+
+    public void load(List<AdvBanner> advs){
+        if(AdvBanner.same(this.advs,advs))
+            return;
+        stopPlay();
+        currentItem=0;
+        destoryBitmaps();
+        layDots.removeAllViews();
+        this.advs=advs==null?new ArrayList<AdvBanner>():advs;
+        imageViewsList.clear();
+        dotViewsList.clear();
+        if(advs.isEmpty()){
+            NetworkImageView view =  new NetworkImageView(context);
+            view.setImageResource(R.drawable.temp1);
+            view.setDefaultImageResId(R.drawable.temp1);
+            view.setScaleType(ScaleType.FIT_XY);
+            imageViewsList.add(view);
+            addDotView();
+        }else{
+            for (final AdvBanner adv:advs){
+                NetworkImageView view =  new NetworkImageView(context);
+                view.setImageResource(R.drawable.temp1);
+                view.setDefaultImageResId(R.drawable.temp1);
+                view.setErrorImageResId(R.drawable.temp1);
+                view.setScaleType(ScaleType.FIT_XY);
+                view.setImageUrl(adv.picurl, App.mApiService().getImageLoader());
+                view.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(TextUtils.isEmpty(adv.linkurl))
+                            return;
+                        //TODO 服务端返回数据不正确 没有带协议头，暂时由客户端先加上
+                        if(!adv.linkurl.contains("http")){
+                            adv.linkurl="http://"+adv.linkurl;
+                        }
+                        Uri uri = Uri.parse(adv.linkurl);
+                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(it);
+                    }
+                });
+                imageViewsList.add(view);
+                addDotView();
+            }
+        }
+        pagerAdapter.notifyDataSetChanged();
+        viewPager.setCurrentItem(0);
         if(isAutoPlay){
             startPlay();
         }
-
     }
     /**
      * 开始轮播图切换
@@ -93,45 +143,27 @@ public class SlideShowView extends FrameLayout {
      * 停止轮播图切换
      */
     private void stopPlay(){
-        scheduledExecutorService.shutdown();
+        if(null!=scheduledExecutorService) {
+            scheduledExecutorService.shutdownNow();
+        }
     }
-    /**
-     * 初始化相关Data
-     */
-    private void initData(){
-        imagesResIds = new int[]{
-                R.drawable.temp1,
-                R.drawable.temp2,
-                R.drawable.temp1,
-                R.drawable.temp2,
-                R.drawable.temp1,
 
-        };
-        imageViewsList = new ArrayList<ImageView>();
-        dotViewsList = new ArrayList<View>();
-
+    private void addDotView(){
+        View v=LayoutInflater.from(context).inflate(R.layout.banner_dot,layDots,false);
+        layDots.addView(v);
+        dotViewsList.add(v);
     }
+
     /**
      * 初始化Views等UI
      */
     private void initUI(Context context){
         LayoutInflater.from(context).inflate(R.layout.layout_slideshow, this, true);
-        for(int imageID : imagesResIds){
-            ImageView view =  new ImageView(context);
-            view.setImageResource(imageID);
-            view.setScaleType(ScaleType.FIT_XY);
-            imageViewsList.add(view);
-        }
-        dotViewsList.add(findViewById(R.id.v_dot1));
-        dotViewsList.add(findViewById(R.id.v_dot2));
-        dotViewsList.add(findViewById(R.id.v_dot3));
-        dotViewsList.add(findViewById(R.id.v_dot4));
-        dotViewsList.add(findViewById(R.id.v_dot5));
-
+        layDots= (ViewGroup) findViewById(R.id.layDots);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setFocusable(true);
-
-        viewPager.setAdapter(new MyPagerAdapter());
+        pagerAdapter=new MyPagerAdapter();
+        viewPager.setAdapter(pagerAdapter);
         viewPager.setOnPageChangeListener(new MyPageChangeListener());
     }
 
@@ -267,7 +299,7 @@ public class SlideShowView extends FrameLayout {
      */
     private void destoryBitmaps() {
 
-        for (int i = 0; i < IMAGE_COUNT; i++) {
+        for (int i = 0; i < imageViewsList.size(); i++) {
             ImageView imageView = imageViewsList.get(i);
             Drawable drawable = imageView.getDrawable();
             if (drawable != null) {

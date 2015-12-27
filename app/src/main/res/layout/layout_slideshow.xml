@@ -9,47 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/layDots"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:padding="5dp"
         android:gravity="center"
         android:orientation="horizontal">
-
-        <View
+       <!-- <View
             android:id="@+id/v_dot1"
             android:layout_width="8dp"
             android:layout_height="8dp"
-            android:background="@drawable/navigation_dot_normal" />
-
-        <View
-            android:id="@+id/v_dot2"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/navigation_dot_normal" />
-
-        <View
-            android:id="@+id/v_dot3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/navigation_dot_normal" />
-
-        <View
-            android:id="@+id/v_dot4"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/navigation_dot_normal" />
-
-        <View
-            android:id="@+id/v_dot5"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/navigation_dot_normal" />
-
+            android:background="@drawable/navigation_dot_normal" />-->
     </LinearLayout>
 </RelativeLayout>
