@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.alkaid.trip51.base.widget.view.LoadingItem android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:minHeight="?android:listPreferredItemHeight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/anim_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="4.0dip" android:src="@drawable/loading_big_main" />
+    <TextView android:id="@+id/tvMsg" android:textSize="@dimen/text_title_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="加载中..." android:layout_marginLeft="8dp"/>
+</com.alkaid.trip51.base.widget.view.LoadingItem>
