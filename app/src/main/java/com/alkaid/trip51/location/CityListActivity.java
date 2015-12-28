@@ -1,16 +1,20 @@
 package com.alkaid.trip51.location;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -30,7 +34,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CityListActivity extends Activity{
+public class CityListActivity extends Activity {
+    LinearLayout llCityList;
     //城市列表相关ui
     private GridView gvLocationCities;//定位城市列表
     private GridView gvLastInterviewCities;//最近观看的城市列表
@@ -39,6 +44,12 @@ public class CityListActivity extends Activity{
     private CityRightBar sideBar; //城市列表右侧字母排列
     private TextView dialog;//滚动提示ui
     private CitySearchEditText mClearEditText;//城市列表搜索栏
+    private FrameLayout flSearch;//搜索条
+    private View layTitleBar;
+
+    private TextView tvLocationTitle;
+    private TextView tvLastInterviewTitle;
+    private TextView tvHotTitle;
 
     private CityComparator cityComparator;
 
@@ -48,7 +59,7 @@ public class CityListActivity extends Activity{
     private List<SimpleCity> hotCities;
     private List<SimpleCity> allCities;
 
-    private ScrollView rootScrollView;
+    private ScrollView svCityList;
 
     private CharacterParser characterParser;//城市列表汉字转拼音的类
 
@@ -60,6 +71,9 @@ public class CityListActivity extends Activity{
 
     private OnItemClickListener onItemClickListener;
 
+    private int otherHeight = 0;//用于计算热门城市，定位城市，以及保存城市一共的高度
+    private int sideBarHeight = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +84,7 @@ public class CityListActivity extends Activity{
     }
 
     private void initTitleBar() {
-        View layTitleBar = findViewById(R.id.title_bar);
+        layTitleBar = findViewById(R.id.title_bar);
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
         View btnLeft = findViewById(R.id.btn_back_wx);
         View btnRight = findViewById(R.id.notify);
@@ -85,7 +99,9 @@ public class CityListActivity extends Activity{
     }
 
     private void initViews() {
+        llCityList = (LinearLayout) findViewById(R.id.ll_acivity_city_list);
         //初始化view
+        flSearch = (FrameLayout) findViewById(R.id.fl_search);
         sideBar = (CityRightBar) findViewById(R.id.sidrbar);
         dialog = (TextView) findViewById(R.id.dialog);
         sideBar.setTextView(dialog);
@@ -94,11 +110,11 @@ public class CityListActivity extends Activity{
         gvLocationCities = (GridView) findViewById(R.id.gv_location_citys);
         gvLastInterviewCities = (GridView) findViewById(R.id.gv_last_interview_citys);
         gvHotCities = (GridView) findViewById(R.id.gv_hot_citys);
-        TextView tvLocationTitle = (TextView) findViewById(R.id.tv_location_citys_title);
-        TextView tvLastInterviewTitle = (TextView) findViewById(R.id.tv_last_interview_citys_title);
-        TextView tvHotTitle = (TextView) findViewById(R.id.tv_hot_citys_title);
+        tvLocationTitle = (TextView) findViewById(R.id.tv_location_citys_title);
+        tvLastInterviewTitle = (TextView) findViewById(R.id.tv_last_interview_citys_title);
+        tvHotTitle = (TextView) findViewById(R.id.tv_hot_citys_title);
 
-        rootScrollView = (ScrollView) this.getLayoutInflater().inflate(R.layout.activity_city_list,null);
+        svCityList = (ScrollView) findViewById(R.id.sv_city_list);
 
         //设置adapter
         locationCitiesAdapter = new CityGridViewAdapter(this);
@@ -111,27 +127,27 @@ public class CityListActivity extends Activity{
         gvHotCities.setAdapter(hotCitiesAdapter);
 
         setListViewHeight(citySortListView);
-        if(locationCitys!=null&&locationCitys.size()>0) {
+        if (locationCitys != null && locationCitys.size() > 0) {
             locationCitiesAdapter.setData(locationCitys);
             tvLocationTitle.setVisibility(View.VISIBLE);
             gvLocationCities.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvLocationTitle.setVisibility(View.GONE);
             gvLocationCities.setVisibility(View.GONE);
         }
-        if(lastInterviewCities!=null&lastInterviewCities.size()>0) {
+        if (lastInterviewCities != null & lastInterviewCities.size() > 0) {
             lastInterviewCitiesAdapter.setData(lastInterviewCities);
             tvLastInterviewTitle.setVisibility(View.VISIBLE);
             gvLastInterviewCities.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvLastInterviewTitle.setVisibility(View.GONE);
             gvLastInterviewCities.setVisibility(View.GONE);
         }
-        if(hotCities!=null&&hotCities.size()>0) {
+        if (hotCities != null && hotCities.size() > 0) {
             hotCitiesAdapter.setData(hotCities);
             tvHotTitle.setVisibility(View.VISIBLE);
             gvHotCities.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvHotTitle.setVisibility(View.GONE);
             gvHotCities.setVisibility(View.GONE);
         }
@@ -150,7 +166,7 @@ public class CityListActivity extends Activity{
                 } else if (parent.getId() == gvHotCities.getId()) {
                     selectedCity = hotCities.get(position);
                 } else if (parent.getId() == citySortListView.getId()) {
-                    selectedCity = (SimpleCity)sortAdapter.getItem(position);
+                    selectedCity = (SimpleCity) sortAdapter.getItem(position);
                 }
                 App.locationService().changeCity(selectedCity);
                 setResult(Activity.RESULT_OK);
@@ -170,9 +186,10 @@ public class CityListActivity extends Activity{
             @Override
             public void onTouchingLetterChanged(String s) {
                 //该字母首次出现的位置
-                int position = sortAdapter.getPositionForSection(s.charAt(0));
+                final int position = sortAdapter.getPositionForSection(s.charAt(0));
                 if (position != -1) {
-                    citySortListView.setSelection(position);
+//                    citySortListView.setSelection(position);
+                    svCityList.scrollTo(0, getScrollViewHeight(position, citySortListView));
                 }
 
             }
@@ -195,6 +212,33 @@ public class CityListActivity extends Activity{
             public void afterTextChanged(Editable s) {
             }
         });
+        setViewHeightInOnCreate();
+    }
+
+    private void setViewHeightInOnCreate(){
+        final WindowManager wm = (WindowManager) this
+                .getSystemService(Context.WINDOW_SERVICE);
+        ViewTreeObserver vto = llCityList.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(sideBarHeight == 0) {
+                    sideBarHeight = wm.getDefaultDisplay().getHeight() - layTitleBar.getMeasuredHeight() - flSearch.getMeasuredHeight();
+                    sideBar.setHeight(sideBarHeight);
+                }
+                if(otherHeight == 0) {
+                    if (tvLocationTitle.getVisibility() == View.VISIBLE) {
+                        otherHeight = otherHeight + tvLocationTitle.getHeight() + gvLocationCities.getHeight();
+                    }
+                    if (tvLastInterviewTitle.getVisibility() == View.VISIBLE) {
+                        otherHeight = otherHeight + tvLastInterviewTitle.getHeight() + gvLastInterviewCities.getHeight();
+                    }
+                    if (tvHotTitle.getVisibility() == View.VISIBLE) {
+                        otherHeight = otherHeight + tvHotTitle.getHeight() + gvHotCities.getHeight();
+                    }
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -204,7 +248,7 @@ public class CityListActivity extends Activity{
         locationCitys = new ArrayList<>();
         //当前定位城市
         SimpleCity locationCity = App.locationService().getGpsCity();
-        if(locationCity.getCityname()!=null&&!locationCity.getCityname().equals("")) {
+        if (locationCity.getCityname() != null && !locationCity.getCityname().equals("")) {
             locationCitys.add(locationCity);
         }
         //热门城市
@@ -269,8 +313,9 @@ public class CityListActivity extends Activity{
     }
 
     /**
-     *设置listview的高度 防止scrollview listview嵌套出问题
-      * @param listView
+     * 设置listview的高度 防止scrollview listview嵌套出问题
+     *
+     * @param listView
      */
     public void setListViewHeight(ListView listView) {
         // 获取ListView对应的Adapter
@@ -290,10 +335,33 @@ public class CityListActivity extends Activity{
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         // listView.getDividerHeight()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
     }
+
+    /**
+     * 跳到listview的第position位置
+     *
+     * @param postion
+     */
+    public int getScrollViewHeight(int postion, ListView listView) {
+        int scrollHeight = 0;
+        // 获取ListView对应的Adapter
+        ListAdapter listAdapter = listView.getAdapter();
+        for (int i = 0; i < postion; i++) {
+            // listAdapter.getCount()返回数据项的数目
+            View listItem = listAdapter.getView(i, null, listView);
+            // 计算子项View 的宽高
+            listItem.measure(0, 0);
+            // 统计第postion位置的高度
+            scrollHeight += listItem.getMeasuredHeight();
+        }
+        scrollHeight = scrollHeight + otherHeight;
+        return scrollHeight;
+
+    }
+
 
 }
