@@ -58,6 +58,11 @@ public class ShoppingCartService {
                     if (f.getFoodid() == food.getFoodid()) {
                         f = food;
                         isContainFood = true;
+                        if(food.getFoodNum() == 0){
+                            cartFoods.get(shopId).remove(food);
+                        }else{
+                            f.setFoodNum(food.getFoodNum());
+                        }
                         break;
                     }
                 }

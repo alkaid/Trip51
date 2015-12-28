@@ -67,7 +67,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return foods.get(position).getFoodid();
     }
 
     @Override
@@ -116,6 +116,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
      * @param foodNum 需要改变的食物的数量
      */
     public void updateFoodCategories(Food food, int foodNum) {
+        food.setFoodNum(foodNum);
         if (foodCategories != null) {
             for (int i = 0; i < foodCategories.size(); i++) {
                 List<Food> foods = foodCategories.get(i).getFoods();
@@ -128,6 +129,7 @@ public class ShoppingCartListAdapter extends BaseAdapter {
             App.shoppingCartService().updateFoodToCart(currShop.getShopid(), food);
             if(mHandler!=null){
                 mHandler.sendEmptyMessage(FoodListFragment.UPDATE_MENU_LIST);
+                mHandler.sendEmptyMessage(FoodListFragment.UPDATE_SHOPPING_CART);
             }
         }
     }

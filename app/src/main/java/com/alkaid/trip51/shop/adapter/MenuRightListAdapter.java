@@ -154,6 +154,7 @@ public class MenuRightListAdapter extends SectionedBaseAdapter implements ImageL
      * @param foodNum 需要改变的食物的数量
      */
     public void updateFoodCategories(Food food, int foodNum) {
+        food.setFoodNum(foodNum);
         if(food == null){
             return;
         }
