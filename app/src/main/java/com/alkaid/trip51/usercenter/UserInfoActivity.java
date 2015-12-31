@@ -22,6 +22,7 @@ import com.alkaid.trip51.dataservice.mapi.MApiMultipartRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.account.Account;
 import com.alkaid.trip51.model.response.ResUserFace;
+import com.alkaid.trip51.widget.PickerBottom;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.NetworkImageView;
@@ -44,8 +45,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private NetworkImageView nivFace;
     private Account account;
 
-    private ViewGroup layPhotoPick,layNickname;
-    private Button btn_take_photo, btn_pick_photo, btn_cancel;
+    private PickerBottom layPhotoPick;
+    private ViewGroup layNickname;
+//    private Button btn_take_photo, btn_pick_photo, btn_cancel;
     private TextView tvNickname,tvSex,tvRealName,tvMobile;
 
     CropConfig mCropParams = new CropConfig();
@@ -65,16 +67,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView(){
-        layPhotoPick= (ViewGroup) findViewById(R.id.layPhotoPick);
+        layPhotoPick= (PickerBottom) findViewById(R.id.layPhotoPick);
         layPhotoPick.setVisibility(View.GONE);
-        LayoutInflater inflater=LayoutInflater.from(context);
-        inflater.inflate(R.layout.activity_take_photo,layPhotoPick,true);
-        btn_take_photo = (Button) layPhotoPick.findViewById(R.id.btn_take_photo);
-        btn_pick_photo = (Button) layPhotoPick.findViewById(R.id.btn_pick_photo);
-        btn_cancel = (Button) layPhotoPick.findViewById(R.id.btn_cancel);
-        btn_cancel.setOnClickListener(this);
-        btn_pick_photo.setOnClickListener(this);
-        btn_take_photo.setOnClickListener(this);
         relTelphone = (RelativeLayout) findViewById(R.id.rl_tel);
         relTelphone.setOnClickListener(this);
         relHeadSetting = (RelativeLayout) findViewById(R.id.rl_head_setting);
@@ -101,6 +95,24 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         nivFace.setErrorImageResId(R.drawable.default_user_face);
         nivFace.setImageUrl(account.getAvater(), App.mApiService().getImageLoader());
 
+        layPhotoPick.addBtn("拍照", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layPhotoPick.setVisibility(View.GONE);
+                Log.v("CropUtils", "--CropHelper.imageUri--" + CropUtils.buildUri());
+                Intent intent = CropUtils.buildCaptureIntent(CropUtils.buildUri());
+                startActivityForResult(intent, CropUtils.REQUEST_CAMERA);
+            }
+        });
+        layPhotoPick.addBtn("从相册选择", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layPhotoPick.setVisibility(View.GONE);
+                Intent intent_gallery = CropUtils.buildCropFromGalleryIntent(mCropParams);
+                Log.v("CropUtils", "intent:" + intent_gallery.getAction());
+                startActivityForResult(intent_gallery, CropUtils.REQUEST_CROP);
+            }
+        });
     }
 
     private void initTitleBar(){
@@ -127,21 +139,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.rl_head_setting:
                 layPhotoPick.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btn_take_photo:
-                layPhotoPick.setVisibility(View.GONE);
-                Log.v("CropUtils", "--CropHelper.imageUri--" + CropUtils.buildUri());
-                Intent intent = CropUtils.buildCaptureIntent(CropUtils.buildUri());
-                startActivityForResult(intent, CropUtils.REQUEST_CAMERA);
-                break;
-            case R.id.btn_pick_photo:
-                layPhotoPick.setVisibility(View.GONE);
-                Intent intent_gallery = CropUtils.buildCropFromGalleryIntent(mCropParams);
-                Log.v("CropUtils", "intent:" + intent_gallery.getAction());
-                startActivityForResult(intent_gallery, CropUtils.REQUEST_CROP);
-                break;
-            case R.id.btn_cancel:
-                layPhotoPick.setVisibility(View.GONE);
                 break;
             case R.id.layNickname:
                 Intent intent1=new Intent(context,SimpleEditorActivity.class);

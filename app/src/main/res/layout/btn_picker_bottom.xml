@@ -1,0 +1,4 @@
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_take_photo"
+    style="@style/ButtonPickerBottom"
+    android:text="拍照" />

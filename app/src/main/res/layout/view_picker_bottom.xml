@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal" android:background="@color/half_transparent_black_background"
+    android:orientation="vertical"
+    android:clickable="true">
 
     <LinearLayout android:clickable="true"
         android:id="@+id/pop_layout"
@@ -12,35 +13,21 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/transparent_bg"
         android:gravity="center_horizontal"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/layBtns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:background="@drawable/btn_white_bg_head_setting"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_take_photo"
-                style="@style/ButtonHeadSetting"
-                android:text="拍照" />
-
-            <View style="@style/DividerViewHorizon" />
-
-            <Button
-                android:id="@+id/btn_pick_photo"
-                style="@style/ButtonHeadSetting"
-                android:text="从相册选择" />
-        </LinearLayout>
+            android:orientation="vertical" />
 
         <Button
             android:id="@+id/btn_cancel"
-            style="@style/ButtonLarger.White"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            style="@style/ButtonPickerBottom.BtnCancel"
             android:text="取消" />
     </LinearLayout>
 </RelativeLayout>

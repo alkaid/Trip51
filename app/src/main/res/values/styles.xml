@@ -840,18 +840,24 @@
         <!-- 模糊 -->
     </style>
 
-    <!--+++++++++++++++++++++++++++++++++++++++++单独界面的style++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <!--头像设置界面通用按钮style-->
-    <style name="ButtonHeadSetting">
+    <!--底部选择框按钮样式-->
+    <style name="ButtonPickerBottom">
         <item name="android:textSize">@dimen/text_button_normal</item>
-        <item name="android:textColor">#ffd22b00</item>
+        <item name="android:textColor">@color/text_picker_bottom</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/transparent_bg</item>
+        <item name="android:background">@drawable/btn_bg_picker_bottom</item>
         <item name="android:padding">8dp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ButtonPickerBottom.BtnCancel">
+        <item name="android:background">@drawable/btn_cancel_picker_bottom</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++单独界面的style++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--购物车数字标识带红色圆形背景-->
     <style name="OvalNumTagTextView">
         <item name="android:textSize">@dimen/text_subscript</item>

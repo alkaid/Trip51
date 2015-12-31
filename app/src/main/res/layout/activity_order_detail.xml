@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@color/background_gray">
     <include layout="@layout/default_title_bar" />
@@ -88,3 +90,8 @@
     <Button android:id="@+id/btnPay" style="@style/ButtonLarger.Red" android:text="立即支付"/>
     </LinearLayout>
 </LinearLayout>
+
+    <com.alkaid.trip51.widget.PickerBottom android:id="@+id/layPayWay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

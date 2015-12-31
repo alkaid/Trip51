@@ -252,8 +252,7 @@
 
     </LinearLayout>
 </LinearLayout>
-    <LinearLayout android:id="@+id/layPhotoPick"
+    <com.alkaid.trip51.widget.PickerBottom android:id="@+id/layPhotoPick"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>

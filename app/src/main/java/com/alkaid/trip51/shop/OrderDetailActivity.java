@@ -29,6 +29,7 @@ import com.alkaid.trip51.pay.Payment;
 import com.alkaid.trip51.pay.PaymentCallback;
 import com.alkaid.trip51.pay.PaymentFactory;
 import com.alkaid.trip51.pay.Result;
+import com.alkaid.trip51.widget.PickerBottom;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -47,6 +48,7 @@ public class OrderDetailActivity extends BaseActivity {
     private TextView tvShopName,tvInfo,tvOrderNo,tvTotal;
     private ViewGroup layFoodList,layShop,layOrderDetail;
     private Button btnPay;
+    private PickerBottom layPayWay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +70,29 @@ public class OrderDetailActivity extends BaseActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnPay.setEnabled(false);
-                pay(Payment.PAYTYPE_ALI);
+                layPayWay.setVisibility(View.VISIBLE);
             }
         });
         layFoodList= (ViewGroup) findViewById(R.id.layFoodList);
         layShop= (ViewGroup) findViewById(R.id.layShop);
         layOrderDetail= (ViewGroup) findViewById(R.id.layOrderDetail);
+        layPayWay= (PickerBottom) findViewById(R.id.layPayWay);
+        layPayWay.setVisibility(View.GONE);
+        layPayWay.addBtn("微信", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layPayWay.setVisibility(View.GONE);
+                btnPay.setEnabled(false);
+                pay(Payment.PAYTYPE_WECHAT);
+            }
+        });
+        layPayWay.addBtn("支付宝", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnPay.setEnabled(false);
+                pay(Payment.PAYTYPE_ALI);
+            }
+        });
     }
     private void resetView(){
         tvShopName.setText("");

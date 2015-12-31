@@ -356,6 +356,7 @@
     <color name="yellow_3">#ffe6b523</color>
 
     <!--以下为自己添加的 非大众点评的-->
+    <color name="btn_pressed_orange">#ffff6600</color>
     <color name="half_transparent_black_background">#89000000</color>
 
     <color name="divide_gray_default">#ffe9e9e9</color>
