@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -15,9 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alkaid.trip51.R;
@@ -42,7 +39,7 @@ public class CityListActivity extends Activity {
     private GridView gvHotCities;//热门城市列表
     private ListView citySortListView;
     private CityRightBar sideBar; //城市列表右侧字母排列
-    private TextView dialog;//滚动提示ui
+    private TextView tipDialog;//滚动提示ui
     private CitySearchEditText mClearEditText;//城市列表搜索栏
     private FrameLayout flSearch;//搜索条
     private View layTitleBar;
@@ -58,8 +55,6 @@ public class CityListActivity extends Activity {
     private List<SimpleCity> lastInterviewCities;
     private List<SimpleCity> hotCities;
     private List<SimpleCity> allCities;
-
-    private ScrollView svCityList;
 
     private CharacterParser characterParser;//城市列表汉字转拼音的类
 
@@ -99,22 +94,23 @@ public class CityListActivity extends Activity {
     }
 
     private void initViews() {
+        View listViewHeadView = getLayoutInflater().inflate(R.layout.listview_city_headview,null);
         llCityList = (LinearLayout) findViewById(R.id.ll_acivity_city_list);
         //初始化view
         flSearch = (FrameLayout) findViewById(R.id.fl_search);
         sideBar = (CityRightBar) findViewById(R.id.sidrbar);
-        dialog = (TextView) findViewById(R.id.dialog);
-        sideBar.setTextView(dialog);
+        tipDialog = (TextView) findViewById(R.id.dialog);
+        sideBar.setTextView(tipDialog);
         mClearEditText = (CitySearchEditText) findViewById(R.id.filter_edit);
         citySortListView = (ListView) findViewById(R.id.lv_citys);
-        gvLocationCities = (GridView) findViewById(R.id.gv_location_citys);
-        gvLastInterviewCities = (GridView) findViewById(R.id.gv_last_interview_citys);
-        gvHotCities = (GridView) findViewById(R.id.gv_hot_citys);
-        tvLocationTitle = (TextView) findViewById(R.id.tv_location_citys_title);
-        tvLastInterviewTitle = (TextView) findViewById(R.id.tv_last_interview_citys_title);
-        tvHotTitle = (TextView) findViewById(R.id.tv_hot_citys_title);
+        gvLocationCities = (GridView)listViewHeadView.findViewById(R.id.gv_location_citys);
+        gvLastInterviewCities = (GridView)listViewHeadView.findViewById(R.id.gv_last_interview_citys);
+        gvHotCities = (GridView)listViewHeadView. findViewById(R.id.gv_hot_citys);
+        tvLocationTitle = (TextView) listViewHeadView.findViewById(R.id.tv_location_citys_title);
+        tvLastInterviewTitle = (TextView) listViewHeadView.findViewById(R.id.tv_last_interview_citys_title);
+        tvHotTitle = (TextView) listViewHeadView.findViewById(R.id.tv_hot_citys_title);
 
-        svCityList = (ScrollView) findViewById(R.id.sv_city_list);
+        citySortListView.addHeaderView(listViewHeadView);
 
         //设置adapter
         locationCitiesAdapter = new CityGridViewAdapter(this);
@@ -126,7 +122,7 @@ public class CityListActivity extends Activity {
         gvLastInterviewCities.setAdapter(lastInterviewCitiesAdapter);
         gvHotCities.setAdapter(hotCitiesAdapter);
 
-        setListViewHeight(citySortListView);
+        //setListViewHeight(citySortListView);
         if (locationCitys != null && locationCitys.size() > 0) {
             locationCitiesAdapter.setData(locationCitys);
             tvLocationTitle.setVisibility(View.VISIBLE);
@@ -135,7 +131,7 @@ public class CityListActivity extends Activity {
             tvLocationTitle.setVisibility(View.GONE);
             gvLocationCities.setVisibility(View.GONE);
         }
-        if (lastInterviewCities != null & lastInterviewCities.size() > 0) {
+        if (lastInterviewCities != null && lastInterviewCities.size() > 0) {
             lastInterviewCitiesAdapter.setData(lastInterviewCities);
             tvLastInterviewTitle.setVisibility(View.VISIBLE);
             gvLastInterviewCities.setVisibility(View.VISIBLE);
@@ -188,8 +184,8 @@ public class CityListActivity extends Activity {
                 //该字母首次出现的位置
                 final int position = sortAdapter.getPositionForSection(s.charAt(0));
                 if (position != -1) {
-//                    citySortListView.setSelection(position);
-                    svCityList.scrollTo(0, getScrollViewHeight(position, citySortListView));
+                    citySortListView.setSelection(position);
+//                    svCityList.scrollTo(0, getScrollViewHeight(position, citySortListView));
                 }
 
             }
@@ -215,18 +211,18 @@ public class CityListActivity extends Activity {
         setViewHeightInOnCreate();
     }
 
-    private void setViewHeightInOnCreate(){
+    private void setViewHeightInOnCreate() {
         final WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         ViewTreeObserver vto = llCityList.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if(sideBarHeight == 0) {
+                if (sideBarHeight == 0) {
                     sideBarHeight = wm.getDefaultDisplay().getHeight() - layTitleBar.getMeasuredHeight() - flSearch.getMeasuredHeight();
                     sideBar.setHeight(sideBarHeight);
                 }
-                if(otherHeight == 0) {
+                if (otherHeight == 0) {
                     if (tvLocationTitle.getVisibility() == View.VISIBLE) {
                         otherHeight = otherHeight + tvLocationTitle.getHeight() + gvLocationCities.getHeight();
                     }
@@ -311,57 +307,5 @@ public class CityListActivity extends Activity {
         Collections.sort(filterCityList, cityComparator);
         sortAdapter.updateListView(filterCityList);
     }
-
-    /**
-     * 设置listview的高度 防止scrollview listview嵌套出问题
-     *
-     * @param listView
-     */
-    public void setListViewHeight(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
-            // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            // 计算子项View 的宽高
-            listItem.measure(0, 0);
-            // 统计所有子项的总高度
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
-    }
-
-    /**
-     * 跳到listview的第position位置
-     *
-     * @param postion
-     */
-    public int getScrollViewHeight(int postion, ListView listView) {
-        int scrollHeight = 0;
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
-        for (int i = 0; i < postion; i++) {
-            // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            // 计算子项View 的宽高
-            listItem.measure(0, 0);
-            // 统计第postion位置的高度
-            scrollHeight += listItem.getMeasuredHeight();
-        }
-        scrollHeight = scrollHeight + otherHeight;
-        return scrollHeight;
-
-    }
-
 
 }

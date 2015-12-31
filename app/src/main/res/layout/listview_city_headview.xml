@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_location_citys_title"
+        style="@style/TextViewTitle3"
+        android:layout_width="match_parent"
+        android:background="@color/city_title_2_background"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="定位城市"
+        android:textStyle="bold" />
+
+    <GridView
+        android:id="@+id/gv_location_citys"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/city_gridview_background"
+        android:horizontalSpacing="20dp"
+        android:numColumns="3"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:verticalSpacing="20dp" />
+
+    <TextView
+        android:id="@+id/tv_last_interview_citys_title"
+        style="@style/TextViewTitle3"
+        android:layout_width="match_parent"
+        android:background="@color/city_title_2_background"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="最近访问城市"
+        android:textStyle="bold" />
+
+    <GridView
+        android:id="@+id/gv_last_interview_citys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/city_gridview_background"
+        android:horizontalSpacing="20dp"
+        android:numColumns="3"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:verticalSpacing="20dp" />
+
+    <TextView
+        android:id="@+id/tv_hot_citys_title"
+        style="@style/TextViewTitle3"
+        android:layout_width="match_parent"
+        android:background="@color/city_title_2_background"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:text="热门城市"
+        android:textStyle="bold" />
+
+    <GridView
+        android:id="@+id/gv_hot_citys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/city_gridview_background"
+        android:horizontalSpacing="20dp"
+        android:numColumns="3"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:verticalSpacing="20dp" />
+</LinearLayout>
