@@ -56,10 +56,9 @@ public class ShoppingCartService {
                 boolean isContainFood = false;
                 for (Food f : foods) {
                     if (f.getFoodid() == food.getFoodid()) {
-                        f = food;
                         isContainFood = true;
                         if(food.getFoodNum() == 0){
-                            cartFoods.get(shopId).remove(food);
+                            cartFoods.get(shopId).remove(f);
                         }else{
                             f.setFoodNum(food.getFoodNum());
                         }
