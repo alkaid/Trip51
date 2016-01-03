@@ -1,179 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true"
-    >
+    android:background="@color/gray_light_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/ListViewItem"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingLeft="@dimen/margin_page_medium"
+        android:paddingRight="@dimen/margin_page_medium"
+        android:paddingTop="15dp">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/imgShopThumb"
+            style="@style/ListViewShopImage"
+            android:src="@drawable/temp_shop_thumb" />
+
+        <LinearLayout
+            style="@style/ListViewArticleLay"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvShopName"
+                    style="@style/TextViewTitle2.centerVertical" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_star_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/tvTaste"
+                    style="@style/TextViewArticle" />
+
+                <TextView
+                    android:id="@+id/tvEnvironment"
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="5dp" />
+
+                <TextView
+                    android:id="@+id/tvService"
+                    style="@style/TextViewArticle"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_light_background"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
 
-        <LinearLayout
-            style="@style/ListViewItem"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/margin_page_medium"
-            android:paddingRight="@dimen/margin_page_medium"
-            android:paddingTop="15dp" android:paddingBottom="15dp">
+        <RelativeLayout style="@style/SingleItem">
 
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/imgShopThumb"
-                style="@style/ListViewShopImage"
-                android:src="@drawable/temp_shop_thumb" />
+            <ImageView
+                android:id="@+id/iv_dingwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/dingwei" />
 
-            <LinearLayout
-                style="@style/ListViewArticleLay"
-                android:orientation="vertical">
+            <ImageView
+                android:id="@+id/ivArrow0"
+                style="@style/ImageViewRightArrow" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvAdress"
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_dingwei" />
+        </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tvShopName"
-                        style="@style/TextViewTitle2.centerVertical" />
+        <View style="@style/DividerViewHorizon" />
 
-                </RelativeLayout>
+        <RelativeLayout style="@style/SingleItem">
 
-                <LinearLayout
-                    android:id="@+id/ll_star_fav"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:orientation="horizontal" />
+            <ImageView
+                android:id="@+id/iv_dianhua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/phone" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+            <ImageView style="@style/ImageViewRightArrow" />
 
-                    <TextView
-                        android:id="@+id/tvTaste"
-                        style="@style/TextViewArticle" />
-
-                    <TextView
-                        android:id="@+id/tvEnvironment"
-                        style="@style/TextViewArticle"
-                        android:layout_marginLeft="5dp" />
-
-                    <TextView
-                        android:id="@+id/tvService"
-                        style="@style/TextViewArticle"
-                        android:layout_marginLeft="5dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/margin_page_small"
-            android:paddingLeft="@dimen/margin_page_small">
-
-            <RelativeLayout style="@style/SingleItem">
-
-                <ImageView
-                    android:id="@+id/iv_dingwei"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/dingwei" />
-
-                <ImageView
-                    android:id="@+id/ivArrow0"
-                    style="@style/ImageViewRightArrow" />
-
-                <TextView
-                    android:id="@+id/tvAdress"
-                    style="@style/TextViewArticle"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/iv_dingwei" />
-            </RelativeLayout>
-            <View style="@style/DividerViewHorizon"/>
-            <RelativeLayout style="@style/SingleItem">
-
-                <ImageView
-                    android:id="@+id/iv_dianhua"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:src="@drawable/phone" />
-
-                <ImageView style="@style/ImageViewRightArrow" />
-
-                <TextView
-                    android:id="@+id/tvPhone"
-                    style="@style/TextViewArticle"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/iv_dianhua" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/margin_page_small"
-            android:paddingLeft="@dimen/margin_page_small">
-
-            <RelativeLayout style="@style/SingleItem">
-
-                <TextView
-                    android:id="@+id/tvEvaluationNum"
-                    style="@style/TextViewArticle"
-                    android:layout_marginLeft="10dp"
-                    android:text="网友点评（0)" />
-
-                <ImageView
-                    android:id="@+id/ivArrow2"
-                    style="@style/ImageViewRightArrow" />
-
-            </RelativeLayout>
-            <View style="@style/DividerViewHorizon"/>
-            <ListView
-                android:id="@+id/lv_evaluation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/margin_page_small"
-            android:paddingRight="@dimen/margin_page_small">
-
-            <RelativeLayout style="@style/SingleItem">
-
-                <TextView
-                    style="@style/TextViewArticle"
-                    android:layout_marginLeft="10dp"
-                    android:text="商户信息" />
-
-                <ImageView
-                    android:id="@+id/ivArrow3"
-                    style="@style/ImageViewRightArrow" />
-
-            </RelativeLayout>
-            <View style="@style/DividerViewHorizon"/>
-            <RelativeLayout style="@style/SingleItem">
-
-                <TextView
-                    android:id="@+id/tvShopOtherInfo"
-                    style="@style/TextViewArticle"
-                    android:layout_marginLeft="10dp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tvPhone"
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_dianhua" />
+        </RelativeLayout>
     </LinearLayout>
-</ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                android:id="@+id/tvEvaluationNum"
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="网友点评(0)" />
+
+            <ImageView
+                android:id="@+id/ivArrow2"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <ListView
+            android:id="@+id/lv_evaluation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_page_small"
+        android:paddingRight="@dimen/margin_page_small">
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp"
+                android:text="商户信息" />
+
+            <ImageView
+                android:id="@+id/ivArrow3"
+                style="@style/ImageViewRightArrow" />
+
+        </RelativeLayout>
+
+        <View style="@style/DividerViewHorizon" />
+
+        <RelativeLayout style="@style/SingleItem">
+
+            <TextView
+                android:id="@+id/tvShopOtherInfo"
+                style="@style/TextViewArticle"
+                android:layout_marginLeft="10dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
