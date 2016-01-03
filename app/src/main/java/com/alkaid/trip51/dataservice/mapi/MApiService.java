@@ -110,7 +110,7 @@ public class MApiService {
         if(e instanceof MApiError){
             MApiError me=(MApiError)e;
             r=new Result(Result.RQF_SERVER_NOTICE_ERROR);
-            r.setExternal("status:" + me.data.getErrcode() + " msg:" + me.data.getMsg());
+            r.setExternal("status:" + me.data.getErrorcode() + " msg:" + me.data.getMsg());
             tradException = new TradException(me.data.getMsg(),me);
         }else if((e instanceof NetworkError) || (e instanceof ServerError) || (e instanceof TimeoutError)){
             r=new Result(Result.RQF_NET_ERROR);

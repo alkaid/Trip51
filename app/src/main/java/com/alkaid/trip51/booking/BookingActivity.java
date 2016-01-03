@@ -16,7 +16,6 @@ import android.widget.ToggleButton;
 
 import com.alkaid.base.common.DateUtil;
 import com.alkaid.base.common.LogUtil;
-import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
@@ -24,6 +23,7 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.NetDataConstants;
+import com.alkaid.trip51.model.config.TimeSet;
 import com.alkaid.trip51.model.enums.SeatType;
 import com.alkaid.trip51.model.request.ReqOrderInfo;
 import com.alkaid.trip51.model.response.ResOrder;
@@ -38,6 +38,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -95,12 +96,14 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout rlComplete;//
 
     private DatePicker dpPicker;
+    private TimeSet selectedTimeSet;
 
     /**
      * ui显示需要的数据
      */
     private String[] personNums = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    private String[] timeSetLables = new String[]{"8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"};
+//    private String[] timeSetLables = new String[]{"8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"};
+    private List<String> timeSetLables=new ArrayList<>();
 
     private static final String WHEEL_VIEW_DATA = "9001";
     private static final String WHEEL_VIEW_OFFSET = "9002";
@@ -196,9 +199,10 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
     private void initData() {
         tvPersonNum.setText("请选择参与人数");
         tvBookingTime.setText("请选择预定日期");
-        if(currShop!=null) {
-            float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
-            tvTotalPrice.setText(totalPrice+"");
+        float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
+        tvTotalPrice.setText(totalPrice+"");
+        for(TimeSet t:currShop.getTimesets()){
+            timeSetLables.add(t.timepart);
         }
     }
 
@@ -272,12 +276,19 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         order.setFoodamount(totalPrice);
         order.setOrderamount(totalPrice);
         order.setFoods(foods);
+        order.setTimeid(0);
+//        order.setTimeid(selectedTimeSet.timeid);
     }
 
     private void booking() {
         //检查登录
         if (!checkLogined()) {
             return;
+        }
+        //检查必选项
+        if(selectedTimeSet==null){
+            toastLong("必须选择预订时间");
+//            return;
         }
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
@@ -348,7 +359,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.rl_time:
                 if (rlSelectItem != null) {
-                    mWheelView.setItems( Arrays.asList(timeSetLables));
+                    mWheelView.setItems( timeSetLables);
                     mWheelView.setOffset(1);
                     mWheelView.setSeletion(3);
                     mWheelView.setVisibility(View.GONE);
@@ -379,6 +390,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(dpPicker.getYear(), dpPicker.getMonth(), dpPicker.getDayOfMonth());
                 dinnerTime = new SimpleDateFormat(NetDataConstants.DATE_FORMAT).format(calendar.getTimeInMillis()) + " " + mWheelView.getSeletedItem();
+                selectedTimeSet=currShop.getTimesets().get(mWheelView.getSeletedIndex());
                 break;
             case BOOKING_PERSON_NUM_LAYOUT_TAG:
                 personNum = Integer.parseInt(mWheelView.getSeletedItem());

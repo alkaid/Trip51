@@ -137,7 +137,7 @@ public class AccountService {
     }
 
     private boolean checkIsNeedRelogin(ResponseData responseData){
-        if(!responseData.isSuccess()&&responseData.getErrcode()== ResponseCode.ERROR_NEED_RELOGIN){
+        if(!responseData.isSuccess()&&responseData.getErrorcode()== ResponseCode.ERROR_NEED_RELOGIN){
             this.account=null;
             this.openInfo=null;
             logined=false;

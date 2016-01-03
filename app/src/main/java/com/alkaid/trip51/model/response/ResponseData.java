@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class ResponseData implements Serializable {
     protected boolean success;
-    protected int errcode;
+    protected int errorcode;
     protected String msg;
 
     public boolean isSuccess() {
@@ -18,12 +18,12 @@ public class ResponseData implements Serializable {
         this.success = success;
     }
 
-    public int getErrcode() {
-        return errcode;
+    public int getErrorcode() {
+        return errorcode;
     }
 
-    public void setErrcode(int errcode) {
-        this.errcode = errcode;
+    public void setErrorcode(int errorcode) {
+        this.errorcode = errorcode;
     }
 
     public String getMsg() {
