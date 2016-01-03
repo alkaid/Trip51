@@ -21,8 +21,8 @@ android {
 
     signingConfigs {
         debug {
-//            storeFile file("/Users/miu/debug.keystore")
-            storeFile file("c:/debug.keystore")
+            storeFile file("/Users/miu/debug.keystore")
+//            storeFile file("c:/debug.keystore")
         }
     }
 

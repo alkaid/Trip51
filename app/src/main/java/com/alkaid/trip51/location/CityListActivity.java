@@ -162,7 +162,7 @@ public class CityListActivity extends Activity {
                 } else if (parent.getId() == gvHotCities.getId()) {
                     selectedCity = hotCities.get(position);
                 } else if (parent.getId() == citySortListView.getId()) {
-                    selectedCity = (SimpleCity) sortAdapter.getItem(position);
+                    selectedCity = (SimpleCity) sortAdapter.getItem(position-1);
                 }
                 App.locationService().changeCity(selectedCity);
                 setResult(Activity.RESULT_OK);
