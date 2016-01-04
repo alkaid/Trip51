@@ -6,7 +6,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView android:text="和太郎寿司" style="@style/TextViewTitle2.centerVertical"/>
+            <TextView android:id="@+id/tv_shop_name" android:text="和太郎寿司" style="@style/TextViewTitle2.centerVertical"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

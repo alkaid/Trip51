@@ -15,7 +15,7 @@ import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResShopList;
 import com.alkaid.trip51.model.shop.Shop;
-import com.alkaid.trip51.usercenter.adapter.MyFavoriteAdapter;
+import com.alkaid.trip51.shop.adapter.ShopListAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -31,11 +31,7 @@ public class MyFavoriteActivity extends BaseActivity {
 
     private ListView myFavoriteList;
 
-    private List<Shop> favoriteShops;
-    private MyFavoriteAdapter adapter;
-
-    private static final int HANDLER_UPDATE_DATA = 1001;
-
+    private ShopListAdapter shopListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +58,9 @@ public class MyFavoriteActivity extends BaseActivity {
     }
 
     private void initView(){
-        adapter = new MyFavoriteAdapter(this);
+        shopListAdapter = new ShopListAdapter(this);
         myFavoriteList = (ListView)findViewById(R.id.lv_my_fav);
-        myFavoriteList.setAdapter(adapter);
+        myFavoriteList.setAdapter(shopListAdapter);
     }
 
     private void loadData(){
@@ -82,12 +78,8 @@ public class MyFavoriteActivity extends BaseActivity {
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, true, ResShopList.class, MApiService.URL_USER_COLLECTS, beSignForm, unBeSignform, new Response.Listener<ResShopList>() {
             @Override
             public void onResponse(ResShopList response) {
-                if(favoriteShops!=null){
-                    favoriteShops = new ArrayList<Shop>();
-                }else{
-                    favoriteShops.clear();
-                }
-                favoriteShops = response.getData();
+                shopListAdapter.setData(response.getData());
+                shopListAdapter.notifyDataSetChanged();
                 dismissPdg();
             }
         }, new Response.ErrorListener() {
@@ -101,16 +93,4 @@ public class MyFavoriteActivity extends BaseActivity {
         }), tag);
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case HANDLER_UPDATE_DATA:
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 }

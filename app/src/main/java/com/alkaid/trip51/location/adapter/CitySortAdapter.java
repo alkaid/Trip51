@@ -52,7 +52,6 @@ public class CitySortAdapter extends BaseAdapter implements SectionIndexer{
 	}
 
 	public View getView(final int position, View view, ViewGroup arg2) {
-		android.util.Log.d("citySortAdapter",position+"");
 		ViewHolder viewHolder = null;
 		final SimpleCity mContent = cities.get(position);
 		if (view == null) {
