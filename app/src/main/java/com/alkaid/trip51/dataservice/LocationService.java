@@ -309,7 +309,7 @@ public class LocationService {
     public void requestHotCityList(Response.Listener<ResCityList> listener,Response.ErrorListener errorListener){
         Map<String,String> beSignForm=new HashMap<String, String>();
         Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("provincename", provinceName);
+//        unBeSignform.put("provincename", provinceName);
         final String tag="citylist"+(int)(Math.random()*1000);
         App.mApiService().exec(new MApiRequest(CacheType.DAILY,false,ResCityList.class, MApiService.URL_CITY_HOTLIST, beSignForm, unBeSignform,listener,errorListener), tag);
     }
@@ -323,7 +323,7 @@ public class LocationService {
     public void requestCityList(final Response.Listener<ResAllCityList> listener, final Response.ErrorListener errorListener){
         final Map<String,String> beSignForm=new HashMap<String, String>();
         final Map<String,String> unBeSignform=new HashMap<String, String>();
-        unBeSignform.put("provincename", provinceName);
+//        unBeSignform.put("provincename", provinceName);
         final int cacheDataVersion=Integer.parseInt( SpUtil.getString(SpUtil.key_data_version_citylist,"0"));
         unBeSignform.put("versionnum", cacheDataVersion+"");
         final String tag="citylist"+(int)(Math.random()*1000);

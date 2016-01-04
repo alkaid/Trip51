@@ -238,7 +238,7 @@ public class RequestQueue {
         // If the request is uncacheable, skip the cache queue and go straight to the network.
         //---------------------------modified by alkaid 20151129 begin-----------------------
 //        if (!request.shouldCache()) {     //origin
-        if(request.shouldForceNetwork()){   //modified
+        if(request.shouldForceNetwork() || !request.shouldCache()){   //modified
         //---------------------------modified by alkaid 20151129 end-----------------------
             mNetworkQueue.add(request);
             return request;
