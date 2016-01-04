@@ -1,4 +1,4 @@
-package com.alkaid.trip51.shop.adapter;
+package com.alkaid.trip51.usercenter.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.alkaid.trip51.R;
+import com.alkaid.trip51.model.shop.Shop;
+
+import java.util.List;
 
 /**
  * Created by alkaid on 2015/11/7.
@@ -14,23 +17,32 @@ import com.alkaid.trip51.R;
 public class MyFavoriteAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
+    private List<Shop> favoriteShops;
+
+    public void setData(List<Shop> shops){
+        this.favoriteShops = shops;
+    }
+
     public MyFavoriteAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return 5;
+        if(favoriteShops == null){
+            return 0;
+        }
+        return favoriteShops.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return favoriteShops.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override

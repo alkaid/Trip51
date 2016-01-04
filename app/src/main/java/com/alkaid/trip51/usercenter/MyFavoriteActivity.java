@@ -1,11 +1,12 @@
 package com.alkaid.trip51.usercenter;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alkaid.base.exception.TradException;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
@@ -13,11 +14,14 @@ import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
 import com.alkaid.trip51.model.response.ResShopList;
-import com.alkaid.trip51.shop.adapter.MyFavoriteAdapter;
+import com.alkaid.trip51.model.shop.Shop;
+import com.alkaid.trip51.usercenter.adapter.MyFavoriteAdapter;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,13 +31,19 @@ public class MyFavoriteActivity extends BaseActivity {
 
     private ListView myFavoriteList;
 
+    private List<Shop> favoriteShops;
+    private MyFavoriteAdapter adapter;
+
+    private static final int HANDLER_UPDATE_DATA = 1001;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_favorite);
         initTitleBar();
-        initView();
         loadData();
+        initView();
     }
 
     private void initTitleBar(){
@@ -52,8 +62,9 @@ public class MyFavoriteActivity extends BaseActivity {
     }
 
     private void initView(){
+        adapter = new MyFavoriteAdapter(this);
         myFavoriteList = (ListView)findViewById(R.id.lv_my_fav);
-        myFavoriteList.setAdapter(new MyFavoriteAdapter(this));
+        myFavoriteList.setAdapter(adapter);
     }
 
     private void loadData(){
@@ -71,6 +82,12 @@ public class MyFavoriteActivity extends BaseActivity {
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL, true, ResShopList.class, MApiService.URL_USER_COLLECTS, beSignForm, unBeSignform, new Response.Listener<ResShopList>() {
             @Override
             public void onResponse(ResShopList response) {
+                if(favoriteShops!=null){
+                    favoriteShops = new ArrayList<Shop>();
+                }else{
+                    favoriteShops.clear();
+                }
+                favoriteShops = response.getData();
                 dismissPdg();
             }
         }, new Response.ErrorListener() {
@@ -83,4 +100,17 @@ public class MyFavoriteActivity extends BaseActivity {
             }
         }), tag);
     }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case HANDLER_UPDATE_DATA:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }
