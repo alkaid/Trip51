@@ -214,7 +214,7 @@
                             style="@style/TextViewTitle2.centerVertical"
                             android:layout_marginLeft="10dp"
                             android:layout_toRightOf="@+id/ivItemIcon"
-                            android:text="86" />
+                            android:text="+86" />
 
                         <EditText
                             android:id="@+id/et_mobile"

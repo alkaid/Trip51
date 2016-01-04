@@ -8,8 +8,8 @@ android {
         applicationId "com.alkaid.trip51"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 5
-        versionName "1.04"
+        versionCode 6
+        versionName "1.05"
     }
     buildTypes {
         release {

@@ -349,6 +349,8 @@ public class MainHomeFragment extends BaseFragment {
                 mShouldRefreshCache=true;
                 break;
         }
+        //需求变更 要求实时刷新 故这里不再使用缓存 每次都刷新
+        mShouldRefreshCache=true;
         //请求首页
         App.mApiService().exec(new MApiRequest(CacheType.NORMAL,mShouldRefreshCache,ResMainHome.class, MApiService.URL_MAIN_HOME, beSignForm, unBeSignform, new Response.Listener<ResMainHome>() {
             @Override

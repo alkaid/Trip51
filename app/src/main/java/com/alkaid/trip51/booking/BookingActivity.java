@@ -1,5 +1,6 @@
 package com.alkaid.trip51.booking;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import com.alkaid.base.common.LogUtil;
 import com.alkaid.trip51.R;
 import com.alkaid.trip51.base.widget.App;
 import com.alkaid.trip51.base.widget.BaseActivity;
+import com.alkaid.trip51.dataservice.AccountService;
 import com.alkaid.trip51.dataservice.mapi.CacheType;
 import com.alkaid.trip51.dataservice.mapi.MApiRequest;
 import com.alkaid.trip51.dataservice.mapi.MApiService;
@@ -198,11 +200,14 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
 
     private void initData() {
         tvPersonNum.setText("请选择参与人数");
-        tvBookingTime.setText("请选择预定日期");
+        tvBookingTime.setText("请选择就餐时间");
         float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
         tvTotalPrice.setText(totalPrice+"");
         for(TimeSet t:currShop.getTimesets()){
             timeSetLables.add(t.timepart);
+        }
+        if(App.accountService().isLogined()) {
+            etMobile.setText(App.accountService().getAccount().getMobile());
         }
     }
 
@@ -248,7 +253,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             isReplaceother = NetDataConstants.FALSE;
         }
         mobile = etMobile.getText().toString();
-        otherMobile = etMobile.getText().toString();
+        otherMobile = etOtherMobile.getText().toString();
         /**组装order*/
         List<Food> foods = App.shoppingCartService().getCart().get(currShop.getShopid());
         if (foods != null && foods.size() > 0) {
@@ -257,11 +262,11 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             isContainFood = NetDataConstants.FALSE;
         }
         float totalPrice = App.shoppingCartService().getCartTotalPrice(currShop.getShopid());
-        if(TextUtils.isEmpty(dinnerTime)) {
-            order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
-        }else{
+//        if(TextUtils.isEmpty(dinnerTime)) {
+//            order.setDinnertime(DateUtil.formatDateString(new Date(), NetDataConstants.DATETIME_FORMAT));
+//        }else{
             order.setDinnertime(dinnerTime);
-        }
+//        }
         order.setIscontainfood(isContainFood);
         order.setIsreplaceother(isReplaceother);
         order.setMobile(mobile);
@@ -276,8 +281,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         order.setFoodamount(totalPrice);
         order.setOrderamount(totalPrice);
         order.setFoods(foods);
-        order.setTimeid(0);
-//        order.setTimeid(selectedTimeSet.timeid);
+        order.setTimeid(selectedTimeSet.timeid);
     }
 
     private void booking() {
@@ -287,8 +291,8 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
         }
         //检查必选项
         if(selectedTimeSet==null){
-            toastLong("必须选择预订时间");
-//            return;
+            toastLong("请选择就餐时间");
+            return;
         }
         Map<String, String> beSignForm = new HashMap<String, String>();
         Map<String, String> unBeSignform = new HashMap<String, String>();
@@ -360,8 +364,8 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             case R.id.rl_time:
                 if (rlSelectItem != null) {
                     mWheelView.setItems( timeSetLables);
-                    mWheelView.setOffset(1);
-                    mWheelView.setSeletion(3);
+//                    mWheelView.setOffset(1);
+//                    mWheelView.setSeletion(3);
                     mWheelView.setVisibility(View.GONE);
                     rlSelectContent.setVisibility(View.VISIBLE);
                     currentWheelView = BOOKING_TIME_LAYOUT_TAG;
@@ -389,7 +393,7 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
             case BOOKING_TIME_LAYOUT_TAG:
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(dpPicker.getYear(), dpPicker.getMonth(), dpPicker.getDayOfMonth());
-                dinnerTime = new SimpleDateFormat(NetDataConstants.DATE_FORMAT).format(calendar.getTimeInMillis()) + " " + mWheelView.getSeletedItem();
+                dinnerTime = new SimpleDateFormat(NetDataConstants.DATE_FORMAT).format(calendar.getTimeInMillis())/* + " " + mWheelView.getSeletedItem()*/;
                 selectedTimeSet=currShop.getTimesets().get(mWheelView.getSeletedIndex());
                 break;
             case BOOKING_PERSON_NUM_LAYOUT_TAG:
@@ -410,6 +414,15 @@ public class BookingActivity extends BaseActivity implements View.OnClickListene
                     tvPersonNum.setText(personNum+"");
                 }
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode== AccountService.REQUEST_CODE_LOGIN && resultCode== Activity.RESULT_OK){
+            if(App.accountService().isLogined() && TextUtils.isEmpty(etMobile.getText())) {
+                etMobile.setText(App.accountService().getAccount().getMobile());
+            }
         }
     }
 
