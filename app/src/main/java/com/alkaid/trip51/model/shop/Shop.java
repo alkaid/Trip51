@@ -1,22 +1,27 @@
 package com.alkaid.trip51.model.shop;
 
+import com.alkaid.trip51.model.config.TimeSet;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alkaid on 2015/11/29.
  */
 public class Shop implements Serializable {
     private long shopid;
-    private String shopname;
-    private String avgpay;
-    private String imageurl;
-    private String diningtypename;
+    private String shopname="";
+    private String avgpay="";
+    private String imageurl="";
+    private String diningtypename="";
     private float totallevel;
-    private String areaname;
+    private String areaname="";
     private int privaterroomstatus;
     private int loungestatus;
     private int hallstatus;
     private int distance;
+    private List<TimeSet> timesets=new ArrayList<>();
 
     public long getShopid() {
         return shopid;
@@ -104,5 +109,13 @@ public class Shop implements Serializable {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public List<TimeSet> getTimesets() {
+        return timesets;
+    }
+
+    public void setTimesets(List<TimeSet> timesets) {
+        this.timesets = timesets;
     }
 }

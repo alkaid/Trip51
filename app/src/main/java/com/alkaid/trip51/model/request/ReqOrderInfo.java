@@ -25,6 +25,7 @@ public class ReqOrderInfo implements Serializable {
     private String othermobile="";
     private int iscontainfood;
     private List<Food> foods=new ArrayList<>();
+    private int timeid;
 
     public long getShopid() {
         return shopid;
@@ -144,5 +145,13 @@ public class ReqOrderInfo implements Serializable {
 
     public void setFoods(List<Food> foods) {
         this.foods = foods;
+    }
+
+    public int getTimeid() {
+        return timeid;
+    }
+
+    public void setTimeid(int timeid) {
+        this.timeid = timeid;
     }
 }
