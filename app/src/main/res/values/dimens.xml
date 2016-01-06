@@ -9,7 +9,6 @@
     <dimen name="section_height">22.0dip</dimen>
     <dimen name="single_line_height">48.0dip</dimen>
     <dimen name="single_line_height_meduim">42.0dip</dimen>
-    <dimen name="sub_filter_item_height">45.0dip</dimen>
     <dimen name="table_item_padding">15.0dip</dimen>
     <dimen name="title_bar_button_margin">15.0dip</dimen>
     <dimen name="user_blance_background_height">200.0dip</dimen>
@@ -35,9 +34,7 @@
     <dimen name="text_button_normal">18sp</dimen>
 
     <!--未命名字号1 70px-->
-    <dimen name="text_other_1">37sp</dimen>
     <!--未命名字号1 32px-->
     <dimen name="text_other_2">18sp</dimen>
     <!--未命名字号1 26px-->
-    <dimen name="text_other_3">15sp</dimen>
 </resources>
